@@ -57,3 +57,14 @@ Flow  1) Sys prompts Driver to enter keyworkd or geo-location
       3) Sys displays open requests, prompting for selection
       4) Driver browses and selects a request to accept
       Sys displays that the acceptance of the request was sent to the Rider
+ 
+Accept a Driver
+Actor:Rider
+Goal: For the Rider to chose a Driver
+Trigger: Rider has one or more acceptances from Drivers for a single request
+Precondition: At least one Driver accepted the request
+Postcondition: The Rider has a driver for that request, now the request is closed
+Flow  1) Sys displays a list of driver that have accepted the request and prompts for selection
+      2) The Rider browses the list of Driver and selects one
+      3) Sys displays that the request is secured, cloesed and confirms the drivers acceptance
+      
