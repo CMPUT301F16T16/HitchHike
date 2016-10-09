@@ -1,1 +1,16 @@
-
+Login
+Actor: User
+Goal: log into user's account
+Trigger: User is compeled to view their account 
+Precondition: User has an account
+Postcondition: They have logged in and are able to complete other tasks
+Flow  1) Sys prompts user to enter username
+      2) User submits username
+      3) Sys prompts user to enter password
+      4) User submits password
+      5) Sys grants accept to User account
+Exceptions
+      5) If Sys does not grant access
+      5.1) Sys displays error of incorrect password or username
+      5.2) returns to 1
+      
