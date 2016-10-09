@@ -46,3 +46,14 @@ Exception
       4) Rider declines the suggested fare
       4.1) Rider enters a fare of their own choosing
      
+Accept Drive Request
+Actor: Driver
+Goal: To accept a drive request from a Rider
+Trigger: Driver is looking for a request to accept
+Precondition: There are drive requests
+Postcondition: Acceptance is submitted to the Rider
+Flow  1) Sys prompts Driver to enter keyworkd or geo-location
+      2) Driver submits keyword or geo-location
+      3) Sys displays open requests, prompting for selection
+      4) Driver browses and selects a request to accept
+      Sys displays that the acceptance of the request was sent to the Rider
