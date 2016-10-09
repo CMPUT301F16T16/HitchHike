@@ -14,3 +14,19 @@ Exceptions
       5.1) Sys displays error of incorrect password or username
       5.2) returns to 1
       
+      
+Cancel Request
+Actor: Rider
+Goal: To remove an open request
+Trigger: Rider no longer requires the request to be accepted
+Precondition: The request Rider wishes to remove exists
+Postcondition: The request has been removed. 
+Flow  1) Sys lists open request, prompting for selection
+      2) Rider browses and selects request
+      3) Sys displays that request will be deleted, prompts for confirmation
+      4) Rider confirms
+      Sys displays that request has been deleted
+Exception
+      4) Rider declines 
+      4.1) returns to 1
+      
