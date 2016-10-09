@@ -30,3 +30,19 @@ Exception
       4) Rider declines 
       4.1) returns to 1
       
+Submit Drive Request
+Actor: Rider
+Goal: To submit a drive request 
+Trigger: Rider needs a ride
+Precondition: Rider does not have a ride
+Postcondition: The request is now available for drivers to browse and accept
+Flow  1) Sys prompts Rider to enter a request
+      2) Rider enters a request between two locations
+      3) Sys calculates the the fare in accordance to the distance between the two locations requested, and prompts the Rider 
+            to agree or disagree to the fare.
+      4) Rider agrees to the fare 
+      5) Sys disaplys the request has been submited 
+Exception
+      4) Rider declines the suggested fare
+      4.1) Rider enters a fare of their own choosing
+     
