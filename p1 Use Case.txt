@@ -1,0 +1,66 @@
+Use Case: Create User Account
+Actor: User
+Trigger: User wants to create their own account
+Precondition: User does not have an account
+Postcondition: They are able to access various tasks that would be impossible without creating an account
+Flow:
+
+	1) User clicks on "Create Account" Button/trigger
+	2) Sys sends user (opens a page or prompt) leading a user to input information.
+	   The minimum requirements of creating an user account consists of:
+			User Name
+			Password
+			Whether the user is a Rider or Driver
+	3) After confirming their account information, the system will save the user's information in the database
+	4) The user is lead to their account page, displaying their account information (to be filled with 
+	other user functions later).
+	
+Exceptions:
+
+	1) User's desired User Name is already within the system's database
+	1.1) System prompt displays that the desired username already exists and the flow ceases to continue
+	2) Minimum requirements are not filled by the user
+	2.1) System prompt displays that not all the necessary fields are filled and the flow ceases to continue
+	until required fields are filled.
+	3) While creating the account, the user fails to successfully enter their password twice 
+	(2 passwords do not match).
+	3.1) System prompt displays that the desired password does not match with the verification password field 
+	and the flow ceases to continue.
+	
+	========================================================================
+Use Case: Look up User / Search User
+Actor: User / Searcher
+Trigger: User wants to search for another user within the database
+Precondition: The desired user is within the system's database
+Postcondition: The searcher is redirected to the searched's account page
+Flow:
+
+	1) The user enters the account that they want to access
+	2) The user is redirected to the desired account's account page
+	
+Exceptions:
+
+	1) The desired account does not exist / is not within the system's database
+	1.1) System prompt displays that the desired account does not exist
+	2) The search bar is not empty (maybe can be linked with the first exception)
+	2.2) System prompt displays that the search field is empty
+
+	========================================================================
+Use Case: Edit User Account
+Actor: User
+Trigger: User wants to edit their account information and or features
+Precondtion: User must have an account
+Postcondtion: User edits their account
+Flow:
+
+	0) User goes through login proccedure if they have yet to log into their account
+	1) User goes to their account page via clicking on their account name icon
+	2) User clicks on the "Edit Account" icon
+	3) The account page is either turned into some kind of edit account mode; or, the user is lead to a 
+	separate edit account page.
+	4) The user edits desired fields
+	5) The user is lead to an updated user account page
+	
+Exceptions:
+
+	1) 
