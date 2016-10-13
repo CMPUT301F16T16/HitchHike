@@ -1,0 +1,56 @@
+Use Case: Create User Account
+Actor: User
+Trigger: User wants to create their own account
+Precondition: User does not have an account
+Postcondition: They are able to access various tasks that would be impossible without creating an account
+Flow  1) Sys promps user to enter a Username, Password, First and Last name and whether or not the use is 
+          a Rider, Driver or both
+      2) User submits the information required
+      3) System will save user information to the database and redirect the user to their new User Page
+Exceptions
+      3) If sys does not save the user information or redirect the user
+      3.1) Sys displays error of either incompatible password, not a unique username
+      3.2) Returns to 1
+
+
+Use Case: Login
+Actor: User
+Goal: Log into user's account
+Trigger: User is compeled to view their account 
+Precondition: User has an account
+Postcondition: They have logged in and are able to complete other tasks
+Flow  1) Sys prompts user to enter username and password
+      2) User submits username and password
+      3) Sys grants accept to User account
+Exceptions
+      3) If Sys does not grant access
+      3.1) Sys displays error of incorrect password or username
+      3.2) Returns to 1
+      
+Use Case: Create GetRide Request
+Actor: Rider 
+Goal: To create a request to get a ride  
+Trigger: Rider needs a ride
+Precondition: Rider does not have a ride
+Postcondition: The request is now almost complete, awaiting submission 
+Flow  1) Sys prompts Rider to enter a request
+      2) Rider enters a request between two locations
+      3) Sys calculates the the fare in accordance to the distance between the two locations requested
+          and displays the estimated amount
+      4) Rider enters a fare price, could be the estimated price
+      5) Sys displays the route between the two locations specified on the map
+
+
+Use Case: Submit GetRide Request
+Actor: Rider
+Goal: To submit the drive request that was created
+Precondition: A GetRide request has been created and has not been submited
+Postcondition: The request is now available for drivers to browse and accept
+Flow  1)  rider 
+      
+      
+      
+      
+
+
+      
