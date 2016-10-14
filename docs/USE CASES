@@ -13,7 +13,8 @@ Exceptions
       3.2) Returns to 1
 
 
-Use Case: Login
+Use Case 1          
+Name: Login
 Actor: User
 Goal: Log into user's account
 Trigger: User is compeled to view their account 
@@ -27,7 +28,8 @@ Exceptions
       3.1) Sys displays error of incorrect password or username
       3.2) Returns to 1
       
-Use Case: Create GetRide Request
+Use Case2
+Name: Create GetRide Request
 Actor: Rider 
 Goal: To create a request to get a ride  
 Trigger: Rider needs a ride
@@ -41,15 +43,22 @@ Flow  1) Sys prompts Rider to enter a request
       5) Sys displays the route between the two locations specified on the map
 
 
-Use Case: Submit GetRide Request
+Use Case 3
+Name: Submit GetRide Request
 Actor: Rider
 Goal: To submit the drive request that was created
 Precondition: A GetRide request has been created and has not been submited
 Postcondition: The request is now available for drivers to browse and accept
-Flow  1)  rider 
+Flow  1) Sys prompts Rider to to submit the request
+      2) Rider submits the request
+      3) Sys displays that the request has been added
+Exception 
+      2) Rider does not submit request
+      2.1) Returns to Use Case Create GetRide Request, to continue editing
       
       
-Use Case: Cancel GetRide Pending Request
+Use Case 4
+Name: Cancel GetRide Pending Request
 Actor: Rider
 Goal: To remove an open request
 Trigger: Rider no longer requires the request to be accepted
@@ -64,7 +73,8 @@ Exception
       4) Rider declines 
       4.1) returns to 1
       
-Use Case: Cancel GetRide Confirmed Request
+Use Case 5
+Name: Cancel GetRide Confirmed Request
 Actor: Rider
 Goal: To remove an confirmed request
 Trigger: Rider no longer requires the ride
@@ -80,24 +90,46 @@ Exception
       4.1) Return to 1
       
       
-Use Case: Browse Requests
+Use Case 6
+Name: Browse Requests
 Actor: Driver
 Goal: To look through requests that are around the Drivers area as per GPS
 Precondition: Driver is in the Browse Page
-Postcondition: A list of open getRide requests, within a certian radius to the driver, is displayed
+Postcondition: A list of open getRide requests, within a certain radius to the driver is displayed
 Flow  1) Sys prompts Driver to enter keyworkd or geo-location
       2) Driver enters keyword or geo-location
       3) Sys displays open requests, prompting for selection
       4) Driver browses the list
 
-Use Case: View Requests
+Use Case 7
+Name: Accept GetRide Requests
 Actor: Driver
-Goal: To View the Map of the getRide request the Driver selected
+Goal: To accept a drive request made by the Rider
 Precondition: Driver is browsing open requests
-Postcondition: A list of open getRide requests, within a certian radius to the driver, is displayed
+Postcondition: GetRide request is accepted
 Flow  1) Driver selects a open request to view
-      2) Sys displays a map of the route from the request and promps the Driver to accept the request or decline 
-      Sys displays that the acceptance of the request was sent to the Rider
+      2) Sys displays a map of the route from the request and prompts the Driver to accept the request or decline 
+      3) Driver accepts the request 
+      4) Sys displays the acceptance of the request and sends a notification to Rider, aleting them that their
+         GetRide request has been accepted
+
+Use Case 8
+Name: Accept Driver
+Actor: Rider
+Goal: To choose one Driver from a list of Driver that have responded to a single request
+Precondition: At least one Driver has responded to the request
+Postcondition: Rider now has a Driver for their GetRide request
+Flow   1) Rider selects a open request 
+       2) Sys displays a list of all the Drivers that have responded to that request
+       3) Rider selects a Driver 
+       4) Sys prompts Rider for Confirmation
+       5) Rider confirms and accepts the Driver
+Exception
+       3) Rider does not select a Driver, because Rider chose the wrong request
+       3.1) Rider returns previous page
+       3.2) Return to 1
+       5) Rider does not confirm the Driver
+       5.1) Return to 3
       
       
       
