@@ -68,3 +68,38 @@ Flow  1) Sys displays a list of driver that have accepted the request and prompt
       2) The Rider browses the list of Driver and selects one
       3) Sys displays that the request is secured, cloesed and confirms the drivers acceptance
       
+      
+Find user
+Actor:user
+Goal:find a new user
+Trigger: looking for some user
+Precondition: user name/ID
+Postcondition: find a user and able to add the user
+Flow  1) system displays a search UI 
+      2) user input a user name/ID
+      3) system search user base on the information.
+      4) system displays all possible users
+      5) user add a right user
+      
+Exception
+      3) system cannot find user/not exit
+      3.1) system display error mesage
+      3.2) return to 1
+      
+Edit user account
+Actor:user
+Goal:modify user account
+Trigger: change user information
+Precondition: login account
+Postcondition: user account has correct information
+Flow  1) system displays account information
+      2) user eddits account information
+      3) system records the information
+      4) user presses the save button
+      5) system saves information
+      
+Exception
+      5) system cannot save information
+      5.1) system display error mesage
+      5.2) return to 1
+      
