@@ -6,7 +6,7 @@ import junit.framework.TestCase;
  * Created by Leo Yoon on 13/10/2016.
  */
 
-public class LoginTest extends TestCase {
+public class UserTest extends TestCase {
     public void testGetUserName() {
         String userName = "TestUser";
         User user = new User(userName);
@@ -16,7 +16,8 @@ public class LoginTest extends TestCase {
     public void testSetUserName(){
         String userName = "TestUser";
         User user = new User(userName);
-        user.setName(userName);
+        String userName2 = "TestUser2";
+        user.setName(userName2);
         assertEquals("TestUser", user.getName());
     }
 
