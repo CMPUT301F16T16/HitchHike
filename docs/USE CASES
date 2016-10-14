@@ -49,6 +49,56 @@ Postcondition: The request is now available for drivers to browse and accept
 Flow  1)  rider 
       
       
+Use Case: Cancel GetRide Pending Request
+Actor: Rider
+Goal: To remove an open request
+Trigger: Rider no longer requires the request to be accepted
+Precondition: User is on the Requests Status Page and the request they wish to delete exists
+Postcondition: The GetRide request has been removed. 
+Flow  1) Sys lists open request 
+      2) Rider browses and selects request
+      3) Sys displays that request will be deleted, prompts for confirmation
+      4) Rider confirms
+      Sys displays that request has been deleted
+Exception
+      4) Rider declines 
+      4.1) returns to 1
+      
+Use Case: Cancel GetRide Confirmed Request
+Actor: Rider
+Goal: To remove an confirmed request
+Trigger: Rider no longer requires the ride
+Precondition: Request Status is still pending pick up
+Postcondition: The GetRide request has been removed. 
+Flow  1) Sys displays the User home page
+      2) Rider selects a confirmed request to be deleted
+      3) Sys displays that request will be deleted, prompts for confirmation
+      4) Rider confirms
+      5) Sys displays that request has been deleted
+Exception
+      4) Rider declines 
+      4.1) Return to 1
+      
+      
+Use Case: Browse Requests
+Actor: Driver
+Goal: To look through requests that are around the Drivers area as per GPS
+Precondition: Driver is in the Browse Page
+Postcondition: A list of open getRide requests, within a certian radius to the driver, is displayed
+Flow  1) Sys prompts Driver to enter keyworkd or geo-location
+      2) Driver enters keyword or geo-location
+      3) Sys displays open requests, prompting for selection
+      4) Driver browses the list
+
+Use Case: View Requests
+Actor: Driver
+Goal: To View the Map of the getRide request the Driver selected
+Precondition: Driver is browsing open requests
+Postcondition: A list of open getRide requests, within a certian radius to the driver, is displayed
+Flow  1) Driver selects a open request to view
+      2) Sys displays a map of the route from the request and promps the Driver to accept the request or decline 
+      Sys displays that the acceptance of the request was sent to the Rider
+      
       
       
 
