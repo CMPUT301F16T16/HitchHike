@@ -103,3 +103,37 @@ Exception
       5.1) system display error mesage
       5.2) return to 1
       
+      
+complete Request
+Actor: driver
+Goal: dirver complete request
+Trigger: driver try to finish request 
+Precondition: rider arrives his destination
+Postcondition: driver finishes his job
+Flow  1) system shows request information
+      2) driver presses complete button
+      2) system sends a message to rider
+      3) system shows information (success of fail)
+Exceptions
+      2)   system fail to send information
+      2.1) returns to 1
+
+
+
+transfer payment
+Actor: rider
+Goal: dirver can recive his money
+Trigger: rider try to make payment
+Precondition: rider arrives his destination
+Postcondition: driver gets paid
+Flow  1) rider gets information and confirm the completion
+      2) rider chooses a method to pay
+      3) System record the payment method
+      4) rider press pay button
+      5) system makes a transfer base on payment method
+      6) system shows information (success of fail)
+      7) rider press a button to main menu or evaluation
+Exceptions
+      5)   system fail to make transfer
+      5.1) System displays error 
+      5.2) returns to 1
