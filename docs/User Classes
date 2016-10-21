@@ -52,6 +52,9 @@ variables:
   user_type(False = Rider)
   
 Methods:
+  createRequest(Request Object)
+  payForRide(Int payment)
+  acceptDriverRequest(Request Object)
   
 -------------------------------------------------
 
@@ -62,6 +65,8 @@ variables:
   user_type(False = True)
   
 Methods:
+  acceptPayforRide(Int payment)
+  acceptRiderRequest(Request Object)
   
 -------------------------------------------------
 Class: BrowseList
@@ -70,14 +75,6 @@ variables:
 
 Methods:
   chooseBrowseRequest(requestObject)
--------------------------------------------------
-
-Class: PendingRequest
-
-variables:
-
-Methods:
-  getDriverID(int)
 -------------------------------------------------
 
 Class: Request
@@ -96,6 +93,9 @@ Methods:
   getDriverInformation(String First Name, String Last Name, Int phoneNumber)
   getLocation(Int PickUp(x,y), Int DropOff(x,y))
   getPayment(Int price)
+  getRiderID(Int)
+  getDriverID(Int)
+  createContractID(Contract_ID)
   
   -------------------------------------------------
   
