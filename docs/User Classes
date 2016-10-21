@@ -16,9 +16,9 @@ List of Classes:
 (Controllers) BLUE
 1.ElasticSearch
 2.Location Controller
-3.UserController
+3.UserListController
 4.FareController
-5.RequestController
+5.RequestListController
 
 (Views) RED
 1.LoginActivity
@@ -163,5 +163,23 @@ Methods:
   addRequest()
   deleteRequest()
 
+-------------------------------------------------
   
+Class: RequestListController
+
+variables:
+
+  
+Methods:
+  updateRequestList()
+  
+-------------------------------------------------
+  
+Class: UserListController
+
+variables:
+
+  
+Methods:
+  updateUserList()
   
