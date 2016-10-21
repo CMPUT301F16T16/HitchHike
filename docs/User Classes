@@ -13,6 +13,7 @@ List of Classes:
 9.BrowseList
 10.RequestList
 
+
 (Controllers) BLUE
 1.ElasticSearch
 2.Location Controller
@@ -22,11 +23,16 @@ List of Classes:
 
 (Views) RED
 1.LoginActivity
-3.SignUpActivity
-4.DriverActivity
-5.RiderActivity
-6.RequestInfoActivity
-7.CreateRequestActivity
+2.SignUpActivity
+3.DriverActivity
+4.RiderActivity
+5.RequestInfoActivity
+6.CreateRequestActivity
+7.UserInfoActivity
+8.BrowsingActivity
+9.RideOfferActivity
+10.ProspectiveDriversActivity
+
 
 
 -------------------------------------------------
