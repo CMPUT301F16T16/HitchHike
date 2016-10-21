@@ -1,22 +1,32 @@
 List of Classes:
-User
-BrowseList
-PendingList
-Pending Request
-Ready Request
-Request
-Location
-Calc_Fair
-driverList
-riderList
-driverListController
-driverListManager
-riderListController
-riderListManager
-?FairWageController
-RequestController
-?CompletedRequest
-InvisibleRequest
+(Models) WHITE
+1.User
+2.Driver
+3.Rider
+4.Request
+
+5.Location
+6.Fare
+
+7.DriverList
+8.RiderList
+9.BrowseList
+10.RequestList
+
+(Controllers) BLUE
+1.ElasticSearch
+2.Location Controller
+3.UserController
+4.FareController
+5.RequestController
+
+(Views) RED
+1.LoginActivity
+3.SignUpActivity
+4.DriverActivity
+5.RiderActivity
+6.RequestInfoActivity
+7.CreateRequestActivity
 
 
 -------------------------------------------------
@@ -35,6 +45,25 @@ Methods:
   getPhoneNumber(Int)
 -------------------------------------------------
 
+Class: Rider
+
+variables:
+  user_id(string)
+  user_type(False = Rider)
+  
+Methods:
+  
+-------------------------------------------------
+
+Class: Driver
+
+variables:
+  user_id(string)
+  user_type(False = True)
+  
+Methods:
+  
+-------------------------------------------------
 Class: BrowseList
 
 variables:
@@ -43,29 +72,12 @@ Methods:
   chooseBrowseRequest(requestObject)
 -------------------------------------------------
 
-Class: PendingList
-
-variables:
-
-Mathods:
-  choosePendingRequest(requestObject)
-  
--------------------------------------------------
-
 Class: PendingRequest
 
 variables:
 
 Methods:
   getDriverID(int)
--------------------------------------------------
-
-Class: ReadyRequest
-
-variables:
-  Contract_id(int)
-Methods:
-  createContractID(int)
 -------------------------------------------------
 
 Class: Request
@@ -98,12 +110,58 @@ Methods:
   setPickUpDest(Int x, y)
   getPickUpDest(Int x, y)
   
-  -------------------------------------------------
+---------------------------------------------------
+   
+Class: Fare
+
+variables:
+  rate(Int)
+  
+Methods:
+  calculateFair(Int Distance, Int rate)
   
   
+-------------------------------------------------
   
+Class: DriverList
+
+variables:
+
   
+Methods:
+  getPendingRequests()
+  deletePendingRequest()
+
+-------------------------------------------------
   
+Class: RiderList
+
+variables:
+
+Methods:
+  acceptDriverRequest()
+  deleteDriverRequest()
+-------------------------------------------------
+  
+Class: BrowseList
+
+variables:
+
+  
+Methods:
+  addDriverListener()
+  deleteDriverListener()
+-------------------------------------------------
+  
+Class: RequestList
+
+variables:
+
+  
+Methods:
+  getRequest()
+  addRequest()
+  deleteRequest()
 
   
   
