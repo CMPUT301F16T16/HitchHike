@@ -75,12 +75,7 @@ Methods:
   acceptRiderRequest(Request Object)
   
 -------------------------------------------------
-Class: BrowseList
 
-variables:
-
-Methods:
-  chooseBrowseRequest(requestObject)
 -------------------------------------------------
 
 Class: Request
@@ -148,15 +143,22 @@ Methods:
   acceptDriverRequest()
   deleteDriverRequest()
 -------------------------------------------------
-  
+
+Class: BrowseList
+
+variables:
+
+Methods:
+  chooseBrowseRequest(requestObject)
+  ================================
 Class: BrowseList
 
 variables:
 
   
 Methods:
-  addDriverListener()
-  deleteDriverListener()
+  ?addDriverListener()  
+  ?deleteDriverListener()
 -------------------------------------------------
   
 Class: RequestList
