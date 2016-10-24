@@ -39,40 +39,42 @@ List of Classes:
 Class: User
 
 variables:
-  user_id(string)
-  user_type(True = Both, False = Rider)
+  user_id(Integer)
+  userName(String)
+  firstName(Stirng)
+  lastName(String)
+  user_type(Boolean:(True = Both, False = Rider))
   
 Methods:
-  getName(String(email))
-  setName(returns user_name)
+  setFirstName(FirstName)
+  setLastName(LastName)
   getFirstName(String)
   getLastName(String)
+  setUserName(email)
   getUserType(Rider,Both)
-  getPhoneNumber(Int)
+  getPhoneNumber(Integer)
 -------------------------------------------------
 
 Class: Rider
 
 variables:
-  user_id(string)
-  user_type(False = Rider)
+  riderID(Integer)
   
 Methods:
-  createRequest(Request Object)
-  payForRide(Int payment)
-  acceptDriverRequest(Request Object)
+  createRequest(RiderID)
+  payForRide(Integer(payment))
+  acceptDriverRequest(Integer(driverid))
   
 -------------------------------------------------
 
 Class: Driver
 
 variables:
-  user_id(string)
-  user_type(False = True)
+  driverID(Integer)
   
 Methods:
-  acceptPayforRide(Int payment)
-  acceptRiderRequest(Request Object)
+  acceptPayforRide(Integer(payment))
+  acceptRiderRequest(Integer(RequestID))
   
 -------------------------------------------------
 
@@ -85,13 +87,13 @@ variables:
   Rider_ID(int)
   Contract_ID(int)
   Request_ID(int)
-  DropOff(x,y)
-  PickUp(x,y)
-  Payment(Int)
+  DropOff(Integer(location))
+  PickUp(Integer(location))
+  Payment(Ineger(Fare))
 
 Methods:
-  getRiderInformation(String First Name, String Last Name, Int phoneNumber)
-  getDriverInformation(String First Name, String Last Name, Int phoneNumber)
+  getRider(Integer(RiderID))
+  getDriver(Integer(RiderID))
   getLocation(Int PickUp(x,y), Int DropOff(x,y))
   getPayment(Int price)
   getRiderID(Int)
@@ -127,21 +129,26 @@ Methods:
 Class: DriverList
 
 variables:
-
+  driverList(ArrayList<Driver>)
   
 Methods:
-  getPendingRequests()
-  deletePendingRequest()
+  addDriver(User:user)
+  deleteDriver(User:user)
+  getDriver(Integer(driverID))
+
 
 -------------------------------------------------
   
 Class: RiderList
 
 variables:
-
+    RiderList(ArrayList<Rider>)
 Methods:
-  acceptDriverRequest()
-  deleteDriverRequest()
+  
+  addRider(User:user)
+  deleteRider(User:user)
+  getDriver(Integer(driverID))
+
 -------------------------------------------------
 
 Class: BrowseList
@@ -157,6 +164,7 @@ variables:
 
   
 Methods:
+  chooseBrowseRequest(request Object)
   ?addDriverListener()  
   ?deleteDriverListener()
 -------------------------------------------------
@@ -164,7 +172,7 @@ Methods:
 Class: RequestList
 
 variables:
-
+  requestList: ArrayList<Request>
   
 Methods:
   getRequest()
@@ -179,7 +187,9 @@ variables:
 
   
 Methods:
-  updateRequestList()
+  updateUserList(): Void
+  updateRiderList(): Void
+  updateDriverList(): Void
   
 -------------------------------------------------
   
@@ -189,5 +199,5 @@ variables:
 
   
 Methods:
-  updateUserList()
+  updateRequestList()
   
