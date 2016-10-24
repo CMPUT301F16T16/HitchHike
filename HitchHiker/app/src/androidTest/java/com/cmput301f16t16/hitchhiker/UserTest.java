@@ -69,7 +69,6 @@ public class UserTest extends TestCase {
         assertEquals(lastName,user.getUserLastName());
     }
 
-
     public void testGetUserLastName() {
         String userName = "testUser";
         User user = new User(userName);
