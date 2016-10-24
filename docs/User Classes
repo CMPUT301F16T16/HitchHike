@@ -1,0 +1,193 @@
+List of Classes:
+(Models) WHITE
+1.User
+2.Driver
+3.Rider
+4.Request
+
+5.Location
+6.Fare
+
+7.DriverList
+8.RiderList
+9.BrowseList
+10.RequestList
+
+
+(Controllers) BLUE
+1.ElasticSearch
+2.Location Controller
+3.UserListController
+4.FareController
+5.RequestListController
+
+(Views) RED
+1.LoginActivity
+2.SignUpActivity
+3.DriverActivity
+4.RiderActivity
+5.RequestInfoActivity
+6.CreateRequestActivity
+7.UserInfoActivity
+8.BrowsingActivity
+9.RideOfferActivity
+10.ProspectiveDriversActivity
+
+
+
+-------------------------------------------------
+Class: User
+
+variables:
+  user_id(string)
+  user_type(True = Both, False = Rider)
+  
+Methods:
+  getName(String(email))
+  setName(returns user_name)
+  getFirstName(String)
+  getLastName(String)
+  getUserType(Rider,Both)
+  getPhoneNumber(Int)
+-------------------------------------------------
+
+Class: Rider
+
+variables:
+  user_id(string)
+  user_type(False = Rider)
+  
+Methods:
+  createRequest(Request Object)
+  payForRide(Int payment)
+  acceptDriverRequest(Request Object)
+  
+-------------------------------------------------
+
+Class: Driver
+
+variables:
+  user_id(string)
+  user_type(False = True)
+  
+Methods:
+  acceptPayforRide(Int payment)
+  acceptRiderRequest(Request Object)
+  
+-------------------------------------------------
+
+-------------------------------------------------
+
+Class: Request
+
+variables:
+  Driver_ID(int)
+  Rider_ID(int)
+  Contract_ID(int)
+  Request_ID(int)
+  DropOff(x,y)
+  PickUp(x,y)
+  Payment(Int)
+
+Methods:
+  getRiderInformation(String First Name, String Last Name, Int phoneNumber)
+  getDriverInformation(String First Name, String Last Name, Int phoneNumber)
+  getLocation(Int PickUp(x,y), Int DropOff(x,y))
+  getPayment(Int price)
+  getRiderID(Int)
+  getDriverID(Int)
+  createContractID(Contract_ID)
+  
+  -------------------------------------------------
+  
+  Class: Location
+  
+  variables:
+  PickUp(Int x,y)
+  DropOff(Int x,y)
+  
+ Methods:
+  getCurrentLocation(Int x, y)
+  setPickUpDest(Int x, y)
+  getPickUpDest(Int x, y)
+  
+---------------------------------------------------
+   
+Class: Fare
+
+variables:
+  rate(Int)
+  
+Methods:
+  calculateFair(Int Distance, Int rate)
+  
+  
+-------------------------------------------------
+  
+Class: DriverList
+
+variables:
+
+  
+Methods:
+  getPendingRequests()
+  deletePendingRequest()
+
+-------------------------------------------------
+  
+Class: RiderList
+
+variables:
+
+Methods:
+  acceptDriverRequest()
+  deleteDriverRequest()
+-------------------------------------------------
+
+Class: BrowseList
+
+variables:
+
+Methods:
+  chooseBrowseRequest(requestObject)
+  ================================
+Class: BrowseList
+
+variables:
+
+  
+Methods:
+  ?addDriverListener()  
+  ?deleteDriverListener()
+-------------------------------------------------
+  
+Class: RequestList
+
+variables:
+
+  
+Methods:
+  getRequest()
+  addRequest()
+  deleteRequest()
+
+-------------------------------------------------
+  
+Class: RequestListController
+
+variables:
+
+  
+Methods:
+  updateRequestList()
+  
+-------------------------------------------------
+  
+Class: UserListController
+
+variables:
+
+  
+Methods:
+  updateUserList()
+  
