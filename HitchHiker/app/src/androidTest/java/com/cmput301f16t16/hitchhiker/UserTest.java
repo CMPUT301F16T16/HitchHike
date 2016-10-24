@@ -46,4 +46,50 @@ public class UserTest extends TestCase {
         assertEquals("Rider", user.getUserType(userType));
     }
 
+    public void testSetUserFirstName() {
+        String userName = "testUser";
+        User user = new User(userName);
+        String firstName = "Angus";
+        user.setUserFirstName(firstName);
+
+    }
+
+    public void testGetUserFirstName() {
+        String userName = "testUser";
+        User user = new User(userName);
+        String firstName = "Angus";
+        user.setUserFirstName(firstName);
+        assertEquals(firstName,user.getUserFirstName());
+    }
+    public void testSetUserLastName() {
+        String userName = "testUser";
+        User user = new User(userName);
+        String lastName = "Abels";
+        user.setUserLastName(lastName);
+        assertEquals(lastName,user.getUserLastName());
+    }
+
+
+    public void testGetUserLastName() {
+        String userName = "testUser";
+        User user = new User(userName);
+        String lastName = "Abels";
+        user.setUserLastName(lastName);
+        assertEquals(lastName,user.getUserLastName());
+    }
+    public void testSetUserPhoneNumber() {
+        Integer phoneNumber = 12345789;
+        String userName = "testUser";
+        User user = new User(userName);
+        user.setUserPhoneNumber(phoneNumber);
+
+    }
+    public void testGetUserPhoneNumber() {
+        Integer phoneNumber = 123456789;
+        String userName = "testUser";
+        User user = new User(userName);
+        user.setUserPhoneNumber(phoneNumber);
+        assertEquals(phoneNumber, user.getUserPhoneNumber());
+    }
+
 }
