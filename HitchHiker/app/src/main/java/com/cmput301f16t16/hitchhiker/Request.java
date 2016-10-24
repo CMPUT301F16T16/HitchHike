@@ -34,4 +34,8 @@ public class Request {
     public void completeRequest() {
         this.requestStatus = "Completed";
     }
+
+    public void driverAcceptsRequest() {
+        this.requestStatus = "Driver Accepted";
+    }
 }

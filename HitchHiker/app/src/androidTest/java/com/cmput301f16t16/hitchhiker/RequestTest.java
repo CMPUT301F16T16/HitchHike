@@ -42,4 +42,9 @@ public class RequestTest extends TestCase {
         request.completeRequest();
         assertEquals("Completed",request.getRequestStatus());
     }
-}
+    public void testDriverAcceptsRequest(){
+        Request request = new Request(0);
+        request.driverAcceptsRequest();
+        assertEquals("Driver Accepted", request.getRequestStatus());
+        }
+    }
