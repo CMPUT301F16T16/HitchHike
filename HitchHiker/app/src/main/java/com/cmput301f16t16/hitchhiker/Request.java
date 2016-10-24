@@ -26,4 +26,12 @@ public class Request {
     public String getRequestStatus() {
         return this.requestStatus;
     }
+
+    public void acceptDriver() {
+        this.requestStatus = "Accepted";
+    }
+
+    public void completeRequest() {
+        this.requestStatus = "Completed";
+    }
 }

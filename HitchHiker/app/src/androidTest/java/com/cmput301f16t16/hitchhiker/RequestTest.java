@@ -32,4 +32,14 @@ public class RequestTest extends TestCase {
         request.setRequestStatus(status);
         assertEquals("TestStatus",request.getRequestStatus());
     }
+    public void testAcceptDriver() {
+        Request request = new Request(0);
+        request.acceptDriver();
+        assertEquals("Accepted",request.getRequestStatus());
+    }
+    public void testCompleteRequest() {
+        Request request = new Request(0);
+        request.completeRequest();
+        assertEquals("Completed",request.getRequestStatus());
+    }
 }
