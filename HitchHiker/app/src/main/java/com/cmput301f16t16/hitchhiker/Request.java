@@ -77,15 +77,15 @@ public class Request implements Serializable {
         return this.dropOff;
     }
 
-    public void acceptDriver() {
-        this.requestStatus = "Accepted";
-    }
-
-    public void completeRequest() {
-        this.requestStatus = "Completed";
-    }
-
-    public void driverAcceptsRequest() {
-        this.requestStatus = "Driver Accepted";
-    }
+//    public void acceptDriver() {
+//        this.requestStatus = "Accepted";
+//    }
+//
+//    public void completeRequest() {
+//        this.requestStatus = "Completed";
+//    }
+//
+//    public void driverAcceptsRequest() {
+//        this.requestStatus = "Driver Accepted";
+//    }
 }

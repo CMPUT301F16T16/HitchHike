@@ -12,18 +12,18 @@ import junit.framework.TestCase;
 public class RequestTest extends TestCase {
 
 
-    public void testRequest () {
+    public void testRequest() {
         Location pickUp = new Location();
         Location dropOff = new Location();
         User requestCreator = new User("HitchKiker1");
-        Request request = new Request (requestCreator, pickUp, dropOff);
+        Request request = new Request(requestCreator, pickUp, dropOff);
         assertTrue("Request Creator is not equal", requestCreator.equals(request.getRider()));
     }
 
     /**
      * US 01.01.01
      * As a rider I want to request rides between 2 locations
-    */
+     */
     public void testLocationRequest() {
         User paying_Rider = new User("HitchHiker2");
         Location pickUp = new Location();
@@ -31,34 +31,32 @@ public class RequestTest extends TestCase {
         Request request = new Request(paying_Rider, pickUp, dropOff);
         assertTrue("Location A is not the start", pickUp.equals(request.getStartLocation()));
         assertTrue("Location A is not the end", dropOff.equals(request.getEndLocation()));
-        RequestListController requestListController= new RequestListController();
+        RequestListController requestListController = new RequestListController();
         requestListController.addRequest(request);
         requestListController.removeRequest(request);
 
 
-
-
-
     }
-<<<<<<< HEAD
-    public void testAcceptDriver() {
-        Request request = new Request(0);
-        request.acceptDriver();
-        assertEquals("Accepted",request.getRequestStatus());
-    }
-    public void testCompleteRequest() {
-        Request request = new Request(0);
-        request.completeRequest();
-        assertEquals("Completed",request.getRequestStatus());
-    }
-    public void testDriverAcceptsRequest(){
-        Request request = new Request(0);
-        request.driverAcceptsRequest();
-        assertEquals("Driver Accepted", request.getRequestStatus());
-        }
-    }
-=======
 }
+//<<<<<<< HEAD
+//    public void testAcceptDriver() {
+//        Request request = new Request(0);
+//        request.acceptDriver();
+//        assertEquals("Accepted",request.getRequestStatus());
+//    }
+//    public void testCompleteRequest() {
+//        Request request = new Request(0);
+//        request.completeRequest();
+//        assertEquals("Completed",request.getRequestStatus());
+//    }
+//    public void testDriverAcceptsRequest(){
+//        Request request = new Request(0);
+//        request.driverAcceptsRequest();
+//        assertEquals("Driver Accepted", request.getRequestStatus());
+//        }
+//    }
+//=======
+//}
 //DONT NEED TO TEST GETTERS AND SETTERS
 //
 //    public void testGetRequestID() {
@@ -87,4 +85,4 @@ public class RequestTest extends TestCase {
 //        assertEquals("TestStatus",request.getRequestStatus());
 //    }
 //}
->>>>>>> request_testing
+//>>>>>>> request_testing
