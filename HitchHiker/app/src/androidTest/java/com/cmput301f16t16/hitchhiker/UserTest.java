@@ -91,4 +91,13 @@ public class UserTest extends TestCase {
         assertEquals(phoneNumber, user.getUserPhoneNumber());
     }
 
+    public void testSetUserEmail() {
+        String email = "testemail@email.com";
+        String userName = "testUser";
+        User user = new User(userName);
+        user.setUserEmail(email);
+        assertEquals(email, user.getUserEmail());
+
+    }
+
 }

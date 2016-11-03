@@ -11,6 +11,7 @@ public class User {
     private String userType;
     private String userFirstName;
     private String userLastName;
+    private String userEmail;
     private Integer userPhoneNumber;
 
     public User(String userName) {
@@ -18,7 +19,9 @@ public class User {
         this.userPassword = new String();
         this.userFirstName = new String();
         this.userLastName = new String();
+        this.userEmail = new String();
         this.userPhoneNumber = new Integer(NULL);
+
     }
 
     public String getName() {
@@ -67,5 +70,13 @@ public class User {
 
     public Integer getUserPhoneNumber() {
         return this.userPhoneNumber;
+    }
+
+    public void setUserEmail(String email) {
+        this.userEmail = email;
+    }
+
+    public String getUserEmail() {
+        return this.userEmail;
     }
 }
