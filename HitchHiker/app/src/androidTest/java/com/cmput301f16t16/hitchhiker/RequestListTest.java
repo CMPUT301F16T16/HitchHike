@@ -7,30 +7,30 @@ import junit.framework.TestCase;
  */
 
 public class RequestListTest extends TestCase{
-    public void testAdd(){
-        RequestList requestList = new RequestList();
-        Request request = new Request(0);
-        requestList.add(request);
-        assertTrue(requestList.hasRequest(request));
-    }
-    public void testDelete() {
-        RequestList requestList = new RequestList();
-        Request request = new Request(0);
-        requestList.add(request);
-        requestList.delete(request);
-        assertFalse(requestList.hasRequest(request));
-    }
-    public void testHasRequest() {
-        RequestList requestList = new RequestList();
-        Request request = new Request(0);
-        requestList.add(request);
-        assertTrue(requestList.hasRequest(request));
-    }
-    public void testGetRequest() {
-        RequestList requestList = new RequestList();
-        Request request = new Request(0);
-        requestList.add(request);
-        Request returnedRequest = requestList.getRequest(0);
-        assertEquals(returnedRequest.getRequestID(),request.getRequestID());
-    }
+//    public void testAdd(){
+//        RequestList requestList = new RequestList();
+//        Request request = new Request(0);
+//        requestList.add(request);
+//        assertTrue(requestList.hasRequest(request));
+//    }
+//    public void testDelete() {
+//        RequestList requestList = new RequestList();
+//        Request request = new Request(0);
+//        requestList.add(request);
+//        requestList.delete(request);
+//        assertFalse(requestList.hasRequest(request));
+//    }
+//    public void testHasRequest() {
+//        RequestList requestList = new RequestList();
+//        Request request = new Request(0);
+//        requestList.add(request);
+//        assertTrue(requestList.hasRequest(request));
+//    }
+//    public void testGetRequest() {
+//        RequestList requestList = new RequestList();
+//        Request request = new Request(0);
+//        requestList.add(request);
+//        Request returnedRequest = requestList.getRequest(0);
+//        assertEquals(returnedRequest.getRequestID(),request.getRequestID());
+//    }
 }
