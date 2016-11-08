@@ -31,11 +31,24 @@ public class RequestTest extends TestCase {
         Request request = new Request(paying_Rider, pickUp, dropOff);
         assertTrue("Location A is not the start", pickUp.equals(request.getStartLocation()));
         assertTrue("Location A is not the end", dropOff.equals(request.getEndLocation()));
-        RequestListController requestListController = new RequestListController();
-        requestListController.addRequest(request);
-        requestListController.removeRequest(request);
+//        RequestListController requestListController = new RequestListController();
+//        requestListController.addRequest(request);
+//        requestListController.removeRequest(request);
 
 
+    }
+
+    public void testSizeRequestList() {
+        User rider = new User("BOB");
+        Location pickUp = new Location();
+        Location dropOff = new Location();
+        Request request = new Request(rider, pickUp, dropOff);
+        RequestListController rc = new RequestListController();
+        assertEquals("There are no requests in the List", rc.getRequestLoad(rider).size(), 0);
+        rc.addRequest(request);
+        assertEquals("There is a request!",rc.getRequestLoad(rider).size(), 1);
+        rc.removeRequest(request);
+        assertEquals("There are no requests in the List", rc.getRequestLoad(rider).size(), 0);
     }
 }
 //<<<<<<< HEAD
