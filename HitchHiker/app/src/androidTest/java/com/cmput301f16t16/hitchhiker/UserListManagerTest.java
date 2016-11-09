@@ -1,8 +1,6 @@
 package com.cmput301f16t16.hitchhiker;
 
-import android.content.Context;
-
-import junit.framework.TestCase;
+import android.test.AndroidTestCase;
 
 import java.io.IOException;
 
@@ -12,12 +10,12 @@ import static java.security.AccessController.getContext;
  * Created by Leo Yoon on 07/11/2016.
  */
 
-public class UserListManagerTest extends TestCase {
+public class UserListManagerTest extends AndroidTestCase {
 
     public void testUserToString() {
         UserList userList = new UserList();
         User user = new User("testUser");
-        userList.add(user);
+        userList.addUser(user);
         try {
             String userName = UserListManager.userListToString(userList);
             assertTrue("String length greater than zero", userName.length()>0);
@@ -37,7 +35,7 @@ public class UserListManagerTest extends TestCase {
             UserList userList = new UserList();
             String userName = "testUser";
             User user = new User(userName);
-            userList.add(user);
+            userList.addUser(user);
             UserListManager userListManager = new UserListManager(getContext());
             userListManager.saveUserList(userList);
             UserList userList2 = userListManager.loadUserList();

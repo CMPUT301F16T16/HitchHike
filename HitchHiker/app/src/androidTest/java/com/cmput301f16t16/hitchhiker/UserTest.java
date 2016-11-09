@@ -18,7 +18,7 @@ public class UserTest extends TestCase {
         User user = new User(userName);
         String userName2 = "TestUser2";
         user.setUserName(userName2);
-        assertEquals("TestUser", user.getUserName());
+        assertEquals("TestUser2", user.getUserName());
     }
 
     public void testGetUserPassword() {
@@ -88,7 +88,12 @@ public class UserTest extends TestCase {
         String userName = "testUser";
         User user = new User(userName);
         user.setUserPhoneNumber(phoneNumber);
-        assertEquals(phoneNumber, user.getUserPhoneNumber());
+
+        Integer phoneNumber2 = 123456789;
+        String userName2 = "testUser2";
+        User user2 = new User(userName2);
+        user2.setUserPhoneNumber(phoneNumber2);
+        assertEquals(user2.getUserPhoneNumber(), user.getUserPhoneNumber());
     }
 
     public void testSetUserEmail() {

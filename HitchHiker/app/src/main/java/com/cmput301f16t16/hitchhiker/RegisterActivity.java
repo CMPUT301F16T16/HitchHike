@@ -1,6 +1,7 @@
 package com.cmput301f16t16.hitchhiker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,13 +29,12 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordText;
     private EditText confirmPasswordText;
     private EditText phoneNumberText;
-    private ArrayList<User> userList = new ArrayList<User>();
     private String firstName;
     private String lastName;
     private String emailAddress;
     private String userName;
     private String password;
-    private String phoneNumber;
+    private int phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
         // Setting up userList
         UserListManager.initUserManager(this.getApplicationContext());
         Collection<User> users = UserListController.getUserList().getUsers();
+        final ArrayList<User> userList = new ArrayList<User>(users);
+
 
         UserListController.getUserList().addUserListener(new UserListener() {
             @Override
@@ -66,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         emailAddress = emailAddressText.getText().toString();
         userName = emailAddressText.getText().toString();
         password = passwordText.getText().toString();
-        phoneNumber = phoneNumberText.getText().toString();
+        phoneNumber = phoneNumberText.getInputType();
 
         Button registerButton = (Button) findViewById(R.id.registerButton);
 
@@ -82,19 +84,21 @@ public class RegisterActivity extends AppCompatActivity {
                 ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
                 addUserTask.execute(user);
                 setResult(RESULT_OK);
+
+                //Intent RegisterIntent = new Intent(RegisterActivity.this, )
             }
             });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ElasticsearchUserController.GetUsersTask getUsersTask = new ElasticsearchUserController.GetUsersTask();
-        getUsersTask.execute("");
-        try {
-            userList = getUsersTask.get();
-        } catch (Exception e) {
-            Log.i("Error", "Failed to get the users out of the async object.");
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        ElasticsearchUserController.GetUsersTask getUsersTask = new ElasticsearchUserController.GetUsersTask();
+//        getUsersTask.execute("");
+//        try {
+//            userList = getUsersTask.get();
+//        } catch (Exception e) {
+//            Log.i("Error", "Failed to get the users out of the async object.");
+//        }
+//    }
 }
