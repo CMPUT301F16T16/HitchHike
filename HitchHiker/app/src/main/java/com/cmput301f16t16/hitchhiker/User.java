@@ -12,7 +12,7 @@ public class User {
     private String userFirstName;
     private String userLastName;
     private String userEmail;
-    private Integer userPhoneNumber;
+    private int userPhoneNumber;
 
     public User(String userName) {
         this.userName = userName;
@@ -20,7 +20,16 @@ public class User {
         this.userFirstName = new String();
         this.userLastName = new String();
         this.userEmail = new String();
+<<<<<<< HEAD
+<<<<<<< HEAD
         this.userPhoneNumber = new Integer(NULL);
+        this.userType = getUserType();
+=======
+        this.userPhoneNumber = new String();
+>>>>>>> RegisterNotWorkingYet
+=======
+        this.userPhoneNumber = getUserPhoneNumber();
+>>>>>>> RegisterNotWorkingYet
 
     }
 
@@ -32,11 +41,11 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    public String getUserPassword() {
         return this.userPassword;
     }
 
-    public void setPassword(String userPassword) {
+    public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
 
@@ -44,7 +53,7 @@ public class User {
         this.userType = userType;
     }
 
-    public String getUserType(String userType) {
+    public String getUserType() {
         return this.userType;
     }
 
@@ -64,11 +73,11 @@ public class User {
         return this.userLastName;
     }
 
-    public void setUserPhoneNumber(Integer phoneNumber) {
-        this.userPhoneNumber = phoneNumber;
+    public void setUserPhoneNumber(int userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
     }
 
-    public Integer getUserPhoneNumber() {
+    public int getUserPhoneNumber() {
         return this.userPhoneNumber;
     }
 

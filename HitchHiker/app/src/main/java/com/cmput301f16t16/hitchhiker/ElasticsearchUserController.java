@@ -22,7 +22,8 @@ import io.searchbox.core.SearchResult;
 public class ElasticsearchUserController {
     private static JestDroidClient client;
 
-    public static class GetUserTask extends AsyncTask<String, Void, ArrayList<User>> {
+
+    public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
             verifySettings();
@@ -85,6 +86,7 @@ public class ElasticsearchUserController {
             if (client == null) {
                 DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
                 DroidClientConfig config = builder.build();
+                config.isDiscoveryEnabled();
 
                 JestClientFactory factory = new JestClientFactory();
                 factory.setDroidClientConfig(config);
