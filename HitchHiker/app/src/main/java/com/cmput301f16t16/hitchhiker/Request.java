@@ -22,9 +22,9 @@ public class Request extends Fare implements Serializable  {
 
 
     /**
-     * Need a list of optional Drivers to choose Final Driver Choice
+     * Need a list of prospective Drivers to choose Final Driver Choice
      */
-    private ArrayList<User> optionalDrivers;
+    private ArrayList<User> prospectiveDrivers;
 
     /**Need a Location A (start of where the rider is located)
      * and a Location B (End of the ride is located)
