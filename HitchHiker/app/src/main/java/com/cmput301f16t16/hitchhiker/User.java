@@ -21,6 +21,7 @@ public class User {
         this.userLastName = new String();
         this.userEmail = new String();
         this.userPhoneNumber = new Integer(NULL);
+        this.userType = getUserType();
 
     }
 
@@ -44,7 +45,7 @@ public class User {
         this.userType = userType;
     }
 
-    public String getUserType(String userType) {
+    public String getUserType() {
         return this.userType;
     }
 

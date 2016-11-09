@@ -6,4 +6,12 @@ package com.cmput301f16t16.hitchhiker;
 public class Location {
     private double lat;
     private double lon;
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
 }

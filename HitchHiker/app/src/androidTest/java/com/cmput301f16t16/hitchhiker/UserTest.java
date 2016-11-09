@@ -43,7 +43,7 @@ public class UserTest extends TestCase {
         User user = new User(userName);
         String userType = "Rider";
         user.setUserType(userType);
-        assertEquals("Rider", user.getUserType(userType));
+        assertEquals("Rider", user.getUserType());
     }
 
     public void testSetUserFirstName() {
