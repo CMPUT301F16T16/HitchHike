@@ -1,6 +1,9 @@
 package com.example.cmput301.osmlab8;
 
 import android.app.Activity;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -40,6 +43,20 @@ public class MainActivity extends Activity {
 
 
 
+    final private double MAP_DEFAULT_LATITUDE = 53.52676;
+    final private double MAP_DEFAULT_LONGITUDE = -113.52715;
+
+    private MapView mMapView;
+    private ResourceProxy mResourceProxy;
+    private OsmMapsItemizedOverlay mItemizedOverlay;
+    private MyLocationOverlay mMyLocationOverlay;
+    private LocationManager locationManager;
+    private OverlayItem lastPosition = null;
+    private Order mOrder;
+    OsmGeoUpdateHandler mUpdateHandler;
+    private ArrayList<OverlayItem> mItems = new ArrayList<OverlayItem>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +65,36 @@ public class MainActivity extends Activity {
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
+        map.setClickable(true);
+        map.setUseDataConnection(false);
+
+        /* location manager */
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mUpdateHandler = new OsmGeoUpdateHandler(this);
+        Location location = null;
+
+        for (String provider : locationManager.getProviders(true))
+        {
+            location = locationManager.getLastKnownLocation(provider);
+            if (location != null)
+            {
+                //location.setLatitude(MAP_DEFAULT_LATITUDE);
+                //location.setLongitude(MAP_DEFAULT_LONGITUDE);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mUpdateHandler);
+                break;
+            }
+        }
+
+        //add car position
+        if (location == null)
+        {
+            location = new Location(LocationManager.GPS_PROVIDER);
+            location.setLatitude(MAP_DEFAULT_LATITUDE);
+            location.setLongitude(MAP_DEFAULT_LONGITUDE);
+            updatePosition(new GeoPoint(location));
+        }
+
+
 
         GeoPoint startPoint = new GeoPoint(48.13, -1.63);
         IMapController mapController = map.getController();
@@ -60,6 +107,11 @@ public class MainActivity extends Activity {
         map.getOverlays().add(startMarker);
 
         GeoPoint destinationPoint = new GeoPoint(48.4, -1.9);
+
+
+
+
+
         // http://stackoverflow.com/questions/38539637/osmbonuspack-roadmanager-networkonmainthreadexception
         // accessed on October 27th, 2016
         // author: yubaraj poudel
@@ -70,6 +122,30 @@ public class MainActivity extends Activity {
         overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", destinationPoint));
         getRoadAsync(startPoint, destinationPoint);
     }
+
+    public void updatePosition(GeoPoint aPoint)
+    {
+        if (mItemizedOverlay == null)
+        {
+            return;
+        }
+        OverlayItem overlayItem;
+
+        /* remove last position marker */
+        removeLastPosition(lastPosition);
+
+        overlayItem = new OverlayItem("Center", "Center", (GeoPoint) aPoint);
+
+        lastPosition = overlayItem;
+
+        mItemizedOverlay.addOverlay(overlayItem);
+
+
+        map.getOverlays().add(mItemizedOverlay);
+        map.getController().animateTo(aPoint);
+
+    }
+
 
     Activity ourActivity = this;
     MapView map;
@@ -89,7 +165,7 @@ public class MainActivity extends Activity {
         protected Road[] doInBackground(Object... params) {
             @SuppressWarnings("unchecked")
             ArrayList<GeoPoint> waypoints = (ArrayList<GeoPoint>) params[0];
-            RoadManager roadManager = new MapQuestRoadManager("--");
+            RoadManager roadManager = new MapQuestRoadManager("L1fY0M61AxWmso7ZUmsjZEtILXjzU3A6");
             return roadManager.getRoads(waypoints);
         }
 
@@ -141,5 +217,11 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    public GeoPoint getCurrentLocation() {
+        return currentLocation;
     }
 }
