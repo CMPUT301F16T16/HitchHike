@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_title"
+        android:text="Request Ride"
+        android:textSize="28dp"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter a start and end location"
+        android:textSize="18sp"
+        android:id="@+id/locationText"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/create_title"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Pick up"
+        android:ems="10"
+        android:id="@+id/pick_up"
+        android:layout_below="@id/locationText"
+        android:layout_marginTop="0dp"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Drop:off"
+        android:ems="10"
+        android:id="@+id/drop_off"
+        android:layout_below="@+id/pick_up"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fare Estimate: "
+        android:textSize="20sp"
+        android:id="@+id/estimate"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/drop_off" />
+
+     <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drop_off"
+        android:layout_toRightOf="@id/estimate"
+        android:layout_marginTop="10dp"
+        android:id="@+id/fare_estimate"
+        android:ems="5"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your fare price"
+        android:textSize="20sp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/suggested_fare_text"
+        android:layout_below="@id/estimate"
+        android:layout_alignParentStart="true"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/estimate"
+        android:layout_toRightOf="@id/suggested_fare_text"
+        android:id="@+id/suggested_fare"
+        android:ems="5"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submit_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/create_title"
+        android:layout_alignEnd="@+id/create_title" />
+
+
+</RelativeLayout>

@@ -27,7 +27,7 @@ public class UserListTest extends TestCase {
         User user = new User("TestUser");
         userList.add(user);
         User returnedUser = userList.getUser(0);
-        assertEquals(returnedUser.getName(), user.getName());
+        assertEquals(returnedUser.getUserName(), user.getUserName());
 
     }
     public void testHasUser(){

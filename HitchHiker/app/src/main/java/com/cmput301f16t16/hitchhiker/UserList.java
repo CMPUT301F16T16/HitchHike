@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Jae-yeon on 10/13/2016.
  */
 public class UserList {
-    private ArrayList<User> userList = new ArrayList<User>();
+    public ArrayList<User> userList = new ArrayList<User>();
 
     public boolean hasUser(User user) {
         return userList.contains(user);
