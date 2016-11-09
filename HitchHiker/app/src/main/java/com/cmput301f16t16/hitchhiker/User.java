@@ -12,7 +12,7 @@ public class User {
     private String userFirstName;
     private String userLastName;
     private String userEmail;
-    private Integer userPhoneNumber;
+    private String userPhoneNumber;
 
     public User(String userName) {
         this.userName = userName;
@@ -20,7 +20,7 @@ public class User {
         this.userFirstName = new String();
         this.userLastName = new String();
         this.userEmail = new String();
-        this.userPhoneNumber = new Integer(NULL);
+        this.userPhoneNumber = new String();
 
     }
 
@@ -32,11 +32,11 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    public String getUserPassword() {
         return this.userPassword;
     }
 
-    public void setPassword(String userPassword) {
+    public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
 
@@ -64,11 +64,11 @@ public class User {
         return this.userLastName;
     }
 
-    public void setUserPhoneNumber(Integer phoneNumber) {
+    public void setUserPhoneNumber(String phoneNumber) {
         this.userPhoneNumber = phoneNumber;
     }
 
-    public Integer getUserPhoneNumber() {
+    public String getUserPhoneNumber() {
         return this.userPhoneNumber;
     }
 

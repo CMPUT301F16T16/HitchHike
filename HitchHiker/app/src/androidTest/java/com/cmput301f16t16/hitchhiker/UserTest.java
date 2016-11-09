@@ -25,16 +25,16 @@ public class UserTest extends TestCase {
         String userName = "TestUser";
         User user = new User(userName);
         String userPassword = "TestPassword";
-        user.setPassword(userPassword);
-        assertEquals("TestPassword",user.getPassword());
+        user.setUserPassword(userPassword);
+        assertEquals("TestPassword",user.getUserPassword());
     }
 
     public void testSetUserPassword() {
         String userName = "TestUser";
         User user = new User(userName);
         String userPassword = "TestPassword";
-        user.setPassword(userPassword);
-        assertEquals("TestPassword", user.getPassword());
+        user.setUserPassword(userPassword);
+        assertEquals("TestPassword", user.getUserPassword());
 
     }
 
