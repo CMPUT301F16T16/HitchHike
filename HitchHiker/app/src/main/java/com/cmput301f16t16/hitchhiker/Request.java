@@ -1,9 +1,15 @@
 package com.cmput301f16t16.hitchhiker;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by Jae-yeon on 10/14/2016.
  */
 public class Request {
+
+    @JestId
+    private String id;
+
     private Integer RID; //RID = Request ID
     private String requestStatus;
     public Request(int RID) {
@@ -37,5 +43,17 @@ public class Request {
 
     public void driverAcceptsRequest() {
         this.requestStatus = "Driver Accepted";
+    }
+
+
+
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
