@@ -10,15 +10,16 @@ import static java.lang.Boolean.TRUE;
 
 public class FareTest extends TestCase{
     public void testGetFare() {
-        Fare fare = new Fare(0);
+        Fare fare = new Fare();
         fare.setFare(0);
-        Integer testFare = 0;
+        double testFare = 0;
         assertEquals(testFare, fare.getFare());
 
     }
     public void testSetFare() {
-        Fare fare = new Fare(0);
-        Integer newFare = 1;
+        Fare fare = new Fare();
+        fare.setFare(10.00);
+        double newFare = 10.00;
         fare.setFare(newFare);
         assertEquals(newFare,fare.getFare());
     }

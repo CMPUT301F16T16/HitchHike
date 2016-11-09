@@ -21,14 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".Login" />
-        <activity android:name=".Register"></activity>
-
-=======
+        <!--<activity android:name=".Login" />-->
+        <!--<activity android:name=".Register"></activity>-->
         <activity android:name=".LoginActivity" />
         <!--<activity android:name=".RegisterActivity"></activity>-->
->>>>>>> testing_requestv1
     </application>
 
 

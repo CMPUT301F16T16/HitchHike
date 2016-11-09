@@ -20,17 +20,9 @@ public class User {
         this.userFirstName = new String();
         this.userLastName = new String();
         this.userEmail = new String();
-<<<<<<< HEAD
-<<<<<<< HEAD
         this.userPhoneNumber = new Integer(NULL);
         this.userType = getUserType();
-=======
-        this.userPhoneNumber = new String();
->>>>>>> RegisterNotWorkingYet
-=======
         this.userPhoneNumber = getUserPhoneNumber();
->>>>>>> RegisterNotWorkingYet
-
     }
 
     public String getUserName() {
