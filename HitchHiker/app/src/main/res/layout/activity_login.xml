@@ -18,7 +18,8 @@
         android:layout_below="@+id/passwordText"
         android:layout_marginTop="33dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="GoToMainPage"/>
 
     <TextView
         android:text="Hitch Hike"

@@ -35,7 +35,7 @@ public class ElasticsearchController {
             String search_string = "{\"from\": 0, \"size\": 10000}";
 
 
-            Search search = new Search.Builder(search_string).addIndex("testing").addType("request").build();
+            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
 
             try{
                 SearchResult result = client.execute(search);
@@ -63,7 +63,7 @@ public class ElasticsearchController {
             verifySettings();
 
             for (Request request: requests) {
-                Index index = new Index.Builder(request).index("testing").type("request").build();
+                Index index = new Index.Builder(request).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").type("request").build();
 
                 try {
                     DocumentResult result = client.execute(index);
@@ -97,7 +97,7 @@ public class ElasticsearchController {
             String search_string = "{\"from\": 0, \"size\": 10000}";
 
 
-            Search search = new Search.Builder(search_string).addIndex("testing").addType("request").build();
+            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
 
             try{
                 SearchResult user = client.execute(search);
@@ -125,7 +125,7 @@ public class ElasticsearchController {
             verifySettings();
 
             for (User user: users) {
-                Index index = new Index.Builder(user).index("testing").type("request").build();
+                Index index = new Index.Builder(user).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").type("request").build();
 
                 try {
                     DocumentResult result = client.execute(index);

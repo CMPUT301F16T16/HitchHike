@@ -1,5 +1,7 @@
 package com.cmput301f16t16.hitchhiker;
 
+import java.util.ArrayList;
+
 import io.searchbox.annotations.JestId;
 
 /**
@@ -9,20 +11,28 @@ public class Request {
 
     @JestId
     private String id;
-
-    private Integer RID; //RID = Request ID
+    private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
     private String requestStatus;
-    public Request(int RID) {
-        this.RID = RID;
-        this.requestStatus = new String(); // Maybe change it to another type later?
+    private User acceptedDriver;
+    private ArrayList<User> prospectiveDrivers;
+    private String pickUp; // Will be changed to Location type
+    private String dropOff; // Will be changed to Location type
+
+
+
+    public Request(String pickUp, String dropOff) {
+        this.pickUp = pickUp;
+        this.dropOff = dropOff;
+        this.requestStatus = "Not Completed";
+    }
+
+    @Override
+    public String toString(){
+        return this.pickUp + "\t ---> \t" + this.dropOff;
     }
 
     public int getRequestID() {
-        return this.RID;
-    }
-
-    public void setRequestID(Integer RID) {
-        this.RID = RID;
+        return this.RequestId;
     }
 
     public void setRequestStatus(String requestStatus) {
@@ -33,17 +43,7 @@ public class Request {
         return this.requestStatus;
     }
 
-    public void acceptDriver() {
-        this.requestStatus = "Accepted";
-    }
 
-    public void completeRequest() {
-        this.requestStatus = "Completed";
-    }
-
-    public void driverAcceptsRequest() {
-        this.requestStatus = "Driver Accepted";
-    }
 
 
 

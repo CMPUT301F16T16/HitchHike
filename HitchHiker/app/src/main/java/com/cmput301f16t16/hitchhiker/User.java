@@ -13,6 +13,7 @@ public class User {
 
     @JestId
     private String id;
+
     private String username;
     private String firstName;
     private String lastName;

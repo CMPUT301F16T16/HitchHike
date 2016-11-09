@@ -29,9 +29,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Pick up"
+        android:hint="Enter pick up location"
         android:ems="10"
-        android:id="@+id/pick_up"
+        android:id="@+id/pick_up_edittext"
         android:layout_below="@id/locationText"
         android:layout_marginTop="0dp"
         android:layout_alignParentStart="true" />
@@ -40,10 +40,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Drop:off"
+        android:hint="Enter Destination"
         android:ems="10"
-        android:id="@+id/drop_off"
-        android:layout_below="@+id/pick_up"
+        android:id="@+id/drop_off_edittext"
+        android:layout_below="@+id/pick_up_edittext"
         android:layout_alignParentStart="true"/>
 
     <TextView
@@ -53,12 +53,12 @@
         android:textSize="20sp"
         android:id="@+id/estimate"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/drop_off" />
+        android:layout_below="@id/drop_off_edittext" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/drop_off"
+        android:layout_below="@id/drop_off_edittext"
         android:layout_toRightOf="@id/estimate"
         android:layout_marginTop="10dp"
         android:id="@+id/fare_estimate"
@@ -94,7 +94,8 @@
         android:id="@+id/submit_button"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/create_title"
-        android:layout_alignEnd="@+id/create_title" />
+        android:layout_alignEnd="@+id/create_title"
+        android:onClick="CreateRequest"/>
 
 
 </RelativeLayout>
