@@ -10,6 +10,7 @@ public class UserListController {
 
     // Lazy Singleton
     private static UserList userList = null;
+
     // If a userList isn't created yet it will catch error otherwise
     // it will grab the users from the userManager and save the userList
     static public UserList getUserList() {
@@ -32,6 +33,7 @@ public class UserListController {
         }
         return userList;
     }
+
     public static void saveUserList() {
         try {
             UserListManager.getUserManager().saveUserList(getUserList());
@@ -39,10 +41,6 @@ public class UserListController {
             e.printStackTrace();
             throw new RuntimeException("Couldn't deserialize UserList from UserListManager");
         }
-    }
-
-    public void add(User user) {
-        getUserList().add(user);
     }
 }
 

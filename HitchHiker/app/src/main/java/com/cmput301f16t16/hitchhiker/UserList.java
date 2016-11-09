@@ -31,10 +31,6 @@ public class UserList implements Serializable{
         return userList.contains(user);
     }
 
-    public void add(User user) {
-        userList.add(user);
-        notifyListeners();
-    }
 
     public void delete(User user) {
         userList.remove(user);
@@ -61,5 +57,10 @@ public class UserList implements Serializable{
 
     public void removeUserListener(UserListener userListener) {
         getUserListeners().remove(userListener);
+    }
+
+    public void addUser(User user) {
+        userList.add(user);
+        notifyListeners();
     }
 }

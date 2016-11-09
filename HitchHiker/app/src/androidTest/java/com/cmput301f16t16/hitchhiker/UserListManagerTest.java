@@ -15,7 +15,7 @@ public class UserListManagerTest extends AndroidTestCase {
     public void testUserToString() {
         UserList userList = new UserList();
         User user = new User("testUser");
-        userList.add(user);
+        userList.addUser(user);
         try {
             String userName = UserListManager.userListToString(userList);
             assertTrue("String length greater than zero", userName.length()>0);
@@ -35,7 +35,7 @@ public class UserListManagerTest extends AndroidTestCase {
             UserList userList = new UserList();
             String userName = "testUser";
             User user = new User(userName);
-            userList.add(user);
+            userList.addUser(user);
             UserListManager userListManager = new UserListManager(getContext());
             userListManager.saveUserList(userList);
             UserList userList2 = userListManager.loadUserList();
