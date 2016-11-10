@@ -21,7 +21,6 @@ public class User {
     private Integer userType;
 
     public User(String username, String firstName, String lastName, String phoneNumber, String userEmail, Integer userType) {
-
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,6 +28,7 @@ public class User {
         this.userEmail = userEmail;
         this.userType = userType;
     }
+
 
     public String getUsername(){
         return this.username;
@@ -50,9 +50,9 @@ public class User {
         return this.userEmail;
     }
 
-//    public Integer getUserType(){
-//        return userType;
-//    }
+    public Integer getUserType(){
+        return userType;
+    }
 
 
     public String getId() {

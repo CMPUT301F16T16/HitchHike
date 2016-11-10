@@ -7,17 +7,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    private Boolean riderBool;
-    private Boolean DriverBool;
     private int userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-
     }
 
     public void CreateUser(View view){
@@ -46,7 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
         else if (driverCheckBox.isChecked()){
             userType = 2;
         }
-
 
         User newUser = new User(username, firstName, lastName, phoneNumber, emailAddress, userType);
 
