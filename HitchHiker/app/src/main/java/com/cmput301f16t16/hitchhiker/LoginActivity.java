@@ -20,6 +20,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void GoToRegisterPage(View view){
+        // TODO If the user is a rider, then go to the rider page
+
+        // Todo If the user is a driver, then go to the driver page
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
 

@@ -29,7 +29,6 @@ public class User {
     }
 
 
-
     public String getUserName() {
 
         return this.userName;
@@ -49,7 +48,10 @@ public class User {
     public String getUserFirstName(){
         return this.userFirstName;
     }
-//
+
+    public void setUserFirstName(String userFirstName) {this.userFirstName = userFirstName;}
+    public void setUserLastName(String userLastName) {this.userLastName = userLastName;}
+
     public String getUserLastName(){
         return this.userLastName;
     }
