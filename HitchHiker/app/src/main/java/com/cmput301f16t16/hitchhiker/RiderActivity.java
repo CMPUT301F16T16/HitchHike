@@ -40,9 +40,8 @@ public class RiderActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
+
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -57,7 +56,10 @@ public class RiderActivity extends AppCompatActivity {
         }
         adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         oldRequestList.setAdapter(adapter);
+
     }
+
+
 
     public void CreateRequest(View view){
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);

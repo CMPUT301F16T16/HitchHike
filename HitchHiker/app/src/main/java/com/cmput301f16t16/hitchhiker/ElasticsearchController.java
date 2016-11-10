@@ -10,6 +10,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -145,6 +146,31 @@ public class ElasticsearchController {
             return null;
         }
     }
+
+    // TODO we need a function which adds a request!
+    public static class DeleteRequestTask extends AsyncTask<Request, Void, Void> {
+        String itemId;
+
+        @Override
+        protected Void doInBackground(Request... requests) {
+            verifySettings();
+
+            try {
+                client.execute(new Delete.Builder(itemId).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").type("request").build());
+            }
+            catch (Exception e) {
+                Log.i("Uhoh", "We failed to delete a request from elastic search!");
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        public void setItemId(String itemId){
+            this.itemId = itemId;
+        }
+    }
+
     private static void verifySettings() {
         // if the client hasn't been initialized then we should make it!
         if (client == null) {
