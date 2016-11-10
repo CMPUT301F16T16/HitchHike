@@ -17,14 +17,17 @@ public class CreateRequestActivity extends AppCompatActivity {
 
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
+        EditText priceText = (EditText) findViewById(R.id.suggested_fare);
 
 
         String pickUp = pickUpText.getText().toString();
         String dropOff = dropOffText.getText().toString();
+        String price = priceText.getText().toString();
 
-//        Request newRequest = new Request(pickUp, dropOff);
-//        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-//        addRequestsTask.execute(newRequest);
+        // TODO figure out how to pass a user rider
+       // Request newRequest = new Request(user, pickUp, dropOff, price);
+       // ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+       // addRequestsTask.execute(newRequest);
 
         finish();
 
