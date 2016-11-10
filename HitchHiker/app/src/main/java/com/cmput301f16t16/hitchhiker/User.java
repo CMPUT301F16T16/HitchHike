@@ -18,7 +18,7 @@ public class User {
     protected int userPhoneNumber;
     protected String id;
 
-    public User(String userName, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
+    public User(String userName) {
         this.userName = getUserName();
         this.userFirstName = getUserFirstName();
         this.userLastName = getUserLastName();
@@ -30,55 +30,45 @@ public class User {
 
 
 
-    public String getUserName() {
-
-        return this.userName;
-    }
-
-    public void setUserName(String userName) {
-
-        this.userName = userName;
-    }
 
 
+
+
+    public void setUserName(String userName) {this.userName = userName;}
+    public void setUserFirstName(String userFirstName) {this.userFirstName = userFirstName;}
+    public void setUserLatName(String userLastName) {this.userLastName = userLastName;}
     public void setUserType(Integer userType) {
         this.userType = userType;
     }
+    public void setUserPhoneNumber(int userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
+    }
+    public void setUserEmail(String email) {
+        this.userEmail = email;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-
+    public String getUserName() {return this.userName;}
     public String getUserFirstName(){
         return this.userFirstName;
     }
-//
     public String getUserLastName(){
         return this.userLastName;
     }
-
     public Integer getUserType(){
         return userType;
     }
     public String getId() {
         return id;
     }
-
-    public void setUserPhoneNumber(int userPhoneNumber) {
-        this.userPhoneNumber = userPhoneNumber;
-    }
-
-    public int getUserPhoneNumber() {
+    public Integer getUserPhoneNumber() {
         return this.userPhoneNumber;
     }
-
-    public void setUserEmail(String email) {
-        this.userEmail = email;
-    }
-
     public String getUserEmail() {
         return this.userEmail;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 }
 
