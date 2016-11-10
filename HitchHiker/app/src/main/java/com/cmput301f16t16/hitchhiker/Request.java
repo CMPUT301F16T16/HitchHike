@@ -1,13 +1,22 @@
 package com.cmput301f16t16.hitchhiker;
 
+<<<<<<< HEAD
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+=======
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import io.searchbox.annotations.JestId;
+
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 /**
  * Created by Jae-yeon on 10/14/2016.
  * Edited by Angus on 11/3/2016
  */
+<<<<<<< HEAD
 public class Request extends Fare implements Serializable  {
 
     private static long serialVersionUID = 44L; // need this to access a same request from diff screens
@@ -73,6 +82,36 @@ public class Request extends Fare implements Serializable  {
 
     public User getRider() {
         return this.Rider;
+=======
+public class Request implements Serializable{
+
+    private static final long serialVersionUID = 25L;
+
+    @JestId
+    private String id;
+    private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
+    private String requestStatus;
+    private User acceptedDriver;
+    private ArrayList<User> prospectiveDrivers;
+    private String pickUp; // Will be changed to Location type
+    private String dropOff; // Will be changed to Location type
+
+
+
+    public Request(String pickUp, String dropOff) {
+        this.pickUp = pickUp;
+        this.dropOff = dropOff;
+        this.requestStatus = "Not Completed";
+    }
+
+    @Override
+    public String toString(){
+        return this.pickUp + "\t ---> \t" + this.dropOff;
+    }
+
+    public int getRequestID() {
+        return this.RequestId;
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
     }
 
     public Location getStartLocation() {
@@ -83,6 +122,7 @@ public class Request extends Fare implements Serializable  {
         return this.dropOff;
     }
 
+<<<<<<< HEAD
 
     //private Location pickUp;
 //    private Location dropOff;
@@ -103,6 +143,21 @@ public class Request extends Fare implements Serializable  {
         // Notifcation to driver that his requests has been accepted
         this.acceptedDriver = driver;
         this.requestStatus = ACCEPTED;
+=======
+    public String getTrip(){
+        return this.pickUp + "\t ---> \t" + this.dropOff;
+    }
+
+
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
     }
 
     public void paidForDrive() {

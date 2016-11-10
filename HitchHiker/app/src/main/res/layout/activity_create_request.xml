@@ -29,9 +29,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+<<<<<<< HEAD
         android:text="Pick up"
         android:ems="10"
         android:id="@+id/pick_up"
+=======
+        android:hint="Enter pick up location"
+        android:ems="10"
+        android:id="@+id/pick_up_edittext"
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
         android:layout_below="@id/locationText"
         android:layout_marginTop="0dp"
         android:layout_alignParentStart="true" />
@@ -40,10 +46,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+<<<<<<< HEAD
         android:text="Drop:off"
         android:ems="10"
         android:id="@+id/drop_off"
         android:layout_below="@+id/pick_up"
+=======
+        android:hint="Enter Destination"
+        android:ems="10"
+        android:id="@+id/drop_off_edittext"
+        android:layout_below="@+id/pick_up_edittext"
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
         android:layout_alignParentStart="true"/>
 
     <TextView
@@ -53,12 +66,21 @@
         android:textSize="20sp"
         android:id="@+id/estimate"
         android:layout_marginTop="20dp"
+<<<<<<< HEAD
         android:layout_below="@id/drop_off" />
 
      <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/drop_off"
+=======
+        android:layout_below="@id/drop_off_edittext" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drop_off_edittext"
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
         android:layout_toRightOf="@id/estimate"
         android:layout_marginTop="10dp"
         android:id="@+id/fare_estimate"
@@ -94,7 +116,12 @@
         android:id="@+id/submit_button"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/create_title"
+<<<<<<< HEAD
         android:layout_alignEnd="@+id/create_title" />
+=======
+        android:layout_alignEnd="@+id/create_title"
+        android:onClick="CreateRequest"/>
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 
 
 </RelativeLayout>

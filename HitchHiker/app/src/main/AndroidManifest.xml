@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cmput301f16t16.hitchhiker">
 
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+=======
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,7 +16,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,8 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".RegisterActivity" />
 
+=======
+        <activity android:name=".CreateRequestActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RiderActivity" />
+        <activity android:name=".ProspectiveDriversActivity"></activity>
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
     </application>
 
 

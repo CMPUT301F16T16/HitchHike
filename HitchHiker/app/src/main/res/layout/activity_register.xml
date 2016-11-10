@@ -37,7 +37,11 @@
         android:ems="10"
         android:layout_below="@+id/enterDetailsText"
         android:layout_alignParentStart="true"
+<<<<<<< HEAD
         android:id="@+id/firstNameText" />
+=======
+        android:id="@+id/firstNameEditText" />
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 
     <EditText
         android:layout_width="wrap_content"
@@ -45,6 +49,7 @@
         android:inputType="textPersonName"
         android:hint="Last Name"
         android:ems="10"
+<<<<<<< HEAD
         android:layout_below="@+id/firstNameText"
         android:layout_alignEnd="@+id/firstNameText"
         android:id="@+id/lastNameText" />
@@ -68,6 +73,11 @@
         android:id="@+id/confirmPasswordText"
         android:layout_below="@+id/passwordText"
         android:layout_alignParentStart="true" />
+=======
+        android:layout_below="@+id/firstNameEditText"
+        android:layout_alignEnd="@+id/firstNameEditText"
+        android:id="@+id/lastNameEditText" />
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 
     <Button
         android:text="Register"
@@ -82,6 +92,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:inputType="textPersonName"
         android:hint="Phone Number"
         android:ems="10"
@@ -97,16 +108,52 @@
         android:id="@+id/emailAddressText"
         android:hint="E-mail"
         android:layout_below="@+id/textView3"
+=======
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailAddressEditText"
+        android:hint="E-mail"
+        android:layout_below="@+id/unique_username_text"
         android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:text="Driver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/driverCheckBox"
+        android:layout_marginBottom="14dp"
+        android:layout_above="@+id/registerButton"
+        android:layout_centerHorizontal="true" />
+
+
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textVisiblePassword"
+        android:hint="Username"
+        android:ems="10"
+        android:id="@+id/userNameEditText"
+        android:layout_below="@+id/emailAddressEditText"
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:inputType="textVisiblePassword"
         android:hint="Password"
         android:ems="10"
         android:id="@+id/passwordText"
         android:layout_below="@+id/emailAddressText"
+=======
+        android:inputType="textPersonName"
+        android:hint="Phone Number"
+        android:ems="10"
+        android:id="@+id/phoneNumberEditText"
+        android:layout_below="@+id/userNameEditText"
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
         android:layout_alignParentStart="true" />
 
     <CheckBox
@@ -114,6 +161,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/riderCheckBox"
+<<<<<<< HEAD
         android:layout_alignBaseline="@+id/driverCheckBox"
         android:layout_alignBottom="@+id/driverCheckBox"
         android:layout_toStartOf="@+id/signUpTitle"
@@ -139,3 +187,28 @@
         android:layout_marginTop="15dp" />
 
 </RelativeLayout>
+=======
+        android:layout_marginEnd="16dp"
+        android:layout_alignBaseline="@+id/driverCheckBox"
+        android:layout_alignBottom="@+id/driverCheckBox"
+        android:layout_toStartOf="@+id/signUpTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/choose_usertype_text"
+        android:textSize="18sp"
+        android:layout_above="@id/riderCheckBox"/>
+
+    <TextView
+        android:text="Your Username must be unique!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/unique_username_text"
+        android:textSize="18sp"
+        android:layout_below="@+id/lastNameEditText"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d

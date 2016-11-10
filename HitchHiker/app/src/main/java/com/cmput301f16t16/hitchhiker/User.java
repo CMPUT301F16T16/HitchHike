@@ -1,11 +1,14 @@
 package com.cmput301f16t16.hitchhiker;
 
+import io.searchbox.annotations.JestId;
+
 import static java.sql.Types.NULL;
 
 /**
  * Created by Leo Yoon on 13/10/2016.
  */
 public class User {
+<<<<<<< HEAD
     private String userName;
     private String userPassword;
     private Boolean userType; // If userType = True, then user is both Rider & Driver. If False, the user is ONLY Rider.
@@ -47,24 +50,59 @@ public class User {
 
     public Boolean getUserType() {
         return this.userType;
+=======
+    //Boolean userType;
+    //Integer userID;
+
+    @JestId
+    private String id;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String userEmail;
+    private Integer userType;
+
+    public User(String username, String firstName, String lastName, String phoneNumber, String userEmail, Integer userType) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.userEmail = userEmail;
+        this.userType = userType;
     }
 
-    public void setUserFirstName(String userFirstName) {
-        this.userFirstName = userFirstName;
+    public String getUsername(){
+        return this.username;
     }
 
-    public String getUserFirstName() {
-        return this.userFirstName;
+    public String getFirstName(){
+        return this.firstName;
     }
 
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
+    public String getLastName(){
+        return this.lastName;
     }
 
-    public String getUserLastName() {
-        return this.userLastName;
+    public String getPhoneNumber(){
+        return this.phoneNumber;
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
     }
 
+    public String getUserEmail(){
+        return this.userEmail;
+    }
+
+    public Integer getUserType(){
+        return userType;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+<<<<<<< HEAD
     public void setUserPhoneNumber(int userPhoneNumber) {
         this.userPhoneNumber = userPhoneNumber;
     }
@@ -80,4 +118,11 @@ public class User {
     public String getUserEmail() {
         return this.userEmail;
     }
+=======
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 }

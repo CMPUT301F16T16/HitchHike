@@ -9,6 +9,7 @@ import android.widget.Button;
 /**
  * Created by Jae-yeon on 10/14/2016.
  */
+<<<<<<< HEAD
 public class Rider extends Activity {
 
     @Override
@@ -42,11 +43,15 @@ public class Rider extends Activity {
 
 
     private Integer riderID;
+=======
+public class Rider extends User{
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 
-    public Rider(int RiderID) {
-        this.riderID = riderID;
+    public Rider(String username, String firstName, String lastName, String phoneNumber, String userEmail, Integer userType) {
+        super(username, firstName, lastName, phoneNumber, userEmail, userType);
     }
 
+<<<<<<< HEAD
     public int getRiderID() {
         return this.riderID;
     }
@@ -62,4 +67,6 @@ public class Rider extends Activity {
 
 
 
+=======
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 }

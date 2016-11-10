@@ -23,7 +23,11 @@
         android:layout_height="400dp"
         android:layout_below="@+id/open"
 
+<<<<<<< HEAD
         android:id="@+id/open_requests" />
+=======
+        android:id="@+id/open_requests_listview" />
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 
     <Button
         android:layout_width="wrap_content"
@@ -44,7 +48,12 @@
         android:layout_gravity="bottom"
         android:layout_weight="0.33"
         android:layout_centerHorizontal="true"
+<<<<<<< HEAD
         android:layout_below="@+id/open_requests" />
+=======
+        android:layout_below="@+id/open_requests_listview"
+        android:onClick="CreateRequest"/>
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 
     <Button
         android:layout_width="wrap_content"
@@ -53,7 +62,14 @@
         android:id="@+id/profile_button"
         android:layout_weight="0.33"
         android:layout_gravity="bottom"
+<<<<<<< HEAD
         android:layout_below="@+id/open_requests"
         android:layout_toRightOf="@+id/make_button"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>
+=======
+        android:layout_below="@+id/open_requests_listview"
+        android:layout_toRightOf="@+id/make_button"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
+>>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
