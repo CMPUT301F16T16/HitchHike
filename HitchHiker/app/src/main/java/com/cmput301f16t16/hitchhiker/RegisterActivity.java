@@ -70,7 +70,7 @@ public class RegisterActivity extends Activity {
         final EditText emailAddressText = (EditText) findViewById(R.id.emailAddressText);
         final EditText phoneNumberText = (EditText) findViewById(R.id.phoneNumberText);
 
-        Button registerButton = (Button) findViewById(R.id.registerButton);
+        final Button registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 User user = new User(firstNameText.getText().toString());
@@ -83,7 +83,9 @@ public class RegisterActivity extends Activity {
                 addUserTask.execute(user);
                 setResult(RESULT_OK);
 
-                //Intent RegisterIntent = new Intent(RegisterActivity.this, )
+
+                Intent RegisterIntent = new Intent(RegisterActivity.this,Rider.class);
+                startActivity(RegisterIntent);
             }
         });
     }
