@@ -45,18 +45,27 @@ public class User {
         this.userType = userType;
     }
 
-
-    public String getUserFirstName(){
-        return this.userFirstName;
-    }
-//
-    public String getUserLastName(){
-        return this.userLastName;
-    }
-
     public Integer getUserType(){
         return userType;
     }
+
+    public void setUserFirstName(String userFirstName){
+        this.userFirstName = userFirstName;}
+
+
+    public String getUserFirstName(){
+        return userFirstName;
+
+    }
+
+    public void setUserLastName(String userLastName){
+        this.userLastName = userLastName;}
+
+    public String getUserLastName(){
+        return userLastName;
+    }
+
+
     public String getId() {
         return id;
     }
