@@ -8,21 +8,16 @@ import junit.framework.TestCase;
 <<<<<<< HEAD
  * Created by Jae-yeon on 10/14/2016.
  * edited by Angus on 11/2/2016.
-=======
- * Created by willyliao on 2016-11-09.
->>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
- */
+*/
 
 public class RequestTest extends TestCase {
-
-<<<<<<< HEAD
 
     public void testRequest() {
         Location pickUp = new Location();
         Fare fare = new Fare();
         fare.setFare(10.25);
         Location dropOff = new Location();
-        User requestCreator = new User("HitchKiker1");
+        User requestCreator = new User("HitchKiker1", "Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
         Request request = new Request(requestCreator, pickUp, dropOff, fare);
         assertTrue("Request Creator is not equal", requestCreator.equals(request.getRider()));
     }
@@ -32,7 +27,7 @@ public class RequestTest extends TestCase {
      * As a rider I want to request rides between 2 locations
      */
     public void testLocationRequest() {
-        User paying_Rider = new User("HitchHiker2");
+        User paying_Rider = new User("HitchHiker2", "Bob", "Abe", "email@hotmaotmail.com", 1233123, 1);
         Location pickUp = new Location();
         Location dropOff = new Location();
         Fare fare = new Fare();
@@ -48,7 +43,7 @@ public class RequestTest extends TestCase {
     }
 
     public void testSizeRequestList() {
-        User rider = new User("BOB");
+        User rider = new User("BOB", "Joseph", "Loo", "email@hotmaotmail.com", 1233, 2);
         Location pickUp = new Location();
         Location dropOff = new Location();
         Fare fare = new Fare();
@@ -63,11 +58,11 @@ public class RequestTest extends TestCase {
     }
 
     public void testUserType () {
-        User rider = new User("Billy");
-        rider.setUserType("Rider");
-        User driver = new User("Dora");
-        driver.setUserType("");
-        assertTrue("The User's type is the same", rider.getUserType().equals("Rider"));
+        User rider = new User("Billy", "Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
+        rider.setUserType(2);
+        User driver = new User("Dora","Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
+        driver.setUserType(2);
+        assertTrue("The User's type is the same", rider.getUserType().equals(driver.getUserType()));
 //        assertTrue("The User's type is the same", driver.getUserType().equals("Driver"));
 //        assertNotSame(rider, driver);
 
@@ -124,11 +119,10 @@ public class RequestTest extends TestCase {
 //    }
 //}
 //>>>>>>> request_testing
-=======
-    public void testCreateRequest(){
-        String pickUp = "Earth";
-        String dropOff = "Moon";
-        Request newRequest = new Request(pickUp, dropOff);
+//    public void testCreateRequest(){
+//        String pickUp = "Earth";
+//        String dropOff = "Moon";
+//        Request newRequest = new Request(pickUp, dropOff);
 
 
 //        Rider newRider = new Rider(username, firstName, lastName, phoneNumber);
@@ -138,6 +132,6 @@ public class RequestTest extends TestCase {
 //        assertEquals("First name is not the same", firstName, newRider.getFirstName());
 //        assertEquals("Last name is not the same", lastName, newRider.getLastName());
 //        assertEquals("Phone number is not the same", phoneNumber, newRider.getPhoneNumber());
-    }
-}
->>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
+//    }
+//}
+

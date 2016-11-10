@@ -103,6 +103,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else if (usernameExists == false) {
             User user = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType);
+
+
+
             ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
             addUsersTask.execute(user);
             finish();
