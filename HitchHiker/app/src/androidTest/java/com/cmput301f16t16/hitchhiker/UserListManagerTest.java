@@ -1,18 +1,20 @@
 package com.cmput301f16t16.hitchhiker;
 
 import android.content.Context;
+import android.test.AndroidTestCase;
 
 import junit.framework.TestCase;
 
 import java.io.IOException;
 
 import static java.security.AccessController.getContext;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by Leo Yoon on 07/11/2016.
  */
 
-public class UserListManagerTest extends TestCase {
+public class UserListManagerTest extends AndroidTestCase {
 
     public void testUserToString() {
         UserList userList = new UserList();

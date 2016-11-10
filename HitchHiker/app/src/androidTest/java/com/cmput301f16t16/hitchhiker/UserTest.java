@@ -77,14 +77,14 @@ public class UserTest extends TestCase {
         assertEquals(lastName,user.getUserLastName());
     }
     public void testSetUserPhoneNumber() {
-        Integer phoneNumber = 12345789;
+        String phoneNumber = "12345789";
         String userName = "testUser";
         User user = new User(userName);
         user.setUserPhoneNumber(phoneNumber);
 
     }
     public void testGetUserPhoneNumber() {
-        Integer phoneNumber = 123456789;
+        String phoneNumber = "123456789";
         String userName = "testUser";
         User user = new User(userName);
         user.setUserPhoneNumber(phoneNumber);
