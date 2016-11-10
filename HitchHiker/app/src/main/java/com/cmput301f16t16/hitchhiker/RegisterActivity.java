@@ -1,6 +1,7 @@
 package com.cmput301f16t16.hitchhiker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,22 +20,21 @@ import java.util.Collection;
 
 public class RegisterActivity extends AppCompatActivity {
 
-//    private Activity activity = this;
-//
-//    private static final String FILENAME = "file.sav";
-//    private EditText firstNameText;
-//    private EditText lastNameText;
-//    private EditText emailAddressText;
-//    private EditText passwordText;
-//    private EditText confirmPasswordText;
-//    private EditText phoneNumberText;
-//    private ArrayList<User> userList = new ArrayList<User>();
-//    private String firstName;
-//    private String lastName;
-//    private String emailAddress;
-//    private String userName;
-//    private String password;
-//    private String phoneNumber;
+    private Activity activity = this;
+
+    private static final String FILENAME = "file.sav";
+    private EditText firstNameText;
+    private EditText lastNameText;
+    private EditText emailAddressText;
+    private EditText passwordText;
+    private EditText confirmPasswordText;
+    private EditText phoneNumberText;
+    private String firstName;
+    private String lastName;
+    private String emailAddress;
+    private String userName;
+    private String password;
+    private int phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +56,14 @@ public class RegisterActivity extends AppCompatActivity {
         String emailAddress = emailAddressText.getText().toString();
         String userName = emailAddressText.getText().toString();
         String password = passwordText.getText().toString();
-        String phoneNumber = phoneNumberText.getText().toString();
+        Integer phoneNumber = phoneNumberText.getInputType();
 
+        firstName = firstNameText.getText().toString();
+        lastName = lastNameText.getText().toString();
+        emailAddress = emailAddressText.getText().toString();
+        userName = emailAddressText.getText().toString();
+        password = passwordText.getText().toString();
+        phoneNumber = phoneNumberText.getInputType();
 
         User user = new User(userName);
         user.setUserFirstName(firstName);
@@ -66,20 +72,10 @@ public class RegisterActivity extends AppCompatActivity {
         user.setUserPassword(password);
         user.setUserPhoneNumber(phoneNumber);
 
+
         ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
         addUserTask.execute(user);
         finish();
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        ElasticsearchUserController.GetUsersTask getUsersTask = new ElasticsearchUserController.GetUsersTask();
-//        getUsersTask.execute("");
-//        try {
-//            userList = getUsersTask.get();
-//        } catch (Exception e) {
-//            Log.i("Error", "Failed to get the users out of the async object.");
-//        }
-//    }
 }

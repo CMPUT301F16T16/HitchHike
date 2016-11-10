@@ -50,7 +50,7 @@
         android:id="@+id/lastNameText" />
 
     <TextView
-        android:text="Your e-mail address will be your username"
+        android:text="Your Username must be unique!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lastNameText"

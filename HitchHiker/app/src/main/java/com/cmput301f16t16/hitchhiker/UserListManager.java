@@ -2,12 +2,12 @@ package com.cmput301f16t16.hitchhiker;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -62,7 +62,7 @@ public class UserListManager {
     }
 
     // Encodes the User data to string
-    public static String userListToString(UserList userList) throws IOException {
+    static public String userListToString(UserList userList) throws IOException {
         ByteArrayOutputStream bo = new ByteArrayOutputStream();
         ObjectOutputStream oo = new ObjectOutputStream(bo);
         oo.writeObject(userList);
