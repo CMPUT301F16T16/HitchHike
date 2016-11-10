@@ -20,7 +20,7 @@ import io.searchbox.core.SearchResult;
  * Created by willyliao on 2016-11-04.
  */
 
-public class ElasticsearchController {
+public class ElasticsearchRequestController {
     private static JestDroidClient client;
 
     // TODO we need a function that gets requests!

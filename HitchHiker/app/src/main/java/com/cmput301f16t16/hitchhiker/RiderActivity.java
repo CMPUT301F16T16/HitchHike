@@ -1,16 +1,13 @@
 package com.cmput301f16t16.hitchhiker;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ListViewCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
 public class RiderActivity extends AppCompatActivity {
@@ -46,7 +43,7 @@ public class RiderActivity extends AppCompatActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        ElasticsearchController.GetRequestsTask getRequestsTask = new ElasticsearchController.GetRequestsTask();
+        ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
         getRequestsTask.execute("");
         try {
             requestsList = getRequestsTask.get();
@@ -58,7 +55,6 @@ public class RiderActivity extends AppCompatActivity {
         oldRequestList.setAdapter(adapter);
 
     }
-
 
 
     public void CreateRequest(View view){

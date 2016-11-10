@@ -18,16 +18,16 @@ public class User {
     private String lastName;
     private String phoneNumber;
     private String userEmail;
-    private String userType;
+    private Integer userType;
 
-    public User(String username, String firstName, String lastName, String phoneNumber) {
+    public User(String username, String firstName, String lastName, String phoneNumber, String userEmail, Integer userType) {
 
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        //this.userEmail = userEmail;
-        //this.userType = userType;
+        this.userEmail = userEmail;
+        this.userType = userType;
     }
 
     public String getUsername(){
@@ -45,6 +45,14 @@ public class User {
     public String getPhoneNumber(){
         return this.phoneNumber;
     }
+
+    public String getUserEmail(){
+        return this.userEmail;
+    }
+
+//    public Integer getUserType(){
+//        return userType;
+//    }
 
 
     public String getId() {

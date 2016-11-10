@@ -5,8 +5,8 @@ package com.cmput301f16t16.hitchhiker;
  */
 public class Rider extends User{
 
-    public Rider(String username, String firstName, String lastName, String phoneNumber) {
-        super(username, firstName, lastName, phoneNumber);
+    public Rider(String username, String firstName, String lastName, String phoneNumber, String userEmail, Integer userType) {
+        super(username, firstName, lastName, phoneNumber, userEmail, userType);
     }
 
 }

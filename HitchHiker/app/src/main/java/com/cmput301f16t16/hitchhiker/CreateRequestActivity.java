@@ -22,7 +22,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         String dropOffString = dropOffText.getText().toString();
 
         Request newRequest = new Request(pickUpString, dropOffString);
-        ElasticsearchController.AddRequestsTask addRequestsTask = new ElasticsearchController.AddRequestsTask();
+        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
         addRequestsTask.execute(newRequest);
 
         finish();

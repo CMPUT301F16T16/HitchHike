@@ -33,7 +33,7 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
     }
 
     public void DeleteRequest(View view){
-        ElasticsearchController.DeleteRequestTask deleteRequestTask = new ElasticsearchController.DeleteRequestTask();
+        ElasticsearchRequestController.DeleteRequestTask deleteRequestTask = new ElasticsearchRequestController.DeleteRequestTask();
         deleteRequestTask.setItemId(requestId);
         deleteRequestTask.execute();
         //requestsList.remove(index);
