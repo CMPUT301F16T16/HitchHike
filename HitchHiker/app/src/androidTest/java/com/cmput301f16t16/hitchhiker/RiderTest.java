@@ -15,13 +15,13 @@ public class RiderTest extends TestCase {
         String lastName = "Liao";
         String phoneNumber = "1234567890";
 
-        Rider newRider = new Rider(username, firstName, lastName, phoneNumber);
+        Rider newRider = new Rider(userName, userFirstName, userLastName, userPhoneNumber);
 
         //Test to see if values passed are creqted and stored. It tests for equality.
-        assertEquals("Username is not the same", username, newRider.getUsername());
-        assertEquals("First name is not the same", firstName, newRider.getFirstName());
-        assertEquals("Last name is not the same", lastName, newRider.getLastName());
-        assertEquals("Phone number is not the same", phoneNumber, newRider.getPhoneNumber());
+        assertEquals("Username is not the same", username, newRider.getUserName());
+        assertEquals("First name is not the same", firstName, newRider.getUserFirstName());
+        assertEquals("Last name is not the same", lastName, newRider.getUserLastName());
+        assertEquals("Phone number is not the same", phoneNumber, newRider.getUserPhoneNumber());
     }
 
 
