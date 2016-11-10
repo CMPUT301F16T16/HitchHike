@@ -29,7 +29,6 @@ public class User {
         this.userType = userType;
     }
 
-
     public String getUsername(){
         return this.username;
     }
