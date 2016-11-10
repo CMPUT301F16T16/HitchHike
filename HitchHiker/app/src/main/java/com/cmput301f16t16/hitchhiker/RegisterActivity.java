@@ -12,10 +12,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
-    private int userType;
+    private int userType = 0;
     private ArrayList<User> usersList = new ArrayList<User>();
     private Boolean usernameExists = false;
-    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +25,9 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        /**
+         * Pulls from elasticsearch and populate the usersList with the users
+         */
         ElasticsearchUserController.GetUsersTask getUsersTask = new ElasticsearchUserController.GetUsersTask();
         getUsersTask.execute("");
         try {
@@ -46,13 +48,15 @@ public class RegisterActivity extends AppCompatActivity {
         CheckBox riderCheckBox = (CheckBox) findViewById(R.id.riderCheckBox);
         CheckBox driverCheckBox = (CheckBox) findViewById(R.id.driverCheckBox);
 
-
         String username = usernameText.getText().toString();
         String firstName = firstNameText.getText().toString();
         String lastName = lastNameText.getText().toString();
         String phoneNumber = phoneNumberText.getText().toString();
         String emailAddress = emailAddressText.getText().toString();
 
+        /**
+         * Determines the userType
+         */
         if (riderCheckBox.isChecked() && driverCheckBox.isChecked()){
             userType = 3;
         }
@@ -63,6 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
             userType = 2;
         }
 
+        /**
+         * checks to see if the username inputted already exists.
+         */
         for (User user: usersList){
             if ((user.getUsername()).contentEquals(username)){
                 usernameExists = true;
@@ -73,12 +80,24 @@ public class RegisterActivity extends AppCompatActivity {
          * If the username exists already, output message.
          * ELSE create the new user
          */
-        if (usernameExists){
+        if (username.equals("") || firstName.equals("") || lastName.equals("") ||
+                phoneNumber.equals("") || emailAddress.equals("")){
+            TextView uniqueUsernameText = (TextView) findViewById(R.id.choose_usertype_text);
+            uniqueUsernameText.setText("Please fill out every field.");
+            uniqueUsernameText.setTextColor(Color.RED);
+            usernameExists = false;
+        }
+        else if (usernameExists){
             TextView uniqueUsernameText = (TextView) findViewById(R.id.unique_username_text);
             uniqueUsernameText.setText("Your username is not unique!");
             uniqueUsernameText.setTextColor(Color.RED);
             usernameExists = false;
-
+        }
+        else if (userType == 0) {
+            TextView uniqueUsernameText = (TextView) findViewById(R.id.choose_usertype_text);
+            uniqueUsernameText.setText("Please choose to be a rider, driver or both.");
+            uniqueUsernameText.setTextColor(Color.RED);
+            usernameExists = false;
         }
         else if (usernameExists == false) {
             User newUser = new User(username, firstName, lastName, phoneNumber, emailAddress, userType);
