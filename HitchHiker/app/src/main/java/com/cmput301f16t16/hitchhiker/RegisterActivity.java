@@ -44,7 +44,7 @@ public class RegisterActivity extends Activity {
 
     }
 
-    static public int userType = 0;
+    public int userType;
 
     public int onCheckboxUserTypeClicked(View view) {
         CheckBox rider_check = (CheckBox) findViewById(R.id.riderCheckBox);

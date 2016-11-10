@@ -29,7 +29,7 @@ public static class AddUserTask extends AsyncTask<User, Void, Void> {
         verifySettings();
 
         for (User user : userList) {
-            Index index = new Index.Builder(user).index("testing").type("user").build();
+            Index index = new Index.Builder(user).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").type("user").build();
 
             try {
                 // Double check if its Username that we are going to set here
