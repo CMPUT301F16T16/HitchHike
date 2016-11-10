@@ -41,64 +41,34 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Setting up userList
-        UserListManager.initUserManager(this.getApplicationContext());
-        Collection<User> users = UserListController.getUserList().getUsers();
-        final ArrayList<User> userList = new ArrayList<User>(users);
-
-
-        UserListController.getUserList().addUserListener(new UserListener() {
-            @Override
-            public void update() {
-                userList.clear();
-                Collection<User> users = UserListController.getUserList().getUsers();
-                userList.addAll(users);
-            }
-        });
-
-        firstNameText = (EditText) findViewById(R.id.firstNameText);
-        lastNameText = (EditText) findViewById(R.id.lastNameText);
-        emailAddressText = (EditText) findViewById(R.id.emailAddressText);
-        passwordText = (EditText) findViewById(R.id.passwordText);
-        confirmPasswordText = (EditText) findViewById(R.id.confirmPasswordText);
-        phoneNumberText = (EditText) findViewById(R.id.phoneNumberText);
-
-        firstName = firstNameText.getText().toString();
-        lastName = lastNameText.getText().toString();
-        emailAddress = emailAddressText.getText().toString();
-        userName = emailAddressText.getText().toString();
-        password = passwordText.getText().toString();
-        phoneNumber = phoneNumberText.getInputType();
-
-        Button registerButton = (Button) findViewById(R.id.registerButton);
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                User user = new User(userName);
-                user.setUserFirstName(firstName);
-                user.setUserLastName(lastName);
-                user.setUserEmail(emailAddress);
-                user.setUserPassword(password);
-                user.setUserPhoneNumber(phoneNumber);
-
-                ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
-                addUserTask.execute(user);
-                setResult(RESULT_OK);
-
-                //Intent RegisterIntent = new Intent(RegisterActivity.this, )
-            }
-            });
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        ElasticsearchUserController.GetUsersTask getUsersTask = new ElasticsearchUserController.GetUsersTask();
-//        getUsersTask.execute("");
-//        try {
-//            userList = getUsersTask.get();
-//        } catch (Exception e) {
-//            Log.i("Error", "Failed to get the users out of the async object.");
-//        }
-//    }
+    public void CreateUser(View view) {
+        EditText firstNameText = (EditText) findViewById(R.id.firstNameText);
+        EditText lastNameText = (EditText) findViewById(R.id.lastNameText);
+        EditText emailAddressText = (EditText) findViewById(R.id.emailAddressText);
+        EditText passwordText = (EditText) findViewById(R.id.passwordText);
+        EditText confirmPasswordText = (EditText) findViewById(R.id.confirmPasswordText);
+        EditText phoneNumberText = (EditText) findViewById(R.id.phoneNumberText);
+
+        String firstName = firstNameText.getText().toString();
+        String lastName = lastNameText.getText().toString();
+        String emailAddress = emailAddressText.getText().toString();
+        String userName = emailAddressText.getText().toString();
+        String password = passwordText.getText().toString();
+        Integer phoneNumber = phoneNumberText.getInputType();
+
+        User user = new User(userName);
+        user.setUserFirstName(firstName);
+        user.setUserLastName(lastName);
+        user.setUserEmail(emailAddress);
+        user.setUserPassword(password);
+        user.setUserPhoneNumber(phoneNumber);
+
+
+        ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
+        addUserTask.execute(user);
+        finish();
+    }
+
 }

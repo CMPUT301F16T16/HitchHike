@@ -2,9 +2,18 @@ package com.cmput301f16t16.hitchhiker;
 
 import android.test.AndroidTestCase;
 
+import android.content.Context;
+import android.test.AndroidTestCase;
+
+import junit.framework.TestCase;
+
+import android.test.AndroidTestCase;
+
+
 import java.io.IOException;
 
 import static java.security.AccessController.getContext;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by Leo Yoon on 07/11/2016.
