@@ -58,13 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
         Integer phoneNumber = phoneNumberText.getInputType();
 
-        firstName = firstNameText.getText().toString();
-        lastName = lastNameText.getText().toString();
-        emailAddress = emailAddressText.getText().toString();
-        userName = emailAddressText.getText().toString();
-        password = passwordText.getText().toString();
-        phoneNumber = phoneNumberText.getInputType();
-
         User user = new User(userName);
         user.setUserFirstName(firstName);
         user.setUserLastName(lastName);
