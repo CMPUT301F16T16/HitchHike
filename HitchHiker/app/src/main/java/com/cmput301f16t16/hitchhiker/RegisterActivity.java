@@ -22,7 +22,7 @@ import java.util.zip.CheckedInputStream;
 
 public class RegisterActivity extends AppCompatActivity {
 
-//    private Activity activity = this;
+    //    private Activity activity = this;
     private static final String FILENAME = "file.sav";
 
     Collection<User> users = UserListController.getUserList().getUsers();
@@ -34,64 +34,63 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         // Setting up userList
-        UserListManager.initUserManager(this.getApplicationContext());
-        UserListController.getUserList().addUserListener(new UserListener() {
-            @Override
-            public void update() {
-                userList.clear();
-                Collection<User> users = UserListController.getUserList().getUsers();
-                userList.addAll(users);
-            }
-        });
+//        UserListManager.initUserManager(this.getApplicationContext());
+//        UserListController.getUserList().addUserListener(new UserListener() {
+//            @Override
+//            public void update() {
+//                userList.clear();
+//                Collection<User> users = UserListController.getUserList().getUsers();
+//                userList.addAll(users);
+//            }
+//        });
 
     }
-
-    public int onCheckboxUserTypeClicked (View view) {
-        CheckBox rider_check = (CheckBox)findViewById(R.id.riderCheckBox);
-        CheckBox driver_check = (CheckBox)findViewById(R.id.driverCheckBox);
-        int userType = 0;
-        boolean checked = ((CheckBox) view ).isChecked();
-        if (rider_check.isChecked()) {
-            userType = 1;
-        }
-        if (driver_check.isChecked()) {
-            userType = 2;
-        }
-        if (driver_check.isChecked() && rider_check.isChecked()) {
-            userType = 3;
-        }
-        return userType;
-    }
-
-
-    public void submission (View view, final int userType) {
-        final EditText firstNameText = (EditText) findViewById(R.id.firstNameText);
-        final EditText lastNameText = (EditText) findViewById(R.id.lastNameText);
-        final EditText emailAddressText = (EditText) findViewById(R.id.emailAddressText);
-        final EditText phoneNumberText = (EditText) findViewById(R.id.phoneNumberText);
-
-
-
-        Button registerButton = (Button) findViewById(R.id.registerButton);
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+}
+//    static public int userType = 0;
+//    public int onCheckboxUserTypeClicked (View view) {
+//        CheckBox rider_check = (CheckBox)findViewById(R.id.riderCheckBox);
+//        CheckBox driver_check = (CheckBox)findViewById(R.id.driverCheckBox);
+//        int userType = 0;
+//        boolean checked = ((CheckBox) view ).isChecked();
+//        if (rider_check.isChecked()) {
+//            userType = 1;
+//        }
+//        if (driver_check.isChecked()) {
+//            userType = 2;
+//        }
+//        if (driver_check.isChecked() && rider_check.isChecked()) {
+//            userType = 3;
+//        }
+//        return userType;
+//    }
+//
+//
+//    public void submission (View view) {
+//        final EditText firstNameText = (EditText) findViewById(R.id.firstNameText);
+//        final EditText lastNameText = (EditText) findViewById(R.id.lastNameText);
+//        final EditText emailAddressText = (EditText) findViewById(R.id.emailAddressText);
+//        final EditText phoneNumberText = (EditText) findViewById(R.id.phoneNumberText);
+//
+//        Button registerButton = (Button) findViewById(R.id.registerButton);
+//
+//        registerButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+////                User user = new User(firstNameText.getText().toString());
 //                User user = new User(firstNameText.getText().toString());
-                User user = new User(firstNameText.getText().toString());
-                user.setUserFirstName(lastNameText.getText().toString());
-                user.setUserEmail(emailAddressText.getText().toString());
-                user.setUserType(userType);
-                user.setUserPhoneNumber(Integer.parseInt(phoneNumberText.getText().toString()));
+//                user.setUserFirstName(lastNameText.getText().toString());
+//                user.setUserEmail(emailAddressText.getText().toString());
+//                user.setUserType(userType);
+//                user.setUserPhoneNumber(Integer.parseInt(phoneNumberText.getText().toString()));
+//
+//                ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
+//                addUserTask.execute(user);
+//                setResult(RESULT_OK);
+//
+//                //Intent RegisterIntent = new Intent(RegisterActivity.this, )
+//            }
+//        });
 
-                ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
-                addUserTask.execute(user);
-                setResult(RESULT_OK);
 
-                //Intent RegisterIntent = new Intent(RegisterActivity.this, )
-            }
-        });
-
-    }
 
 //    @Override
 //    protected void onStart() {
@@ -104,4 +103,4 @@ public class RegisterActivity extends AppCompatActivity {
 //            Log.i("Error", "Failed to get the users out of the async object.");
 //        }
 //    }
-}
+
