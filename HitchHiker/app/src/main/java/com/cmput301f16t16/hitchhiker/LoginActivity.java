@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void GoToRegisterPage(View view){
+        // TODO get user from Elastic Search
+
         // TODO If the user is a rider, then go to the rider page
 
         // Todo If the user is a driver, then go to the driver page
