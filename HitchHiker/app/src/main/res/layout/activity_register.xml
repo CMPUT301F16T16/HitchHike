@@ -119,23 +119,23 @@
         android:layout_toStartOf="@+id/signUpTitle"
         android:layout_marginEnd="16dp" />
 
-    <CheckBox
-        android:text="Both"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/riderAndDriverCheckBox"
-        android:layout_marginStart="17dp"
-        android:layout_alignBaseline="@+id/driverCheckBox"
-        android:layout_alignBottom="@+id/driverCheckBox"
-        android:layout_toEndOf="@+id/driverCheckBox" />
+    <!--<CheckBox-->
+        <!--android:text="Both"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/riderAndDriverCheckBox"-->
+        <!--android:layout_marginStart="17dp"-->
+        <!--android:layout_alignBaseline="@+id/driverCheckBox"-->
+        <!--android:layout_alignBottom="@+id/driverCheckBox"-->
+        <!--android:layout_toEndOf="@+id/driverCheckBox" />-->
 
     <CheckBox
         android:text="Driver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/driverCheckBox"
-        android:layout_marginBottom="14dp"
-        android:layout_above="@+id/registerButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/phoneNumberText"
+        android:layout_toEndOf="@+id/signUpTitle"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>

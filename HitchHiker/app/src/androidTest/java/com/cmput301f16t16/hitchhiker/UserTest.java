@@ -2,6 +2,8 @@ package com.cmput301f16t16.hitchhiker;
 
 import junit.framework.TestCase;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  * Created by Leo Yoon on 13/10/2016.
  */
@@ -35,15 +37,14 @@ public class UserTest extends TestCase {
         String userPassword = "TestPassword";
         user.setUserPassword(userPassword);
         assertEquals("TestPassword", user.getUserPassword());
-
     }
 
     public void testSetUserType() {
         String userName = "TestUser";
         User user = new User(userName);
-        String userType = "Rider";
-        user.setUserType(userType);
-        assertEquals("Rider", user.getUserType());
+        Boolean Rider = FALSE;
+        user.setUserType(Rider);
+        assertEquals(Rider, user.getUserType());
     }
 
     public void testSetUserFirstName() {
@@ -51,7 +52,6 @@ public class UserTest extends TestCase {
         User user = new User(userName);
         String firstName = "Angus";
         user.setUserFirstName(firstName);
-
     }
 
     public void testGetUserFirstName() {
@@ -77,14 +77,14 @@ public class UserTest extends TestCase {
         assertEquals(lastName,user.getUserLastName());
     }
     public void testSetUserPhoneNumber() {
-        String phoneNumber = "12345789";
+        Integer phoneNumber = 1234567890;
         String userName = "testUser";
         User user = new User(userName);
         user.setUserPhoneNumber(phoneNumber);
-
     }
+
     public void testGetUserPhoneNumber() {
-        String phoneNumber = "123456789";
+        Integer phoneNumber = 1234567890;
         String userName = "testUser";
         User user = new User(userName);
         user.setUserPhoneNumber(phoneNumber);

@@ -8,7 +8,7 @@ import static java.sql.Types.NULL;
 public class User {
     private String userName;
     private String userPassword;
-    private String userType;
+    private Boolean userType; // If userType = True, then user is both Rider & Driver. If False, the user is ONLY Rider.
     private String userFirstName;
     private String userLastName;
     private String userEmail;
@@ -41,11 +41,11 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(Boolean userType) {
         this.userType = userType;
     }
 
-    public String getUserType() {
+    public Boolean getUserType() {
         return this.userType;
     }
 

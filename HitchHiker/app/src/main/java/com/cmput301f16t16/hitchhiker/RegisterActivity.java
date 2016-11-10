@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -18,23 +19,12 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private Activity activity = this;
-
-    private static final String FILENAME = "file.sav";
-    private EditText firstNameText;
-    private EditText lastNameText;
-    private EditText emailAddressText;
-    private EditText passwordText;
-    private EditText confirmPasswordText;
-    private EditText phoneNumberText;
-    private String firstName;
-    private String lastName;
-    private String emailAddress;
-    private String userName;
-    private String password;
-    private int phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +41,18 @@ public class RegisterActivity extends AppCompatActivity {
         EditText confirmPasswordText = (EditText) findViewById(R.id.confirmPasswordText);
         EditText phoneNumberText = (EditText) findViewById(R.id.phoneNumberText);
 
+        CheckBox riderCheckBox = (CheckBox) findViewById(R.id.riderCheckBox);
+        CheckBox driverCheckBox = (CheckBox) findViewById(R.id.driverCheckBox);
+
         String firstName = firstNameText.getText().toString();
         String lastName = lastNameText.getText().toString();
         String emailAddress = emailAddressText.getText().toString();
         String userName = emailAddressText.getText().toString();
         String password = passwordText.getText().toString();
         Integer phoneNumber = phoneNumberText.getInputType();
+        Boolean userType = FALSE; // Default type is FALSE
+        if (riderCheckBox.isChecked()) { userType = FALSE;}
+        else if (driverCheckBox.isChecked()) {userType = TRUE;}
 
         User user = new User(userName);
         user.setUserFirstName(firstName);
@@ -64,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.setUserEmail(emailAddress);
         user.setUserPassword(password);
         user.setUserPhoneNumber(phoneNumber);
-
+        user.setUserType(userType);
 
         ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
         addUserTask.execute(user);
