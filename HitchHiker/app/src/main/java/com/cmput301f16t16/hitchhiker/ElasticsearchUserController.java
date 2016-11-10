@@ -31,7 +31,7 @@ public class ElasticsearchUserController {
 
             // Assume that search_parameters[0] is the only term we are interested in using
             Search search = new Search.Builder(search_parameters[0])
-                    .addIndex("testing")
+                    .addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s")
                     .addType("user")
                     .build();
             try {
@@ -53,6 +53,36 @@ public class ElasticsearchUserController {
         }
     }
 
+    public static class GetUserTask extends AsyncTask<String, Void, User> {
+        @Override
+        protected User doInBackground(String... search_parameters) {
+            verifySettings();
+
+            User user = new User(search_parameters[0]);
+
+            // Assume that search_parameters[0] is the only term we are interested in using
+            Search search = new Search.Builder(search_parameters[0])
+                    .addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s")
+                    .addType("user")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    Log.i("Success", "We found the user!");
+                    user = result.getSourceAsObject(User.class);
+                }
+                else {
+                    Log.i("Error", "The search query failed to find any users that matched.");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicated with the elasticsearch server!");
+            }
+
+            return user;
+        }
+    }
+
     public static class AddUserTask extends AsyncTask<User, Void, Void> {
 
         @Override
@@ -60,7 +90,7 @@ public class ElasticsearchUserController {
             verifySettings();
 
             for (User user : userList) {
-                Index index = new Index.Builder(user).index("testing").type("user").build();
+                Index index = new Index.Builder(user).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1a").type("user").build();
 
                 try {
                     // Double check if its Username that we are going to set here

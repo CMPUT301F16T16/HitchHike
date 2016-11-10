@@ -31,6 +31,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        UserListManager.initUserManager(this.getApplicationContext());
+//        UserListController.getUserList().addUserListener(new UserListener()) {
+//            @Override
+//                    public
+//        }
     }
 
     public void CreateUser(View view) {
@@ -49,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         String emailAddress = emailAddressText.getText().toString();
         String userName = emailAddressText.getText().toString();
         String password = passwordText.getText().toString();
-        Integer phoneNumber = phoneNumberText.getInputType();
+        Integer phoneNumber = Integer.parseInt(phoneNumberText.getText().toString());
         Boolean userType = FALSE; // Default type is FALSE
         if (riderCheckBox.isChecked()) { userType = FALSE;}
         else if (driverCheckBox.isChecked()) {userType = TRUE;}
@@ -64,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
         addUserTask.execute(user);
+        setResult(RESULT_OK);
         finish();
     }
 

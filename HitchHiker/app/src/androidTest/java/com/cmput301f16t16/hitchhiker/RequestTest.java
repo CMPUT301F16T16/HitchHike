@@ -57,12 +57,12 @@ public class RequestTest extends TestCase {
 //        assertEquals("There are no requests in the List", rc.getRequestLoad(rider).size(), 0);
     }
 
-    public void testUserType () {
-        User rider = new User("Billy");
-        rider.setUserType("Rider");
-        User driver = new User("Dora");
-        driver.setUserType("");
-        assertTrue("The User's type is the same", rider.getUserType().equals("Rider"));
+//    public void testUserType () {
+//        User rider = new User("Billy");
+//        rider.setUserType("Rider");
+//        User driver = new User("Dora");
+//        driver.setUserType("");
+//        assertTrue("The User's type is the same", rider.getUserType().equals("Rider"));
 //        assertTrue("The User's type is the same", driver.getUserType().equals("Driver"));
 //        assertNotSame(rider, driver);
 

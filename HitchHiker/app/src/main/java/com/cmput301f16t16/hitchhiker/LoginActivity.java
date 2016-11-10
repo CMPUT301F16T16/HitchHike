@@ -3,10 +3,16 @@ package com.cmput301f16t16.hitchhiker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class LoginActivity extends AppCompatActivity {
+
+    private ArrayList<User> userList = new ArrayList<User>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +36,14 @@ public class LoginActivity extends AppCompatActivity {
         String userName = userNameText.getText().toString();
         String userPassword = userPasswordText.getText().toString();
 
-        ElasticsearchUserController.GetUsersTask getUsersTask = new ElasticsearchUserController.GetUsersTask();
-        getUsersTask.execute(userName);
+        ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
+        getUserTask.execute(userName);
 
 
         // TODO If the user is a driver, then go to the driver page
 
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//        startActivity(intent);
     }
 
 }

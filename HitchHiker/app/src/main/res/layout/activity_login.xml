@@ -10,17 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cmput301f16t16.hitchhiker.LoginActivity">
 
-    <Button
-        android:text="Sign In"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/signInButton"
-        android:layout_below="@+id/passwordText"
-        android:layout_marginTop="33dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:onClick="GoToMainPage"/>
-
     <TextView
         android:text="Hitch Hike"
         android:layout_width="wrap_content"
@@ -69,5 +58,16 @@
         android:textStyle="normal|bold|"
         android:textSize="18sp"
         android:onClick="GoToRegisterPage"/>
+
+    <Button
+        android:text="Sign In"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signInButton"
+        android:layout_marginTop="36dp"
+        android:onClick="GoToMainPage"
+        android:layout_below="@+id/userPasswordText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
