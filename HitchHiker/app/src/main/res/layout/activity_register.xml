@@ -76,8 +76,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:onClick="submission"
-        android:nestedScrollingEnabled="false" />
+        android:nestedScrollingEnabled="false"
+        android:onClick="submission"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
         android:layout_alignBottom="@+id/driverCheckBox"
         android:layout_toStartOf="@+id/signUpTitle"
         android:layout_marginEnd="16dp"
-        android:onClick="onCheckboxUserTypeClicked" />
+        android:onClick="onCheckboxUserTypeClicked"/>
 
     <CheckBox
         android:text="Both"
@@ -138,6 +138,6 @@
         android:layout_marginBottom="14dp"
         android:layout_above="@+id/registerButton"
         android:layout_centerHorizontal="true"
-        android:onClick="onCheckboxUserTypeClicked" />
+        android:onClick="onCheckboxUserTypeClicked"/>
 
 </RelativeLayout>

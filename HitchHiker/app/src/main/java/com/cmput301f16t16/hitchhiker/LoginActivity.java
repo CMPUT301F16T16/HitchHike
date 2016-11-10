@@ -1,11 +1,12 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
