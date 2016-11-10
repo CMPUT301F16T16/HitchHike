@@ -31,6 +31,5 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.assertCurrentActivity("Wrong Activity", LoginActivity.class);
 
         solo.enterText((EditText) solo.getView(R.id.userNameText), "test@email.com");
-        solo.enterText((EditText) solo.getView(R.id.passwordText), "testpassword");
     }
 }

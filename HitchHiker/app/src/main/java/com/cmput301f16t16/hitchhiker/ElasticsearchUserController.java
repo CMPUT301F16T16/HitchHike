@@ -23,6 +23,7 @@ import io.searchbox.core.SearchResult;
  */
 
 public class ElasticsearchUserController{
+
     private static JestDroidClient client;
 
     // TODO we need a function that gets requests!

@@ -9,12 +9,10 @@ import android.widget.Button;
 /**
  * Created by Jae-yeon on 10/14/2016.
  */
+
+//public class Rider extends User {
 //
-//public class Rider extends User{
 //
-//    public Rider() {
-//        super();
-//        super(username, firstName, lastName, phoneNumber, userEmail, userType);
 //    }
 
 //    public int getRiderID() {
@@ -28,5 +26,6 @@ import android.widget.Button;
 //    public int getRiderId() {
 //        return this.riderID;
 //    }
-
 //}
+
+
