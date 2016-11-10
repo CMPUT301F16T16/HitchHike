@@ -13,17 +13,21 @@ public class User {
 
     @JestId
     private String id;
-
     private String username;
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private String userEmail;
+    private String userType;
 
     public User(String username, String firstName, String lastName, String phoneNumber) {
+
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        //this.userEmail = userEmail;
+        //this.userType = userType;
     }
 
     public String getUsername(){

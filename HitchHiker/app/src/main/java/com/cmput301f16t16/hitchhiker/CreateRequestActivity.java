@@ -24,6 +24,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         Request newRequest = new Request(pickUpString, dropOffString);
         ElasticsearchController.AddRequestsTask addRequestsTask = new ElasticsearchController.AddRequestsTask();
         addRequestsTask.execute(newRequest);
+
         finish();
 
 

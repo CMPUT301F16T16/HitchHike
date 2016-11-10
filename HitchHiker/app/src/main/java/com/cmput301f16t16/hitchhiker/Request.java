@@ -1,5 +1,6 @@
 package com.cmput301f16t16.hitchhiker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
@@ -7,7 +8,9 @@ import io.searchbox.annotations.JestId;
 /**
  * Created by Jae-yeon on 10/14/2016.
  */
-public class Request {
+public class Request implements Serializable{
+
+    private static final long serialVersionUID = 25L;
 
     @JestId
     private String id;
@@ -43,8 +46,9 @@ public class Request {
         return this.requestStatus;
     }
 
-
-
+    public String getTrip(){
+        return this.pickUp + "\t ---> \t" + this.dropOff;
+    }
 
 
 

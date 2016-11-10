@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -19,9 +20,9 @@ public class RiderActivity extends AppCompatActivity {
     private ArrayList<Request> requestsList = new ArrayList<Request>();
     private ArrayAdapter<Request> adapter;
 
-    public ListView getOldRequestList(){
-        return oldRequestList;
-    }
+//    public ListView getOldRequestList(){
+//        return oldRequestList;
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,15 @@ public class RiderActivity extends AppCompatActivity {
 
         // display requests into the listview
         oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
+
+        oldRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
+                Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
+                intent.putExtra("requestsList", requestsList);
+                intent.putExtra("index", position);
+                startActivity(intent);
+            }
+        });
 
 
     }

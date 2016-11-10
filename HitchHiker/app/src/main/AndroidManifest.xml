@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".CreateRequestActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".RiderActivity"></activity>
+        <activity android:name=".RiderActivity" />
+        <activity android:name=".ProspectiveDriversActivity"></activity>
     </application>
 
 </manifest>
