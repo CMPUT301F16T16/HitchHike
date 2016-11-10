@@ -18,12 +18,13 @@ public class CreateRequestActivity extends AppCompatActivity {
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
 
-        String pickUpString = pickUpText.getText().toString();
-        String dropOffString = dropOffText.getText().toString();
 
-        Request newRequest = new Request(pickUpString, dropOffString);
-        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-        addRequestsTask.execute(newRequest);
+        String pickUp = pickUpText.getText().toString();
+        String dropOff = dropOffText.getText().toString();
+
+//        Request newRequest = new Request(pickUp, dropOff);
+//        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+//        addRequestsTask.execute(newRequest);
 
         finish();
 

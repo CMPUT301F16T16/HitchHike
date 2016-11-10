@@ -1,9 +1,4 @@
 <resources>
-<<<<<<< HEAD
     <string name="app_name">Hitch Hiker</string>
     <string name="Register"><u>Register</u></string>
-=======
-    <string name="app_name">HitchHiker</string>
-    <string name="Register">Register</string>
->>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
 </resources>
