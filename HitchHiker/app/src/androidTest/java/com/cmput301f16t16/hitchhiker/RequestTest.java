@@ -17,7 +17,7 @@ public class RequestTest extends TestCase {
         Fare fare = new Fare();
         fare.setFare(10.25);
         Location dropOff = new Location();
-        User requestCreator = new User("HitchKiker1", "Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
+        User requestCreator = new User("HitchKiker1");
         Request request = new Request(requestCreator, pickUp, dropOff, fare);
         assertTrue("Request Creator is not equal", requestCreator.equals(request.getRider()));
     }
@@ -27,7 +27,7 @@ public class RequestTest extends TestCase {
      * As a rider I want to request rides between 2 locations
      */
     public void testLocationRequest() {
-        User paying_Rider = new User("HitchHiker2", "Bob", "Abe", "email@hotmaotmail.com", 1233123, 1);
+        User paying_Rider = new User("HitchHiker2");
         Location pickUp = new Location();
         Location dropOff = new Location();
         Fare fare = new Fare();
@@ -43,7 +43,7 @@ public class RequestTest extends TestCase {
     }
 
     public void testSizeRequestList() {
-        User rider = new User("BOB", "Joseph", "Loo", "email@hotmaotmail.com", 1233, 2);
+        User rider = new User("BOB");
         Location pickUp = new Location();
         Location dropOff = new Location();
         Fare fare = new Fare();
@@ -58,9 +58,9 @@ public class RequestTest extends TestCase {
     }
 
     public void testUserType () {
-        User rider = new User("Billy", "Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
+        User rider = new User("Billy");
         rider.setUserType(2);
-        User driver = new User("Dora","Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
+        User driver = new User("Dora");
         driver.setUserType(2);
         assertTrue("The User's type is the same", rider.getUserType().equals(driver.getUserType()));
 //        assertTrue("The User's type is the same", driver.getUserType().equals("Driver"));

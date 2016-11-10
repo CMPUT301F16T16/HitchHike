@@ -103,7 +103,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else if (usernameExists == false) {
             User user = new User(userName);
-            user.setUserName(userName);
             user.setUserFirstName(userFirstName);
             user.setUserLatName(userLastName);
             user.setUserEmail(userEmail);
