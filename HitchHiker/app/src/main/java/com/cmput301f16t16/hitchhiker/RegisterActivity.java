@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -17,24 +18,15 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.zip.CheckedInputStream;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private Activity activity = this;
-
+//    private Activity activity = this;
     private static final String FILENAME = "file.sav";
-    private EditText firstNameText;
-    private EditText lastNameText;
-    private EditText emailAddressText;
-    private EditText passwordText;
-    private EditText confirmPasswordText;
-    private EditText phoneNumberText;
-    private String firstName;
-    private String lastName;
-    private String emailAddress;
-    private String userName;
-    private String password;
-    private int phoneNumber;
+
+    Collection<User> users = UserListController.getUserList().getUsers();
+    private ArrayList<User> userList = new ArrayList<User>(users);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +35,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Setting up userList
         UserListManager.initUserManager(this.getApplicationContext());
-        Collection<User> users = UserListController.getUserList().getUsers();
-        final ArrayList<User> userList = new ArrayList<User>(users);
-
-
         UserListController.getUserList().addUserListener(new UserListener() {
             @Override
             public void update() {
@@ -56,30 +44,44 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        firstNameText = (EditText) findViewById(R.id.firstNameText);
-        lastNameText = (EditText) findViewById(R.id.lastNameText);
-        emailAddressText = (EditText) findViewById(R.id.emailAddressText);
-        passwordText = (EditText) findViewById(R.id.passwordText);
-        confirmPasswordText = (EditText) findViewById(R.id.confirmPasswordText);
-        phoneNumberText = (EditText) findViewById(R.id.phoneNumberText);
+    }
 
-        firstName = firstNameText.getText().toString();
-        lastName = lastNameText.getText().toString();
-        emailAddress = emailAddressText.getText().toString();
-        userName = emailAddressText.getText().toString();
-        password = passwordText.getText().toString();
-        phoneNumber = phoneNumberText.getInputType();
+    public int onCheckboxUserTypeClicked (View view) {
+        CheckBox rider_check = (CheckBox)findViewById(R.id.riderCheckBox);
+        CheckBox driver_check = (CheckBox)findViewById(R.id.driverCheckBox);
+        int userType = 0;
+        boolean checked = ((CheckBox) view ).isChecked();
+        if (rider_check.isChecked()) {
+            userType = 1;
+        }
+        if (driver_check.isChecked()) {
+            userType = 2;
+        }
+        if (driver_check.isChecked() && rider_check.isChecked()) {
+            userType = 3;
+        }
+        return userType;
+    }
+
+
+    public void submission (View view, final int userType) {
+        final EditText firstNameText = (EditText) findViewById(R.id.firstNameText);
+        final EditText lastNameText = (EditText) findViewById(R.id.lastNameText);
+        final EditText emailAddressText = (EditText) findViewById(R.id.emailAddressText);
+        final EditText phoneNumberText = (EditText) findViewById(R.id.phoneNumberText);
+
+
 
         Button registerButton = (Button) findViewById(R.id.registerButton);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                User user = new User(userName);
-                user.setUserFirstName(firstName);
-                user.setUserLastName(lastName);
-                user.setUserEmail(emailAddress);
-                user.setUserPassword(password);
-                user.setUserPhoneNumber(phoneNumber);
+//                User user = new User(firstNameText.getText().toString());
+                User user = new User(firstNameText.getText().toString());
+                user.setUserFirstName(lastNameText.getText().toString());
+                user.setUserEmail(emailAddressText.getText().toString());
+                user.setUserType(userType);
+                user.setUserPhoneNumber(Integer.parseInt(phoneNumberText.getText().toString()));
 
                 ElasticsearchUserController.AddUserTask addUserTask = new ElasticsearchUserController.AddUserTask();
                 addUserTask.execute(user);
@@ -87,7 +89,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //Intent RegisterIntent = new Intent(RegisterActivity.this, )
             }
-            });
+        });
+
     }
 
 //    @Override

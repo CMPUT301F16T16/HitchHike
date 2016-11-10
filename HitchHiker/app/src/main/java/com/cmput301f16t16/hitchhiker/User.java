@@ -6,21 +6,21 @@ import static java.sql.Types.NULL;
  * Created by Leo Yoon on 13/10/2016.
  */
 public class User {
-    private String userName;
-    private String userPassword;
-    private String userType;
-    private String userFirstName;
-    private String userLastName;
-    private String userEmail;
-    private int userPhoneNumber;
+    protected String userName;
+    protected String userPassword;
+    protected int userType;
+    protected String userFirstName;
+    protected String userLastName;
+    protected String userEmail;
+    protected int userPhoneNumber;
 
     public User(String userName) {
         this.userName = userName;
-        this.userPassword = new String();
-        this.userFirstName = new String();
-        this.userLastName = new String();
-        this.userEmail = new String();
-        this.userPhoneNumber = new Integer(NULL);
+//        this.userPassword = new String();
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.userEmail = userEmail;
+//        this.userPhoneNumber = new Integer(NULL);
         this.userType = getUserType();
         this.userPhoneNumber = getUserPhoneNumber();
     }
@@ -33,19 +33,13 @@ public class User {
         this.userName = userName;
     }
 
-    public String getUserPassword() {
-        return this.userPassword;
-    }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
 
-    public void setUserType(String userType) {
+    public void setUserType(int userType) {
         this.userType = userType;
     }
 
-    public String getUserType() {
+    public int getUserType() {
         return this.userType;
     }
 
