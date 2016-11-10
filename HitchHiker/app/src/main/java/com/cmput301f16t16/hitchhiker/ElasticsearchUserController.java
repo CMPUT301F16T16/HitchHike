@@ -71,6 +71,7 @@ public class ElasticsearchUserController{
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     user = result.getSourceAsObject(User.class);
+                    Log.i("Success!", "We found the user!");
                 } else {
                     Log.i("Error", "We could not find the desired user in Elasticsearch");
                     return null;
