@@ -120,15 +120,6 @@
         android:layout_marginEnd="16dp"
         android:onClick="onCheckboxUserTypeClicked" />
 
-    <CheckBox
-        android:text="Both"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/riderAndDriverCheckBox"
-        android:layout_marginStart="17dp"
-        android:layout_alignBaseline="@+id/driverCheckBox"
-        android:layout_alignBottom="@+id/driverCheckBox"
-        android:layout_toEndOf="@+id/driverCheckBox" />
 
     <CheckBox
         android:text="Driver"
