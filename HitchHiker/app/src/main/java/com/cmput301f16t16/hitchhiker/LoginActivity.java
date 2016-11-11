@@ -3,11 +3,13 @@ package com.cmput301f16t16.hitchhiker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,15 +21,26 @@ public class LoginActivity extends AppCompatActivity {
         EditText userNameText = (EditText) findViewById(R.id.userNameText);
         String userName = userNameText.getText().toString();
 
-        User user = new User(userName);
+
         ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
         getUserTask.execute(userName);
+
+        try {
+            user = getUserTask.get();
+            Log.i("User Name : ", user.getUserName());
+            Log.i("User Type: ", user.getUserType().toString());
+            Intent intent = new Intent(LoginActivity.this, RiderActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        
+        catch (Exception e) {
+            Log.i("Error", "Failed to get the user out of the async object");
+        }
         // TODO If the user is a rider, then go to the rider page
 
         // Todo If the user is a driver, then go to the driver page
-        Intent intent = new Intent(LoginActivity.this, RiderActivity.class);
-        startActivity(intent);
-        finish();
+
     }
 
     public void GoToRegisterPage(View view){
