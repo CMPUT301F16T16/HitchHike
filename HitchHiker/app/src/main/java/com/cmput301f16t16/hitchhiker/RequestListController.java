@@ -20,7 +20,8 @@ public class RequestListController {
     private static RequestList requestList = null;
     static public RequestList getRequestList() {
         if (requestList == null) {
-//            requestList =
+            requestList = new RequestList();
+        }
 //            try {
 //                requestList = new RequestList();
 //                requestList = RequestListManager.getRequestManager().loadRequestList();
@@ -39,7 +40,7 @@ public class RequestListController {
 //                e.printStackTrace();
 //                throw new RuntimeException("Couldnt deserialize RequetList from HabitListManager");
 //            }
-        }
+//        }
         return requestList;
     }
 
@@ -55,6 +56,7 @@ public class RequestListController {
 
 
     public void addRequest(Request request) {
+        requestList.add(request);
         //add request to the requestList and
         //browsingRequest List
         //Elastic controller cmd

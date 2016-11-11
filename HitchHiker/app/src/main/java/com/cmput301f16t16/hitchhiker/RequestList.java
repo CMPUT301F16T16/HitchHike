@@ -8,23 +8,11 @@ import java.util.ArrayList;
 public class RequestList {
     private ArrayList<Request> requestList = new ArrayList<Request>();
 
-    public void add(Request request) {
+    public void add(Request request) { requestList.add (request); }
 
-        requestList.add(request);
-    }
+    public boolean hasRequest(Request request) { return requestList.contains(request); }
 
-    public boolean hasRequest(Request request) {
+    public void delete(Request request) { requestList.remove(request); }
 
-        return requestList.contains(request);
-    }
-
-    public void delete(Request request) {
-
-        requestList.remove(request);
-    }
-
-    public Request getRequest(int index) {
-
-        return requestList.get(index);
-    }
+    public Request getRequest(int index) { return requestList.get(index); }
 }

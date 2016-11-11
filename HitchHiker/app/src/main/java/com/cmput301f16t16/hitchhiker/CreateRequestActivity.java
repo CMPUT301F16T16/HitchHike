@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class CreateRequestActivity extends AppCompatActivity {
 
@@ -36,9 +37,16 @@ public class CreateRequestActivity extends AppCompatActivity {
         //Havent figured out how the Fare works yet (Spei's job)
         //Integer estimate = Integer.parseInt(estimate.getText().toString());
 
-        Request newRequest = new Request(user.getUserName(), pickUp, dropOff); //, estimate);
+        Request newRequest = new Request(/*user.getUserName(),*/ pickUp, dropOff); //, estimate);
         ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
         addRequestsTask.execute(newRequest);
         finish();
+
+
+        RequestListController rlc = new RequestListController();
+        rlc.addRequest(newRequest);
+        Toast.makeText(this, "Added a request", Toast.LENGTH_SHORT).show();
+
+
     }
 }
