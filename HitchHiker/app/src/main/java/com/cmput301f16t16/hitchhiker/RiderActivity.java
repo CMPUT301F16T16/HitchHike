@@ -1,6 +1,7 @@
 package com.cmput301f16t16.hitchhiker;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class RiderActivity extends AppCompatActivity {
@@ -16,6 +19,7 @@ public class RiderActivity extends AppCompatActivity {
     private ListView oldRequestList;
     private ArrayList<Request> requestsList = new ArrayList<Request>();
     private ArrayAdapter<Request> adapter;
+    private User user;
 
 //    public ListView getOldRequestList(){
 //        return oldRequestList;
@@ -25,6 +29,9 @@ public class RiderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
+
+        Bundle bundle = getIntent().getExtras();
+        user = bundle.getParcelable("user");
 
         // display requests into the listview
         oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
@@ -64,13 +71,16 @@ public class RiderActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void HomeRequest(View view){
         Intent intent = new Intent(RiderActivity.this, RiderActivity.class);
         startActivity(intent);
     }
 
-//    public void ProfileRequest(View view){
-//        Intent intent = new Intent(RiderActivity.this, Profile.class);
-//        startActivity(intent);
-//    }
+    public void GoToUserProfilePage(View view) {
+        Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+    }
+
 }

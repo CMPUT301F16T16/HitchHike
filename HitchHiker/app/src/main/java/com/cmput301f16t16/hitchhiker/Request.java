@@ -78,10 +78,7 @@ public class Request extends Fare implements Serializable {
         return this.requestStatus;
     }
 
-    //    public User getRider() {
-//        return this.Rider;
-//
-//
+
 //        public Request(String pickUp, String dropOff) {
 //            this.pickUp = pickUp;
 //            this.dropOff = dropOff;

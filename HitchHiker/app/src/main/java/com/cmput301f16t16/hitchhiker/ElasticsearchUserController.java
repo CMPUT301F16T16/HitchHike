@@ -62,7 +62,7 @@ public class ElasticsearchUserController{
         @Override
         protected User doInBackground(String... search_parameters) {
             verifySettings();
-            String search_string = "{\"from\": 0, \"size\": 1, \"query\": {\"match\": {\"username\": \"" + search_parameters[0] + "\"}}}";
+            String search_string = "{\"from\": 0, \"size\": 1, \"query\": {\"match\": {\"userName\": \"" + search_parameters[0] + "\"}}}";
 
             Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("user").build();
 
@@ -72,7 +72,6 @@ public class ElasticsearchUserController{
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     user = result.getSourceAsObject(User.class);
-                    Log.i("Success!", "We found the user!");
                 } else {
                     Log.i("Error", "We could not find the desired user in Elasticsearch");
                     return null;
