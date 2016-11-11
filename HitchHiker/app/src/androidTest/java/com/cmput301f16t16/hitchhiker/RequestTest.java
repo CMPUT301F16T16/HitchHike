@@ -8,9 +8,9 @@ import junit.framework.TestCase;
 
  * Created by Jae-yeon on 10/14/2016.
  * edited by Angus on 11/2/2016.
-<<<<<<< HEAD
- * Created by willyliao on 2016-11-09.
 
+ * Created by willyliao on 2016-11-09.
+ * edited by Victoria on 10/11/2016.
  */
 
 public class RequestTest extends TestCase {
@@ -73,6 +73,8 @@ public class RequestTest extends TestCase {
 
 
     }
+
+
 
 //<<<<<<< HEAD
 //    public void testAcceptDriver() {
