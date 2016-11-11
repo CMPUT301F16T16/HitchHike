@@ -5,7 +5,6 @@ import junit.framework.TestCase;
 
 
 /**
-<<<<<<< HEAD
  * Created by Jae-yeon on 10/14/2016.
  * edited by Angus on 11/2/2016.
 */
@@ -30,15 +29,17 @@ public class RequestTest extends TestCase {
         User paying_Rider = new User("HitchHiker2");
         Location pickUp = new Location();
         Location dropOff = new Location();
+        paying_Rider.setUserType(1);
         Fare fare = new Fare();
         fare.setFare(100.25);
         Request request = new Request(paying_Rider, pickUp, dropOff, fare);
         assertTrue("Location A is not the start", pickUp.equals(request.getStartLocation()));
         assertTrue("Location A is not the end", dropOff.equals(request.getEndLocation()));
-//        RequestListController requestListController = new RequestListController();
-//        requestListController.addRequest(request);
-//        requestListController.removeRequest(request);
-
+        RequestListController requestListController = new RequestListController();
+        requestListController.addRequest(request);
+        assertEquals("There is a request", 1, requestListController.getRequestLoad(paying_Rider).size());
+        requestListController.removeRequest(request);
+        assertEquals("There is no request", requestListController.getRequestLoad(paying_Rider).size(),0);
 
     }
 
@@ -70,6 +71,8 @@ public class RequestTest extends TestCase {
 
 
     }
+
+
 }
 //<<<<<<< HEAD
 //    public void testAcceptDriver() {

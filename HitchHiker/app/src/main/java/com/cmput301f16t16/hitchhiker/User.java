@@ -28,16 +28,6 @@ public class User {
         this.userPhoneNumber = getUserPhoneNumber();
     }
 
-
-<<<<<<< HEAD
-    public String getUserName() {
-=======
-
->>>>>>> Angus-branch
-
-
-
-
     public void setUserName(String userName) {this.userName = userName;}
     public void setUserFirstName(String userFirstName) {this.userFirstName = userFirstName;}
     public void setUserLatName(String userLastName) {this.userLastName = userLastName;}
@@ -58,13 +48,6 @@ public class User {
     public String getUserFirstName(){
         return this.userFirstName;
     }
-<<<<<<< HEAD
-
-    public void setUserFirstName(String userFirstName) {this.userFirstName = userFirstName;}
-    public void setUserLastName(String userLastName) {this.userLastName = userLastName;}
-
-=======
->>>>>>> Angus-branch
     public String getUserLastName(){
         return this.userLastName;
     }

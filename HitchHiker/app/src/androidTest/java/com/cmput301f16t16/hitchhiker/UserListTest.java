@@ -10,13 +10,13 @@ import junit.framework.TestCase;
 public class UserListTest extends TestCase {
     public void testAdd(){
         UserList userList = new UserList();
-        User user = new User("TestUser", "Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
+        User user = new User("TestUser");
         userList.addUser(user);
         assertTrue(userList.hasUser(user));
     }
     public void testDelete(){
         UserList userList = new UserList();
-        User user = new User("TestUser","Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
+        User user = new User("TestUser");
         userList.addUser(user);
         userList.delete(user);
         assertFalse(userList.hasUser(user));
@@ -24,7 +24,7 @@ public class UserListTest extends TestCase {
     }
     public void testGetUser(){
         UserList userList = new UserList();
-        User user = new User("TestUser","Angus", "Abels", "email@hotmaotmail.com", 1233123, 2);
+        User user = new User("TestUser");
         userList.addUser(user);
         User returnedUser = userList.getUser(0);
         assertEquals(returnedUser.getUserName(), user.getUserName());
