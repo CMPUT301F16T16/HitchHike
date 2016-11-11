@@ -51,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         }
-
+        // If username does not exist, show text: The username you have entered does not exist
         catch (Exception e) {
             TextView userDoesNotExistText = (TextView) findViewById(R.id.userDoesNotExistText);
-            userDoesNotExistText.setText("The username you have entered does not exist.\n");
+            userDoesNotExistText.setText("The username you have entered does not exist.");
             userDoesNotExistText.setTextColor(Color.RED);
             Log.i("Error", "Failed to get the user out of the async object");
         }
