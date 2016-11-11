@@ -1,15 +1,24 @@
 package com.example.cmput301.osmlab8;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +31,7 @@ import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Overlay;
@@ -32,7 +42,7 @@ import org.osmdroid.views.overlay.infowindow.BasicInfoWindow;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements LocationListener {
 
     // Cmput 301 lab 8 based on open resources.
     // based on https://github.com/MKergall/osmbonuspack/wiki/Tutorial_0
@@ -46,15 +56,18 @@ public class MainActivity extends Activity {
     final private double MAP_DEFAULT_LATITUDE = 53.52676;
     final private double MAP_DEFAULT_LONGITUDE = -113.52715;
 
-    private MapView mMapView;
-    private ResourceProxy mResourceProxy;
-    private OsmMapsItemizedOverlay mItemizedOverlay;
-    private MyLocationOverlay mMyLocationOverlay;
-    private LocationManager locationManager;
-    private OverlayItem lastPosition = null;
-    private Order mOrder;
-    OsmGeoUpdateHandler mUpdateHandler;
-    private ArrayList<OverlayItem> mItems = new ArrayList<OverlayItem>();
+    private GeoPoint currentPoint;
+
+    private GeoPoint startPoint;
+    private GeoPoint endPoint;
+    private long start;
+    private long stop;
+    private int x,y,lat,longi;
+    private GeoPoint touchedPoint;
+
+    private List<Overlay> overlayList;
+    private  LocationManager lm;
+    private String towers;
 
 
     @Override
@@ -65,48 +78,58 @@ public class MainActivity extends Activity {
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
-        map.setClickable(true);
-        map.setUseDataConnection(false);
-
-        /* location manager */
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        mUpdateHandler = new OsmGeoUpdateHandler(this);
-        Location location = null;
-
-        for (String provider : locationManager.getProviders(true))
-        {
-            location = locationManager.getLastKnownLocation(provider);
-            if (location != null)
-            {
-                //location.setLatitude(MAP_DEFAULT_LATITUDE);
-                //location.setLongitude(MAP_DEFAULT_LONGITUDE);
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mUpdateHandler);
-                break;
-            }
-        }
-
-        //add car position
-        if (location == null)
-        {
-            location = new Location(LocationManager.GPS_PROVIDER);
-            location.setLatitude(MAP_DEFAULT_LATITUDE);
-            location.setLongitude(MAP_DEFAULT_LONGITUDE);
-            updatePosition(new GeoPoint(location));
-        }
 
 
 
-        GeoPoint startPoint = new GeoPoint(48.13, -1.63);
+
+
+
         IMapController mapController = map.getController();
         mapController.setZoom(9);
         mapController.setCenter(startPoint);
 
-        Marker startMarker = new Marker(map);
-        startMarker.setPosition(startPoint);
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        map.getOverlays().add(startMarker);
 
-        GeoPoint destinationPoint = new GeoPoint(48.4, -1.9);
+
+
+
+
+        Touchy t = new Touchy();
+        overlayList = map.getOverlays();
+        overlayList.add(t);
+
+        //
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria crit = new Criteria();
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(MainActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        towers = lm.getBestProvider(crit, false);
+        Location location = lm.getLastKnownLocation(towers);
+
+        if (location != null) {
+            lat = (int) (location.getLatitude()*1E6);
+            longi = (int) (location.getLongitude()*1E6);
+            currentPoint = new GeoPoint(lat,longi);
+            Marker startMarker = new Marker(map);
+            startMarker.setPosition(currentPoint);
+            startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+            map.getOverlays().add(startMarker);
+            mapController.animateTo(currentPoint);
+
+
+        }else{
+            Toast.makeText(MainActivity.this, "Couldn't get provider", Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -119,33 +142,91 @@ public class MainActivity extends Activity {
         overlayItemArray = new ArrayList<>();
 
         overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
-        overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", destinationPoint));
-        getRoadAsync(startPoint, destinationPoint);
+        overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", endPoint));
+        getRoadAsync(startPoint, endPoint);
     }
 
-    public void updatePosition(GeoPoint aPoint)
-    {
-        if (mItemizedOverlay == null)
-        {
-            return;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lm.requestLocationUpdates(towers, 500, 1, this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        lm.removeUpdates(this);
+    }
+
+    @Override
+    public void onLocationChanged(Location l) {
+        lat = (int) (l.getLatitude()*1E6);
+        longi = (int) (l.getLongitude()*1E6);
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+        // TODO Auto-generated method stub
+    }
+
+
+
+
+    private class Touchy extends Overlay {
+
+
+        public boolean onTouchEvent(MotionEvent e, MapView m) {
+            if (e.getAction() == MotionEvent.ACTION_DOWN) {
+                start = e.getEventTime();
+                x = (int) e.getX();
+                y = (int) e.getY();
+                touchedPoint = (GeoPoint) map.getProjection().fromPixels(x,y);
+            }
+
+            if (e.getAction() == MotionEvent.ACTION_UP) {
+                stop = e.getEventTime();
+            }
+
+            if (stop - start > 1500) {
+                AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
+                alert.setTitle("Pick an Option");
+                alert.setMessage("Your current location will be your default start point");
+                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Set SatrtPoint", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        // TODO Auto-generated method stub
+                    }
+                    setStartPoint(touchedpoint);
+                    //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
+
+                });
+                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Set Destination", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        // TODO Auto-generated method stub
+                    }
+                    setEndPoint(touchedpoint);
+                    //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
+                });
+
+
+
+                alert.show();
+                return true;
+            }
+            return false;
         }
-        OverlayItem overlayItem;
-
-        /* remove last position marker */
-        removeLastPosition(lastPosition);
-
-        overlayItem = new OverlayItem("Center", "Center", (GeoPoint) aPoint);
-
-        lastPosition = overlayItem;
-
-        mItemizedOverlay.addOverlay(overlayItem);
-
-
-        map.getOverlays().add(mItemizedOverlay);
-        map.getController().animateTo(aPoint);
-
     }
-
 
     Activity ourActivity = this;
     MapView map;
@@ -219,9 +300,8 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    
 
-
-    public GeoPoint getCurrentLocation() {
-        return currentLocation;
-    }
 }
+
+
