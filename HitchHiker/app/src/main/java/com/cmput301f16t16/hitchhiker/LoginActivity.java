@@ -29,22 +29,33 @@ public class LoginActivity extends AppCompatActivity {
             user = getUserTask.get();
             Log.i("User Name : ", user.getUserName());
             Log.i("User Type: ", user.getUserType().toString());
-            Intent intent = new Intent(LoginActivity.this, RiderActivity.class);
-            startActivity(intent);
-            finish();
+
+            // TODO If the user is a rider, then go to the rider page
+            if (user.getUserType() == 1) {
+
+                Intent intent = new Intent(LoginActivity.this, RiderActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
+            }
+
+            // Todo If the user is a driver, then go to the driver page
+            else if (user.getUserType() == 2 || user.getUserType() == 3) {
+                Intent intent = new Intent(LoginActivity.this, DriverActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
+            }
         }
-        
+
         catch (Exception e) {
             Log.i("Error", "Failed to get the user out of the async object");
         }
-        // TODO If the user is a rider, then go to the rider page
 
-        // Todo If the user is a driver, then go to the driver page
 
     }
 
     public void GoToRegisterPage(View view){
-
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
 

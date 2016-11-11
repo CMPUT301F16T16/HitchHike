@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cmput301f16t16.hitchhiker">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -22,9 +23,9 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CreateRequestActivity" />
         <activity android:name=".RiderActivity" />
-        <activity android:name=".ProspectiveDriversActivity"></activity>
+        <activity android:name=".ProspectiveDriversActivity" />
+        <activity android:name=".DriverActivity" />
+        <activity android:name=".UserProfileActivity"></activity>
     </application>
-
-
 
 </manifest>
