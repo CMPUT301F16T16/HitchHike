@@ -116,4 +116,8 @@ public class Request extends Fare implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+    public User getRider() {
+        return this.Rider;
+    }
 }

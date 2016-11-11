@@ -5,9 +5,10 @@ package com.cmput301f16t16.hitchhiker;
  */
 public class Fare extends Location{
 
-    private static double fare;
-    private Location A;
-    private Location B;
+    protected static double fare;
+    protected static double estimate;
+    protected Location A;
+    protected Location B;
 
     public Fare(Location A, Location B) {
         this.A = A;

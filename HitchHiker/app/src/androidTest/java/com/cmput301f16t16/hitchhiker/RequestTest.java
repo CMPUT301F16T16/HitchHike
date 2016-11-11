@@ -8,13 +8,12 @@ import junit.framework.TestCase;
 
  * Created by Jae-yeon on 10/14/2016.
  * edited by Angus on 11/2/2016.
+<<<<<<< HEAD
  * Created by willyliao on 2016-11-09.
 
  */
 
 public class RequestTest extends TestCase {
-
-
 
     public void testRequest() {
         Location pickUp = new Location();
@@ -63,10 +62,10 @@ public class RequestTest extends TestCase {
 
     public void testUserType () {
         User rider = new User("Billy");
-        rider.setUserType("Rider");
+        rider.setUserType(2);
         User driver = new User("Dora");
-        driver.setUserType("");
-        assertTrue("The User's type is the same", rider.getUserType().equals("Rider"));
+        driver.setUserType(2);
+        assertTrue("The User's type is the same", rider.getUserType().equals(driver.getUserType()));
 //        assertTrue("The User's type is the same", driver.getUserType().equals("Driver"));
 //        assertNotSame(rider, driver);
 
@@ -124,12 +123,11 @@ public class RequestTest extends TestCase {
 //}
 //>>>>>>> request_testing
 
-    public void testCreateRequest(){
-        String pickUp = "Earth";
-        String dropOff = "Moon";
-        User createdUser;
-        double price = "10.25";
-        Request newRequest = new Request(createdUser, pickUp, dropOff, price);
+//    public void testCreateRequest(){
+//        String pickUp = "Earth";
+//        String dropOff = "Moon";
+//        Request newRequest = new Request(pickUp, dropOff);
+
 
 
 //        Rider newRider = new Rider(username, firstName, lastName, phoneNumber);
@@ -139,6 +137,7 @@ public class RequestTest extends TestCase {
 //        assertEquals("First name is not the same", firstName, newRider.getFirstName());
 //        assertEquals("Last name is not the same", lastName, newRider.getLastName());
 //        assertEquals("Phone number is not the same", phoneNumber, newRider.getPhoneNumber());
-    }
-}
+ }
+
+
 
