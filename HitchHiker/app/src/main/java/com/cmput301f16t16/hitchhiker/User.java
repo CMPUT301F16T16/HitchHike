@@ -22,18 +22,27 @@ public class User implements Parcelable {
     protected String userFirstName;
     protected String userLastName;
     protected String userEmail;
-    protected int userPhoneNumber;
+    protected Integer userPhoneNumber;
     protected String id;
 
-    public User(String userName){// }, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
-        this.userName = getUserName();
-        this.userFirstName = getUserFirstName();
-        this.userLastName = getUserLastName();
-        this.userEmail = getUserEmail();
-        this.userPhoneNumber = getUserPhoneNumber();
-        this.userType = getUserType();
-        this.userPhoneNumber = getUserPhoneNumber();
+    public User(String userName, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
+        this.userName = userName;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.userEmail = userEmail;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userType = userType;
     }
+
+//    public User(String userName){// }, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
+//        this.userName = getUserName();
+//        this.userFirstName = getUserFirstName();
+//        this.userLastName = getUserLastName();
+//        this.userEmail = getUserEmail();
+//        this.userPhoneNumber = getUserPhoneNumber();
+//        this.userType = getUserType();
+//        this.userPhoneNumber = getUserPhoneNumber();
+//    }
 
 
 
