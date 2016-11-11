@@ -5,17 +5,16 @@ import junit.framework.TestCase;
 
 
 /**
-<<<<<<< HEAD
+
  * Created by Jae-yeon on 10/14/2016.
  * edited by Angus on 11/2/2016.
-=======
  * Created by willyliao on 2016-11-09.
->>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
+
  */
 
 public class RequestTest extends TestCase {
 
-<<<<<<< HEAD
+
 
     public void testRequest() {
         Location pickUp = new Location();
@@ -75,7 +74,7 @@ public class RequestTest extends TestCase {
 
 
     }
-}
+
 //<<<<<<< HEAD
 //    public void testAcceptDriver() {
 //        Request request = new Request(0);
@@ -93,7 +92,7 @@ public class RequestTest extends TestCase {
 //        assertEquals("Driver Accepted", request.getRequestStatus());
 //        }
 //    }
-//=======
+
 //}
 //DONT NEED TO TEST GETTERS AND SETTERS
 //
@@ -124,11 +123,13 @@ public class RequestTest extends TestCase {
 //    }
 //}
 //>>>>>>> request_testing
-=======
+
     public void testCreateRequest(){
         String pickUp = "Earth";
         String dropOff = "Moon";
-        Request newRequest = new Request(pickUp, dropOff);
+        User createdUser;
+        double price = "10.25";
+        Request newRequest = new Request(createdUser, pickUp, dropOff, price);
 
 
 //        Rider newRider = new Rider(username, firstName, lastName, phoneNumber);
@@ -140,4 +141,4 @@ public class RequestTest extends TestCase {
 //        assertEquals("Phone number is not the same", phoneNumber, newRider.getPhoneNumber());
     }
 }
->>>>>>> 1b56c156b5b8a7a5e64f53b7b252e6830816ea1d
+

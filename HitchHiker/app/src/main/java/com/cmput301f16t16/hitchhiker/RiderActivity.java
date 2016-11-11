@@ -37,6 +37,8 @@ public class RiderActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     @Override
@@ -61,4 +63,14 @@ public class RiderActivity extends AppCompatActivity {
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
         startActivity(intent);
     }
+
+    public void HomeRequest(View view){
+        Intent intent = new Intent(RiderActivity.this, RiderActivity.class);
+        startActivity(intent);
+    }
+
+//    public void ProfileRequest(View view){
+//        Intent intent = new Intent(RiderActivity.this, Profile.class);
+//        startActivity(intent);
+//    }
 }

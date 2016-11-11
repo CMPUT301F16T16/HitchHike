@@ -18,7 +18,7 @@ public class User {
     protected int userPhoneNumber;
     protected String id;
 
-    public User(String userName, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
+    public User(String userName){// }, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
         this.userName = getUserName();
         this.userFirstName = getUserFirstName();
         this.userLastName = getUserLastName();
