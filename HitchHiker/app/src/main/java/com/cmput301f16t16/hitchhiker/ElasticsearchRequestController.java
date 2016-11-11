@@ -64,10 +64,10 @@ public class ElasticsearchRequestController {
             verifySettings();
 
             for (Request request: requests) {
-                Index index = new Index.Builder(request).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").type("request").build();
+                Index in = new Index.Builder(request).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").type("request").build();
 
                 try {
-                    DocumentResult result = client.execute(index);
+                    DocumentResult result = client.execute(in);
                     if (result.isSucceeded()) {
                         request.setId(result.getId());
                     }
