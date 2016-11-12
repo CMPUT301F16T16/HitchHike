@@ -1,8 +1,10 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import java.io.Serializable;
 
@@ -15,6 +17,20 @@ public class DriverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_driver);
 
         Bundle bundle = getIntent().getExtras();
-        user = bundle.getParcelable("user");
+        user = (User) getIntent().getSerializableExtra("user");
+    }
+
+    public void BrowseRequestAction(View view) {
+        Intent intent = new Intent(DriverActivity.this, DriverActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+    }
+
+    public void UserProfilePageAction(View view) {
+        Intent intent = new Intent(DriverActivity.this, UserProfileActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
     }
 }
+
+

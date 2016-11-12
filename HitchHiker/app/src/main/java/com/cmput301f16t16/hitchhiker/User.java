@@ -80,14 +80,17 @@ public class User implements Serializable {
     }
 
     public void setUserPhoneNumber(int userPhoneNumber) {
+
         this.userPhoneNumber = userPhoneNumber;
     }
+
 
     public int getUserPhoneNumber() {
         return this.userPhoneNumber;
     }
 
     public void setUserEmail(String email) {
+
         this.userEmail = email;
     }
 
@@ -98,6 +101,9 @@ public class User implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+
+
 
 
 

@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
+/**
+ * Created by Victoria Lee 11/12/2016
+ */
 public class UserProfileActivity extends AppCompatActivity{
     private User user;
 
@@ -56,15 +59,18 @@ public class UserProfileActivity extends AppCompatActivity{
     }
 
     public void savedChanges(View v){
-        TextView newNumber = (TextView) findViewById(R.id.changeNumber);
-        TextView newEmail = (TextView) findViewById(R.id.changeEmail);
+        TextView newNumberText = (TextView) findViewById(R.id.changeNumber);
+        TextView newEmailText = (TextView) findViewById(R.id.changeEmail);
 
-        Integer newNumberText = Integer.parseInt(newNumber.getText().toString());
-        String newEmailText = newEmail.getText().toString();
+        Integer newNumber = Integer.parseInt(newNumberText.getText().toString());
+        String newEmail = newEmailText.getText().toString();
 
-        user.setUserPhoneNumber(newNumberText);
-        user.setUserEmail(newEmailText);
+        newNumberText.setText(""+newNumber);
+        newEmailText.setText(newEmail);
 
+        //saves in user
+        user.setUserPhoneNumber(newNumber);
+        user.setUserEmail(newEmail);
 
         finish();
     }

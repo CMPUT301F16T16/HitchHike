@@ -84,6 +84,33 @@ public class ElasticsearchUserController{
         }
     }
 
+//    // TODO we need a function which updates the email and phone number
+//    public static class UpdateUserTask extends AsyncTask<String, Void, User> {
+//        @Override
+//        protected User doInBackground(String... search_parameters) {
+//            verifySettings();
+//            String search_string = "{\"from\": 0, \"size\": 1, \"query\": {\"match\": {\"userName\": \"" + search_parameters[3] + "\"}}}";
+//
+//            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("user").build();
+//
+//            User user = null;
+//
+//            try {
+//                SearchResult result = client.execute(search);
+//                if (result.isSucceeded()) {
+//                    user = result.getSourceAsObject(User.class);
+//                } else {
+//                    Log.i("Error", "We could not find the desired user in Elasticsearch");
+//                    return null;
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                Log.i("Error", "We could not contact Elasticsearch");
+//            }
+//            return user;
+//        }
+//    }
+
 
     // TODO we need a function which adds a request!
     public static class AddUsersTask extends AsyncTask<User, Void, Void> {

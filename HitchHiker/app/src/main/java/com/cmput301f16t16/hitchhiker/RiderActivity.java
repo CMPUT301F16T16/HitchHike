@@ -28,38 +28,39 @@ public class RiderActivity extends AppCompatActivity {
 
 
         // display requests into the listview
-        oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
-
-        oldRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
-                Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
-                intent.putExtra("requestsList", requestsList);
-                intent.putExtra("index", position);
-                startActivity(intent);
-            }
-        });
+//        oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
+//
+//        oldRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
+//                Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
+//                intent.putExtra("requestsList", requestsList);
+//                intent.putExtra("index", position);
+//                startActivity(intent);
+//            }
+//        });
     }
 
-    @Override
-    protected void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-        ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
-        getRequestsTask.execute("");
-        try {
-            requestsList = getRequestsTask.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "Failed to get the requests out of the async object.");
-        }
-        adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
-        oldRequestList.setAdapter(adapter);
-
-    }
+//    @Override
+//    protected void onStart() {
+//        // TODO Auto-generated method stub
+//        super.onStart();
+//        ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
+//        getRequestsTask.execute("");
+//        try {
+//            requestsList = getRequestsTask.get();
+//        }
+//        catch (Exception e) {
+//            Log.i("Error", "Failed to get the requests out of the async object.");
+//        }
+//        adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
+//        oldRequestList.setAdapter(adapter);
+//
+//    }
 
 
     public void CreateRequest(View view){
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 
