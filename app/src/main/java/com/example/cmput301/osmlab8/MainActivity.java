@@ -100,6 +100,8 @@ public class MainActivity extends Activity implements LocationListener {
         //
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria crit = new Criteria();
+        criteria.setPowerRequirement(Criteria.NO_REQUIREMENT);
+        criteria.setAccuracy(Criteria.NO_REQUIREMENT);
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -113,7 +115,7 @@ public class MainActivity extends Activity implements LocationListener {
             return;
         }
 
-        towers = lm.getBestProvider(crit, false);
+        towers = lm.getBestProvider(crit, true);
         Location location = lm.getLastKnownLocation(towers);
 
         if (location != null) {
