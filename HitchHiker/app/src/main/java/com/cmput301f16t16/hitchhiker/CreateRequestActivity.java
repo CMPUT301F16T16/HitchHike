@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 public class CreateRequestActivity extends AppCompatActivity {
 
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,8 +16,8 @@ public class CreateRequestActivity extends AppCompatActivity {
         //Request manager has to be initialized to know about the created request
         RequestListManager.initRequestListManager(this.getApplicationContext());
 
-//        Bundle bundle = getIntenet().getExtras();
-//        User user = bundle.getParcelable("");
+        Bundle bundle = getIntent().getExtras();
+        User user = bundle.getParcelable("user");
     }
 
     public void CreateRequest(View view){
@@ -43,9 +44,12 @@ public class CreateRequestActivity extends AppCompatActivity {
          * struggling on how to pass a User Rider into the request object
          * Going to make mock-object Test see requestTest
          */
-        Request newRequest = new Request(requestCreator, pickUp, dropOff, estimate);
-//        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-//        addRequestsTask.execute(newRequest);
+        Location Alocation = new Location();
+        Location Blocation = new Location();
+        Fare fare = new Fare();
+        Request newRequest = new Request(user, Alocation, Blocation, fare);
+        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+        addRequestsTask.execute(newRequest);
 
         finish();
 

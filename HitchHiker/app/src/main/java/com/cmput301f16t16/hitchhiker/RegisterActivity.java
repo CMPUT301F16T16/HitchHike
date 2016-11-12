@@ -102,12 +102,12 @@ public class RegisterActivity extends AppCompatActivity {
             usernameExists = false;
         }
         else if (usernameExists == false) {
-            User user = new User(userName);
-            user.setUserFirstName(userFirstName);
-            user.setUserLatName(userLastName);
-            user.setUserEmail(userEmail);
-            user.setUserPhoneNumber(userPhoneNumber);
-            user.setUserType(userType);
+            User user = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType);
+//            user.setUserFirstName(userFirstName);
+//            user.setUserLatName(userLastName);
+//            user.setUserEmail(userEmail);
+//            user.setUserPhoneNumber(userPhoneNumber);
+//            user.setUserType(userType);
             ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
             addUsersTask.execute(user);
             finish();
