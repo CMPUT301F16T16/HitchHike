@@ -7,11 +7,13 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
+import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
@@ -52,6 +54,33 @@ public class ElasticsearchUserController{
                 Log.i("Error", "Executing the get requests method failed");
             }
             return users;
+        }
+    }
+
+    // TODO we need a function which gets a single user (for login)
+    public static class GetUserTask extends AsyncTask<String, Void, User> {
+        @Override
+        protected User doInBackground(String... search_parameters) {
+            verifySettings();
+            String search_string = "{\"from\": 0, \"size\": 1, \"query\": {\"match\": {\"userName\": \"" + search_parameters[0] + "\"}}}";
+
+            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("user").build();
+
+            User user = null;
+
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    user = result.getSourceAsObject(User.class);
+                } else {
+                    Log.i("Error", "We could not find the desired user in Elasticsearch");
+                    return null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.i("Error", "We could not contact Elasticsearch");
+            }
+            return user;
         }
     }
 
