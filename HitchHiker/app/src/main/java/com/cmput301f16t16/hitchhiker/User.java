@@ -8,7 +8,7 @@ import io.searchbox.annotations.JestId;
 import static java.sql.Types.NULL;
 
 /**
- * Created by Leo Yoon on 13/10/2016.
+ * Created by Leo Yoon on 13/10/
  * Edited by Angus Abels & Willy Liao
  * Edited by Victoria Lee 10/11/2016.
  * We used our user class and put our code into http://www.parcelabler.com/ (accessed on 10/11/2016
