@@ -60,7 +60,7 @@ public class Request extends Fare implements Serializable {
     public Request(/*String requestCreator,*/ String pickUp, String dropOff) {
         //this.Rider = requestCreator;
         this.acceptedDriver = acceptedDriver;
-        this.requestStatus = CREATED; // always 1 when request if first created
+        //this.requestStatus = CREATED; // always 1 when request if first created
         //this.price = fare.getFare();
         this.pickUp = pickUp;
         this.dropOff = dropOff;

@@ -34,17 +34,6 @@ public class User implements Parcelable {
         this.userType = userType;
     }
 
-//    public User(String userName){// }, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
-//        this.userName = getUserName();
-//        this.userFirstName = getUserFirstName();
-//        this.userLastName = getUserLastName();
-//        this.userEmail = getUserEmail();
-//        this.userPhoneNumber = getUserPhoneNumber();
-//        this.userType = getUserType();
-//        this.userPhoneNumber = getUserPhoneNumber();
-//    }
-
-
 
     public String getUserName() {
 

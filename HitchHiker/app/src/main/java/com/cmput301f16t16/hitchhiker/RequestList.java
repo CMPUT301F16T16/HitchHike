@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class RequestList {
     private ArrayList<Request> requestList = new ArrayList<Request>();
 
-    public void add(Request request) { requestList.add (request); }
+    public void addR(Request request) { requestList.add (request); }
 
     public boolean hasRequest(Request request) { return requestList.contains(request); }
 

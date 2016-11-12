@@ -18,6 +18,7 @@ public class RequestListController {
     *Lazy Singleton talk too the activity and elastic search
      */
     private static RequestList requestList = null;
+
     static public RequestList getRequestList() {
         if (requestList == null) {
             requestList = new RequestList();
@@ -56,7 +57,7 @@ public class RequestListController {
 
 
     public void addRequest(Request request) {
-        requestList.add(request);
+        requestList.addR(request);
         //add request to the requestList and
         //browsingRequest List
         //Elastic controller cmd

@@ -35,6 +35,7 @@ public class RiderActivity extends AppCompatActivity {
                 intent.putExtra("requestsList", requestsList);
                 intent.putExtra("index", position);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -63,18 +64,21 @@ public class RiderActivity extends AppCompatActivity {
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
+        finish();
     }
 
 
     public void HomeRequest(View view){
         Intent intent = new Intent(RiderActivity.this, RiderActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void GoToUserProfilePage(View view) {
         Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
+        finish();
     }
 
 }
