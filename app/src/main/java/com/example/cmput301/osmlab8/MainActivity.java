@@ -100,8 +100,8 @@ public class MainActivity extends Activity implements LocationListener {
         //
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria crit = new Criteria();
-        criteria.setPowerRequirement(Criteria.NO_REQUIREMENT);
-        criteria.setAccuracy(Criteria.NO_REQUIREMENT);
+        crit.setPowerRequirement(Criteria.NO_REQUIREMENT);
+        crit.setAccuracy(Criteria.NO_REQUIREMENT);
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -203,7 +203,7 @@ public class MainActivity extends Activity implements LocationListener {
                 AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
                 alert.setTitle("Pick an Option");
                 alert.setMessage("Your current location will be your default start point");
-                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Set SatrtPoint", new DialogInterface.OnClickListener() {
+                alert.setButton(DialogInterface.BUTTON_POSITIVE, "Set SatrtPoint", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
@@ -212,7 +212,7 @@ public class MainActivity extends Activity implements LocationListener {
                     //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
 
                 });
-                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Set Destination", new DialogInterface.OnClickListener() {
+                alert.setButton(DialogInterface.BUTTON_NEGATIVE, "Set Destination", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
