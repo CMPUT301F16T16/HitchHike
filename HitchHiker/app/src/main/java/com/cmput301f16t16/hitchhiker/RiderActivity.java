@@ -17,6 +17,7 @@ public class RiderActivity extends AppCompatActivity {
 //    private ListView oldRequestList;
 //    private ArrayList<Request> requestsList = new ArrayList<Request>();
 //    private ArrayAdapter<Request> adapter;
+    private User user;
 
 //    public ListView getOldRequestList(){
 //        return oldRequestList;
@@ -27,6 +28,9 @@ public class RiderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
 
+
+        Bundle bundle = getIntent().getExtras();
+        user = bundle.getParcelable("user");
 
 
         //initialize request manager to save/load the requestList
