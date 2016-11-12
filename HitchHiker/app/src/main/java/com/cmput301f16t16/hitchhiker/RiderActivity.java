@@ -24,7 +24,8 @@ public class RiderActivity extends AppCompatActivity {
 
         // Can also use serializable
         Bundle bundle = getIntent().getExtras();
-        user = bundle.getParcelable("user");
+        user = (User) getIntent().getSerializableExtra("user");
+
 
         // display requests into the listview
         oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
