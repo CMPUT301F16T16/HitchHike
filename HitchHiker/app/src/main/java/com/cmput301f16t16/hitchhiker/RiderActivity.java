@@ -30,7 +30,7 @@ public class RiderActivity extends AppCompatActivity {
 
         // Can also use serializable
         Bundle bundle = getIntent().getExtras();
-        user = bundle.getParcelable("user");
+//        user = bundle.getParcelable("user");
 
 //        // display requests into the listview
 //        oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
@@ -114,6 +114,7 @@ public class RiderActivity extends AppCompatActivity {
 
     public void CreateRequest(View view){
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 

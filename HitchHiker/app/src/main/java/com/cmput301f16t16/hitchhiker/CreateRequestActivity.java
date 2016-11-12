@@ -17,8 +17,9 @@ public class CreateRequestActivity extends AppCompatActivity {
         //Request manager has to be initialized to know about the created request
         RequestListManager.initRequestListManager(this.getApplicationContext());
 
-        Bundle bundle = getIntent().getExtras();
-        User user = bundle.getParcelable("user");
+//        Bundle bundle = getIntent().getExtras();
+//        User user = bundle.getParcelable("user");
+        user = (User) getIntent().getSerializableExtra("user");
 
         //RequestList Manager has to be initialized to know about the new created request
         RequestListManager.initRequestListManager(this.getApplicationContext());
@@ -50,13 +51,14 @@ public class CreateRequestActivity extends AppCompatActivity {
          * struggling on how to pass a User Rider into the request object
          * Going to make mock-object Test see requestTest
          */
-
+        String username = user.getUserName();
         Location Alocation = new Location();
         Location Blocation = new Location();
         Fare fare = new Fare();
-        Request newRequest = new Request(user, Alocation, Blocation, fare);
+        Request newRequest = new Request(username, 0, 0, 0);
         ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
         addRequestsTask.execute(newRequest);
+        rlc.addRequest(newRequest);
 
         finish();
 

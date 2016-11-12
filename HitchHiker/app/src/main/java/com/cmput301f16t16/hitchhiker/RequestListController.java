@@ -20,51 +20,48 @@ public class RequestListController {
     private static RequestList requestList = null;
     static public RequestList getRequestList() {
         if (requestList == null) {
-//            requestList =
-//            try {
-//                requestList = new RequestList();
-//                requestList = RequestListManager.getRequestManager().loadRequestList();
-//                requestList.addRequestListener(new RequestListener() {
-//                    @Override
-//                    public void update() {
-//                        saveRequestList();
-//                    }
-//                });
-//            }
-//            catch (IOException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("Couldnt deserialize HabitList from RequestListManager");
-//            }
-//            catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("Couldnt deserialize RequetList from HabitListManager");
-//            }
+            try {
+                requestList = new RequestList();
+                requestList = RequestListManager.getRequestManager().loadRequestList();
+                requestList.addRequestListener(new RequestListener() {
+                    @Override
+                    public void update() {
+                        saveRequestList();
+                    }
+                });
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Couldnt deserialize HabitList from RequestListManager");
+            }
+            catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Couldnt deserialize RequetList from HabitListManager");
+            }
         }
         return requestList;
     }
 
-//    private static void saveRequestList() {
-//        try {
-//            RequestListManager.getRequestManager().saveRequesttList(getRequestList());
-//        }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("Couldnt deserialize HabitList from HabitListManager");
-//        }
-//    }
+    private static void saveRequestList() {
+        try {
+            RequestListManager.getRequestManager().saveRequestList(getRequestList());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Couldnt deserialize HabitList from HabitListManager");
+        }
+    }
 
 
     public void addRequest(Request request) {
-        //add request to the requestList and
-        //browsingRequest List
-        //Elastic controller cmd
+        getRequestList().add(request);
     }
 
-    public void removeRequest(Request request) {
-        //remove request from browsingList and
-        //requestList because of possibility of
-        //canceling a request or A driver has accepted a offer
-    }
+//    public void removeRequest(Request request) {
+//        //remove request from browsingList and
+//        //requestList because of possibility of
+//        //canceling a request or A driver has accepted a offer
+//    }
 
     public ArrayList<Request> getRequestLoad(User rider) {
         ArrayList<Request> requestLoad = new ArrayList<>();

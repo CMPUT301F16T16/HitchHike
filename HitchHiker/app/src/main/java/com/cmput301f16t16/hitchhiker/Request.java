@@ -21,7 +21,7 @@ public class Request extends Fare implements Serializable {
      * instead of just grabbing the ID's driver and rider we can bring in the whole objects
      * and use what info we need
      */
-    private User Rider;
+    private String Rider;
     private User acceptedDriver = null;
 
 
@@ -36,8 +36,8 @@ public class Request extends Fare implements Serializable {
      * and a Location B (End of the ride is located)
      */
 
-    private Location pickUp;
-    private Location dropOff;
+    private double pickUp;
+    private double dropOff;
 
     /**
      * Fare is calculated and must be accepted before request is complete
@@ -64,13 +64,13 @@ public class Request extends Fare implements Serializable {
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
     private String id;
 
-    public Request(User requestCreator, Location pickUp, Location dropOff, Fare fare) {
+    public Request(String requestCreator, double pickUp, double dropOff, double fare) {
         this.Rider = requestCreator;
         this.acceptedDriver = acceptedDriver;
         this.requestStatus = getRequestStatus();
-        this.price = fare.getFare();
-        this.pickUp = pickUp;
-        this.dropOff = dropOff;
+        this.price = 0;
+        this.pickUp = 0;
+        this.dropOff = 0;
     }
 
 
@@ -97,13 +97,13 @@ public class Request extends Fare implements Serializable {
         return this.RequestId;
     }
 
-    public Location getStartLocation() {
-        return this.pickUp;
-    }
-
-    public Location getEndLocation() {
-        return this.dropOff;
-    }
+//    public Location getStartLocation() {
+//        return this.pickUp;
+//    }
+//
+//    public Location getEndLocation() {
+//        return this.dropOff;
+//    }
 
     public String getTrip() {
         return this.pickUp + "\t ---> \t" + this.dropOff;
@@ -117,7 +117,8 @@ public class Request extends Fare implements Serializable {
         this.id = id;
     }
 
-    public User getRider() {
+    public String getRider(User user) {
+        Rider = user.getUserName();
         return this.Rider;
     }
 }
