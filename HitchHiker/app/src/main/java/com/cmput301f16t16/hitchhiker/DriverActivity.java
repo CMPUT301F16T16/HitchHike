@@ -21,9 +21,10 @@ public class DriverActivity extends AppCompatActivity {
     }
 
     public void BrowseRequestAction(View view) {
-        Intent intent = new Intent(DriverActivity.this, DriverActivity.class);
+        Intent intent = new Intent(DriverActivity.this, BrowseRequestActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
+        finish();
     }
 
     public void UserProfilePageAction(View view) {

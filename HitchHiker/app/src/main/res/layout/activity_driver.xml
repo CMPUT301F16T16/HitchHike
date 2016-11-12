@@ -36,8 +36,7 @@
         android:layout_weight="0.33"
         android:layout_alignBottom="@+id/browse"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/browse"
-        android:onClick="HomeAction"/>
+        android:layout_toStartOf="@+id/browse" />
 
     <Button
         android:layout_width="wrap_content"
