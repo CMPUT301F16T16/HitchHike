@@ -28,8 +28,9 @@ public class RiderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
 
-        // Can also use serializable
-        Bundle bundle = getIntent().getExtras();
+        // Can also use serializable\
+        user = (User) getIntent().getSerializableExtra("user");
+//        Bundle bundle = getIntent().getExtras();
 //        user = bundle.getParcelable("user");
 
 //        // display requests into the listview
