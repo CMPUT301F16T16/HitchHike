@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
             usersList = getUsersTask.get();
         }
         catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets out of the async object.");
+            Log.i("Error", "Failed to get the users out of the async object.");
         }
     }
 
@@ -102,14 +102,9 @@ public class RegisterActivity extends AppCompatActivity {
             usernameExists = false;
         }
         else if (usernameExists == false) {
-            User user = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType);
-//            user.setUserFirstName(userFirstName);
-//            user.setUserLatName(userLastName);
-//            user.setUserEmail(userEmail);
-//            user.setUserPhoneNumber(userPhoneNumber);
-//            user.setUserType(userType);
+            User newUser = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType);
             ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
-            addUsersTask.execute(user);
+            addUsersTask.execute(newUser);
             finish();
         }
     }

@@ -12,25 +12,41 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class RiderActivity extends AppCompatActivity {
-    //private Activity activity = this;
 
 //    private ListView oldRequestList;
 //    private ArrayList<Request> requestsList = new ArrayList<Request>();
 //    private ArrayAdapter<Request> adapter;
-    private User user;
 
 //    public ListView getOldRequestList(){
 //        return oldRequestList;
 //    }
+    private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
 
-
+        // Can also use serializable
         Bundle bundle = getIntent().getExtras();
         user = bundle.getParcelable("user");
+
+//        // display requests into the listview
+//        oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
+//
+//        oldRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
+//                Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
+//                intent.putExtra("requestsList", requestsList);
+//                intent.putExtra("index", position);
+//                startActivity(intent);
+//            }
+//        });
+//    }
+//
+//        Bundle bundle = getIntent().getExtras();
+//        user = bundle.getParcelable("user");
 
 
         //initialize request manager to save/load the requestList
@@ -45,7 +61,7 @@ public class RiderActivity extends AppCompatActivity {
             list = getRequestsTask.get();
         }
         catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets out of the async object.");
+            Log.i("Error", "Failed to get the requests out of the async object.");
         }
 
         final ArrayAdapter<Request> requestAdapter = new ArrayAdapter<Request>(this, android.R.layout.simple_list_item_1, list);
@@ -101,9 +117,9 @@ public class RiderActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void GoToUserProfilePage(View view) {
-//        Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
-//        intent.putExtra("user", user);
-//        startActivity(intent);
-//    }
+    public void GoToUserProfilePage(View view) {
+        Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+    }
 }

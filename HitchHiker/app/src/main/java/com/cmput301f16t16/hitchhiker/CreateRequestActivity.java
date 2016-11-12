@@ -13,17 +13,23 @@ public class CreateRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
+
         //Request manager has to be initialized to know about the created request
         RequestListManager.initRequestListManager(this.getApplicationContext());
 
         Bundle bundle = getIntent().getExtras();
         User user = bundle.getParcelable("user");
+
+        //RequestList Manager has to be initialized to know about the new created request
+        RequestListManager.initRequestListManager(this.getApplicationContext());
+
     }
 
     public void CreateRequest(View view){
 
         Toast.makeText(this, "Creating Request", Toast.LENGTH_SHORT).show();
-        //RequestListController rlc = new RequestListController();
+        RequestListController rlc = new RequestListController();
+
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
         //Fare estimate shouldnt be editable it should pop-up once the
@@ -44,6 +50,7 @@ public class CreateRequestActivity extends AppCompatActivity {
          * struggling on how to pass a User Rider into the request object
          * Going to make mock-object Test see requestTest
          */
+
         Location Alocation = new Location();
         Location Blocation = new Location();
         Fare fare = new Fare();
