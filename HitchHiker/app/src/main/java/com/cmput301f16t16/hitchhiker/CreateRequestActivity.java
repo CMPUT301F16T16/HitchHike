@@ -14,38 +14,32 @@ public class CreateRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
+        Toast.makeText(this, "make a new request", Toast.LENGTH_SHORT).show();
 
-        Bundle bundle = getIntent().getExtras();
-        user = bundle.getParcelable("user");
+
+//        Bundle bundle = getIntent().getExtras();
+//        user = bundle.getParcelable("user");
     }
 
     public void CreateRequest(View view){
 
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
-//        //EditText estimate = (EditText) findViewById(R.id.suggested_fare);
+        //EditText estimate = (EditText) findViewById(R.id.suggested_fare);
         String pickUp = pickUpText.getText().toString();
         String dropOff = dropOffText.getText().toString();
-//        //Integer estimate = Integer.parseInt(estimate.getText().toString());
-//
+        //Integer estimate = Integer.parseInt(estimate.getText().toString());
+
         //Request newRequest = new Request(user.getUserName(), pickUp, dropOff, estimate);
         Request newRequest = new Request(pickUp, dropOff);
+
         RequestListController rlc = new RequestListController();
         rlc.addRequest(newRequest);
 
-//        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-//        addRequestsTask.execute(newRequest);
         Toast.makeText(this, "Added a request", Toast.LENGTH_SHORT).show();
 
 
 
-
-    }
-
-    public void Submit(View v){
-//        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-//        addRequestsTask.execute(newRequest);
-//        finish();
 
     }
 }

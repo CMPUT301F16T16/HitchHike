@@ -109,6 +109,8 @@ public class RegisterActivity extends AppCompatActivity {
             ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
             addUsersTask.execute(newUser);
             finish();
+            
+
         }
     }
 

@@ -58,9 +58,9 @@ public class RequestListController {
 
     public void addRequest(Request request) {
         requestList.addR(request);
-        //add request to the requestList and
-        //browsingRequest List
-        //Elastic controller cmd
+        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+        addRequestsTask.execute(request);
+
     }
 
     public void removeRequest(Request request) {

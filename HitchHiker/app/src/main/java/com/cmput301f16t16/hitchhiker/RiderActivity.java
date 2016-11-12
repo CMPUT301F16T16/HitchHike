@@ -64,7 +64,7 @@ public class RiderActivity extends AppCompatActivity {
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        finish();
+
     }
 
 
@@ -78,7 +78,7 @@ public class RiderActivity extends AppCompatActivity {
         Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
 }

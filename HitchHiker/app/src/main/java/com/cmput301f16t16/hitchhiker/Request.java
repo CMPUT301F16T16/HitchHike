@@ -57,7 +57,7 @@ public class Request extends Fare implements Serializable {
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
     private String id;
 
-    public Request(/*String requestCreator,*/ String pickUp, String dropOff) {
+    public Request(String pickUp, String dropOff) {
         //this.Rider = requestCreator;
         this.acceptedDriver = acceptedDriver;
         //this.requestStatus = CREATED; // always 1 when request if first created
