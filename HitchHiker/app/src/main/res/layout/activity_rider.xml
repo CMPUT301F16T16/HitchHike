@@ -55,6 +55,7 @@
         android:layout_gravity="bottom"
         android:layout_below="@+id/open_requests_listview"
         android:layout_toRightOf="@+id/make_button"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="GoToUserProfilePage"/>
 </RelativeLayout>
 

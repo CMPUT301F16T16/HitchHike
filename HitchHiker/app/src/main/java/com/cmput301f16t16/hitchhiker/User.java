@@ -22,24 +22,18 @@ public class User implements Parcelable {
     protected String userFirstName;
     protected String userLastName;
     protected String userEmail;
-    protected int userPhoneNumber;
+    protected Integer userPhoneNumber;
     protected String id;
 
-    public User(String userName){// }, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
-        this.userName = getUserName();
-        this.userFirstName = getUserFirstName();
-        this.userLastName = getUserLastName();
-        this.userEmail = getUserEmail();
-        this.userPhoneNumber = getUserPhoneNumber();
-        this.userType = getUserType();
-        this.userPhoneNumber = getUserPhoneNumber();
+    public User(String userName, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
+        this.userName = userName;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.userEmail = userEmail;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userType = userType;
     }
 
-<<<<<<< HEAD
-    public void setUserName(String userName) {this.userName = userName;}
-    public void setUserFirstName(String userFirstName) {this.userFirstName = userFirstName;}
-    public void setUserLatName(String userLastName) {this.userLastName = userLastName;}
-=======
 
 
     public String getUserName() {
@@ -53,7 +47,6 @@ public class User implements Parcelable {
     }
 
 
->>>>>>> 7ffb592cc1fb2ae75acd6feb85af7e80d6e2a1e4
     public void setUserType(Integer userType) {
         this.userType = userType;
     }
@@ -70,13 +63,11 @@ public class User implements Parcelable {
         return userFirstName;
 
     }
-<<<<<<< HEAD
-=======
+
 
     public void setUserLastName(String userLastName){
         this.userLastName = userLastName;}
 
->>>>>>> 7ffb592cc1fb2ae75acd6feb85af7e80d6e2a1e4
     public String getUserLastName(){
         return userLastName;
     }

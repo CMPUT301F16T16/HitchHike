@@ -11,20 +11,20 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class RiderActivity extends AppCompatActivity {
-    //private Activity activity = this;
 
     private ListView oldRequestList;
     private ArrayList<Request> requestsList = new ArrayList<Request>();
     private ArrayAdapter<Request> adapter;
-
-//    public ListView getOldRequestList(){
-//        return oldRequestList;
-//    }
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
+
+        // Can also use serializable
+        Bundle bundle = getIntent().getExtras();
+        user = bundle.getParcelable("user");
 
         // display requests into the listview
         oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
@@ -49,7 +49,7 @@ public class RiderActivity extends AppCompatActivity {
             requestsList = getRequestsTask.get();
         }
         catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets out of the async object.");
+            Log.i("Error", "Failed to get the requests out of the async object.");
         }
         adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         oldRequestList.setAdapter(adapter);
@@ -59,6 +59,12 @@ public class RiderActivity extends AppCompatActivity {
 
     public void CreateRequest(View view){
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
+        startActivity(intent);
+    }
+
+    public void GoToUserProfilePage(View view) {
+        Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 }

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class CreateRequestActivity extends AppCompatActivity {
 
@@ -11,9 +12,15 @@ public class CreateRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
+
+        //RequestList Manager has to be initialized to know about the new created request
+//        RequestListManager.initRequestManager(this.getApplicationContext());
     }
 
     public void CreateRequest(View view){
+
+        Toast.makeText(this, "Creating Request", Toast.LENGTH_SHORT).show();
+        RequestListController rlc = new RequestListController();
 
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
@@ -35,7 +42,7 @@ public class CreateRequestActivity extends AppCompatActivity {
          * struggling on how to pass a User Rider into the request object
          * Going to make mock-object Test see requestTest
          */
-//        Request newRequest = new Request(User requestCreator, Location pickUp, Location dropOff, estimate);
+//        Request newRequest = new Request(requestCreator, pickUp, dropOff, estimate);
 //        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
 //        addRequestsTask.execute(newRequest);
 
