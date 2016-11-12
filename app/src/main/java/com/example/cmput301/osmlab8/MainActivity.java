@@ -164,6 +164,7 @@ public class MainActivity extends Activity implements LocationListener {
     public void onLocationChanged(Location l) {
         lat = (int) (l.getLatitude()*1E6);
         longi = (int) (l.getLongitude()*1E6);
+        currentPoint = new GeoPoint(lat,longi);
     }
 
     @Override
