@@ -27,13 +27,6 @@ public class User {
         this.userType = getUserType();
         this.userPhoneNumber = getUserPhoneNumber();
     }
-
-
-
-
-
-
-
     public void setUserName(String userName) {this.userName = userName;}
     public void setUserFirstName(String userFirstName) {this.userFirstName = userFirstName;}
     public void setUserLatName(String userLastName) {this.userLastName = userLastName;}
