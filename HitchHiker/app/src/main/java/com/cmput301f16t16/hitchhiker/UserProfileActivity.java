@@ -49,19 +49,32 @@ public class UserProfileActivity extends AppCompatActivity{
     public void editPhoneNumber(View view){
         //updates
         EditText editText = (EditText) findViewById(R.id.changeNumber);
-        newNumber = Integer.parseInt(editText.getText().toString());
-        editText.setText(""+newNumber);
-        user.setUserPhoneNumber(newNumber);
-
+        if ((editText.getText().toString()).equals("")){
+            // include a textView to show a message: Cannot save an empty phonenumber.
+        }
+        else{
+            try{
+                newNumber = Integer.parseInt(editText.getText().toString());
+                //editText.setText(newNumber);
+                user.setUserPhoneNumber(newNumber);
+            }
+            catch(Exception e){
+                // include a textView to show a message: Please only enter digits for phonenumber
+            }
+        }
     }
 
     public void editEmail(View view){
         //updates
         EditText editText = (EditText) findViewById(R.id.changeEmail);
         newEmail = editText.getText().toString();
-        editText.setText(newEmail);
-        user.setUserEmail(newEmail);
-
+        if (newEmail.equals("")){
+            // include a textView to show a message: This field is empty! Please enter in an email.
+        }
+        else {
+            //editText.setText(newEmail);
+            user.setUserEmail(newEmail);
+        }
     }
 
     public void savedChanges(View v){
