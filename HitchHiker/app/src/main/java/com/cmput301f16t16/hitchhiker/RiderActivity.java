@@ -74,10 +74,6 @@ public class RiderActivity extends AppCompatActivity {
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
-
-//        adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
-//        requestListView.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
     }
 
 
