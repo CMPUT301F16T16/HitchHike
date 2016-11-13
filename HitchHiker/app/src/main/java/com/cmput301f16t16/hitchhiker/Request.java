@@ -12,7 +12,7 @@ import io.searchbox.annotations.JestId;
  * Edited by Angus on 11/3/2016
  */
 
-public class Request extends Fare implements Serializable {
+public class Request implements Serializable {
 
     private static long serialVersionUID = 44L; // need this to access a same request from diff screens
     @JestId
@@ -23,8 +23,8 @@ public class Request extends Fare implements Serializable {
     private ArrayList<User> prospectiveDrivers;
     private String pickUp;
     private String dropOff;
-    // Fare is calculated and must be accepted before request is complete
     private double price;
+
    // requestStatus
     static final int CREATED = 1;
     static final int PENDING = 2;
@@ -32,17 +32,17 @@ public class Request extends Fare implements Serializable {
     static final int FINISHED = 4;
     static final int CANCLED = 5;
     static int requestStatus; //Always starts at one when a request is created
-
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
     private String id;
 
-    public Request(String requestCreator, String pickUp, String dropOff, double price) { //}, Fare fare) {
+
+    public Request(String requestCreator, String pickUp, String dropOff, Double price) {
         this.Rider = requestCreator;
-        this.acceptedDriver = acceptedDriver;
-        this.requestStatus = CREATED;
-        this.price = getPrice();
+            this.acceptedDriver = acceptedDriver;
         this.pickUp = pickUp;
         this.dropOff = dropOff;
+        this.price = price;
+        this.requestStatus = CREATED;
     }
 
     public int getRequestStatus() { return this.requestStatus; }
@@ -63,6 +63,15 @@ public class Request extends Fare implements Serializable {
         return this.dropOff;
     }
 
+//    public Location getStartLocation() {
+//        return this.pickUp;
+//    }
+//
+//    public Location getEndLocation() {
+//        return this.dropOff;
+//    }
+
+
     public String getTrip() {
         return this.pickUp + "\t ---> \t" + this.dropOff;
     }
@@ -75,7 +84,8 @@ public class Request extends Fare implements Serializable {
         this.id = id;
     }
 
-//    public User getRider() {
-//        return this.Rider;
-//    }
+    public String getRiderName(){
+        return this.Rider;
+    }
+
 }

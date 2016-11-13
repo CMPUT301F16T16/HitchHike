@@ -88,7 +88,10 @@ public class UserProfileActivity extends AppCompatActivity{
         intent.putExtra("user", user);
         startActivity(intent);
 
+
         finish();
     }
+
+
 
 }

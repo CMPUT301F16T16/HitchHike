@@ -20,31 +20,29 @@ public class CreateRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
 
-        Bundle bundle = getIntent().getExtras();
+        //Bundle bundle = getIntent().getExtras();
         user = (User) getIntent().getSerializableExtra("user");
     }
-
-
 
     public void CreateRequestAction(View view){
 
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
         EditText priceText = (EditText) findViewById(R.id.suggested_fare);
+        EditText estimate = (EditText) findViewById(R.id.suggested_fare);
 
-        pickUp = pickUpText.getText().toString();
-        dropOff = dropOffText.getText().toString();
-        price = Double.parseDouble(priceText.getText().toString());
-        requestCreator = user.getUserName();
 
-        Request newRequest = new Request(requestCreator, pickUp, dropOff, price);
-        RequestListController rlc = new RequestListController();
-        rlc.addRequest(newRequest);
+        String pickUp = pickUpText.getText().toString();
+        String dropOff = dropOffText.getText().toString();
+        Double price = Double.parseDouble(priceText.getText().toString());
+
+        String userName = user.getUserName();
+
+        Request newRequest = new Request(userName, pickUp, dropOff, price);
+        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+        addRequestsTask.execute(newRequest);
         Toast.makeText(this, "Thanks for the request!", Toast.LENGTH_SHORT).show();
 
-
-//        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-//        addRequestsTask.execute(newRequest);
         finish();
 
 
