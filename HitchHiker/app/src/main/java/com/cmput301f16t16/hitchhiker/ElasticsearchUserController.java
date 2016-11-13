@@ -36,7 +36,7 @@ public class ElasticsearchUserController{
 
             // Assumption: Only the first search_parameter[0] is used.
 
-            String search_string = "{\"from\": 0, \"size\": 10000}" + search_parameters[4];
+            String search_string = "{\"from\": 0, \"size\": 10000}";
 
 
             Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("user").build();

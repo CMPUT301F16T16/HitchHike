@@ -28,7 +28,7 @@ public class RequestListController {
 //                            saveRequestList();
 //                        }
 //                    });
-//                requestList = new RequestList();
+                requestList = new RequestList();
 //            }
 //            catch (IOException e) {
 //                e.printStackTrace();

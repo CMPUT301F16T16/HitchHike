@@ -29,7 +29,7 @@ public class ElasticsearchRequestController {
     // TODO we need a function that gets requests!
     public static class GetRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
         private String userName;
-
+        ArrayList <Request> requests = new ArrayList<Request>();
         @Override
         protected ArrayList<Request> doInBackground(String... search_parameters) {
             verifySettings();
@@ -43,7 +43,7 @@ public class ElasticsearchRequestController {
             String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"Rider\": \""+userName+"\"}}}";
 
             Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
-            ArrayList <Request> requests = new ArrayList<Request>();
+
             try{
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()){

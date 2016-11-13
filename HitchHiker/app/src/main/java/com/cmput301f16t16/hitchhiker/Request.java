@@ -12,7 +12,7 @@ import io.searchbox.annotations.JestId;
  * Edited by Angus on 11/3/2016
  */
 
-public class Request extends Fare implements Serializable {
+public class Request implements Serializable {
 
     private static long serialVersionUID = 44L; // need this to access a same request from diff screens
 
@@ -102,16 +102,20 @@ public class Request extends Fare implements Serializable {
         return id;
     }
 
-    public String getRiderName(){
-        return this.Rider;
-    }
+//    public String getRiderName(){
+//        return this.Rider;
+//    }
 
     public void setId(String id) {
         this.id = id;
     }
 
-//    public String getRider(User user) {
-//        Rider = user.getUserName();
+//    public User getRider() {
+////        Rider = user.getUserName();
 //        return this.Rider;
 //    }
+
+    public String getRiderName() {
+        return this.Rider;
+    }
 }
