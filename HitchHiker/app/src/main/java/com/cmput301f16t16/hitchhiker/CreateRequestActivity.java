@@ -20,7 +20,7 @@ public class CreateRequestActivity extends AppCompatActivity {
 
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
-        EditText priceText = (EditText) findViewById(R.id.suggested_fare);
+        EditText suggestedFareText = (EditText) findViewById(R.id.suggested_fare);
 
         //Fare estimate shouldnt be editable it should pop-up once the
         //dropOff and PickUp location are specified
@@ -33,7 +33,21 @@ public class CreateRequestActivity extends AppCompatActivity {
          */
         String pickUp = pickUpText.getText().toString();
         String dropOff = dropOffText.getText().toString();
-        Double price = Double.parseDouble(priceText.getText().toString());
+        String suggestedFare = suggestedFareText.getText().toString();
+
+        if (pickUp.equals("") || dropOff.equals("") || suggestedFare.equals("")){
+
+        }
+        else{
+            Double price = Double.parseDouble(suggestedFare);
+            String userName = user.getUserName();
+
+            Request newRequest = new Request(userName, pickUp, dropOff, price);
+            ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+            addRequestsTask.execute(newRequest);
+            finish();
+
+        }
 
         //Havnt figured out how the Fare works yet (Spei's job)
         //Integer esitmate = Integer.parseInt(estimate.getText().toString());
@@ -46,12 +60,6 @@ public class CreateRequestActivity extends AppCompatActivity {
 //        addRequestsTask.execute(newRequest);
 
 
-        String userName = user.getUserName();
-
-        Request newRequest = new Request(userName, pickUp, dropOff, price);
-        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-        addRequestsTask.execute(newRequest);
-        finish();
 
 
     }
