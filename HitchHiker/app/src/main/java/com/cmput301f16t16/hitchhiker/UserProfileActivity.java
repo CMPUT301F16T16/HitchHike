@@ -1,5 +1,6 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -50,6 +51,7 @@ public class UserProfileActivity extends AppCompatActivity{
         EditText editText = (EditText) findViewById(R.id.changeNumber);
         newNumber = Integer.parseInt(editText.getText().toString());
         editText.setText(""+newNumber);
+        user.setUserPhoneNumber(newNumber);
 
     }
 
@@ -58,24 +60,20 @@ public class UserProfileActivity extends AppCompatActivity{
         EditText editText = (EditText) findViewById(R.id.changeEmail);
         newEmail = editText.getText().toString();
         editText.setText(newEmail);
+        user.setUserEmail(newEmail);
+
     }
 
     public void savedChanges(View v){
-        EditText newNumberText = (EditText) findViewById(R.id.changeNumber);
-        EditText newEmailText = (EditText) findViewById(R.id.changeEmail);
 
-        Integer newNumber = Integer.parseInt(newNumberText.getText().toString());
-        String newEmail = newEmailText.getText().toString();
-
-        //newNumberText.setText(""+newNumber);
-        newEmailText.setText(newEmail);
-
-        //saves in user
-        user.setUserPhoneNumber(newNumber);
-        user.setUserEmail(newEmail);
-
-        ElasticsearchUserController.UpdateUserTask update = new ElasticsearchUserController.UpdateUserTask();
+        //updates ElasticSearch by creating the user again
+        ElasticsearchUserController.AddUsersTask update = new ElasticsearchUserController.AddUsersTask();
         update.execute(user);
+
+        // send updated user back
+        Intent intent = new Intent(UserProfileActivity.this, RiderActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
 
         finish();
     }
