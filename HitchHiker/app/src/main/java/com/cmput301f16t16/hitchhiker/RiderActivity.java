@@ -58,7 +58,7 @@ public class RiderActivity extends AppCompatActivity {
     }
 
 
-    public void CreateRequest(View view){
+    public void CreateRequestPage(View view){
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);

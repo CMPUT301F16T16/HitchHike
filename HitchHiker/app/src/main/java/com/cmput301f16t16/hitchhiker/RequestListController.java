@@ -20,7 +20,6 @@ public class RequestListController {
     private static RequestList requestList = null;
     static public RequestList getRequestList() {
         if (requestList == null) {
-//            requestList =
 //            try {
 //                requestList = new RequestList();
 //                requestList = RequestListManager.getRequestManager().loadRequestList();
@@ -55,6 +54,7 @@ public class RequestListController {
 
 
     public void addRequest(Request request) {
+         getRequestList().add(request);
         //add request to the requestList and
         //browsingRequest List
         //Elastic controller cmd
