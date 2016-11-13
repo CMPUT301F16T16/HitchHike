@@ -56,8 +56,11 @@ public class Request implements Serializable {
         this.requestStatus = CREATED;
     }
 
-    public int getRequestStatus() { return this.requestStatus; }
+    public int getRequestStatus() {
+        return this.requestStatus;
+    }
 
+    
     public int getRequestID() {
         return this.RequestId;
     }

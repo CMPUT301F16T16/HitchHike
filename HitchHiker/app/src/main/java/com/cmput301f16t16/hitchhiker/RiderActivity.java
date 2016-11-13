@@ -14,25 +14,24 @@ import java.util.ArrayList;
 
 public class RiderActivity extends AppCompatActivity {
 
-    private ListView oldRequestList;
+    private ListView theRequestList;
     private ArrayList<Request> requestsList = new ArrayList<Request>();
-    private ArrayAdapter<Request> adapter;
+    private ArrayAdapter<Request> requestAdapter;
     private User user;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
 
-        user = (User) getIntent().getSerializableExtra("user");
-
+        user =(User) getIntent().getSerializableExtra("user");
 
         // display requests into the listview
-        oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
+        theRequestList = (ListView) findViewById(R.id.open_requests_listview);
 
-        oldRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+
+        theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
                 Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
                 intent.putExtra("requestsList", requestsList);
@@ -44,23 +43,25 @@ public class RiderActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
+        // TODO Auto-generated method stubz
         super.onStart();
+
         requestsList.clear();
 
         ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
+//        getRequestsTask.execute("");
         getRequestsTask.setUserName(user.getUserName());
         getRequestsTask.execute("");
+
         try {
             requestsList = getRequestsTask.get();
         }
         catch (Exception e) {
-            Log.i("Error", "Failed to get the requests out of the async object.");
+            Log.i("Error", "Failed to get the tweets out of the async object.");
         }
-        adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
-        oldRequestList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
+        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
+        theRequestList.setAdapter(requestAdapter);
+        requestAdapter.notifyDataSetChanged();
     }
 
 
