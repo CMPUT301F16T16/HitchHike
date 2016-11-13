@@ -28,9 +28,6 @@ public class RiderActivity extends AppCompatActivity {
 
         // display requests into the listview
         theRequestList = (ListView) findViewById(R.id.open_requests_listview);
-
-
-
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
                 Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
@@ -47,9 +44,7 @@ public class RiderActivity extends AppCompatActivity {
         super.onStart();
 
         requestsList.clear();
-
         ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
-//        getRequestsTask.execute("");
         getRequestsTask.setUserName(user.getUserName());
         getRequestsTask.execute("");
 

@@ -49,7 +49,6 @@ public class CreateRequestActivity extends AppCompatActivity {
         else{
             Double price = Double.parseDouble(suggestedFare);
             String userName = user.getUserName();
-
             Request newRequest = new Request(userName, pickUp, dropOff, price);
             ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
             addRequestsTask.execute(newRequest);

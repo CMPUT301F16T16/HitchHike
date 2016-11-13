@@ -64,6 +64,44 @@ public class ElasticsearchRequestController {
     }
 
 
+
+    // TODO we need a function which populates browsing_request!
+    public static class GetBrowsingRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
+
+        @Override
+        protected ArrayList<Request> doInBackground(String... search_parameters) {
+            verifySettings();
+
+            ArrayList<Request> requests = new ArrayList<Request>();
+
+            // Assumption: Only the first search_parameter[0] is used.
+
+            //String search_string = "{\"from\": 0, \"size\": 10000}";
+
+            String search_string = "{\"from\": 0, \"size\": 10000}";
+
+            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
+
+            try{
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()){
+                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
+                    requests.addAll(foundRequests);
+                }
+                else{
+                    Log.i("Error", "The search executed but it didn't work.");
+                }
+            }
+            catch (Exception e){
+                Log.i("Error", "Executing the get requests method failed");
+            }
+            return requests;
+        }
+    }
+
+
+
+
     // TODO we need a function which adds a request!
     public static class AddRequestsTask extends AsyncTask<Request, Void, Void> {
 
