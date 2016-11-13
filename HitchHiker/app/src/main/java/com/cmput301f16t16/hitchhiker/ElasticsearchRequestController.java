@@ -25,6 +25,8 @@ public class ElasticsearchRequestController {
 
     // TODO we need a function that gets requests!
     public static class GetRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
+        private String userName;
+
         @Override
         protected ArrayList<Request> doInBackground(String... search_parameters) {
             verifySettings();
@@ -33,8 +35,9 @@ public class ElasticsearchRequestController {
 
             // Assumption: Only the first search_parameter[0] is used.
 
-            String search_string = "{\"from\": 0, \"size\": 10000}";
+            //String search_string = "{\"from\": 0, \"size\": 10000}";
 
+            String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"Rider\": \""+userName+"\"}}}";
 
             Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
 
@@ -53,6 +56,11 @@ public class ElasticsearchRequestController {
             }
             return requests;
         }
+
+        public void setUserName(String userName){
+            this.userName = userName;
+        }
+
     }
 
 
@@ -85,67 +93,6 @@ public class ElasticsearchRequestController {
         }
     }
 
-    // TODO we need a function that gets requests!
-    public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
-        @Override
-        protected ArrayList<User> doInBackground(String... search_parameters) {
-            verifySettings();
-
-            ArrayList<User> users = new ArrayList<User>();
-
-            // Assumption: Only the first search_parameter[0] is used.
-
-            String search_string = "{\"from\": 0, \"size\": 10000}";
-
-
-            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
-
-            try{
-                SearchResult user = client.execute(search);
-                if (user.isSucceeded()){
-                    List<User> foundUsers = user.getSourceAsObjectList(User.class);
-                    users.addAll(foundUsers);
-                }
-                else{
-                    Log.i("Error", "The search executed but it didn't work.");
-                }
-            }
-            catch (Exception e){
-                Log.i("Error", "Executing the get users method failed");
-            }
-            return users;
-        }
-    }
-
-
-    // TODO we need a function which adds a request!
-    public static class AddUsersTask extends AsyncTask<User, Void, Void> {
-
-        @Override
-        protected Void doInBackground(User... users) {
-            verifySettings();
-
-            for (User user: users) {
-                Index index = new Index.Builder(user).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").type("request").build();
-
-                try {
-                    DocumentResult result = client.execute(index);
-                    if (result.isSucceeded()) {
-                        user.setId(result.getId());
-                    }
-                    else {
-                        Log.i("Error", "Elastic search was not able to add the request.");
-                    }
-                }
-                catch (Exception e) {
-                    Log.i("Uhoh", "We failed to add a users to elastic search!");
-                    e.printStackTrace();
-                }
-            }
-
-            return null;
-        }
-    }
 
     // TODO we need a function which adds a request!
     public static class DeleteRequestTask extends AsyncTask<Request, Void, Void> {

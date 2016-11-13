@@ -3,6 +3,8 @@ package com.cmput301f16t16.hitchhiker;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 import io.searchbox.annotations.JestId;
 
 import static java.sql.Types.NULL;
@@ -15,7 +17,9 @@ import static java.sql.Types.NULL;
  * this website for it to auto generate a parceled version of our code.
  */
 
-public class User implements Parcelable {
+public class User implements Serializable {
+
+    private static long serialVersionUID = 44454L;
     @JestId
     protected String userName;
     protected Integer userType; // If userType = True, then user is both Rider & Driver. If False, the user is ONLY Rider.
@@ -33,7 +37,6 @@ public class User implements Parcelable {
         this.userPhoneNumber = userPhoneNumber;
         this.userType = userType;
     }
-
 
 
     public String getUserName() {
@@ -78,14 +81,17 @@ public class User implements Parcelable {
     }
 
     public void setUserPhoneNumber(int userPhoneNumber) {
+
         this.userPhoneNumber = userPhoneNumber;
     }
+
 
     public int getUserPhoneNumber() {
         return this.userPhoneNumber;
     }
 
     public void setUserEmail(String email) {
+
         this.userEmail = email;
     }
 
@@ -97,49 +103,13 @@ public class User implements Parcelable {
         this.id = id;
     }
 
-    protected User(Parcel in) {
-        userName = in.readString();
-        userType = in.readByte() == 0x00 ? null : in.readInt();
-        userFirstName = in.readString();
-        userLastName = in.readString();
-        userEmail = in.readString();
-        userPhoneNumber = in.readInt();
-        id = in.readString();
-    }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(userName);
-        if (userType == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeInt(userType);
-        }
-        dest.writeString(userFirstName);
-        dest.writeString(userLastName);
-        dest.writeString(userEmail);
-        dest.writeInt(userPhoneNumber);
-        dest.writeString(id);
-    }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
 
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
+
+
+
 }
 
 
