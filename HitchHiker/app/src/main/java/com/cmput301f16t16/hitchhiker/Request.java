@@ -36,8 +36,8 @@ public class Request extends Fare implements Serializable {
      * and a Location B (End of the ride is located)
      */
 
-    private double pickUp;
-    private double dropOff;
+    private String pickUp;
+    private String dropOff;
 
     /**
      * Fare is calculated and must be accepted before request is complete
@@ -63,47 +63,36 @@ public class Request extends Fare implements Serializable {
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
     private String id;
-
-    public Request(String requestCreator, double pickUp, double dropOff, double fare) {
+//
+    public Request(String requestCreator, String pickUp, String dropOff, Double price) {
         this.Rider = requestCreator;
-        this.acceptedDriver = acceptedDriver;
-        this.requestStatus = getRequestStatus();
-        this.price = 0;
-        this.pickUp = 0;
-        this.dropOff = 0;
+//        this.acceptedDriver = acceptedDriver;
+        this.requestStatus = CREATED;
+        this.price = price;
+        this.pickUp = pickUp;
+        this.dropOff = dropOff;
     }
 
+    @Override
+    public String toString () {
+        return this.pickUp + "\t ---> \t" + this.dropOff;
+    }
 
     public int getRequestStatus() {
         return this.requestStatus;
     }
 
-    //    public User getRider() {
-//        return this.Rider;
-//
-//
-//        public Request(String pickUp, String dropOff) {
-//            this.pickUp = pickUp;
-//            this.dropOff = dropOff;
-//            this.requestStatus = "Not Completed";
-//        }
-//
-//        @Override
-//        public String toString () {
-//            return this.pickUp + "\t ---> \t" + this.dropOff;
-//        }
-//    }
     public int getRequestID() {
         return this.RequestId;
     }
 
-//    public Location getStartLocation() {
-//        return this.pickUp;
-//    }
-//
-//    public Location getEndLocation() {
-//        return this.dropOff;
-//    }
+    public String getStartLocation() {
+        return this.pickUp;
+    }
+
+    public String getEndLocation() {
+        return this.dropOff;
+    }
 
     public String getTrip() {
         return this.pickUp + "\t ---> \t" + this.dropOff;
@@ -113,12 +102,16 @@ public class Request extends Fare implements Serializable {
         return id;
     }
 
+    public String getRiderName(){
+        return this.Rider;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
 
-    public String getRider(User user) {
-        Rider = user.getUserName();
-        return this.Rider;
-    }
+//    public String getRider(User user) {
+//        Rider = user.getUserName();
+//        return this.Rider;
+//    }
 }

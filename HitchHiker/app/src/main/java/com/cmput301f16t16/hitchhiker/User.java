@@ -101,15 +101,6 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    protected User(Parcel in) {
-        userName = in.readString();
-        userType = in.readByte() == 0x00 ? null : in.readInt();
-        userFirstName = in.readString();
-        userLastName = in.readString();
-        userEmail = in.readString();
-        userPhoneNumber = in.readInt();
-        id = in.readString();
-    }
 
 //    @Override
 //    public int describeContents() {

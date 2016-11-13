@@ -15,7 +15,7 @@ public class RequestList implements Serializable {
     //RequestListManager doesnt need to save the listeners
     protected transient ArrayList<RequestListener> requestListeners = null;
 
-    public void add(Request request) {
+    public void addRequest(Request request) {
         requestList.add(request);
         notifyListeners();
     }
@@ -56,12 +56,12 @@ public class RequestList implements Serializable {
         requestList.remove(request);
     }
 
-    public Request getRequest(int index) {
+    public Request pickRequest(int index) {
 
         return requestList.get(index);
     }
 
-    public Collection<Request> getRequest() {
+    public Collection<Request> getRequests() {
         return requestList;
     }
 

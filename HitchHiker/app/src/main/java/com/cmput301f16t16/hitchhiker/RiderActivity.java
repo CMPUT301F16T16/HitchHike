@@ -6,114 +6,84 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class RiderActivity extends AppCompatActivity {
+
+    //Added a request change observer to tell when the list needs to be updated
+
 
 //    private ListView oldRequestList;
 //    private ArrayList<Request> requestsList = new ArrayList<Request>();
 //    private ArrayAdapter<Request> adapter;
 
-//    public ListView getOldRequestList(){
+    //    public ListView getOldRequestList(){
 //        return oldRequestList;
 //    }
     private User user;
-
+    private ListView requestListView;
+    private ArrayList<Request> requestList = new ArrayList<Request>();
+    private ArrayAdapter<Request> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
+        requestList.clear();
 
         // Can also use serializable\
-        user = (User) getIntent().getSerializableExtra("user");
-//        Bundle bundle = getIntent().getExtras();
-//        user = bundle.getParcelable("user");
-
-//        // display requests into the listview
-//        oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
-//
-//        oldRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
-//                Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
-//                intent.putExtra("requestsList", requestsList);
-//                intent.putExtra("index", position);
-//                startActivity(intent);
-//            }
-//        });
-//    }
-//
-//        Bundle bundle = getIntent().getExtras();
-//        user = bundle.getParcelable("user");
+        Intent intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
 
 
         //initialize request manager to save/load the requestList
-        RequestListManager.initRequestListManager(this.getApplicationContext());
-        final ListView listView = (ListView) findViewById(R.id.open_requests_listview);
-        Collection<Request> requests = RequestListController.getRequestList().getRequest();
-        ArrayList<Request> list = new ArrayList<Request>(requests);
+//        RequestListManager.initRequestListManager(this.getApplicationContext());
+        ListView listView = (ListView) findViewById(R.id.open_requests_listview);
+//        Collection<Request> requests = RequestListController.getRequestList();
+
 
         ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
+        getRequestsTask.setUserName(user.getUserName());
         getRequestsTask.execute("");
+
+
         try {
-            list = getRequestsTask.get();
-        }
-        catch (Exception e) {
+            requestList = getRequestsTask.get();
+        } catch (Exception e) {
             Log.i("Error", "Failed to get the requests out of the async object.");
         }
 
-        final ArrayAdapter<Request> requestAdapter = new ArrayAdapter<Request>(this, android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(requestAdapter);
-
-
-        //Added a request change observer to tell when the list needs to be updated
-        final ArrayList<Request> finalList = list;
-        RequestListController.getRequestList().addRequestListener(new RequestListener() {
-            @Override
-            public void update() {
-                finalList.clear();
-                Collection<Request> requests = RequestListController.getRequestList().getRequest();
-                finalList.addAll(requests);
-                requestAdapter.notifyDataSetChanged();
-            }
-        });
-        //################################################################################################
-
-        // display requests into the listview
-//        oldRequestList = (ListView) findViewById(R.id.open_requests_listview);
-
-//        oldRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
-//                Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
-//                intent.putExtra("requestsList", requestsList);
-//                intent.putExtra("index", position);
-//                startActivity(intent);
-//            }
-//        });
+        adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
+        requestListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
-//    @Override
-//    protected void onStart() {
-//        // TODO Auto-generated method stub
-//        super.onStart();
-//        ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
+
+    public void Refresh(View view){
+        requestList.clear();
+
+        ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
 //        getRequestsTask.execute("");
-//        try {
-//            requestsList = getRequestsTask.get();
-//        }
-//        catch (Exception e) {
-//            Log.i("Error", "Failed to get the requests out of the async object.");
-//        }
-//        adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
-//        oldRequestList.setAdapter(adapter);
-//
-//    }
+        getRequestsTask.setUserName(user.getUserName());
+        getRequestsTask.execute("");
 
+        try {
+            requestList = getRequestsTask.get();
+        }
+        catch (Exception e) {
+            Log.i("Error", "Failed to get the tweets out of the async object.");
+        }
+        adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
+        requestListView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
 
-    public void CreateRequest(View view){
+    public void CreateRequest(View view) {
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);

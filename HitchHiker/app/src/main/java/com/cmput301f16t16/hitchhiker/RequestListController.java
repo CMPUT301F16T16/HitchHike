@@ -17,60 +17,76 @@ public class RequestListController {
     /*
     *Lazy Singleton talk too the activity and elastic search
      */
-    private static RequestList requestList = null;
+    static private RequestList requestList = null;
     static public RequestList getRequestList() {
         if (requestList == null) {
-            try {
-                requestList = new RequestList();
-                requestList = RequestListManager.getRequestManager().loadRequestList();
-                requestList.addRequestListener(new RequestListener() {
-                    @Override
-                    public void update() {
-                        saveRequestList();
-                    }
-                });
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("Couldnt deserialize HabitList from RequestListManager");
-            }
-            catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                throw new RuntimeException("Couldnt deserialize RequetList from HabitListManager");
-            }
+//            try {
+//                    requestList = RequestListManager.getRequestManager().loadRequestList();
+//                    requestList.addRequestListener(new RequestListener() {
+//                        @Override
+//                        public void update() {
+//                            saveRequestList();
+//                        }
+//                    });
+//                requestList = new RequestList();
+//            }
+//            catch (IOException e) {
+//                e.printStackTrace();
+//                throw new RuntimeException("Couldnt deserialize RequestList from RequestListManager");
+//            }
+//            catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//                throw new RuntimeException("Couldnt deserialize RequetList from RequestListManager");
+//            }
         }
         return requestList;
     }
-
-    private static void saveRequestList() {
-        try {
-            RequestListManager.getRequestManager().saveRequestList(getRequestList());
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Couldnt deserialize HabitList from HabitListManager");
-        }
-    }
+//
+//    private static void saveRequestList() {
+//        try {
+//            RequestListManager.getRequestManager().saveRequestList(getRequestList());
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException("Couldnt deserialize RequestList from RequestListManager");
+//        }
+//    }
 
 
     public void addRequest(Request request) {
-        getRequestList().add(request);
+
+//        ElasticsearchRequestController.AddRequestsTask addRequestTask = new ElasticsearchRequestController.AddRequestsTask();
+//        addRequestTask.execute(request);
+//        return null;
+
+//        getRequestList().addRequest(request);
     }
 
-//    public void removeRequest(Request request) {
-//        //remove request from browsingList and
-//        //requestList because of possibility of
-//        //canceling a request or A driver has accepted a offer
-//    }
+    public void removeRequest(Request request) {
+        //remove request from browsingList and
+        //requestList because of possibility of
+        //canceling a request or A driver has accepted a offer
+    }
 
-    public ArrayList<Request> getRequestLoad(User rider) {
-        ArrayList<Request> requestLoad = new ArrayList<>();
-//        for(Request request : requestList) {
-//            if(request.getRider() == rider) {
+//    public RequestList getRequests(User user) {
+//        RequestList rl = new RequestList();
+//        if (requestList != null){
+//            for (Request request : requestList) {
+//                if(request.getRider(user)== user.getUserName()){
+//                    rl.addRequest(request);
+//                }
+//            }
+//        }
+//        return rl;
+
+//    public ArrayList<Request> getRequestLoad(User rider) {
+//        ArrayList<Request> requestLoad = new ArrayList<>();
+//        for(Request request : requestLoad) {
+//            if(request.getRider(rider) == rider.getUserName()) {
 //                requestLoad.add(request);
 //            }
 //        }
-        return requestLoad;
-    }
+//        return requestLoad;
+//    }
 
 }

@@ -14,15 +14,15 @@ public class CreateRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
 
-        //Request manager has to be initialized to know about the created request
-        RequestListManager.initRequestListManager(this.getApplicationContext());
+//        //Request manager has to be initialized to know about the created request
+//        RequestListManager.initRequestListManager(this.getApplicationContext());
 
 //        Bundle bundle = getIntent().getExtras();
 //        User user = bundle.getParcelable("user");
         user = (User) getIntent().getSerializableExtra("user");
 
         //RequestList Manager has to be initialized to know about the new created request
-        RequestListManager.initRequestListManager(this.getApplicationContext());
+//        RequestListManager.initRequestListManager(this.getApplicationContext());
 
     }
 
@@ -44,21 +44,14 @@ public class CreateRequestActivity extends AppCompatActivity {
          */
         String pickUp = pickUpText.getText().toString();
         String dropOff = dropOffText.getText().toString();
-
         //Havnt figured out how the Fare works yet (Spei's job)
-        Integer esitmate = Integer.parseInt(estimate.getText().toString());
-        /**
-         * struggling on how to pass a User Rider into the request object
-         * Going to make mock-object Test see requestTest
-         */
-        String username = user.getUserName();
-        Location Alocation = new Location();
-        Location Blocation = new Location();
-        Fare fare = new Fare();
-        Request newRequest = new Request(username, 0, 0, 0);
+        Double esitmate = Double.parseDouble(estimate.getText().toString());
+        String username = user.getUserName().toString();
+//        Fare fare = new Fare();
+        Request newRequest = new Request(username, pickUp, dropOff, esitmate);
         ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
         addRequestsTask.execute(newRequest);
-        rlc.addRequest(newRequest);
+//        rlc.addRequest(newRequest);
 
         finish();
 
