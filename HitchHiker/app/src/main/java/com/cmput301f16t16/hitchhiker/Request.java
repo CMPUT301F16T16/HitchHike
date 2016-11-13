@@ -89,21 +89,11 @@ public class Request implements Serializable {
         return this.requestStatus;
     }
 
-    //    public User getRider() {
-//        return this.Rider;
-//
-//
-//        public Request(String pickUp, String dropOff) {
-//            this.pickUp = pickUp;
-//            this.dropOff = dropOff;
-//            this.requestStatus = "Not Completed";
-//        }
-//
-//        @Override
-//        public String toString () {
-//            return this.pickUp + "\t ---> \t" + this.dropOff;
-//        }
-//    }
+    @Override
+    public String toString () {
+        return this.pickUp + "\t ---> \t" + this.dropOff;
+    }
+
     public int getRequestID() {
         return this.RequestId;
     }
