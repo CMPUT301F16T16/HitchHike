@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class RiderActivity extends AppCompatActivity {
@@ -16,6 +18,8 @@ public class RiderActivity extends AppCompatActivity {
     private ArrayList<Request> requestsList = new ArrayList<Request>();
     private ArrayAdapter<Request> adapter;
     private User user;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class RiderActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         oldRequestList.setAdapter(adapter);
 
+
     }
 
 
@@ -68,5 +73,9 @@ public class RiderActivity extends AppCompatActivity {
         Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
+    }
+
+    public void onBackPressed(){
+        // Do nothing
     }
 }

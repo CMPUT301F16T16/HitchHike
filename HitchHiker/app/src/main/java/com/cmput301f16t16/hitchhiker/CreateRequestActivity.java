@@ -6,17 +6,22 @@ import android.view.View;
 import android.widget.EditText;
 
 public class CreateRequestActivity extends AppCompatActivity {
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
+
+        user = (User) getIntent().getSerializableExtra("user");
     }
 
     public void CreateRequest(View view){
 
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
+        EditText priceText = (EditText) findViewById(R.id.suggested_fare);
+
         //Fare estimate shouldnt be editable it should pop-up once the
         //dropOff and PickUp location are specified
         EditText estimate = (EditText) findViewById(R.id.suggested_fare);
@@ -28,9 +33,10 @@ public class CreateRequestActivity extends AppCompatActivity {
          */
         String pickUp = pickUpText.getText().toString();
         String dropOff = dropOffText.getText().toString();
+        Double price = Double.parseDouble(priceText.getText().toString());
 
         //Havnt figured out how the Fare works yet (Spei's job)
-        Integer esitmate = Integer.parseInt(estimate.getText().toString());
+        //Integer esitmate = Integer.parseInt(estimate.getText().toString());
         /**
          * struggling on how to pass a User Rider into the request object
          * Going to make mock-object Test see requestTest
@@ -39,6 +45,12 @@ public class CreateRequestActivity extends AppCompatActivity {
 //        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
 //        addRequestsTask.execute(newRequest);
 
+
+        String userName = user.getUserName();
+
+        Request newRequest = new Request(userName, pickUp, dropOff, price);
+        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+        addRequestsTask.execute(newRequest);
         finish();
 
 

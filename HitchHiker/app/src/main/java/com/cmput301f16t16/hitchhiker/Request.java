@@ -12,7 +12,7 @@ import io.searchbox.annotations.JestId;
  * Edited by Angus on 11/3/2016
  */
 
-public class Request extends Fare implements Serializable {
+public class Request implements Serializable {
 
     private static long serialVersionUID = 44L; // need this to access a same request from diff screens
 
@@ -21,9 +21,9 @@ public class Request extends Fare implements Serializable {
      * instead of just grabbing the ID's driver and rider we can bring in the whole objects
      * and use what info we need
      */
-    private User Rider;
-    private User acceptedDriver = null;
-
+//    private User Rider;
+//    private User acceptedDriver = null;
+    private String Rider;
 
     /**
      * Need a list of prospective Drivers to choose Final Driver Choice
@@ -36,14 +36,16 @@ public class Request extends Fare implements Serializable {
      * and a Location B (End of the ride is located)
      */
 
-    private Location pickUp;
-    private Location dropOff;
+//    private Location pickUp;
+//    private Location dropOff;
+    private String pickUp;
+    private String dropOff;
 
     /**
      * Fare is calculated and must be accepted before request is complete
      */
 
-    private double price;
+    private Double price;
     /**
      * need some variables types (int maybe?) to know different states of request:
      * 1) a user has created a request but no drivers accepted yet CREATED = 1
@@ -56,21 +58,29 @@ public class Request extends Fare implements Serializable {
     static final int PENDING = 2;
     static final int ACCEPTED = 3;
     static final int FINISHED = 4;
-    static final int CANCLED = 5;
-    static int requestStatus = CREATED; //Always starts at one when a request is created
+    static final int CANCELED = 5;
+    //static int requestStatus = CREATED; //Always starts at one when a request is created
+    private int requestStatus;
 
     @JestId
-
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
     private String id;
 
-    public Request(User requestCreator, Location pickUp, Location dropOff, Fare fare) {
+//    public Request(String requestCreator, String pickUp, String dropOff, Fare fare) {
+//        this.Rider = requestCreator;
+////        this.acceptedDriver = acceptedDriver;
+////        this.requestStatus = getRequestStatus();
+//        this.price = fare.getFare();
+//        this.pickUp = pickUp;
+//        this.dropOff = dropOff;
+//        this.requestStatus = CREATED;
+//    }
+    public Request(String requestCreator, String pickUp, String dropOff, Double price) {
         this.Rider = requestCreator;
-        this.acceptedDriver = acceptedDriver;
-        this.requestStatus = getRequestStatus();
-        this.price = fare.getFare();
         this.pickUp = pickUp;
         this.dropOff = dropOff;
+        this.price = price;
+        this.requestStatus = CREATED;
     }
 
 
@@ -97,13 +107,27 @@ public class Request extends Fare implements Serializable {
         return this.RequestId;
     }
 
-    public Location getStartLocation() {
+//    public Location getStartLocation() {
+//        return this.pickUp;
+//    }
+//
+//    public Location getEndLocation() {
+//        return this.dropOff;
+//    }
+    public String getStartLocation(){
         return this.pickUp;
     }
-
-    public Location getEndLocation() {
+    public String getEndLocation(){
         return this.dropOff;
     }
+
+
+
+    public Double getPrice(){
+        return this.price;
+    }
+
+
 
     public String getTrip() {
         return this.pickUp + "\t ---> \t" + this.dropOff;
@@ -117,7 +141,10 @@ public class Request extends Fare implements Serializable {
         this.id = id;
     }
 
-    public User getRider() {
+//    public User getRider() {
+//        return this.Rider;
+//    }
+    public String getRiderName(){
         return this.Rider;
     }
 }
