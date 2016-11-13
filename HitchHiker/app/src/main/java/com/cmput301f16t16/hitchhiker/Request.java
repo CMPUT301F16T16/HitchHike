@@ -15,8 +15,18 @@ import io.searchbox.annotations.JestId;
 public class Request implements Serializable {
 
     private static long serialVersionUID = 44L; // need this to access a same request from diff screens
+
+
     @JestId
-    // going to just grab the usename
+    private String id;
+
+    /**
+     * instead of just grabbing the ID's driver and rider we can bring in the whole objects
+     * and use what info we need
+     */
+//    private User Rider;
+//    private User acceptedDriver = null;
+
     private String Rider;
     private String acceptedDriver = null;
     //Need a list of prospective Drivers to choose Final Driver Choice
@@ -32,8 +42,9 @@ public class Request implements Serializable {
     static final int FINISHED = 4;
     static final int CANCLED = 5;
     static int requestStatus; //Always starts at one when a request is created
+
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
-    private String id;
+
 
 
     public Request(String requestCreator, String pickUp, String dropOff, Double price) {
