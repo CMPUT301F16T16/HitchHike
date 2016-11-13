@@ -1,5 +1,6 @@
 package com.example.cmput301.osmlab8;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -52,7 +53,6 @@ public class MainActivity extends Activity implements LocationListener {
     // answered by: yubaraj poudel
 
 
-
     final private double MAP_DEFAULT_LATITUDE = 53.52676;
     final private double MAP_DEFAULT_LONGITUDE = -113.52715;
 
@@ -62,11 +62,11 @@ public class MainActivity extends Activity implements LocationListener {
     private GeoPoint endPoint;
     private long start;
     private long stop;
-    private int x,y,lat,longi;
+    private int x, y, lat, longi;
     private GeoPoint touchedPoint;
 
     private List<Overlay> overlayList;
-    private  LocationManager lm;
+    private LocationManager lm;
     private String towers;
 
 
@@ -80,17 +80,9 @@ public class MainActivity extends Activity implements LocationListener {
         map.setMultiTouchControls(true);
 
 
-
-
-
-
         IMapController mapController = map.getController();
         mapController.setZoom(9);
         mapController.setCenter(startPoint);
-
-
-
-
 
 
         Touchy t = new Touchy();
@@ -119,22 +111,16 @@ public class MainActivity extends Activity implements LocationListener {
         Location location = lm.getLastKnownLocation(towers);
 
         if (location != null) {
-            lat = (int) (location.getLatitude()*1E6);
-            longi = (int) (location.getLongitude()*1E6);
-            currentPoint = new GeoPoint(lat,longi);
-            Marker startMarker = new Marker(map);
-            startMarker.setPosition(currentPoint);
-            startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-            map.getOverlays().add(startMarker);
+            lat = (int) (location.getLatitude() * 1E6);
+            longi = (int) (location.getLongitude() * 1E6);
+            currentPoint = new GeoPoint(lat, longi);
+            setMarker(currentPoint);
             mapController.animateTo(currentPoint);
 
 
-        }else{
+        } else {
             Toast.makeText(MainActivity.this, "Couldn't get provider", Toast.LENGTH_SHORT).show();
         }
-
-
-
 
 
         // http://stackoverflow.com/questions/38539637/osmbonuspack-roadmanager-networkonmainthreadexception
@@ -148,15 +134,47 @@ public class MainActivity extends Activity implements LocationListener {
         getRoadAsync(startPoint, endPoint);
     }
 
+
+    public void setMarker(GeoPoint sp) {
+        Marker startMarker = new Marker(map);
+        startMarker.setPosition(sp);
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        map.getOverlays().clear();
+        map.getOverlays().add(startMarker);
+        map.invalidate();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(MainActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
+            return;
+        }
         lm.requestLocationUpdates(towers, 500, 1, this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(MainActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
+            return;
+        }
         lm.removeUpdates(this);
     }
 
@@ -165,6 +183,7 @@ public class MainActivity extends Activity implements LocationListener {
         lat = (int) (l.getLatitude()*1E6);
         longi = (int) (l.getLongitude()*1E6);
         currentPoint = new GeoPoint(lat,longi);
+        setMarker(currentPoint);
     }
 
     @Override
@@ -185,8 +204,13 @@ public class MainActivity extends Activity implements LocationListener {
 
 
 
-    private class Touchy extends Overlay {
+    public class Touchy extends Overlay {
 
+
+        @Override
+        protected void draw(Canvas canvas, MapView mapView, boolean b) {
+
+        }
 
         public boolean onTouchEvent(MotionEvent e, MapView m) {
             if (e.getAction() == MotionEvent.ACTION_DOWN) {
@@ -208,18 +232,20 @@ public class MainActivity extends Activity implements LocationListener {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
+                        startPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
+                        Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                     }
-                    setStartPoint(touchedpoint);
-                    //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
+
 
                 });
                 alert.setButton(DialogInterface.BUTTON_NEGATIVE, "Set Destination", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
+                        endPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
+                        Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                     }
-                    setEndPoint(touchedpoint);
-                    //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
+
                 });
 
 
@@ -303,8 +329,17 @@ public class MainActivity extends Activity implements LocationListener {
         return super.onOptionsItemSelected(item);
     }
 
-    
+    public GeoPoint getStartPoint() {
+        return startPoint;
+    }
 
+    public GeoPoint getEndPoint() {
+        return endPoint;
+    }
+
+    public GeoPoint getCurrentPoint() {
+        return currentPoint;
+    }
 }
 
 
