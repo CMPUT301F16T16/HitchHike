@@ -37,7 +37,8 @@ public class ElasticsearchRequestController {
 
            // String search_string = "{\"from\": 0, \"size\": 10000}";
             String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"userName\": \""+userName+"\"}}}";
-            
+
+
             Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
 
             try{
