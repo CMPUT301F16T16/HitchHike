@@ -26,8 +26,6 @@ public class RiderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider);
 
-        // Can also use serializable
-        Bundle bundle = getIntent().getExtras();
         user = (User) getIntent().getSerializableExtra("user");
 
 
@@ -48,7 +46,10 @@ public class RiderActivity extends AppCompatActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
+        requestsList.clear();
+
         ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
+        getRequestsTask.setUserName(user.getUserName());
         getRequestsTask.execute("");
         try {
             requestsList = getRequestsTask.get();
@@ -58,7 +59,7 @@ public class RiderActivity extends AppCompatActivity {
         }
         adapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         oldRequestList.setAdapter(adapter);
-
+        adapter.notifyDataSetChanged();
 
     }
 

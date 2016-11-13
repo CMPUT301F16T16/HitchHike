@@ -16,6 +16,8 @@ public class Request implements Serializable {
 
     private static long serialVersionUID = 44L; // need this to access a same request from diff screens
 
+    @JestId
+    private String id;
 
     /**
      * instead of just grabbing the ID's driver and rider we can bring in the whole objects
@@ -62,9 +64,8 @@ public class Request implements Serializable {
     //static int requestStatus = CREATED; //Always starts at one when a request is created
     private int requestStatus;
 
-    @JestId
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
-    private String id;
+
 
 //    public Request(String requestCreator, String pickUp, String dropOff, Fare fare) {
 //        this.Rider = requestCreator;
