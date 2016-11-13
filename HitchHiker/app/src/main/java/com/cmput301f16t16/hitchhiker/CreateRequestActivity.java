@@ -28,23 +28,44 @@ public class CreateRequestActivity extends AppCompatActivity {
 
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
-        EditText priceText = (EditText) findViewById(R.id.suggested_fare);
+        EditText suggestedFareText = (EditText) findViewById(R.id.suggested_fare);
+
+        //Fare estimate shouldnt be editable it should pop-up once the
+        //dropOff and PickUp location are specified
+
         EditText estimate = (EditText) findViewById(R.id.suggested_fare);
 
 
         String pickUp = pickUpText.getText().toString();
         String dropOff = dropOffText.getText().toString();
-        Double price = Double.parseDouble(priceText.getText().toString());
+        String suggestedFare = suggestedFareText.getText().toString();
 
-        String userName = user.getUserName();
+        if (pickUp.equals("") || dropOff.equals("") || suggestedFare.equals("")){
 
-        Request newRequest = new Request(userName, pickUp, dropOff, price);
-        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-        addRequestsTask.execute(newRequest);
-        Toast.makeText(this, "Thanks for the request!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Double price = Double.parseDouble(suggestedFare);
+            String userName = user.getUserName();
 
-        finish();
+            Request newRequest = new Request(userName, pickUp, dropOff, price);
+            ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+            addRequestsTask.execute(newRequest);
+            finish();
 
+        }
+
+
+        //Havnt figured out how the Fare works yet (Spei's job)
+        //Integer esitmate = Integer.parseInt(estimate.getText().toString());
+        /**
+         * struggling on how to pass a User Rider into the request object
+         * Going to make mock-object Test see requestTest
+         */
+//        Request newRequest = new Request(User requestCreator, Location pickUp, Location dropOff, estimate);
+//        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+//        addRequestsTask.execute(newRequest);
+
+        
 
     }
 }

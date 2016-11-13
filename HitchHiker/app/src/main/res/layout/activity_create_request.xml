@@ -94,6 +94,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/create_title"
         android:layout_alignEnd="@+id/create_title"
-        android:onClick="CreateRequestAction"/>
+        android:onClick="CreateRequest"/>
 
 </RelativeLayout>

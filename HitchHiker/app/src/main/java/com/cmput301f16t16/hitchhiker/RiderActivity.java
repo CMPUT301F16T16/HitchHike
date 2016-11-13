@@ -65,7 +65,26 @@ public class RiderActivity extends AppCompatActivity {
     }
 
 
-    public void CreateRequestPage(View view){
+    //Only here for testing purposes.
+    public void Refresh(View view){
+        requestsList.clear();
+
+        ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
+//        getRequestsTask.execute("");
+        getRequestsTask.setUserName(user.getUserName());
+        getRequestsTask.execute("");
+
+        try {
+            requestsList = getRequestsTask.get();
+        }
+        catch (Exception e) {
+            Log.i("Error", "Failed to get the tweets out of the async object.");
+        }
+        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
+        theRequestList.setAdapter(requestAdapter);
+        requestAdapter.notifyDataSetChanged();
+    }
+    public void CreateRequest(View view){
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
