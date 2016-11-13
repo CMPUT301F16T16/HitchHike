@@ -49,6 +49,7 @@ public class UserProfileActivity extends AppCompatActivity{
         //updates
         EditText editText = (EditText) findViewById(R.id.changeNumber);
         newNumber = Integer.parseInt(editText.getText().toString());
+        editText.setText(""+newNumber);
 
     }
 
@@ -56,21 +57,25 @@ public class UserProfileActivity extends AppCompatActivity{
         //updates
         EditText editText = (EditText) findViewById(R.id.changeEmail);
         newEmail = editText.getText().toString();
+        editText.setText(newEmail);
     }
 
     public void savedChanges(View v){
-        TextView newNumberText = (TextView) findViewById(R.id.changeNumber);
-        TextView newEmailText = (TextView) findViewById(R.id.changeEmail);
+        EditText newNumberText = (EditText) findViewById(R.id.changeNumber);
+        EditText newEmailText = (EditText) findViewById(R.id.changeEmail);
 
         Integer newNumber = Integer.parseInt(newNumberText.getText().toString());
         String newEmail = newEmailText.getText().toString();
 
-        newNumberText.setText(""+newNumber);
+        //newNumberText.setText(""+newNumber);
         newEmailText.setText(newEmail);
 
         //saves in user
         user.setUserPhoneNumber(newNumber);
         user.setUserEmail(newEmail);
+
+        ElasticsearchUserController.UpdateUserTask update = new ElasticsearchUserController.UpdateUserTask();
+        update.execute(user);
 
         finish();
     }

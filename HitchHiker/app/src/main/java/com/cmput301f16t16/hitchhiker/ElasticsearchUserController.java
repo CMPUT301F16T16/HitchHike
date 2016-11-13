@@ -84,32 +84,51 @@ public class ElasticsearchUserController{
         }
     }
 
-//    // TODO we need a function which updates the email and phone number
-//    public static class UpdateUserTask extends AsyncTask<String, Void, User> {
-//        @Override
-//        protected User doInBackground(String... search_parameters) {
-//            verifySettings();
-//            String search_string = "{\"from\": 0, \"size\": 1, \"query\": {\"match\": {\"userName\": \"" + search_parameters[3] + "\"}}}";
-//
-//            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("user").build();
-//
-//            User user = null;
-//
-//            try {
-//                SearchResult result = client.execute(search);
-//                if (result.isSucceeded()) {
-//                    user = result.getSourceAsObject(User.class);
-//                } else {
-//                    Log.i("Error", "We could not find the desired user in Elasticsearch");
-//                    return null;
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                Log.i("Error", "We could not contact Elasticsearch");
-//            }
-//            return user;
-//        }
-//    }
+//    String source = "{\"user\": \"kramer\", \"fav_food\": \"pizza\"}";
+//    JestResult result = client.execute(
+//            new Index.Builder(source)
+//                    .index("people")
+//                    .type("food")
+//                    .id(9)
+//                    .build()
+//    );
+
+    // TODO we need a function which updates the email and phone number
+
+    public static class UpdateUserTask extends AsyncTask<User, Void, Void> {
+        String email;
+        Integer number;
+
+        @Override
+        protected Void doInBackground(User... users) {
+            verifySettings();
+
+            // finds the user
+            String query = "{\"from\": 0, \"size\": 1, \"query\": {\"match\": {\"userName\": \"" + users[0] + "\"}}}";
+
+            for (User user: users) {
+                Index index = new Index.Builder(query).index("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").type("user").build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        user.setId(result.getId());
+                    }
+                    else {
+                        Log.i("Error", "Elastic search was not able to add the request.");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Uhoh", "We failed to add a request to elastic search!");
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        public void setEmail(String email){ this.email = email; }
+        public void setNumber(Integer number) { this.number = number; }
+}
 
 
     // TODO we need a function which adds a request!
