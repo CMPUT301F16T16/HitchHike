@@ -14,7 +14,6 @@ public class Fare extends Location{
         this.A = A;
         this.B = B;
         this.fare = getFare();
-
     }
 
     public Fare() {
