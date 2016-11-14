@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
     private List<Overlay> overlayList;
     private  LocationManager lm;
     private String towers;
-
+    IMapController mapController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +85,13 @@ public class MainActivity extends Activity {
         map.setMultiTouchControls(true);
 
 
-        startPoint = new GeoPoint(48.13, -1.63);
-        endPoint = new GeoPoint(48.4, -1.9);
+        startPoint = new GeoPoint(53.52676, -113.52715);
 
 
 
 
-        IMapController mapController = map.getController();
+
+        mapController = map.getController();
         mapController.setZoom(9);
         mapController.setCenter(startPoint);
 
@@ -124,14 +124,34 @@ public class MainActivity extends Activity {
 //        getRoadAsync(startPoint, endPoint);
     }
 
-//    public void setMarker(GeoPoint sp) {
-//        Marker startMarker = new Marker(map);
-//        startMarker.setPosition(sp);
-//        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-//        map.getOverlays().clear();
-//        map.getOverlays().add(startMarker);
-//        map.invalidate();
-//    }
+    private void setStartMarker() {
+        // set the map
+        Marker startMarker = new Marker(map);
+
+
+        startMarker.setPosition(startPoint);
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        startMarker.setTitle("START");
+        startMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
+
+
+        map.getOverlays().add(startMarker);
+
+        map.invalidate();
+    }
+
+    private void setEndMarker () {
+        Marker endMarker = new Marker(map);
+
+        endMarker.setPosition(endPoint);
+        endMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        endMarker.setTitle("END");
+        endMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
+
+        map.getOverlays().add(endMarker);
+
+        map.invalidate();
+    }
 
 
 //  ROUTE
@@ -213,6 +233,8 @@ public class MainActivity extends Activity {
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
                         startPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
+
+                        setStartMarker();
                         Toast.makeText(MainActivity.this, "Set Start Point", Toast.LENGTH_LONG).show();
                     }
                     //setStartPoint(touchedpoint);
@@ -224,9 +246,11 @@ public class MainActivity extends Activity {
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
                         endPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
-//                        map.getOverlays().clear();
+
                         getRoadAsync(startPoint, endPoint);
-                        map.invalidate();
+//                        setStartMarker();
+                        setEndMarker();
+                        mapController.animateTo(startPoint);
                         Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                     }
                     //setEndPoint(touchedpoint);
