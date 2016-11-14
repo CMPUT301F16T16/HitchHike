@@ -43,7 +43,7 @@ import org.osmdroid.views.overlay.infowindow.BasicInfoWindow;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity implements LocationListener {
+public class MainActivity extends Activity {
 
     // Cmput 301 lab 8 based on open resources.
     // based on https://github.com/MKergall/osmbonuspack/wiki/Tutorial_0
@@ -68,7 +68,9 @@ public class MainActivity extends Activity implements LocationListener {
     private List<Overlay> overlayList;
     private LocationManager lm;
     private String towers;
-
+    Activity ourActivity = this;
+    MapView map;
+    Road[] mRoads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,20 +82,26 @@ public class MainActivity extends Activity implements LocationListener {
         map.setMultiTouchControls(true);
 
 
+        GeoPoint startPoint = new GeoPoint(48.13, -1.63);
+        GeoPoint endPoint = new GeoPoint(48.4, -1.9);
+
         IMapController mapController = map.getController();
         mapController.setZoom(9);
         mapController.setCenter(startPoint);
 
 
-        Touchy t = new Touchy();
-        overlayList = map.getOverlays();
-        overlayList.add(t);
-
-        //
+//        Touchy t = new Touchy();
+//        overlayList = map.getOverlays();
+//        overlayList.add(t);
+//
+//        roadManager = new OSRMRoadManager(my.Activity);
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria crit = new Criteria();
-        crit.setPowerRequirement(Criteria.NO_REQUIREMENT);
-        crit.setAccuracy(Criteria.NO_REQUIREMENT);
+        towers = lm.getBestProvider(crit, false);
+        Location location = lm.getLastKnownLocation(towers);
+
+//        crit.setPowerRequirement(Criteria.NO_REQUIREMENT);
+//        crit.setAccuracy(Criteria.NO_REQUIREMENT);
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -106,9 +114,9 @@ public class MainActivity extends Activity implements LocationListener {
             Toast.makeText(MainActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
             return;
         }
-
-        towers = lm.getBestProvider(crit, true);
-        Location location = lm.getLastKnownLocation(towers);
+//
+//        towers = lm.getBestProvider(crit, true);
+//        Location location = lm.getLastKnownLocation(towers);
 
         if (location != null) {
             lat = (int) (location.getLatitude() * 1E6);
@@ -134,7 +142,6 @@ public class MainActivity extends Activity implements LocationListener {
         getRoadAsync(startPoint, endPoint);
     }
 
-
     public void setMarker(GeoPoint sp) {
         Marker startMarker = new Marker(map);
         startMarker.setPosition(sp);
@@ -158,7 +165,7 @@ public class MainActivity extends Activity implements LocationListener {
             Toast.makeText(MainActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
             return;
         }
-        lm.requestLocationUpdates(towers, 500, 1, this);
+//        lm.requestLocationUpdates(towers, 500, 1, this);
     }
 
     @Override
@@ -175,33 +182,32 @@ public class MainActivity extends Activity implements LocationListener {
             Toast.makeText(MainActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
             return;
         }
-        lm.removeUpdates(this);
+//        lm.removeUpdates(this);
     }
 
-    @Override
-    public void onLocationChanged(Location l) {
-        lat = (int) (l.getLatitude()*1E6);
-        longi = (int) (l.getLongitude()*1E6);
-        currentPoint = new GeoPoint(lat,longi);
-        setMarker(currentPoint);
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-        // TODO Auto-generated method stub
-    }
-
-
+//    @Override
+//    public void onLocationChanged(Location l) {
+//        lat = (int) (l.getLatitude()*1E6);
+//        longi = (int) (l.getLongitude()*1E6);
+//        currentPoint = new GeoPoint(lat,longi);
+//        setMarker(currentPoint);
+//    }
+//
+//    @Override
+//    public void onStatusChanged(String s, int i, Bundle bundle) {
+//        // TODO Auto-generated method stub
+//    }
+//
+//    @Override
+//    public void onProviderEnabled(String s) {
+//        // TODO Auto-generated method stub
+//    }
+//
+//    @Override
+//    public void onProviderDisabled(String s) {
+//        // TODO Auto-generated method stub
+//    }
+//
 
 
     public class Touchy extends Overlay {
@@ -217,7 +223,7 @@ public class MainActivity extends Activity implements LocationListener {
                 start = e.getEventTime();
                 x = (int) e.getX();
                 y = (int) e.getY();
-                touchedPoint = (GeoPoint) map.getProjection().fromPixels(x,y);
+                touchedPoint = (GeoPoint) map.getProjection().fromPixels(x, y);
             }
 
             if (e.getAction() == MotionEvent.ACTION_UP) {
@@ -249,7 +255,6 @@ public class MainActivity extends Activity implements LocationListener {
                 });
 
 
-
                 alert.show();
                 return true;
             }
@@ -257,9 +262,8 @@ public class MainActivity extends Activity implements LocationListener {
         }
     }
 
-    Activity ourActivity = this;
-    MapView map;
-    Road[] mRoads;
+
+
 
     public void getRoadAsync(GeoPoint startPoint, GeoPoint destinationPoint) {
         mRoads = null;
@@ -275,13 +279,17 @@ public class MainActivity extends Activity implements LocationListener {
         protected Road[] doInBackground(Object... params) {
             @SuppressWarnings("unchecked")
             ArrayList<GeoPoint> waypoints = (ArrayList<GeoPoint>) params[0];
-            RoadManager roadManager = new MapQuestRoadManager("L1fY0M61AxWmso7ZUmsjZEtILXjzU3A6");
+            RoadManager roadManager = new OSRMRoadManager(ourActivity);
+//            RoadManager roadManager = new MapQuestRoadManager("L1fY0M61AxWmso7ZUmsjZEtILXjzU3A6");
             return roadManager.getRoads(waypoints);
         }
 
         @Override
+        //recieved help by looking at https://github.com/CMPUT301F16T01/Carrier/blob/master/app/src/main/java/comcmput301f16t01/github/carrier/ViewLocationsActivity.java
         protected void onPostExecute(Road[] roads) {
             mRoads = roads;
+            Road path = null;
+            double min = 0;
             if (roads == null)
                 return;
             if (roads[0].mStatus == Road.STATUS_TECHNICAL_ISSUE)
@@ -290,20 +298,22 @@ public class MainActivity extends Activity implements LocationListener {
                 Toast.makeText(map.getContext(), "No possible route here", Toast.LENGTH_SHORT).show();
             Polyline[] mRoadOverlays = new Polyline[roads.length];
             List<Overlay> mapOverlays = map.getOverlays();
-            for (int i = 0; i < roads.length; i++) {
-                Polyline roadPolyline = RoadManager.buildRoadOverlay(roads[i]);
-                mRoadOverlays[i] = roadPolyline;
-                String routeDesc = roads[i].getLengthDurationText(ourActivity, -1);
-                roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
-                roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
-                roadPolyline.setRelatedObject(i);
-//                roadPolyline.setOnClickListener(new RoadOnClickListener());
-                mapOverlays.add(1, roadPolyline);
-                //selectRoad(0);
-//                map.invalidate();
-                //we insert the road overlays at the "bottom", just above the MapEventsOverlay,
-                //to avoid covering the other overlays.
+//            for (int i = 0; i < roads.length; i++) {
+            for (Road road: roads) {
+                if(road.mLength < min || min == 0){
+                    min = road.mLength;
+                    path = road;
+                }
             }
+            String routeDesc = path.getLengthDurationText(ourActivity, -1);
+//            bundle.putDouble("distance", path.mLength);
+//            bundle.putDouble("duration", path.mDuration);
+
+            Polyline roadPolyline = RoadManager.buildRoadOverlay(path);
+            roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
+            roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
+            mapOverlays.add(0, roadPolyline);
+            map.invalidate();
         }
     }
 
