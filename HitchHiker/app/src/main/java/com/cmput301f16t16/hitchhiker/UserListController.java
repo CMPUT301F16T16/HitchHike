@@ -1,5 +1,7 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 /**
@@ -58,7 +60,7 @@ public class UserListController {
             user = getUserTask.get();
         }
         catch(Exception e){
-            
+            Log.i("Error", "Failed to get the user out of the async object");
         }
         return user;
     }

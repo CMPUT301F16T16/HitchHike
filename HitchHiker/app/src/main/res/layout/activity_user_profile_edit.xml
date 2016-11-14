@@ -140,6 +140,7 @@
             android:layout_alignBottom="@+id/phoneNumberTitle_textView"
             android:layout_alignStart="@+id/lastName_textView"
             android:digits="0123456789"
+            android:maxLength="10"
             android:hint="Phonenumber"
             android:inputType="phone"
             android:textSize="17sp" />
