@@ -32,6 +32,7 @@
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".BrowseRequestActivity" />
         <activity android:name=".RequestInfoActivity" />
+        <activity android:name=".UserProfileEditActivity" />
         <activity android:name=".LocationViewActivity"></activity>
     </application>
 
