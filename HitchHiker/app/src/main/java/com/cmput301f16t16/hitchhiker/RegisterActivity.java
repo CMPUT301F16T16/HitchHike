@@ -17,6 +17,8 @@ public class RegisterActivity extends AppCompatActivity {
     private int userType = 0;
     private ArrayList<User> usersList = new ArrayList<User>();
     private Boolean usernameExists = false;
+    private UserListController uc = new UserListController();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +111,12 @@ public class RegisterActivity extends AppCompatActivity {
             usernameExists = false;
         }
         else if (usernameExists == false) {
-
             Integer userPhoneNumber = Integer.parseInt(phoneNumber);
 
             User newUser = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType);
 
-            ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
-            addUsersTask.execute(newUser);
+            // adds user to the elasticsearch database
+            uc.addUser(newUser);
             finish();
         }
     }

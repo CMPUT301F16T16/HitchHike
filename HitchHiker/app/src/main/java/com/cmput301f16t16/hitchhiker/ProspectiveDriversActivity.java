@@ -12,7 +12,6 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
     private Request request;
     private RequestListController rc = new RequestListController();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

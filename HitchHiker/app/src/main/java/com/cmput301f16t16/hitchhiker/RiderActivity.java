@@ -56,7 +56,7 @@ public class RiderActivity extends AppCompatActivity {
         // TODO Auto-generated method stubz
         super.onStart();
 
-        //requestsList.clear();
+        requestsList.clear();
         requestsList = rc.getListOfRequest(userName);
 
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);

@@ -42,5 +42,11 @@ public class UserListController {
             throw new RuntimeException("Couldn't deserialize UserList from UserListManager");
         }
     }
+
+
+    public void addUser(User newUser){
+        ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
+        addUsersTask.execute(newUser);
+    }
 }
 
