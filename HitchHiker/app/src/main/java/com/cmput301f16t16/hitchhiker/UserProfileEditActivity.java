@@ -17,6 +17,8 @@ public class UserProfileEditActivity extends AppCompatActivity {
     private String currentEmail;
     private Integer currentPhoneNumber;
     private User user;
+    private TextView errorMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
         TextView lastNameText = (TextView) findViewById(R.id.lastName_textView);
         TextView riderText = (TextView) findViewById(R.id.rider_textView);
         TextView driverText = (TextView) findViewById(R.id.driver_textView);
+        errorMessage = (TextView) findViewById(R.id.profile_warning_textview);
 
         String userName = user.getUserName();
         Integer userType = user.getUserType();
@@ -76,10 +79,14 @@ public class UserProfileEditActivity extends AppCompatActivity {
 
         if (newEmail.equals(currentEmail) && newPhoneNumber.equals(Integer.toString(currentPhoneNumber))){
             // say nothing has been changed
+            errorMessage.setText("Nothing was changed. Cannot save.");
+            errorMessage.setTextColor(Color.BLUE);
         }
 
         else if (newEmail.equals("") || newPhoneNumber.equals("")){
-            // say cannot leave fields blank
+            errorMessage.setText("Please fill in all fields.");
+            errorMessage.setTextColor(Color.RED);
+
         }
         else{
             user.setUserEmail(newEmail);

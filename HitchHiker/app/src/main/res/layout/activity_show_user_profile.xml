@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cmput301f16t16.hitchhiker.UserProfileEditActivity">
+    tools:context="com.cmput301f16t16.hitchhiker.UserProfileActivity">
 
     <TextView
         android:id="@+id/profile_textView"
@@ -25,8 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
-        android:text="Save Profile"
-        android:onClick="saveProfile"/>
+        android:text="Accept Driver" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -105,12 +104,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="aabels@poop.com"
+            android:textSize="17sp"
+            android:id="@+id/email_textView"
+            android:layout_alignBaseline="@+id/emailTitle_textView"
+            android:layout_alignBottom="@+id/emailTitle_textView"
+            android:layout_toRightOf="@id/emailTitle_textView"
+            android:layout_toStartOf="@+id/driver_textView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="placer"
             android:textSize="17sp"
             android:id="@+id/firstName_textView"
             android:layout_alignBaseline="@+id/firstNameTitle_textView"
             android:layout_alignBottom="@+id/firstNameTitle_textView"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignEnd="@+id/username_textView" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,42 +130,19 @@
             android:id="@+id/lastName_textView"
             android:layout_alignBaseline="@+id/lastNameTitle_textView"
             android:layout_alignBottom="@+id/lastNameTitle_textView"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignStart="@+id/firstName_textView" />
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:layout_alignBaseline="@+id/emailTitle_textView"
-            android:layout_alignBottom="@+id/emailTitle_textView"
-            android:layout_alignStart="@+id/lastName_textView"
-            android:id="@+id/email_edittext"
-            android:textSize="17sp" />
-
-        <EditText
-            android:id="@+id/phoneNumber_edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:text="placer"
+            android:textSize="17sp"
+            android:id="@+id/phoneNumber_textView"
             android:layout_alignBaseline="@+id/phoneNumberTitle_textView"
             android:layout_alignBottom="@+id/phoneNumberTitle_textView"
-            android:layout_alignStart="@+id/lastName_textView"
-            android:digits="0123456789"
-            android:maxLength="11"
-            android:hint="Phonenumber"
-            android:inputType="phone"
-            android:textSize="17sp" />
+            android:layout_toEndOf="@+id/email_textView" />
 
 
     </RelativeLayout>
-
-    <TextView
-        android:text=""
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_information_view"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="16dp"
-        android:id="@+id/profile_warning_textview" />
 
 </RelativeLayout>

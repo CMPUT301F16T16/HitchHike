@@ -33,7 +33,8 @@
         <activity android:name=".BrowseRequestActivity" />
         <activity android:name=".RequestInfoActivity" />
         <activity android:name=".UserProfileEditActivity" />
-        <activity android:name=".LocationViewActivity"></activity>
+        <activity android:name=".LocationViewActivity" />
+        <activity android:name=".ShowUserProfileActivity"></activity>
     </application>
 
 </manifest>
