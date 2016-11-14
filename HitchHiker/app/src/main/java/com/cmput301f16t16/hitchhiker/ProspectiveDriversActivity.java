@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * The type Prospective drivers activity.
+ */
 public class ProspectiveDriversActivity extends AppCompatActivity {
     private String requestId;
     private Request request;
@@ -27,6 +30,11 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Delete request.
+     *
+     * @param view the view
+     */
     public void DeleteRequest(View view){
         rc.removeRequest(requestId);
         finish();

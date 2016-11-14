@@ -8,6 +8,9 @@ import android.view.View;
 
 import java.io.Serializable;
 
+/**
+ * The type Driver activity.
+ */
 public class DriverActivity extends AppCompatActivity {
     private User user;
 
@@ -20,6 +23,11 @@ public class DriverActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
     }
 
+    /**
+     * Browse request action.
+     *
+     * @param view the view
+     */
     public void BrowseRequestAction(View view) {
         Intent intent = new Intent(DriverActivity.this, BrowseRequestActivity.class);
         intent.putExtra("user", user);
@@ -27,6 +35,11 @@ public class DriverActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * User profile page action.
+     *
+     * @param view the view
+     */
     public void UserProfilePageAction(View view) {
         Intent intent = new Intent(DriverActivity.this, UserProfileActivity.class);
         intent.putExtra("user", user);

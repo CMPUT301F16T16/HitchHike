@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * The type User profile edit activity.
+ */
 public class UserProfileEditActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText phoneNumberEditText;
@@ -60,6 +63,11 @@ public class UserProfileEditActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Save profile.
+     *
+     * @param view the view
+     */
     public void saveProfile(View view){
 
         String newEmail = emailEditText.getText().toString();

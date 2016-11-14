@@ -7,13 +7,17 @@ import java.io.IOException;
 /**
  * Created by Leo Yoon on 07/11/2016.
  */
-
 public class UserListController {
 
     // Lazy Singleton
     private static UserList userList = null;
 
-    // If a userList isn't created yet it will catch error otherwise
+    /**
+     * Gets user list.
+     *
+     * @return the user list
+     */
+// If a userList isn't created yet it will catch error otherwise
     // it will grab the users from the userManager and save the userList
     static public UserList getUserList() {
         if (userList == null) {
@@ -36,6 +40,9 @@ public class UserListController {
         return userList;
     }
 
+    /**
+     * Save user list.
+     */
     public static void saveUserList() {
         try {
             UserListManager.getUserManager().saveUserList(getUserList());
@@ -45,11 +52,22 @@ public class UserListController {
         }
     }
 
+    /**
+     * Add user.
+     *
+     * @param newUser the new user
+     */
     public void addUser(User newUser){
         ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
         addUsersTask.execute(newUser);
     }
 
+    /**
+     * Find user user.
+     *
+     * @param userName the user name
+     * @return the user
+     */
     public User findUser(String userName){
         User user = null;
         // Goes into elasticsearch to try and find if the username exists

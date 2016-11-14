@@ -13,13 +13,18 @@ import java.util.ArrayList;
 /**
  * possibly change this to a request controller instead
  */
-
 public class RequestListController {
 
     /*
     *Lazy Singleton talk too the activity and elastic search
      */
     private static RequestList requestList = null;
+
+    /**
+     * Gets request list.
+     *
+     * @return the request list
+     */
     static public RequestList getRequestList() {
         if (requestList == null) {
             requestList = new RequestList();
@@ -29,6 +34,12 @@ public class RequestListController {
         return requestList;
     }
 
+    /**
+     * Add request string.
+     *
+     * @param request the request
+     * @return the string
+     */
     public String addRequest(Request request) {
         if (request.getStartLocation() == null || request.getEndLocation() == null)
         {
@@ -44,12 +55,23 @@ public class RequestListController {
         return null;
     }
 
+    /**
+     * Remove request.
+     *
+     * @param requestId the request id
+     */
     public void removeRequest(String requestId) {
         ElasticsearchRequestController.DeleteRequestTask deleteRequestTask = new ElasticsearchRequestController.DeleteRequestTask();
         deleteRequestTask.setItemId(requestId);
         deleteRequestTask.execute();
     }
 
+    /**
+     * Get list of request array list.
+     *
+     * @param userName the user name
+     * @return the array list
+     */
     public ArrayList<Request> getListOfRequest(String userName){
         ArrayList<Request> requestsList = new ArrayList<Request>();
         ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
@@ -66,6 +88,12 @@ public class RequestListController {
 
     }
 
+    /**
+     * Gets request load.
+     *
+     * @param rider the rider
+     * @return the request load
+     */
     public ArrayList<Request> getRequestLoad(User rider) {
         ArrayList<Request> requestLoad = new ArrayList<>();
         return requestLoad;

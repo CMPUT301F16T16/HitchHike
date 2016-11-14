@@ -11,7 +11,6 @@ import io.searchbox.annotations.JestId;
  * Created by Jae-yeon on 10/14/2016.
  * Edited by Angus on 11/3/2016
  */
-
 public class Request implements Serializable {
 
     private static long serialVersionUID = 44L; // need this to access a same request from diff screens
@@ -50,15 +49,35 @@ public class Request implements Serializable {
      * 5) A canceled request
      */
     static final int CREATED = 1;
+    /**
+     * The Pending.
+     */
     static final int PENDING = 2;
+    /**
+     * The Accepted.
+     */
     static final int ACCEPTED = 3;
+    /**
+     * The Finished.
+     */
     static final int FINISHED = 4;
+    /**
+     * The Canceled.
+     */
     static final int CANCELED = 5;
     //static int requestStatus = CREATED; //Always starts at one when a request is created
     private int requestStatus;
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
 
+    /**
+     * Instantiates a new Request.
+     *
+     * @param requestCreator the request creator
+     * @param pickUp         the pick up
+     * @param dropOff        the drop off
+     * @param price          the price
+     */
     public Request(String requestCreator, String pickUp, String dropOff, Double price) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
@@ -68,6 +87,11 @@ public class Request implements Serializable {
     }
 
 
+    /**
+     * Gets request status.
+     *
+     * @return the request status
+     */
     public int getRequestStatus() {
         return this.requestStatus;
     }
@@ -77,33 +101,74 @@ public class Request implements Serializable {
         return this.pickUp + "\t ---> \t" + this.dropOff;
     }
 
+    /**
+     * Gets request id.
+     *
+     * @return the request id
+     */
     public int getRequestID() {
         return this.RequestId;
     }
 
+    /**
+     * Get start location string.
+     *
+     * @return the string
+     */
     public String getStartLocation(){
         return this.pickUp;
     }
+
+    /**
+     * Get end location string.
+     *
+     * @return the string
+     */
     public String getEndLocation(){
         return this.dropOff;
     }
 
+    /**
+     * Get price double.
+     *
+     * @return the double
+     */
     public Double getPrice(){
         return this.price;
     }
 
+    /**
+     * Gets trip.
+     *
+     * @return the trip
+     */
     public String getTrip() {
         return this.pickUp + "\t ---> \t" + this.dropOff;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Get rider name string.
+     *
+     * @return the string
+     */
     public String getRiderName(){
         return this.Rider;
     }

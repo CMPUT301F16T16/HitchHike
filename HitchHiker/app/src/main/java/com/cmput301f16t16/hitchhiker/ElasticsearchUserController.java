@@ -21,12 +21,14 @@ import io.searchbox.core.SearchResult;
 /**
  * Created by willyliao on 2016-11-09.
  */
-
 public class ElasticsearchUserController{
 
     private static JestDroidClient client;
 
-    // TODO we need a function that gets requests!
+    /**
+     * The type Get users task.
+     */
+// TODO we need a function that gets requests!
     public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
@@ -56,7 +58,10 @@ public class ElasticsearchUserController{
         }
     }
 
-    // TODO we need a function which gets a single user (for login)
+    /**
+     * The type Get user task.
+     */
+// TODO we need a function which gets a single user (for login)
     public static class GetUserTask extends AsyncTask<String, Void, User> {
         @Override
         protected User doInBackground(String... search_parameters) {
@@ -83,7 +88,10 @@ public class ElasticsearchUserController{
         }
     }
 
-    // TODO we need a function which adds a request!
+    /**
+     * The type Add users task.
+     */
+// TODO we need a function which adds a request!
     public static class AddUsersTask extends AsyncTask<User, Void, Void> {
 
         @Override

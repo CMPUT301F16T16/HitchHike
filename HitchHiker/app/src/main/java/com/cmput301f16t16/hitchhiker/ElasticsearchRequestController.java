@@ -19,11 +19,13 @@ import io.searchbox.core.SearchResult;
 /**
  * Created by willyliao on 2016-11-04.
  */
-
 public class ElasticsearchRequestController {
     private static JestDroidClient client;
 
-    // TODO we need a function that gets requests!
+    /**
+     * The type Get requests task.
+     */
+// TODO we need a function that gets requests!
     public static class GetRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
         private String userName;
 
@@ -55,13 +57,21 @@ public class ElasticsearchRequestController {
             return requests;
         }
 
+        /**
+         * Set user name.
+         *
+         * @param userName the user name
+         */
         public void setUserName(String userName){
             this.userName = userName;
         }
 
     }
 
-    // TODO we need a function which populates browsing_request!
+    /**
+     * The type Get browsing requests task.
+     */
+// TODO we need a function which populates browsing_request!
     public static class GetBrowsingRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
 
         @Override
@@ -93,7 +103,10 @@ public class ElasticsearchRequestController {
         }
     }
 
-    // TODO we need a function which adds a request!
+    /**
+     * The type Add requests task.
+     */
+// TODO we need a function which adds a request!
     public static class AddRequestsTask extends AsyncTask<Request, Void, Void> {
 
         @Override
@@ -123,8 +136,14 @@ public class ElasticsearchRequestController {
     }
 
 
-    // TODO we need a function which adds a request!
+    /**
+     * The type Delete request task.
+     */
+// TODO we need a function which adds a request!
     public static class DeleteRequestTask extends AsyncTask<Request, Void, Void> {
+        /**
+         * The Item id.
+         */
         String itemId;
 
         @Override
@@ -142,6 +161,11 @@ public class ElasticsearchRequestController {
             return null;
         }
 
+        /**
+         * Set item id.
+         *
+         * @param itemId the item id
+         */
         public void setItemId(String itemId){
             this.itemId = itemId;
         }

@@ -61,6 +61,11 @@ public class BrowseRequestActivity extends AppCompatActivity{
         browseAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Update browse list.
+     *
+     * @param view the view
+     */
     public void updateBrowseList(View view) {
         browseList.clear();
         try {
@@ -75,6 +80,11 @@ public class BrowseRequestActivity extends AppCompatActivity{
         browseAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Go to driver profile page.
+     *
+     * @param view the view
+     */
     public void GoToDriverProfilePage(View view) {
         Intent intent = new Intent(BrowseRequestActivity.this, DriverActivity.class);
         intent.putExtra("user", user);
