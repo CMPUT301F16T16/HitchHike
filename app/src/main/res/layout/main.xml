@@ -4,6 +4,37 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your default start point will be your current location!"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/origin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start Point"/>
+
+        <EditText
+            android:id="@+id/destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Destination"/>
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"/>
+
+    </LinearLayout>
 
     <org.osmdroid.views.MapView android:id="@+id/map"
         android:layout_width="fill_parent"
