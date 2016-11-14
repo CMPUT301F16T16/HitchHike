@@ -62,6 +62,9 @@ public class LocationViewActivity extends Activity {
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
 
+        /**
+         * Using fake coordinates until we can create REAL requests
+         */
         GeoPoint startPoint = new GeoPoint(48.13, -1.63);
         GeoPoint endPoint = new GeoPoint(48.4, -1.9);
 
@@ -145,7 +148,6 @@ public class LocationViewActivity extends Activity {
                 Toast.makeText(map.getContext(), "No possible route here", Toast.LENGTH_SHORT).show();
             Polyline[] mRoadOverlays = new Polyline[roads.length];
             List<Overlay> mapOverlays = map.getOverlays();
-//            for (int i = 0; i < roads.length; i++) {
             for (Road road: roads) {
                 if(road.mLength < min || min == 0){
                     min = road.mLength;
