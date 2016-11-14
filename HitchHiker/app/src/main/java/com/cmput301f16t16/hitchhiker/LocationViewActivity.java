@@ -48,10 +48,7 @@ public class LocationViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_view);
 
-
         request = (Request) getIntent().getSerializableExtra("request");
-
-//        Request request = requestsList.get(index);
         requestId = request.getId();
         String requestView = request.getTrip();
         TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
@@ -127,7 +124,6 @@ public class LocationViewActivity extends Activity {
             @SuppressWarnings("unchecked")
             ArrayList<GeoPoint> waypoints = (ArrayList<GeoPoint>) params[0];
             RoadManager roadManager = new OSRMRoadManager(ourActivity);
-//            RoadManager roadManager = new MapQuestRoadManager("L1fY0M61AxWmso7ZUmsjZEtILXjzU3A6");
             return roadManager.getRoads(waypoints);
         }
 
@@ -153,9 +149,6 @@ public class LocationViewActivity extends Activity {
                 }
             }
             String routeDesc = path.getLengthDurationText(ourActivity, -1);
-//            bundle.putDouble("distance", path.mLength);
-//            bundle.putDouble("duration", path.mDuration);
-
             Polyline roadPolyline = RoadManager.buildRoadOverlay(path);
             roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
             roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
@@ -163,28 +156,6 @@ public class LocationViewActivity extends Activity {
             map.invalidate();
         }
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     public GeoPoint getStartPoint() {
         return startPoint;

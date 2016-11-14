@@ -27,7 +27,7 @@ public class User implements Serializable {
     protected String id;
 
     protected String userName;
-    protected Integer userType; // If userType = True, then user is both Rider & Driver. If False, the user is ONLY Rider.
+    protected Integer userType;
     protected String userFirstName;
     protected String userLastName;
     protected String userEmail;
@@ -42,17 +42,13 @@ public class User implements Serializable {
         this.userType = userType;
     }
 
-
     public String getUserName() {
-
         return this.userName;
     }
 
     public void setUserName(String userName) {
-
         this.userName = userName;
     }
-
 
     public void setUserType(Integer userType) {
         this.userType = userType;
@@ -65,12 +61,9 @@ public class User implements Serializable {
     public void setUserFirstName(String userFirstName){
         this.userFirstName = userFirstName;}
 
-
     public String getUserFirstName(){
         return userFirstName;
-
     }
-
 
     public void setUserLastName(String userLastName){
         this.userLastName = userLastName;}
@@ -78,7 +71,6 @@ public class User implements Serializable {
     public String getUserLastName(){
         return userLastName;
     }
-
 
     public String getId() {
         return id;
@@ -89,13 +81,11 @@ public class User implements Serializable {
         this.userPhoneNumber = userPhoneNumber;
     }
 
-
     public int getUserPhoneNumber() {
         return this.userPhoneNumber;
     }
 
     public void setUserEmail(String email) {
-
         this.userEmail = email;
     }
 

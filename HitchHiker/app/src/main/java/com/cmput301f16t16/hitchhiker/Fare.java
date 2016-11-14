@@ -20,14 +20,11 @@ public class Fare extends Location{
     public Fare() {
     }
 
-
     public double getFare() {
-
         return this.fare;
     }
 
     public void setFare(double fare) {
-
         this.fare = fare;
     }
 }

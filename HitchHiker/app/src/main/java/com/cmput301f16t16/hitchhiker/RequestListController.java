@@ -23,38 +23,11 @@ public class RequestListController {
     static public RequestList getRequestList() {
         if (requestList == null) {
             requestList = new RequestList();
-//            try {
-//                requestList = new RequestList();
-//                requestList = RequestListManager.getRequestManager().loadRequestList();
-//                requestList.addRequestListener(new RequestListener() {
-//                    @Override
-//                    public void update() {
-//                        saveRequestList();
-//                    }
-//                });
+
             }
-//            catch (IOException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("Couldnt deserialize HabitList from RequestListManager");
-//            }
-//            catch (ClassNotFoundException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException("Couldnt deserialize RequetList from HabitListManager");
-//            }
-//        }
+
         return requestList;
     }
-
-//    private static void saveRequestList() {
-//        try {
-//            RequestListManager.getRequestManager().saveRequesttList(getRequestList());
-//        }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("Couldnt deserialize HabitList from HabitListManager");
-//        }
-//    }
-
 
     public String addRequest(Request request) {
         if (request.getStartLocation() == null || request.getEndLocation() == null)
@@ -93,14 +66,8 @@ public class RequestListController {
 
     }
 
-
     public ArrayList<Request> getRequestLoad(User rider) {
         ArrayList<Request> requestLoad = new ArrayList<>();
-//        for(Request request : requestList) {
-//            if(request.getRider() == rider) {
-//                requestLoad.add(request);
-//            }
-//        }
         return requestLoad;
     }
 

@@ -26,7 +26,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_request);
 
-//        Bundle bundle = getIntent().getExtras();
         user = (User) getIntent().getSerializableExtra("user");
 
         // display requests into the listview
@@ -34,8 +33,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
         theBrowseList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
                 Intent intent = new Intent(BrowseRequestActivity.this, LocationViewActivity.class);
-//                intent.putExtra("requestsList", browseList);
-//                intent.putExtra("index", position);
                 Request chosenRequest = browseList.get(position);
                 intent.putExtra("request", chosenRequest);
                 startActivity(intent);

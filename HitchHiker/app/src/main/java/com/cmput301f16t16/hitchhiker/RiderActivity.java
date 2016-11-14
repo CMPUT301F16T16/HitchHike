@@ -21,7 +21,6 @@ public class RiderActivity extends AppCompatActivity {
     private RequestListController rc = new RequestListController();
     private String userName;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +63,6 @@ public class RiderActivity extends AppCompatActivity {
         requestAdapter.notifyDataSetChanged();
     }
 
-
     //Only here for testing purposes.
     public void Refresh(View view){
         requestsList.clear();
@@ -74,6 +72,7 @@ public class RiderActivity extends AppCompatActivity {
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
     }
+
     public void CreateRequest(View view){
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
         intent.putExtra("user", user);
@@ -82,7 +81,6 @@ public class RiderActivity extends AppCompatActivity {
 
     public void GoToUserProfilePage(View view) {
         Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
-//        Intent intent = new Intent(RiderActivity.this, TestingActivity.class);
         intent.putExtra("user", user);
         startActivityForResult(intent, 1);
     }

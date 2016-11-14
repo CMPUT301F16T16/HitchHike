@@ -70,7 +70,6 @@ public class UserProfileActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 user = (User) data.getSerializableExtra("updatedUser");
-
             }
         }
     }

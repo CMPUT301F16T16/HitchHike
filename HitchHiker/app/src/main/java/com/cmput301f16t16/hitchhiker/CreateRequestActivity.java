@@ -13,12 +13,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
-
-        //RequestList Manager has to be initialized to know about the new created request
-//        RequestListManager.initRequestManager(this.getApplicationContext());
-
         user = (User) getIntent().getSerializableExtra("user");
-
     }
 
     public void CreateRequest(View view){

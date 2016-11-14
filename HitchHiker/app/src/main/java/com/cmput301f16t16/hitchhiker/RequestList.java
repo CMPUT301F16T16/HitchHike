@@ -10,7 +10,6 @@ import java.util.Collection;
  * Edited by Angus Abels 11/14/2016
  */
 
-
 public class RequestList implements Serializable {
 
     private static final long serialVersionUID = 12L;

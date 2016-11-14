@@ -45,7 +45,6 @@ public class UserListController {
         }
     }
 
-
     public void addUser(User newUser){
         ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
         addUsersTask.execute(newUser);

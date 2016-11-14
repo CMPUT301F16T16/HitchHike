@@ -62,7 +62,6 @@ public class RegisterActivity extends AppCompatActivity {
         String userEmail = emailAddressText.getText().toString();
         String phoneNumber = phoneNumberText.getText().toString();
 
-
         /**
          * Determines the userType
          */

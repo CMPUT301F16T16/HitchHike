@@ -23,30 +23,23 @@ public class Request implements Serializable {
      * instead of just grabbing the ID's driver and rider we can bring in the whole objects
      * and use what info we need
      */
-//    private User Rider;
-//    private User acceptedDriver = null;
     private String Rider;
 
     /**
      * Need a list of prospective Drivers to choose Final Driver Choice
      */
     private ArrayList<User> prospectiveDrivers;
-    //    private ArrayList<User> prospectiveDrivers;
 
     /**
      * Need a Location A (start of where the rider is located)
      * and a Location B (End of the ride is located)
      */
-
-//    private Location pickUp;
-//    private Location dropOff;
     private String pickUp;
     private String dropOff;
 
     /**
      * Fare is calculated and must be accepted before request is complete
      */
-
     private Double price;
     /**
      * need some variables types (int maybe?) to know different states of request:
@@ -66,16 +59,6 @@ public class Request implements Serializable {
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
 
-
-//    public Request(String requestCreator, String pickUp, String dropOff, Fare fare) {
-//        this.Rider = requestCreator;
-////        this.acceptedDriver = acceptedDriver;
-////        this.requestStatus = getRequestStatus();
-//        this.price = fare.getFare();
-//        this.pickUp = pickUp;
-//        this.dropOff = dropOff;
-//        this.requestStatus = CREATED;
-//    }
     public Request(String requestCreator, String pickUp, String dropOff, Double price) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
@@ -98,13 +81,6 @@ public class Request implements Serializable {
         return this.RequestId;
     }
 
-//    public Location getStartLocation() {
-//        return this.pickUp;
-//    }
-//
-//    public Location getEndLocation() {
-//        return this.dropOff;
-//    }
     public String getStartLocation(){
         return this.pickUp;
     }
@@ -112,13 +88,9 @@ public class Request implements Serializable {
         return this.dropOff;
     }
 
-
-
     public Double getPrice(){
         return this.price;
     }
-
-
 
     public String getTrip() {
         return this.pickUp + "\t ---> \t" + this.dropOff;
@@ -132,9 +104,6 @@ public class Request implements Serializable {
         this.id = id;
     }
 
-//    public User getRider() {
-//        return this.Rider;
-//    }
     public String getRiderName(){
         return this.Rider;
     }

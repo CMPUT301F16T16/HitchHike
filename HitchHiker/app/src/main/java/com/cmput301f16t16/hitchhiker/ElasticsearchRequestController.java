@@ -35,8 +35,6 @@ public class ElasticsearchRequestController {
 
             // Assumption: Only the first search_parameter[0] is used.
 
-            //String search_string = "{\"from\": 0, \"size\": 10000}";
-
             String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"Rider\": \""+userName+"\"}}}";
 
             Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
@@ -63,8 +61,6 @@ public class ElasticsearchRequestController {
 
     }
 
-
-
     // TODO we need a function which populates browsing_request!
     public static class GetBrowsingRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
 
@@ -75,8 +71,6 @@ public class ElasticsearchRequestController {
             ArrayList<Request> requests = new ArrayList<Request>();
 
             // Assumption: Only the first search_parameter[0] is used.
-
-            //String search_string = "{\"from\": 0, \"size\": 10000}";
 
             String search_string = "{\"from\": 0, \"size\": 10000}";
 
@@ -98,9 +92,6 @@ public class ElasticsearchRequestController {
             return requests;
         }
     }
-
-
-
 
     // TODO we need a function which adds a request!
     public static class AddRequestsTask extends AsyncTask<Request, Void, Void> {

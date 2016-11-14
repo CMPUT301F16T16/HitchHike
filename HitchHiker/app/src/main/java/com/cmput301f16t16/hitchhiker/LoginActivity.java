@@ -61,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             Log.i("Error", "Failed to get the user out of the async object");
         }
 
-
     }
 
     public void GoToRegisterPage(View view){
