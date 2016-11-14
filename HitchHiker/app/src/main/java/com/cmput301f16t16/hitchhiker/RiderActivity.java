@@ -18,6 +18,9 @@ public class RiderActivity extends AppCompatActivity {
     private ArrayList<Request> requestsList = new ArrayList<Request>();
     private ArrayAdapter<Request> requestAdapter;
     private User user;
+    private RequestListController rc = new RequestListController();
+    private String userName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +28,24 @@ public class RiderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rider);
 
         user =(User) getIntent().getSerializableExtra("user");
+        userName = user.getUserName();
 
         // display requests into the listview
         theRequestList = (ListView) findViewById(R.id.open_requests_listview);
+
+        requestsList = rc.getListOfRequest(userName);
+        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
+        theRequestList.setAdapter(requestAdapter);
+        requestAdapter.notifyDataSetChanged();
+
+
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
                 Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
-                intent.putExtra("requestsList", requestsList);
-                intent.putExtra("index", position);
+
+                Request request = requestsList.get(position);
+                intent.putExtra("request", request);
+
                 startActivity(intent);
             }
         });
@@ -43,17 +56,9 @@ public class RiderActivity extends AppCompatActivity {
         // TODO Auto-generated method stubz
         super.onStart();
 
-        requestsList.clear();
-        ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
-        getRequestsTask.setUserName(user.getUserName());
-        getRequestsTask.execute("");
+        //requestsList.clear();
+        requestsList = rc.getListOfRequest(userName);
 
-        try {
-            requestsList = getRequestsTask.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets out of the async object.");
-        }
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
@@ -63,17 +68,8 @@ public class RiderActivity extends AppCompatActivity {
     //Only here for testing purposes.
     public void Refresh(View view){
         requestsList.clear();
+        requestsList = rc.getListOfRequest(userName);
 
-        ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
-        getRequestsTask.setUserName(user.getUserName());
-        getRequestsTask.execute("");
-
-        try {
-            requestsList = getRequestsTask.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets out of the async object.");
-        }
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
