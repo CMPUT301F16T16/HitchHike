@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import io.searchbox.annotations.JestId;
 
 /**
@@ -27,7 +30,9 @@ public class Request implements Serializable {
     /**
      * Need a list of prospective Drivers to choose Final Driver Choice
      */
-    private ArrayList<User> prospectiveDrivers;
+
+    //    private ArrayList<User> prospectiveDrivers;
+    private ArrayList<String> prospectiveDrivers;
 
     /**
      * Need a Location A (start of where the rider is located)
@@ -84,8 +89,9 @@ public class Request implements Serializable {
         this.dropOff = dropOff;
         this.price = price;
         this.requestStatus = CREATED;
-    }
+        this.prospectiveDrivers = new ArrayList<String>();
 
+    }
 
     /**
      * Gets request status.
@@ -137,11 +143,12 @@ public class Request implements Serializable {
         return this.price;
     }
 
-    /**
-     * Gets trip.
-     *
-     * @return the trip
-     */
+
+
+    public void addProspectiveDriver(String driverName){
+        this.prospectiveDrivers.add(driverName);
+    }
+
     public String getTrip() {
         return this.pickUp + "\t ---> \t" + this.dropOff;
     }
@@ -173,4 +180,15 @@ public class Request implements Serializable {
         return this.Rider;
     }
 
+    public String getPickUp() {
+        return pickUp;
+    }
+
+    public String getDropOff() {
+        return dropOff;
+    }
+
+    public ArrayList<String> getProspectiveDrivers() {
+        return prospectiveDrivers;
+    }
 }

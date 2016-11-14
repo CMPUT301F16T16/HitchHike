@@ -40,9 +40,13 @@ public class BrowseRequestActivity extends AppCompatActivity{
         theBrowseList = (ListView) findViewById(R.id.browsing_requests_listview);
         theBrowseList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
-                Intent intent = new Intent(BrowseRequestActivity.this, LocationViewActivity.class);
+
+                Intent intent = new Intent(BrowseRequestActivity.this, RequestInfoActivity.class);
+//                intent.putExtra("requestsList", browseList);
+//                intent.putExtra("index", position);
                 Request chosenRequest = browseList.get(position);
                 intent.putExtra("request", chosenRequest);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
