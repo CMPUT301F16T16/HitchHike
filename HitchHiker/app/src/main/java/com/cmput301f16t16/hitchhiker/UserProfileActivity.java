@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * The type User profile activity.
+ */
 public class UserProfileActivity extends AppCompatActivity {
     private User user;
 
@@ -57,6 +60,11 @@ public class UserProfileActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Edit profile.
+     *
+     * @param view the view
+     */
     public void editProfile(View view){
         Intent intent = new Intent(this, UserProfileEditActivity.class);
         intent.putExtra("user", user);

@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * The type Rider activity.
+ */
 public class RiderActivity extends AppCompatActivity {
 
     private ListView theRequestList;
@@ -63,7 +66,12 @@ public class RiderActivity extends AppCompatActivity {
         requestAdapter.notifyDataSetChanged();
     }
 
-    //Only here for testing purposes.
+    /**
+     * Refresh.
+     *
+     * @param view the view
+     */
+//Only here for testing purposes.
     public void Refresh(View view){
         requestsList.clear();
         requestsList = rc.getListOfRequest(userName);
@@ -73,12 +81,22 @@ public class RiderActivity extends AppCompatActivity {
         requestAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Create request.
+     *
+     * @param view the view
+     */
     public void CreateRequest(View view){
         Intent intent = new Intent(RiderActivity.this, CreateRequestActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
     }
 
+    /**
+     * Go to user profile page.
+     *
+     * @param view the view
+     */
     public void GoToUserProfilePage(View view) {
         Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
         intent.putExtra("user", user);

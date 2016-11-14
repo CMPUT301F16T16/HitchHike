@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * The type Register activity.
+ */
 public class RegisterActivity extends AppCompatActivity {
     private int userType = 0;
     private ArrayList<User> usersList = new ArrayList<User>();
@@ -42,6 +45,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Create user.
+     *
+     * @param view the view
+     */
     public void CreateUser(View view){
         EditText usernameText = (EditText) findViewById(R.id.userNameEditText);
         EditText firstNameText = (EditText) findViewById(R.id.firstNameEditText);

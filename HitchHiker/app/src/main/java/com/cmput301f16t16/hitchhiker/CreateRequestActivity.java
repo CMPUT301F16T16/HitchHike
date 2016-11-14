@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * The type Create request activity.
+ */
 public class CreateRequestActivity extends AppCompatActivity {
     private User user;
 
@@ -16,6 +19,11 @@ public class CreateRequestActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
     }
 
+    /**
+     * Create request with the user inputs.
+     *
+     * @param view the view
+     */
     public void CreateRequest(View view){
         RequestListController rc = new RequestListController();
         Toast.makeText(this, "Creating Request", Toast.LENGTH_SHORT).show();

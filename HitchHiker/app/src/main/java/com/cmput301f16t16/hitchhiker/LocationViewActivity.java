@@ -28,6 +28,9 @@ import org.osmdroid.views.overlay.infowindow.BasicInfoWindow;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Location view activity.
+ */
 public class LocationViewActivity extends Activity {
 
     private Request request;
@@ -39,8 +42,17 @@ public class LocationViewActivity extends Activity {
     private GeoPoint currentPoint;
     private GeoPoint startPoint;
     private GeoPoint endPoint;
+    /**
+     * The Our activity.
+     */
     Activity ourActivity = this;
+    /**
+     * The Map.
+     */
     MapView map;
+    /**
+     * The M roads.
+     */
     Road[] mRoads;
 
     @Override
@@ -104,6 +116,11 @@ public class LocationViewActivity extends Activity {
         getRoadAsync(startPoint, endPoint);
     }
 
+    /**
+     * Sets marker.
+     *
+     * @param sp the sp
+     */
     public void setMarker(GeoPoint sp) {
         Marker startMarker = new Marker(map);
         startMarker.setPosition(sp);
@@ -112,6 +129,13 @@ public class LocationViewActivity extends Activity {
         map.getOverlays().add(startMarker);
         map.invalidate();
     }
+
+    /**
+     * Gets road async.
+     *
+     * @param startPoint       the start point
+     * @param destinationPoint the destination point
+     */
     public void getRoadAsync(GeoPoint startPoint, GeoPoint destinationPoint) {
         mRoads = null;
 
@@ -159,14 +183,29 @@ public class LocationViewActivity extends Activity {
         }
     }
 
+    /**
+     * Gets start point.
+     *
+     * @return the start point
+     */
     public GeoPoint getStartPoint() {
         return startPoint;
     }
 
+    /**
+     * Gets end point.
+     *
+     * @return the end point
+     */
     public GeoPoint getEndPoint() {
         return endPoint;
     }
 
+    /**
+     * Gets current point.
+     *
+     * @return the current point
+     */
     public GeoPoint getCurrentPoint() {
         return currentPoint;
     }

@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * The type Login activity.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private User user;
@@ -19,6 +22,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    /**
+     * Go to main page.
+     *
+     * @param view the view
+     */
     public void GoToMainPage(View view){
 
         // Get username the user has inputted.
@@ -63,6 +71,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Go to register page.
+     *
+     * @param view the view
+     */
     public void GoToRegisterPage(View view){
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
