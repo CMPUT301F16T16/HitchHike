@@ -48,5 +48,19 @@ public class UserListController {
         ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
         addUsersTask.execute(newUser);
     }
+
+    public User findUser(String userName){
+        User user = null;
+        // Goes into elasticsearch to try and find if the username exists
+        ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
+        getUserTask.execute(userName);
+        try {
+            user = getUserTask.get();
+        }
+        catch(Exception e){
+            
+        }
+        return user;
+    }
 }
 
