@@ -88,10 +88,22 @@ public class RiderActivity extends AppCompatActivity {
         Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
 //        Intent intent = new Intent(RiderActivity.this, TestingActivity.class);
         intent.putExtra("user", user);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     public void onBackPressed(){
         // Do nothing
+    }
+
+    //http://stackoverflow.com/questions/14292398/how-to-pass-data-from-2nd-activity-to-1st-activity-when-pressed-back-android
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request it is that we're responding to
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                user = (User) data.getSerializableExtra("updatedUser");
+
+            }
+        }
     }
 }

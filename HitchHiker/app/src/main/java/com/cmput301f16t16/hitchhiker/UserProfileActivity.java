@@ -63,6 +63,7 @@ public class UserProfileActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    //http://stackoverflow.com/questions/14292398/how-to-pass-data-from-2nd-activity-to-1st-activity-when-pressed-back-android
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request it is that we're responding to
@@ -72,5 +73,13 @@ public class UserProfileActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent();
+        intent.putExtra("updatedUser", user);
+        setResult(AppCompatActivity.RESULT_OK, intent);
+        finish();
     }
 }
