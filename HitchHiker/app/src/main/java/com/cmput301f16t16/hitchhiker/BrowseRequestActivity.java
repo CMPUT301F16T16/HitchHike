@@ -21,6 +21,14 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private ArrayAdapter<Request> browseAdapter;
     private User user;
 
+    /**
+     * browseList is an array of all pending requests
+     * request available. The list view is clickable to a new activity to view a
+     * map of the requests.
+     *
+     * request object is passed to the
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

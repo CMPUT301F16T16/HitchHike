@@ -7,14 +7,15 @@ public class Location {
 
     protected String dropOff;
     protected String pickUp;
-    protected double lat;
-    protected double lon;
-
-    public double getLat() {
-        return lat;
-    }
-
-    public double getLon() {
-        return lon;
-    }
+    protected double pickUpLat;
+    protected double pickUpLon;
+    protected double dropOffLat;
+    protected double dropOffLon;
+//    public double getLat() {
+//        return lat;
+//    }
+//
+//    public double getLon() {
+//        return lon;
+//    }
 }
