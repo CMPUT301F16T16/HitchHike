@@ -105,11 +105,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="placer"
+            android:text="aabels@poop.com"
             android:textSize="17sp"
             android:id="@+id/email_textView"
             android:layout_alignBaseline="@+id/emailTitle_textView"
             android:layout_alignBottom="@+id/emailTitle_textView"
+            android:layout_toRightOf="@id/emailTitle_textView"
             android:layout_toStartOf="@+id/driver_textView" />
 
         <TextView
