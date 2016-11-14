@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cmput301f16t16.hitchhiker.TestingActivity">
+    tools:context="com.cmput301f16t16.hitchhiker.UserProfileEditActivity">
 
     <TextView
         android:id="@+id/profile_textView"
@@ -133,13 +133,15 @@
             android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/phoneNumber_edittext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Phonenumber"
             android:layout_alignBaseline="@+id/phoneNumberTitle_textView"
             android:layout_alignBottom="@+id/phoneNumberTitle_textView"
             android:layout_alignStart="@+id/lastName_textView"
-            android:id="@+id/phoneNumber_edittext"
+            android:digits="0123456789"
+            android:hint="Phonenumber"
+            android:inputType="phone"
             android:textSize="17sp" />
 
 

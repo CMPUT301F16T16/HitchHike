@@ -82,6 +82,7 @@
         android:layout_below="@id/estimate"
         android:layout_toRightOf="@id/suggested_fare_text"
         android:id="@+id/suggested_fare"
+        android:digits="0123456789."
         android:ems="5"
         />
 
