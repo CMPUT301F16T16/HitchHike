@@ -69,10 +69,10 @@ public class RequestListController {
         return null;
     }
 
-    public void removeRequest(Request request) {
-        //remove request from browsingList and
-        //requestList because of possibility of
-        //canceling a request or A driver has accepted a offer
+    public void removeRequest(String requestId) {
+        ElasticsearchRequestController.DeleteRequestTask deleteRequestTask = new ElasticsearchRequestController.DeleteRequestTask();
+        deleteRequestTask.setItemId(requestId);
+        deleteRequestTask.execute();
     }
 
     public ArrayList<Request> getRequestLoad(User rider) {

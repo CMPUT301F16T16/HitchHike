@@ -11,6 +11,8 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
     private int index;
     private ArrayList<Request> requestsList;
     private String requestId;
+    private RequestListController rc = new RequestListController();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,7 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
     }
 
     public void DeleteRequest(View view){
-        ElasticsearchRequestController.DeleteRequestTask deleteRequestTask = new ElasticsearchRequestController.DeleteRequestTask();
-        deleteRequestTask.setItemId(requestId);
-        deleteRequestTask.execute();
-        //requestsList.remove(index);
+        rc.removeRequest(requestId);
         finish();
     }
 }
