@@ -11,11 +11,11 @@ public class driverTest extends TestCase {
 
     private final String driver_id = "123";
     private final String rider_id = "456";
-    Driver driver = new Driver(driver_id);
+//    Driver driver = new Driver(driver_id);
 
-    public void testAcceptDriveRequest(){
-        Driver testDriver = new Driver(driver_id);
-    }
+//    public void testAcceptDriveRequest(){
+//        Driver testDriver = new Driver(driver_id);
+//    }
 
     public void testDriverCompleteRequest(){
 

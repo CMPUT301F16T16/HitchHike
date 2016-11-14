@@ -21,13 +21,14 @@ public class User implements Serializable {
 
     private static long serialVersionUID = 44454L;
     @JestId
+    protected String id;
+
     protected String userName;
     protected Integer userType; // If userType = True, then user is both Rider & Driver. If False, the user is ONLY Rider.
     protected String userFirstName;
     protected String userLastName;
     protected String userEmail;
     protected Integer userPhoneNumber;
-    protected String id;
 
     public User(String userName, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
         this.userName = userName;
