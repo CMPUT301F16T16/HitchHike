@@ -31,11 +31,7 @@
         <activity android:name=".DriverActivity" />
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".BrowseRequestActivity" />
-        <activity
-            android:name=".testingAcitivity2"
-            android:label="@string/title_activity_testing_acitivity2"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserProfileEditActivity" />
+        <activity android:name=".RequestInfoActivity" />
         <activity android:name=".LocationViewActivity"></activity>
     </application>
 
