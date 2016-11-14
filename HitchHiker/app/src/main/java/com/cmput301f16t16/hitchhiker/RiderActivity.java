@@ -65,7 +65,6 @@ public class RiderActivity extends AppCompatActivity {
         requestsList.clear();
 
         ElasticsearchRequestController.GetRequestsTask getRequestsTask = new ElasticsearchRequestController.GetRequestsTask();
-//        getRequestsTask.execute("");
         getRequestsTask.setUserName(user.getUserName());
         getRequestsTask.execute("");
 
@@ -87,6 +86,7 @@ public class RiderActivity extends AppCompatActivity {
 
     public void GoToUserProfilePage(View view) {
         Intent intent = new Intent(RiderActivity.this, UserProfileActivity.class);
+//        Intent intent = new Intent(RiderActivity.this, TestingActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
     }

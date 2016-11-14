@@ -15,11 +15,14 @@ import static java.sql.Types.NULL;
  * Edited by Victoria Lee 10/11/2016.
  * We used our user class and put our code into http://www.parcelabler.com/ (accessed on 10/11/2016
  * this website for it to auto generate a parceled version of our code.
+ *
+ * Learned to change String to Integer on: http://stackoverflow.com/questions/5585779/converting-string-to-int-in-java
  */
 
 public class User implements Serializable {
 
     private static long serialVersionUID = 44454L;
+
     @JestId
     protected String id;
 

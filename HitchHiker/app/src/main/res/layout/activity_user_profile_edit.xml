@@ -25,8 +25,8 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
-        android:text="Edit Profile"
-        android:onClick="editProfile"/>
+        android:text="Save Profile"
+        android:onClick="saveProfile"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -122,25 +122,25 @@
             android:layout_alignBottom="@+id/lastNameTitle_textView"
             android:layout_centerHorizontal="true" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="placer"
-            android:textSize="17sp"
-            android:id="@+id/phoneNumber_textView"
-            android:layout_alignBaseline="@+id/phoneNumberTitle_textView"
-            android:layout_alignBottom="@+id/phoneNumberTitle_textView"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="placer"
-            android:textSize="17sp"
-            android:id="@+id/email_textView"
+            android:hint="Email"
             android:layout_alignBaseline="@+id/emailTitle_textView"
             android:layout_alignBottom="@+id/emailTitle_textView"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignStart="@+id/lastName_textView"
+            android:id="@+id/email_edittext"
+            android:textSize="17sp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Phonenumber"
+            android:layout_alignBaseline="@+id/phoneNumberTitle_textView"
+            android:layout_alignBottom="@+id/phoneNumberTitle_textView"
+            android:layout_alignStart="@+id/lastName_textView"
+            android:id="@+id/phoneNumber_edittext"
+            android:textSize="17sp" />
 
 
     </RelativeLayout>

@@ -5,27 +5,25 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileEditActivity extends AppCompatActivity {
+    private EditText emailEditText;
+    private EditText phoneNumberEditText;
+    private String currentEmail;
+    private Integer currentPhoneNumber;
     private User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_user_profile_edit);
 
         user = (User) getIntent().getSerializableExtra("user");
-    }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
         TextView userNameText = (TextView) findViewById(R.id.username_textView);
         TextView firstNameText = (TextView) findViewById(R.id.firstName_textView);
         TextView lastNameText = (TextView) findViewById(R.id.lastName_textView);
-        TextView emailText = (TextView) findViewById(R.id.email_textView);
-        TextView phoneNumberText = (TextView) findViewById(R.id.phoneNumber_textView);
         TextView riderText = (TextView) findViewById(R.id.rider_textView);
         TextView driverText = (TextView) findViewById(R.id.driver_textView);
 
@@ -33,15 +31,10 @@ public class UserProfileActivity extends AppCompatActivity {
         Integer userType = user.getUserType();
         String firstName = user.getUserFirstName();
         String lastName = user.getUserLastName();
-        String email = user.getUserEmail();
-        Integer phoneNumber = user.getUserPhoneNumber();
 
         userNameText.setText(userName);
         firstNameText.setText(firstName);
         lastNameText.setText(lastName);
-        emailText.setText(email);
-        phoneNumberText.setText(Integer.toString(phoneNumber));
-
 
         if (userType == 1){
             riderText.setTextColor(Color.BLACK);
@@ -55,22 +48,44 @@ public class UserProfileActivity extends AppCompatActivity {
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.BLACK);
         }
+
+        emailEditText = (EditText) findViewById(R.id.email_edittext);
+        phoneNumberEditText = (EditText) findViewById(R.id.phoneNumber_edittext);
+
+        currentEmail = user.getUserEmail();
+        currentPhoneNumber = user.getUserPhoneNumber();
+
+        emailEditText.setText(currentEmail);
+        phoneNumberEditText.setText(Integer.toString(currentPhoneNumber));
+
     }
 
-    public void editProfile(View view){
-        Intent intent = new Intent(this, UserProfileEditActivity.class);
-        intent.putExtra("user", user);
-        startActivityForResult(intent, 1);
-    }
+    public void saveProfile(View view){
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request it is that we're responding to
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                user = (User) data.getSerializableExtra("updatedUser");
+        String newEmail = emailEditText.getText().toString();
+        String newPhoneNumber = phoneNumberEditText.getText().toString();
 
-            }
+
+        if (newEmail.equals(currentEmail) && newPhoneNumber.equals(Integer.toString(currentPhoneNumber))){
+            // say nothing has been changed
+        }
+
+        else if (newEmail.equals("") || newPhoneNumber.equals("")){
+            // say cannot leave fields blank
+        }
+        else{
+            user.setUserEmail(newEmail);
+            user.setUserPhoneNumber(Integer.parseInt(newPhoneNumber));
+
+            ElasticsearchUserController.AddUsersTask update = new ElasticsearchUserController.AddUsersTask();
+            update.execute(user);
+
+            Intent intent = new Intent();
+            intent.putExtra("updatedUser", user);
+            setResult(AppCompatActivity.RESULT_OK, intent);
+            finish();
+
+
         }
     }
 }

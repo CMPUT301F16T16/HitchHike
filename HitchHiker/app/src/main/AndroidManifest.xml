@@ -25,8 +25,13 @@
         <activity android:name=".RiderActivity" />
         <activity android:name=".ProspectiveDriversActivity" />
         <activity android:name=".DriverActivity" />
-        <activity android:name=".UserProfileActivity"></activity>
-        <activity android:name=".BrowseRequestActivity"></activity>
+        <activity android:name=".UserProfileActivity" />
+        <activity android:name=".BrowseRequestActivity" />
+        <activity
+            android:name=".testingAcitivity2"
+            android:label="@string/title_activity_testing_acitivity2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UserProfileEditActivity"></activity>
     </application>
 
 </manifest>
