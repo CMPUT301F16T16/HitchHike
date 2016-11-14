@@ -18,7 +18,7 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
 
         userType = user.getUserType();
-        if (userType == 2 || userType == 3) {
+        if (userType == 1) {
             Button aButton = (Button) findViewById(R.id.profile_button);
             aButton.setVisibility(View.GONE);
         }

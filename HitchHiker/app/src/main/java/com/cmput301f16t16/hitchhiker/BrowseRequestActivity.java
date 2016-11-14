@@ -20,6 +20,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private ArrayList<Request> browseList = new ArrayList<Request>();
     private ArrayAdapter<Request> browseAdapter;
     private User user;
+    private User riderUser;
 
     /**
      * browseList is an array of all pending requests
@@ -46,7 +47,22 @@ public class BrowseRequestActivity extends AppCompatActivity{
 //                intent.putExtra("index", position);
                 Request chosenRequest = browseList.get(position);
                 intent.putExtra("request", chosenRequest);
-                intent.putExtra("user", user);
+
+                String riderUserName = chosenRequest.getRiderName();
+
+                ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
+                getUserTask.execute(riderUserName);
+
+                try {
+                    riderUser = getUserTask.get();
+                }
+                catch(Exception e){
+
+                }
+
+
+
+                intent.putExtra("user", riderUser);
                 startActivity(intent);
             }
         });
