@@ -25,7 +25,8 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
-        android:text="Accept Driver" />
+        android:text="Accept Driver"
+        android:id="@+id/profile_button"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

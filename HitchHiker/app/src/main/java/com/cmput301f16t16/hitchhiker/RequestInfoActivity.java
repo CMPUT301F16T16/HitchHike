@@ -26,6 +26,9 @@ public class RequestInfoActivity extends AppCompatActivity {
         TextView dropOffLocationText = (TextView) findViewById(R.id.dropOff_Location_textView);
         dropOffLocationText.setText(request.getDropOff());
 
+        TextView userNameText = (TextView) findViewById(R.id.requestUserName_textView);
+        userNameText.setText(user.getUserName());
+
     }
 
     public void AcceptRequest(View view){
@@ -43,5 +46,14 @@ public class RequestInfoActivity extends AppCompatActivity {
 
         intent.putExtra("request", request);
         startActivity(intent);
+    }
+
+    public void GoToUserProfile(View view){
+        Intent intent = new Intent(RequestInfoActivity.this, ShowUserProfileActivity.class);
+
+        intent.putExtra("user", user);
+        startActivity(intent);
+
+
     }
 }

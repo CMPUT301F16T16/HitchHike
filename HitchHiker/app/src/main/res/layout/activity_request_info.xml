@@ -11,15 +11,6 @@
     tools:context="com.cmput301f16t16.hitchhiker.RequestInfoActivity">
 
     <TextView
-        android:id="@+id/pickUp_Location_TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/pickUp_textView"
-        android:layout_marginStart="40dp"
-        android:layout_toEndOf="@+id/pickUp_textView"
-        android:text="TextView" />
-
-    <TextView
         android:id="@+id/pickUp_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,14 +28,6 @@
         android:layout_below="@+id/pickUp_textView"
         android:layout_marginTop="28dp"
         android:text="Drop Off:" />
-
-    <TextView
-        android:id="@+id/dropOff_Location_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/dropOff_textView"
-        android:layout_alignStart="@+id/pickUp_Location_TextView"
-        android:text="TextView" />
 
     <Button
         android:id="@+id/map_button"
@@ -65,4 +48,40 @@
         android:layout_marginTop="153dp"
         android:onClick="AcceptRequest"
         android:text="Accept Request" />
+
+    <TextView
+        android:text="Username:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dropOff_textView"
+        android:layout_alignStart="@+id/dropOff_textView"
+        android:layout_marginTop="30dp"
+        android:id="@+id/userNameTitle_textView" />
+
+    <TextView
+        android:id="@+id/dropOff_Location_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_above="@+id/userNameTitle_textView"
+        android:layout_alignStart="@+id/pickUp_Location_TextView" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/requestUserName_textView"
+        android:onClick="GoToUserProfile"
+        android:layout_alignBaseline="@+id/userNameTitle_textView"
+        android:layout_alignBottom="@+id/userNameTitle_textView"
+        android:layout_alignStart="@+id/dropOff_Location_textView" />
+
+    <TextView
+        android:id="@+id/pickUp_Location_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="71dp"
+        android:text="TextView"
+        android:layout_above="@+id/dropOff_textView"
+        android:layout_toEndOf="@+id/userNameTitle_textView" />
 </RelativeLayout>

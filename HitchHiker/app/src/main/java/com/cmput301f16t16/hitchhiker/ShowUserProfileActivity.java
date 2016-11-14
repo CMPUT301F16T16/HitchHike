@@ -3,11 +3,13 @@ package com.cmput301f16t16.hitchhiker;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ShowUserProfileActivity extends AppCompatActivity {
     private User user;
-
+    private Integer userType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,6 +17,11 @@ public class ShowUserProfileActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("user");
 
+        userType = user.getUserType();
+        if (userType == 2 || userType == 3) {
+            Button aButton = (Button) findViewById(R.id.profile_button);
+            aButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
