@@ -20,7 +20,7 @@ public class RequestListController {
     private static RequestList requestList = null;
     static public RequestList getRequestList() {
         if (requestList == null) {
-//            requestList =
+            requestList = new RequestList();
 //            try {
 //                requestList = new RequestList();
 //                requestList = RequestListManager.getRequestManager().loadRequestList();
@@ -30,7 +30,7 @@ public class RequestListController {
 //                        saveRequestList();
 //                    }
 //                });
-//            }
+            }
 //            catch (IOException e) {
 //                e.printStackTrace();
 //                throw new RuntimeException("Couldnt deserialize HabitList from RequestListManager");
@@ -39,7 +39,7 @@ public class RequestListController {
 //                e.printStackTrace();
 //                throw new RuntimeException("Couldnt deserialize RequetList from HabitListManager");
 //            }
-        }
+//        }
         return requestList;
     }
 
@@ -54,10 +54,19 @@ public class RequestListController {
 //    }
 
 
-    public void addRequest(Request request) {
-        //add request to the requestList and
-        //browsingRequest List
-        //Elastic controller cmd
+    public String addRequest(Request request) {
+        if (request.getStartLocation() == null || request.getEndLocation() == null)
+        {
+            return "something went wrong with your Request...";
+        }
+        if (request.getPrice() == null){
+            return "You didnt enter a price...";
+        }
+        else {
+            ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+            addRequestsTask.execute(request);
+        }
+        return null;
     }
 
     public void removeRequest(Request request) {
