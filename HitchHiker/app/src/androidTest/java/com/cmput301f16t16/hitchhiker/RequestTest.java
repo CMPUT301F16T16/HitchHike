@@ -39,7 +39,7 @@ public class RequestTest extends TestCase {
         RequestListController requestListController = new RequestListController();
         requestListController.addRequest(request);
         assertEquals("There is a request", 1, requestListController.getRequestLoad(paying_Rider).size());
-        requestListController.removeRequest(request);
+        requestListController.removeRequest(request.getId());
         assertEquals("There is no request", requestListController.getRequestLoad(paying_Rider).size(),0);
 
     }
