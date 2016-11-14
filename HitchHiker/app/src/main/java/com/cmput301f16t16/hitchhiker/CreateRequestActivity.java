@@ -51,7 +51,7 @@ public class CreateRequestActivity extends AppCompatActivity {
             Request newRequest = new Request(userName, pickUp, dropOff, price);
             String result = rc.addRequest(newRequest);
             if (result == null){
-                Toast.makeText(this, "Request submitted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
                 this.finish();
             }
             else {
