@@ -84,7 +84,6 @@ public class ElasticsearchUserController{
         }
     }
 
-
     // TODO we need a function which adds a request!
     public static class AddUsersTask extends AsyncTask<User, Void, Void> {
 

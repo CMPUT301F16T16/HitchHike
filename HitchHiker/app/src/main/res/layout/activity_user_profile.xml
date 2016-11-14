@@ -10,4 +10,70 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cmput301f16t16.hitchhiker.UserProfileActivity">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:id="@+id/profileText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:id="@+id/userNameUnique"
+        android:layout_below="@id/profileText"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/changeNumber"
+        android:layout_below="@id/userNameUnique"
+        android:layout_marginTop="30dp"
+        android:ems="10" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/changeEmail"
+        android:layout_below="@id/changeNumber"
+        android:layout_marginTop="30dp"
+        android:ems="10" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        android:id="@+id/PhoneEdit"
+        android:layout_alignTop="@+id/changeNumber"
+        android:layout_alignParentEnd="true"
+        android:onClick="editPhoneNumber" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        android:id="@+id/EmailEdit"
+        android:layout_alignTop="@+id/changeEmail"
+        android:layout_alignParentEnd="true"
+        android:onClick="editEmail" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save all changes"
+        android:id="@+id/editProfile"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="savedChanges"/>
+
+
 </RelativeLayout>

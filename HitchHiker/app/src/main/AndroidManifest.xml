@@ -26,6 +26,7 @@
         <activity android:name=".ProspectiveDriversActivity" />
         <activity android:name=".DriverActivity" />
         <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".BrowseRequestActivity"></activity>
     </application>
 
 </manifest>

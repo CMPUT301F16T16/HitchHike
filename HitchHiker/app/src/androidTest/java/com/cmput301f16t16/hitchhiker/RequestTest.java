@@ -5,7 +5,6 @@ import junit.framework.TestCase;
 
 
 /**
-<<<<<<< HEAD
  * Created by Jae-yeon on 10/14/2016.
  * edited by Angus on 11/2/2016.
 */
@@ -17,7 +16,7 @@ public class RequestTest extends TestCase {
         Fare fare = new Fare();
         fare.setFare(10.25);
         Location dropOff = new Location();
-        User requestCreator = new User("HitchKiker1");
+        User requestCreator = new User("HitchKiker1", "", "", "", 0,0 );
         Request request = new Request(requestCreator, pickUp, dropOff, fare);
         assertTrue("Request Creator is not equal", requestCreator.equals(request.getRider()));
     }
@@ -27,23 +26,25 @@ public class RequestTest extends TestCase {
      * As a rider I want to request rides between 2 locations
      */
     public void testLocationRequest() {
-        User paying_Rider = new User("HitchHiker2");
+        User paying_Rider = new User("HitchHiker2", "", "", "", 6,5);
         Location pickUp = new Location();
         Location dropOff = new Location();
+        paying_Rider.setUserType(1);
         Fare fare = new Fare();
         fare.setFare(100.25);
         Request request = new Request(paying_Rider, pickUp, dropOff, fare);
         assertTrue("Location A is not the start", pickUp.equals(request.getStartLocation()));
         assertTrue("Location A is not the end", dropOff.equals(request.getEndLocation()));
-//        RequestListController requestListController = new RequestListController();
-//        requestListController.addRequest(request);
-//        requestListController.removeRequest(request);
-
+        RequestListController requestListController = new RequestListController();
+        requestListController.addRequest(request);
+        assertEquals("There is a request", 1, requestListController.getRequestLoad(paying_Rider).size());
+        requestListController.removeRequest(request);
+        assertEquals("There is no request", requestListController.getRequestLoad(paying_Rider).size(),0);
 
     }
 
     public void testSizeRequestList() {
-        User rider = new User("BOB");
+        User rider = new User("BOB", "", "", "", 3, 4);
         Location pickUp = new Location();
         Location dropOff = new Location();
         Fare fare = new Fare();
@@ -58,9 +59,9 @@ public class RequestTest extends TestCase {
     }
 
     public void testUserType () {
-        User rider = new User("Billy");
+        User rider = new User("Billy", "", "", "", 4,5);
         rider.setUserType(2);
-        User driver = new User("Dora");
+        User driver = new User("Dora", "", "", "", 5, 3);
         driver.setUserType(2);
         assertTrue("The User's type is the same", rider.getUserType().equals(driver.getUserType()));
 //        assertTrue("The User's type is the same", driver.getUserType().equals("Driver"));
@@ -70,6 +71,8 @@ public class RequestTest extends TestCase {
 
 
     }
+
+
 }
 //<<<<<<< HEAD
 //    public void testAcceptDriver() {
