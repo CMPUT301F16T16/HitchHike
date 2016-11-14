@@ -107,10 +107,20 @@
             android:layout_height="wrap_content"
             android:text="placer"
             android:textSize="17sp"
+            android:id="@+id/email_textView"
+            android:layout_alignBaseline="@+id/emailTitle_textView"
+            android:layout_alignBottom="@+id/emailTitle_textView"
+            android:layout_toStartOf="@+id/driver_textView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="placer"
+            android:textSize="17sp"
             android:id="@+id/firstName_textView"
             android:layout_alignBaseline="@+id/firstNameTitle_textView"
             android:layout_alignBottom="@+id/firstNameTitle_textView"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignEnd="@+id/username_textView" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,7 +130,7 @@
             android:id="@+id/lastName_textView"
             android:layout_alignBaseline="@+id/lastNameTitle_textView"
             android:layout_alignBottom="@+id/lastNameTitle_textView"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignStart="@+id/firstName_textView" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -130,17 +140,7 @@
             android:id="@+id/phoneNumber_textView"
             android:layout_alignBaseline="@+id/phoneNumberTitle_textView"
             android:layout_alignBottom="@+id/phoneNumberTitle_textView"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="placer"
-            android:textSize="17sp"
-            android:id="@+id/email_textView"
-            android:layout_alignBaseline="@+id/emailTitle_textView"
-            android:layout_alignBottom="@+id/emailTitle_textView"
-            android:layout_centerHorizontal="true" />
+            android:layout_toEndOf="@+id/email_textView" />
 
 
     </RelativeLayout>
