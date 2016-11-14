@@ -13,7 +13,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
-        
+
         //RequestList Manager has to be initialized to know about the new created request
 //        RequestListManager.initRequestManager(this.getApplicationContext());
 
@@ -22,9 +22,8 @@ public class CreateRequestActivity extends AppCompatActivity {
     }
 
     public void CreateRequest(View view){
-
+        RequestListController rc = new RequestListController();
         Toast.makeText(this, "Creating Request", Toast.LENGTH_SHORT).show();
-        RequestListController rlc = new RequestListController();
 
         EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
@@ -50,24 +49,14 @@ public class CreateRequestActivity extends AppCompatActivity {
             Double price = Double.parseDouble(suggestedFare);
             String userName = user.getUserName();
             Request newRequest = new Request(userName, pickUp, dropOff, price);
-            ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-            addRequestsTask.execute(newRequest);
-            finish();
-
+            String result = rc.addRequest(newRequest);
+            if (result == null){
+                Toast.makeText(this, "Request submitted", Toast.LENGTH_SHORT).show();
+                this.finish();
+            }
+            else {
+                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            }
         }
-
-        //Havnt figured out how the Fare works yet (Spei's job)
-        //Integer esitmate = Integer.parseInt(estimate.getText().toString());
-        /**
-         * struggling on how to pass a User Rider into the request object
-         * Going to make mock-object Test see requestTest
-         */
-//        Request newRequest = new Request(requestCreator, pickUp, dropOff, estimate);
-//        ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-//        addRequestsTask.execute(newRequest);
-
-
-
-
     }
 }

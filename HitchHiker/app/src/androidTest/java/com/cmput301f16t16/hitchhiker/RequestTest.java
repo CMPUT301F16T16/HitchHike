@@ -17,8 +17,9 @@ public class RequestTest extends TestCase {
         fare.setFare(10.25);
         Location dropOff = new Location();
         User requestCreator = new User("HitchKiker1", "", "", "", 0,0 );
-        Request request = new Request(requestCreator, pickUp, dropOff, fare);
-        assertTrue("Request Creator is not equal", requestCreator.equals(request.getRider()));
+        String name = requestCreator.getUserName();
+        Request request = new Request(name, "alabama", "arkansas", 10.00);
+        assertTrue("Request Creator is not equal", requestCreator.equals(request.getRiderName()));
     }
 
     /**
@@ -32,7 +33,7 @@ public class RequestTest extends TestCase {
         paying_Rider.setUserType(1);
         Fare fare = new Fare();
         fare.setFare(100.25);
-        Request request = new Request(paying_Rider, pickUp, dropOff, fare);
+        Request request = new Request(paying_Rider.getUserName(), "alabama", "arkansas", 10.00);
         assertTrue("Location A is not the start", pickUp.equals(request.getStartLocation()));
         assertTrue("Location A is not the end", dropOff.equals(request.getEndLocation()));
         RequestListController requestListController = new RequestListController();
@@ -49,7 +50,7 @@ public class RequestTest extends TestCase {
         Location dropOff = new Location();
         Fare fare = new Fare();
         fare.setFare(1.25);
-        Request request = new Request(rider, pickUp, dropOff, fare);
+        Request request = new Request(rider.getUserName(), "pickUp", "dropOff", 10.00);
         RequestListController rc = new RequestListController();
         assertEquals("There are no requests in the List", rc.getRequestLoad(rider).size(), 0);
 //        rc.addRequest(request);
