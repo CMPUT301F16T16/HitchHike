@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-        catch (Exception e) {
+        catch (Exception e) { // If the userName doesn't exist on Elasticsearch!
             Log.i("Error", "Failed to get the user out of the async object");
         }
 
