@@ -37,6 +37,8 @@ public class LocationViewActivity extends Activity {
     private String towers;
     private int lat, longi;
     private GeoPoint currentPoint;
+    private GeoPoint startPoint;
+    private GeoPoint endPoint;
     Activity ourActivity = this;
     MapView map;
     Road[] mRoads;
@@ -99,7 +101,7 @@ public class LocationViewActivity extends Activity {
 
         overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
         overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", endPoint));
-//        getRoadAsync(startPoint, endPoint);
+        getRoadAsync(startPoint, endPoint);
     }
 
     public void setMarker(GeoPoint sp) {
@@ -162,38 +164,37 @@ public class LocationViewActivity extends Activity {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    public GeoPoint getStartPoint() {
-//        return startPoint;
-//    }
-//
-//    public GeoPoint getEndPoint() {
-//        return endPoint;
-//    }
-//
-//    public GeoPoint getCurrentPoint() {
-//        return currentPoint;
-//    }
-//}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public GeoPoint getStartPoint() {
+        return startPoint;
+    }
+
+    public GeoPoint getEndPoint() {
+        return endPoint;
+    }
+
+    public GeoPoint getCurrentPoint() {
+        return currentPoint;
+    }
 }
