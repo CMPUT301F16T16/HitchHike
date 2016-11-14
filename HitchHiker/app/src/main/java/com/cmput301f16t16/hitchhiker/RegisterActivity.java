@@ -47,14 +47,19 @@ public class RegisterActivity extends AppCompatActivity {
         EditText phoneNumberText = (EditText) findViewById(R.id.phoneNumberEditText);
         EditText emailAddressText = (EditText) findViewById(R.id.emailAddressEditText);
 
+        TextView chooseUserTypeText = (TextView) findViewById(R.id.choose_usertype_text);
+        TextView uniqueUsernameText = (TextView) findViewById(R.id.unique_username_text);
+
+
         CheckBox riderCheckBox = (CheckBox) findViewById(R.id.riderCheckBox);
         CheckBox driverCheckBox = (CheckBox) findViewById(R.id.driverCheckBox);
 
         String userName = usernameText.getText().toString();
         String userFirstName = firstNameText.getText().toString();
         String userLastName = lastNameText.getText().toString();
-        Integer userPhoneNumber = Integer.parseInt(phoneNumberText.getText().toString());
         String userEmail = emailAddressText.getText().toString();
+        String phoneNumber = phoneNumberText.getText().toString();
+
 
         /**
          * Determines the userType
@@ -83,43 +88,31 @@ public class RegisterActivity extends AppCompatActivity {
          * ELSE create the new user
          */
         if (userName.equals("") || userFirstName.equals("") || userLastName.equals("") ||
-                userPhoneNumber.equals("") || userEmail.equals("")){
-            TextView uniqueUsernameText = (TextView) findViewById(R.id.choose_usertype_text);
-            uniqueUsernameText.setText("Please fill out every field.");
-            uniqueUsernameText.setTextColor(Color.RED);
+                phoneNumber.equals("") || userEmail.equals("")){
+            uniqueUsernameText.setText("Your Username must be unique!");
+            uniqueUsernameText.setTextColor(Color.BLACK);
+            chooseUserTypeText.setText("Please fill out every field.");
+            chooseUserTypeText.setTextColor(Color.RED);
             usernameExists = false;
         }
         else if (usernameExists){
-            TextView uniqueUsernameText = (TextView) findViewById(R.id.unique_username_text);
+            chooseUserTypeText.setText("");
             uniqueUsernameText.setText("Your username is not unique!");
             uniqueUsernameText.setTextColor(Color.RED);
             usernameExists = false;
         }
         else if (userType == 0) {
-            TextView uniqueUsernameText = (TextView) findViewById(R.id.choose_usertype_text);
-            uniqueUsernameText.setText("Please choose to be a rider, driver or both.");
-            uniqueUsernameText.setTextColor(Color.RED);
+            uniqueUsernameText.setText("Your Username must be unique!");
+            uniqueUsernameText.setTextColor(Color.BLACK);
+            chooseUserTypeText.setText("Please choose to be a rider, driver or both.");
+            chooseUserTypeText.setTextColor(Color.RED);
             usernameExists = false;
         }
         else if (usernameExists == false) {
-//            User user = new User(userName);
-//            user.setUserFirstName(userFirstName);
-//            user.setUserLatName(userLastName);
-//            user.setUserEmail(userEmail);
-//            user.setUserPhoneNumber(userPhoneNumber);
-//            user.setUserType(userType);
-            //User user = new User(userName);
+
+            Integer userPhoneNumber = Integer.parseInt(phoneNumber);
+
             User newUser = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType);
-
-//
-//            user.setUserFirstName(userFirstName);
-//
-//            user.setUserLastName(userLastName);
-//            user.setUserType(userType);
-//            user.setUserPhoneNumber(userPhoneNumber);
-//            user.setUserName(userName);
-//            user.setUserEmail(userEmail);
-
 
             ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
             addUsersTask.execute(newUser);
