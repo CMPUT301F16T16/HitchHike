@@ -18,9 +18,11 @@ import java.util.ArrayList;
 public class RiderActivity extends AppCompatActivity {
 
     private ListView theRequestList;
-    private ArrayList<Request> requestsList = new ArrayList<Request>();
-    private ArrayAdapter<Request> requestAdapter;
+
+
+//    private ArrayAdapter<Request> requestAdapter;
     private User user;
+    private ArrayList<Request> requestsList = new ArrayList<Request>();
     private RequestListController rc = new RequestListController();
     private String userName;
 
@@ -32,13 +34,16 @@ public class RiderActivity extends AppCompatActivity {
         user =(User) getIntent().getSerializableExtra("user");
         userName = user.getUserName();
 
-        // display requests into the listview
-        theRequestList = (ListView) findViewById(R.id.open_requests_listview);
+        RequestViewAdapter rva = new RequestViewAdapter(this, requestsList);
 
-        requestsList = rc.getListOfRequest(userName);
-        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
-        theRequestList.setAdapter(requestAdapter);
-        requestAdapter.notifyDataSetChanged();
+        // display requests into the listview
+//        theRequestList = (ListView) findViewById(R.id.open_requests_listview);
+
+       requestsList = rc.getListOfRequest(userName);
+//        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
+        theRequestList.setAdapter(rva);
+        theRequestList = (ListView) findViewById(R.id.open_requests_listview);
+        rva.notifyDataSetChanged();
 
 
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -53,18 +58,18 @@ public class RiderActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStart() {
-        // TODO Auto-generated method stubz
-        super.onStart();
-
-        requestsList.clear();
-        requestsList = rc.getListOfRequest(userName);
-
-        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
-        theRequestList.setAdapter(requestAdapter);
-        requestAdapter.notifyDataSetChanged();
-    }
+//    @Override
+//    protected void onStart() {
+//        // TODO Auto-generated method stubz
+//        super.onStart();
+//
+//        requestsList.clear();
+//        requestsList = rc.getListOfRequest(userName);
+//
+//        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
+//        theRequestList.setAdapter(requestAdapter);
+//        requestAdapter.notifyDataSetChanged();
+//    }
 
     /**
      * Refresh.
@@ -75,10 +80,11 @@ public class RiderActivity extends AppCompatActivity {
     public void Refresh(View view){
         requestsList.clear();
         requestsList = rc.getListOfRequest(userName);
+        RequestViewAdapter rva = new RequestViewAdapter(this, requestsList);
 
-        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
-        theRequestList.setAdapter(requestAdapter);
-        requestAdapter.notifyDataSetChanged();
+//        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
+        theRequestList.setAdapter(rva);
+        rva.notifyDataSetChanged();
     }
 
     /**
