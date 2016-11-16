@@ -18,7 +18,7 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
     private String requestId;
     private Request request;
     private RequestListController rc = new RequestListController();
-    private User user;
+    private User driverUser;
 
     private ArrayList<String> prospectiveDriverList = new ArrayList<String>();
     private ArrayAdapter<String> driverAdapter;
@@ -49,6 +49,7 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
 
         theProspectiveDriversList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
+
                 String userName;
 
                 Intent intent = new Intent(ProspectiveDriversActivity.this, ShowUserProfileActivity.class);
@@ -59,12 +60,12 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
                 getUserTask.execute(userName);
 
                 try {
-                    user = getUserTask.get();
+                    driverUser = getUserTask.get();
                 }
                 catch(Exception e){
 
                 }
-                intent.putExtra("user", user);
+                intent.putExtra("user", driverUser);
                 startActivity(intent);
             }
         });

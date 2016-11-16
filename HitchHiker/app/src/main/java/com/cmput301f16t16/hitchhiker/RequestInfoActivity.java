@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class RequestInfoActivity extends AppCompatActivity {
     private Request request;
     private User user;
+    private User riderUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class RequestInfoActivity extends AppCompatActivity {
 
         request = (Request) getIntent().getSerializableExtra("request");
         user = (User) getIntent().getSerializableExtra("user");
+        riderUser = (User) getIntent().getSerializableExtra("riderUser");
 
         TextView pickUpLocationText = (TextView) findViewById(R.id.pickUp_Location_TextView);
         pickUpLocationText.setText(request.getPickUp());
@@ -27,7 +29,7 @@ public class RequestInfoActivity extends AppCompatActivity {
         dropOffLocationText.setText(request.getDropOff());
 
         TextView userNameText = (TextView) findViewById(R.id.requestUserName_textView);
-        userNameText.setText(user.getUserName());
+        userNameText.setText(riderUser.getUserName());
 
     }
 
@@ -51,7 +53,7 @@ public class RequestInfoActivity extends AppCompatActivity {
     public void GoToUserProfile(View view){
         Intent intent = new Intent(RequestInfoActivity.this, ShowUserProfileActivity.class);
 
-        intent.putExtra("user", user);
+        intent.putExtra("user", riderUser);
         startActivity(intent);
 
 

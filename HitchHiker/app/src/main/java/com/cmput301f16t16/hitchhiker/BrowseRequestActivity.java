@@ -62,7 +62,8 @@ public class BrowseRequestActivity extends AppCompatActivity{
 
 
 
-                intent.putExtra("user", riderUser);
+                intent.putExtra("riderUser", riderUser);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
