@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
     // October 25th, 2016
     // answered by: yubaraj poudel
 
-
+    private Context context = MainActivity.this;
 
     final private double MAP_DEFAULT_LATITUDE = 53.52676;
     final private double MAP_DEFAULT_LONGITUDE = -113.52715;
@@ -99,7 +99,7 @@ public class MainActivity extends Activity {
 
 
 
-
+        //map.getOverlays().clear();
         Touchy t = new Touchy();
         overlayList = map.getOverlays();
         overlayList.add(t);
@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
         overlayItemArray = new ArrayList<>();
 
         overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
-        overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", endPoint));
+        overlayItemArray.add(new OverlayItem("Destination", "This is the destination point", endPoint));
 //        getRoadAsync(startPoint, endPoint);
     }
 
@@ -155,55 +155,60 @@ public class MainActivity extends Activity {
 
 
 //  ROUTE
-//    public void getRoute (View view) {
-//
-//        EditText etOrigin = (EditText) findViewById(R.id.origin);
-//        EditText etDestination = (EditText) findViewById(R.id.destination);
-//
-//        final String o = etOrigin.getText().toString();
-//        final String d = etDestination.getText().toString();
-//
-//        new Thread() {
-//
-//            public void run() {
-//                GeoPoint startPoint = getLocation(o);
-//                GeoPoint endPoint = getLocation(d);
-//
-//                if (startPoint != null && endPoint != null) {
-//
-//                    getRoadAsync(startPoint, endPoint);
-//                }
-//                else {
-//                    Toast.makeText(MainActivity.this, "Fail!", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        }.start();
-//    }
-//
-//    public GeoPoint getLocation(String location) {
-//
-//        GeocoderNominatim gn = new GeocoderNominatim(MainActivity.this);
-//        GeoPoint gp = null;
-//
-//        ArrayList<Address> al;
-//        try{
-//            al = (ArrayList<Address>) gn.getFromLocationName(location, 1);
-//
-//            if (al != null && al.size() > 0) {
-//                Log.i("Script", "Street: "+al.get(0).getThoroughfare());
-//                Log.i("Script", "City: "+al.get(0).getSubAdminArea());
-//                Log.i("Script", "Province: "+al.get(0).getAdminArea());
-//                Log.i("Script", "Country: "+al.get(0).getCountryName());
-//
-//                gp = new GeoPoint(al.get(0).getLatitude(), al.get(0).getLongitude());
-//            }
-//        }
-//        catch (IOException e) {e.printStackTrace();}
-//
-//        return (gp);
-//    }
+    public void getRoute (View view) {
 
+        EditText etOrigin = (EditText) findViewById(R.id.origin);
+        EditText etDestination = (EditText) findViewById(R.id.destination);
 
+        final String o = etOrigin.getText().toString();
+        final String d = etDestination.getText().toString();
+
+        new Thread() {
+
+            public void run() {
+                startPoint = getLocation(o);
+                endPoint = getLocation(d);
+
+                if (startPoint != null && endPoint != null) {
+
+                    getRoadAsync(startPoint, endPoint);
+                    setStartMarker();
+                    setEndMarker();
+                    mapController.animateTo(startPoint);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Fail to find a route !", Toast.LENGTH_LONG).show();
+                }
+            }
+        }.start();
+    }
+
+    public GeoPoint getLocation(String location) {
+
+        GeocoderNominatim gn = new GeocoderNominatim(location);
+        GeoPoint gp = null;
+
+        ArrayList<Address> al;
+        try{
+            al = (ArrayList<Address>) gn.getFromLocationName(location, 1);
+
+            if (al != null && al.size() > 0) {
+                Log.i("Script", "Street: "+al.get(0).getThoroughfare());
+                Log.i("Script", "City: "+al.get(0).getSubAdminArea());
+                Log.i("Script", "Province: "+al.get(0).getAdminArea());
+                Log.i("Script", "Country: "+al.get(0).getCountryName());
+
+                gp = new GeoPoint(al.get(0).getLatitude(), al.get(0).getLongitude());
+                Log.d("GEOPOINT", "Lat: " + String.valueOf(al.get(0).getLatitude()));
+                Log.d("GEOPOINT", "Lon: " + String.valueOf(al.get(0).getLongitude()));
+            }
+        }
+        catch (IOException e) {e.printStackTrace();}
+
+        return (gp);
+    }
+
+//long click
     private class Touchy extends Overlay {
 
 
@@ -218,6 +223,7 @@ public class MainActivity extends Activity {
                 x = (int) e.getX();
                 y = (int) e.getY();
                 touchedPoint = (GeoPoint) map.getProjection().fromPixels(x,y);
+
             }
 
             if (e.getAction() == MotionEvent.ACTION_UP) {
@@ -233,12 +239,11 @@ public class MainActivity extends Activity {
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
                         startPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
-
+                        //map.getOverlays().clear();
                         setStartMarker();
                         Toast.makeText(MainActivity.this, "Set Start Point", Toast.LENGTH_LONG).show();
                     }
-                    //setStartPoint(touchedpoint);
-                    //Toast.makeText(MainActivity.this, "Set Start Point", Toast.LENGTH_LONG).show();
+
 
                 });
                 alert.setButton(DialogInterface.BUTTON_NEGATIVE, "Set Destination", new DialogInterface.OnClickListener() {
@@ -255,6 +260,15 @@ public class MainActivity extends Activity {
                     }
                     //setEndPoint(touchedpoint);
                     //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
+                });
+
+                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        // TODO Auto-generated method stub
+                        map.getOverlays().clear();
+                    }
+
                 });
 
 
