@@ -75,8 +75,8 @@ public class Location extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        request = (Request) getIntent().getSerializableExtra("request");
-        requestId = request.getId();
+//        request = (Request) getIntent().getSerializableExtra("request");
+//        requestId = request.getId();
         String requestView = request.getTrip();
         TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
         displayTrip.setText(requestView);
