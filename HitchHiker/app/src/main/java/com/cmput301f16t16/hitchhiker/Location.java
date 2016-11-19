@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.location.GeocoderNominatim;
+import org.osmdroid.bonuspack.routing.MapQuestRoadManager;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
@@ -76,10 +77,11 @@ public class Location extends Activity{
         setContentView(R.layout.main);
 
 //        request = (Request) getIntent().getSerializableExtra("request");
-//        requestId = request.getId();
+
         String requestView = request.getTrip();
         TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
         displayTrip.setText(requestView);
+
 
         map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -159,7 +161,7 @@ public class Location extends Activity{
 
         map.getOverlays().add(startMarker);
 
-        map.invalidate();
+
     }
 
     private void setEndMarker () {
@@ -172,7 +174,7 @@ public class Location extends Activity{
 
         map.getOverlays().add(endMarker);
 
-        map.invalidate();
+
     }
 
     //long click
@@ -210,8 +212,9 @@ public class Location extends Activity{
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
                         startPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
-                        //map.getOverlays().clear();
+
                         setStartMarker(startPoint);
+                        map.invalidate();
                         Toast.makeText(Location.this, "Set Start Point", Toast.LENGTH_LONG).show();
                     }
 
@@ -224,8 +227,7 @@ public class Location extends Activity{
                         endPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
 
                         getRoadAsync(startPoint, endPoint);
-//                        setStartMarker();
-                        setEndMarker();
+
                         mapController.animateTo(startPoint);
                         Toast.makeText(Location.this, "Set destination", Toast.LENGTH_LONG).show();
                     }
@@ -233,14 +235,14 @@ public class Location extends Activity{
                     //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                 });
 
-                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
-                        // TODO Auto-generated method stub
-                        map.getOverlays().clear();
-                    }
-
-                });
+//                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int which) {
+//                        // TODO Auto-generated method stub
+//                        map.getOverlays().clear();
+//                    }
+//
+//                });
 
 
 
@@ -269,8 +271,7 @@ public class Location extends Activity{
                 if (startPoint != null && endPoint != null) {
 
                     getRoadAsync(startPoint, endPoint);
-                    setStartMarker(startPoint);
-                    setEndMarker();
+
                     mapController.animateTo(startPoint);
                 }
                 else {
@@ -325,16 +326,13 @@ public class Location extends Activity{
         protected Road[] doInBackground(Object... params) {
             @SuppressWarnings("unchecked")
             ArrayList<GeoPoint> waypoints = (ArrayList<GeoPoint>) params[0];
-            RoadManager roadManager = new OSRMRoadManager(ourActivity);
+            RoadManager roadManager = new MapQuestRoadManager("L1fY0M61AxWmso7ZUmsjZEtILXjzU3A6");
             return roadManager.getRoads(waypoints);
         }
 
         @Override
-        //recieved help by looking at https://github.com/CMPUT301F16T01/Carrier/blob/master/app/src/main/java/comcmput301f16t01/github/carrier/ViewLocationsActivity.java
         protected void onPostExecute(Road[] roads) {
             mRoads = roads;
-            Road path = null;
-            double min = 0;
             if (roads == null)
                 return;
             if (roads[0].mStatus == Road.STATUS_TECHNICAL_ISSUE)
@@ -343,17 +341,24 @@ public class Location extends Activity{
                 Toast.makeText(map.getContext(), "No possible route here", Toast.LENGTH_SHORT).show();
             Polyline[] mRoadOverlays = new Polyline[roads.length];
             List<Overlay> mapOverlays = map.getOverlays();
-            for (Road road: roads) {
-                if(road.mLength < min || min == 0){
-                    min = road.mLength;
-                    path = road;
-                }
+            for (int i = 0; i < roads.length; i++) {
+                Polyline roadPolyline = RoadManager.buildRoadOverlay(roads[i]);
+                mRoadOverlays[i] = roadPolyline;
+                String routeDesc = roads[i].getLengthDurationText(ourActivity, -1);
+                roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
+                roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
+                roadPolyline.setRelatedObject(i);
+//                roadPolyline.setOnClickListener(new RoadOnClickListener());
+                mapOverlays.add(1, roadPolyline);
+
+
+                //selectRoad(0);
+//                map.invalidate();
+                //we insert the road overlays at the "bottom", just above the MapEventsOverlay,
+                //to avoid covering the other overlays.
             }
-            String routeDesc = path.getLengthDurationText(ourActivity, -1);
-            Polyline roadPolyline = RoadManager.buildRoadOverlay(path);
-            roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
-            roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
-            mapOverlays.add(0, roadPolyline);
+            setStartMarker(startPoint);
+            setEndMarker();
             map.invalidate();
         }
     }
