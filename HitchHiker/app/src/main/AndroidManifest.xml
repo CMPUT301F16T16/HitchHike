@@ -34,8 +34,9 @@
         <activity android:name=".RequestInfoActivity" />
         <activity android:name=".UserProfileEditActivity" />
         <activity android:name=".LocationViewActivity" />
-        <activity android:name=".Location" />
-        <activity android:name=".ShowUserProfileActivity"></activity>
+        <activity android:name=".ShowUserProfileActivity"/>
+        <activity android:name=".Location"/>
+
     </application>
 
 </manifest>

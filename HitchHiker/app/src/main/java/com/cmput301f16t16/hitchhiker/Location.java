@@ -75,10 +75,11 @@ public class Location extends Activity{
         setContentView(R.layout.main);
 
 //        request = (Request) getIntent().getSerializableExtra("request");
-//        requestId = request.getId();
-//        String requestView = request.getTrip();
-//        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
-//        displayTrip.setText(requestView);
+
+        String requestView = request.getTrip();
+        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
+        displayTrip.setText(requestView);
+
 
         map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);

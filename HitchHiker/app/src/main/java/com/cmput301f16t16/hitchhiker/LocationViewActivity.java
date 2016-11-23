@@ -60,11 +60,11 @@ public class LocationViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_view);
 
-        request = (Request) getIntent().getSerializableExtra("request");
-        requestId = request.getId();
-        String requestView = request.getTrip();
-        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
-        displayTrip.setText(requestView);
+//        request = (Request) getIntent().getSerializableExtra("request");
+//        requestId = request.getId();
+//        String requestView = request.getTrip();
+//        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
+//        displayTrip.setText(requestView);
 
         map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
