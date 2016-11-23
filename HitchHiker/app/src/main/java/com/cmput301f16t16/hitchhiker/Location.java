@@ -43,8 +43,6 @@ import java.util.List;
  */
 public class Location extends Activity{
 
-    private Request request;
-    private String requestId;
     private List<Overlay> overlayList;
 
     private LocationManager lm;
@@ -141,13 +139,15 @@ public class Location extends Activity{
         //getRoadAsync(startPoint, endPoint);
     }
 
+
+
     /**
      * Sets marker.
      *
      * @param sp the sp
      */
 
-    private void setStartMarker(GeoPoint sp) {
+    public void setStartMarker(GeoPoint sp) {
         // set the map
         Marker startMarker = new Marker(map);
 
@@ -158,12 +158,12 @@ public class Location extends Activity{
         startMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
 
 
-        map.getOverlays().add(startMarker);
+        overlayList.add(startMarker);
 
 
     }
 
-    private void setEndMarker () {
+    public void setEndMarker () {
         Marker endMarker = new Marker(map);
 
         endMarker.setPosition(endPoint);
@@ -171,7 +171,7 @@ public class Location extends Activity{
         endMarker.setTitle("END");
         endMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
 
-        map.getOverlays().add(endMarker);
+        overlayList.add(endMarker);
 
 
     }
@@ -187,9 +187,11 @@ public class Location extends Activity{
         @Override
         protected void draw(Canvas canvas, MapView mapView, boolean b) {
 
+
         }
 
         public boolean onTouchEvent(MotionEvent e, MapView m) {
+            //Log.d("MAPTAG", "testing");
             if (e.getAction() == MotionEvent.ACTION_DOWN) {
                 start = e.getEventTime();
                 x = (int) e.getX();
@@ -234,14 +236,21 @@ public class Location extends Activity{
                     //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                 });
 
-//                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int which) {
-//                        // TODO Auto-generated method stub
-//                        map.getOverlays().clear();
-//                    }
-//
-//                });
+                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        // TODO Auto-generated method stub
+                        overlayList.clear();
+                        map.invalidate();
+
+                        Touchy t = new Touchy();
+                        overlayList = map.getOverlays();
+                        overlayList.add(t);
+
+
+                    }
+
+                });
 
 
 
