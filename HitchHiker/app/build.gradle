@@ -3,6 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "22.0.1"
+    useLibrary 'org.apache.http.legacy'
+
 
     defaultConfig {
         applicationId "com.cmput301f16t16.hitchhiker"
@@ -31,9 +33,6 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('src/include/jest-droid-2.0.1-SNAPSHOT.jar')
-    compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
 
     testCompile 'junit:junit:4.12'
     compile('com.github.MKergall:osmbonuspack:6.0') {
@@ -42,4 +41,8 @@ dependencies {
     }
     androidTestCompile 'org.testng:testng:6.9.6'
     androidTestCompile 'junit:junit:4.12'
+    compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.google.android.gms:play-services-maps:9.2.1'
 }

@@ -86,6 +86,17 @@
         android:ems="5"
         />
 
+    <com.google.android.gms.maps.MapView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/submit_button"
+        android:layout_below="@+id/suggested_fare"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/mapView"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentEnd="true" />
+
 
     <Button
         android:layout_width="wrap_content"
