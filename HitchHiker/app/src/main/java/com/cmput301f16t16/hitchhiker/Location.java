@@ -335,13 +335,16 @@ public class Location extends Activity{
         protected Road[] doInBackground(Object... params) {
             @SuppressWarnings("unchecked")
             ArrayList<GeoPoint> waypoints = (ArrayList<GeoPoint>) params[0];
-            RoadManager roadManager = new MapQuestRoadManager("L1fY0M61AxWmso7ZUmsjZEtILXjzU3A6");
+            RoadManager roadManager = new OSRMRoadManager(ourActivity);
             return roadManager.getRoads(waypoints);
         }
 
         @Override
+        //recieved help by looking at https://github.com/CMPUT301F16T01/Carrier/blob/master/app/src/main/java/comcmput301f16t01/github/carrier/ViewLocationsActivity.java
         protected void onPostExecute(Road[] roads) {
             mRoads = roads;
+            Road path = null;
+            double min = 0;
             if (roads == null)
                 return;
             if (roads[0].mStatus == Road.STATUS_TECHNICAL_ISSUE)
@@ -350,27 +353,25 @@ public class Location extends Activity{
                 Toast.makeText(map.getContext(), "No possible route here", Toast.LENGTH_SHORT).show();
             Polyline[] mRoadOverlays = new Polyline[roads.length];
             List<Overlay> mapOverlays = map.getOverlays();
-            for (int i = 0; i < roads.length; i++) {
-                Polyline roadPolyline = RoadManager.buildRoadOverlay(roads[i]);
-                mRoadOverlays[i] = roadPolyline;
-                String routeDesc = roads[i].getLengthDurationText(ourActivity, -1);
-                roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
-                roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
-                roadPolyline.setRelatedObject(i);
-//                roadPolyline.setOnClickListener(new RoadOnClickListener());
-                mapOverlays.add(1, roadPolyline);
-
-
-                //selectRoad(0);
-//                map.invalidate();
-                //we insert the road overlays at the "bottom", just above the MapEventsOverlay,
-                //to avoid covering the other overlays.
+            for (Road road: roads) {
+                if(road.mLength < min || min == 0){
+                    min = road.mLength;
+                    path = road;
+                }
             }
+            String routeDesc = path.getLengthDurationText(ourActivity, -1);
+            distance = path.mLength;
+            Polyline roadPolyline = RoadManager.buildRoadOverlay(path);
+            roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
+            roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
+            mapOverlays.add(0, roadPolyline);
             setStartMarker(startPoint);
             setEndMarker();
             map.invalidate();
         }
     }
+
+
 
     /**
      * Gets start point.
@@ -402,5 +403,13 @@ public class Location extends Activity{
      */
     public GeoPoint getCurrentPoint() {
         return currentPoint;
+    }
+
+    /**
+     * gets distance
+     * @return distance
+     */
+    public Double getDistance() {
+        return distance;
     }
 }
