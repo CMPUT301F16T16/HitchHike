@@ -106,7 +106,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
      * @param view the view
      */
     public void GoToDriverProfilePage(View view) {
-        Intent intent = new Intent(BrowseRequestActivity.this, DriverActivity.class);
+        Intent intent = new Intent(BrowseRequestActivity.this, UserProfileActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
     }
