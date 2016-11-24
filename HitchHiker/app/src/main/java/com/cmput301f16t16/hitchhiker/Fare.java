@@ -3,7 +3,7 @@ package com.cmput301f16t16.hitchhiker;
 /**
  * Created by Jae-yeon on 10/24/2016.
  */
-public class Fare extends Location{
+public class Fare {
 
     /**
      * The constant fare.

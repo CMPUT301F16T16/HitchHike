@@ -1,6 +1,8 @@
 package com.cmput301f16t16.hitchhiker;
 
 
+import android.location.Address;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -38,8 +40,8 @@ public class Request implements Serializable {
      * Need a Location A (start of where the rider is located)
      * and a Location B (End of the ride is located)
      */
-    private String pickUp;
-    private String dropOff;
+    private Location pickUp;
+    private Location dropOff;
 
     /**
      * Fare is calculated and must be accepted before request is complete
@@ -83,7 +85,7 @@ public class Request implements Serializable {
      * @param dropOff        the drop off
      * @param price          the price
      */
-    public Request(String requestCreator, String pickUp, String dropOff, Double price) {
+    public Request(String requestCreator, Location pickUp, Location dropOff, Double price) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
         this.dropOff = dropOff;
@@ -92,6 +94,8 @@ public class Request implements Serializable {
         this.prospectiveDrivers = new ArrayList<String>();
 
     }
+
+
 
     /**
      * Gets request status.
@@ -121,7 +125,7 @@ public class Request implements Serializable {
      *
      * @return the string
      */
-    public String getStartLocation(){
+    public Location getStartLocation(){
         return this.pickUp;
     }
 
@@ -130,7 +134,7 @@ public class Request implements Serializable {
      *
      * @return the string
      */
-    public String getEndLocation(){
+    public Location getEndLocation(){
         return this.dropOff;
     }
 
@@ -180,13 +184,6 @@ public class Request implements Serializable {
         return this.Rider;
     }
 
-    public String getPickUp() {
-        return pickUp;
-    }
-
-    public String getDropOff() {
-        return dropOff;
-    }
 
     public ArrayList<String> getProspectiveDrivers() {
         return prospectiveDrivers;

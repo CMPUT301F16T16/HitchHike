@@ -1,6 +1,8 @@
 package com.cmput301f16t16.hitchhiker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Rider activity.
  */
-public class RiderActivity extends AppCompatActivity {
+public class RiderActivity extends AppCompatActivity implements Serializable {
 
     private ListView theRequestList;
     private ArrayList<Request> requestsList = new ArrayList<Request>();
@@ -40,14 +43,20 @@ public class RiderActivity extends AppCompatActivity {
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editor = preferences.edit();
+
 
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
                 Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
 
                 Request request = requestsList.get(position);
-                intent.putExtra("request", request);
 
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Request",request);
+                intent.putExtras(bundle);
+                //intent.putExtra("USERNAME", userName);
                 startActivity(intent);
             }
         });

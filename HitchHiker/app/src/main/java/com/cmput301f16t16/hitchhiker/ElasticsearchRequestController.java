@@ -25,6 +25,7 @@ public class ElasticsearchRequestController {
     /**
      * The type Get requests task.
      */
+
 // TODO we need a function that gets requests!
     public static class GetRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
         private String userName;

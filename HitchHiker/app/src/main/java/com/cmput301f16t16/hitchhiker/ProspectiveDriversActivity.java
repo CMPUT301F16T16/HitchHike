@@ -9,12 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Prospective drivers activity.
  */
-public class ProspectiveDriversActivity extends AppCompatActivity {
+public class ProspectiveDriversActivity extends AppCompatActivity implements Serializable {
     private String requestId;
     private Request request;
     private RequestListController rc = new RequestListController();
@@ -30,7 +31,7 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prospective_drivers);
 
-        request = (Request) getIntent().getSerializableExtra("request");
+        //request = (Request) getIntent().getExtras().getSerializable("request");
 
         theProspectiveDriversList = (ListView) findViewById(R.id.prospective_driver_listview);
 

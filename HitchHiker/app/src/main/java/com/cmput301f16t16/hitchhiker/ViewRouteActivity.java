@@ -68,10 +68,10 @@ public class ViewRouteActivity extends AppCompatActivity implements OnMapReadyCa
         //LatLng defaultLocation = new LatLng(53.5444,-113.4904);
 
         // 51°03′N 114°04′W
-        double x1 = 51.03;
-        double y1 = -114.04;
-        double x2 = 53.54;
-        double y2 = -113.49;
+        double x1 = request.getStartLocation().getLatitude();
+        double y1 = request.getStartLocation().getLongitude();
+        double x2 = request.getEndLocation().getLatitude();
+        double y2 = request.getEndLocation().getLongitude();
 
         LatLng startPoint = new LatLng(x1,y1);
         LatLng endPoint = new LatLng(x2,y2);
@@ -84,7 +84,6 @@ public class ViewRouteActivity extends AppCompatActivity implements OnMapReadyCa
         googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bound,600,600,5));
 
         //make a marker
-
         Marker start = googleMap.addMarker(new MarkerOptions()
                 .position(startPoint)
                 .title("Start Point")
@@ -151,21 +150,9 @@ public class ViewRouteActivity extends AppCompatActivity implements OnMapReadyCa
         mapView.onLowMemory();
     }
 
+//    public void setUpMap(){
+//        googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)_.title("Maker"))
+//
+//    }
 
-    public static Address searchLocationByName(Context context, String locationName){
-        Geocoder geoCoder = new Geocoder(context, Locale.getDefault());
-        GeoPoint gp = null;
-        Address ad = null;
-        try {
-            List<Address> addresses = geoCoder.getFromLocationName(locationName, 1);
-            for(Address address : addresses){
-                gp = new GeoPoint((int)(address.getLatitude() * 1E6), (int)(address.getLongitude() * 1E6));
-                address.getAddressLine(1);
-                ad = address;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ad;
-    }
 }

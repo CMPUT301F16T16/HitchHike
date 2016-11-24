@@ -41,7 +41,7 @@ public class RequestListController {
      * @return the string
      */
     public String addRequest(Request request) {
-        if (request.getStartLocation() == null || request.getEndLocation() == null)
+        if (request.getStartLocation() == null || request.getEndLocation() == null )
         {
             return "something went wrong with your Request...";
         }

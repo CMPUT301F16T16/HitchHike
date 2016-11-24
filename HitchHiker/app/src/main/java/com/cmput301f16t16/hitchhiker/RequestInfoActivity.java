@@ -21,10 +21,10 @@ public class RequestInfoActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
 
         TextView pickUpLocationText = (TextView) findViewById(R.id.pickUp_Location_TextView);
-        pickUpLocationText.setText(request.getPickUp());
+        pickUpLocationText.setText(request.getStartLocation().getAddressName());
 
         TextView dropOffLocationText = (TextView) findViewById(R.id.dropOff_Location_textView);
-        dropOffLocationText.setText(request.getDropOff());
+        dropOffLocationText.setText(request.getEndLocation().getAddressName());
 
         TextView userNameText = (TextView) findViewById(R.id.requestUserName_textView);
         userNameText.setText(user.getUserName());
