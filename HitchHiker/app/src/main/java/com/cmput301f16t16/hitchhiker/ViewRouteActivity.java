@@ -1,6 +1,9 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -18,9 +21,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.osmdroid.util.GeoPoint;
 import org.w3c.dom.Document;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by V1CTORIA2LEE on 2016-11-24.
@@ -35,7 +42,7 @@ public class ViewRouteActivity extends AppCompatActivity implements OnMapReadyCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_route);
-        //request = (Request) getIntent().getSerializableExtra("request");
+        request = (Request) getIntent().getSerializableExtra("newRequest");
         mapView = (MapView) this.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
@@ -114,10 +121,6 @@ public class ViewRouteActivity extends AppCompatActivity implements OnMapReadyCa
 
         Polyline polylin = googleMap.addPolyline(rectLine);
 
-
-
-
-
         //LatLng sydney = new LatLng(-34, 151);
         //googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
@@ -149,4 +152,20 @@ public class ViewRouteActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
 
+    public static Address searchLocationByName(Context context, String locationName){
+        Geocoder geoCoder = new Geocoder(context, Locale.getDefault());
+        GeoPoint gp = null;
+        Address ad = null;
+        try {
+            List<Address> addresses = geoCoder.getFromLocationName(locationName, 1);
+            for(Address address : addresses){
+                gp = new GeoPoint((int)(address.getLatitude() * 1E6), (int)(address.getLongitude() * 1E6));
+                address.getAddressLine(1);
+                ad = address;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ad;
+    }
 }

@@ -1,5 +1,10 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.location.Address;
+import android.location.Geocoder;
+
+import org.osmdroid.util.GeoPoint;
+
 /**
  * Created by Angus on 11/3/2016.
  */
@@ -16,24 +21,24 @@ public class Location {
     /**
      * The Pick up lat.
      */
-    protected double pickUpLat;
-    /**
-     * The Pick up lon.
-     */
-    protected double pickUpLon;
-    /**
-     * The Drop off lat.
-     */
-    protected double dropOffLat;
-    /**
-     * The Drop off lon.
-     */
-    protected double dropOffLon;
-//    public double getLat() {
-//        return lat;
+
+
+    public Address getStartAddress(){
+        return
+    }
+
+
+
+//    public Address getSourceAddress() {
+//        return sourceAddress;
 //    }
 //
-//    public double getLon() {
-//        return lon;
-//    }
+//    /**
+//     * Sets source address.
+//     *
+//     * @param sourceAddress the source address
+//     */
+//    public void setSourceAddress(Address sourceAddress) {
+//        this.sourceAddress = sourceAddress;
+
 }

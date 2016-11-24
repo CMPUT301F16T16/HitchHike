@@ -30,6 +30,7 @@ import java.util.ArrayList;
  */
 public class CreateRequestActivity extends AppCompatActivity {
     private User user;
+    private Request newRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +53,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
         EditText suggestedFareText = (EditText) findViewById(R.id.suggested_fare);
 
-        //Fare estimate shouldnt be editable it should pop-up once the
-        //dropOff and PickUp location are specified
-        EditText estimate = (EditText) findViewById(R.id.suggested_fare);
 
-        /**
-         * Spei convert the dropOff Location and pickUp Location to
-         * doubles long and lat and return them so they can be added to
-         * the request object
-         */
         String pickUp = pickUpText.getText().toString();
         String dropOff = dropOffText.getText().toString();
         String suggestedFare = suggestedFareText.getText().toString();
@@ -71,7 +64,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         else{
             Double price = Double.parseDouble(suggestedFare);
             String userName = user.getUserName();
-            Request newRequest = new Request(userName, pickUp, dropOff, price);
+            newRequest = new Request(userName, pickUp, dropOff, price);
             String result = rc.addRequest(newRequest);
 
             if (result == null){
@@ -86,7 +79,7 @@ public class CreateRequestActivity extends AppCompatActivity {
 
     public void ViewMapAction(View view) {
         Intent intent = new Intent(CreateRequestActivity.this, ViewRouteActivity.class);
-        //intent.putExtra("user", user);
+        intent.putExtra("newRequest", newRequest);
         startActivity(intent);
     }
 }
