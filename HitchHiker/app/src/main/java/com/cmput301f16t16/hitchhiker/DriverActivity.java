@@ -32,7 +32,6 @@ public class DriverActivity extends AppCompatActivity {
         Intent intent = new Intent(DriverActivity.this, BrowseRequestActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        finish();
     }
 
     /**
