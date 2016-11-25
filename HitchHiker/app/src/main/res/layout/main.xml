@@ -31,9 +31,18 @@
         <Button
             android:id="@+id/search"
             android:layout_width="match_parent"
+            android:layout_weight="0.5"
             android:layout_height="wrap_content"
             android:text="Search"
             android:onClick="getRoute"/>
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Done"
+            android:onClick="setRoute"/>
 
     </LinearLayout>
 

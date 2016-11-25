@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.location.Address;
@@ -35,13 +36,14 @@ import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.infowindow.BasicInfoWindow;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Angus on 11/3/2016.
  */
-public class Location extends Activity{
+public class Location extends Activity implements Serializable{
 
     private List<Overlay> overlayList;
 
@@ -55,6 +57,8 @@ public class Location extends Activity{
     private long start;
     private long stop;
     private int x,y,lat,longi;
+    private double rate = 5;
+    private double fare;
     IMapController mapController;
     /**
      * The Our activity.
@@ -76,9 +80,9 @@ public class Location extends Activity{
 
 //        request = (Request) getIntent().getSerializableExtra("request");
 
-        String requestView = request.getTrip();
-        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
-        displayTrip.setText(requestView);
+//        String requestView = request.getTrip();
+//        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
+//        displayTrip.setText(requestView);
 
 
         map = (MapView) findViewById(R.id.map);
@@ -89,7 +93,7 @@ public class Location extends Activity{
         /**
          * Using fake coordinates until we can create REAL requests
          */
-        startPoint = new GeoPoint(53.52676, -113.52715);
+        startPoint = new GeoPoint(53.527452,-113.529679);
 
 
         mapController = map.getController();
@@ -140,6 +144,12 @@ public class Location extends Activity{
         //getRoadAsync(startPoint, endPoint);
     }
 
+    public void setRoute(View view){
+        Intent intent = new Intent(Location.this, CreateRequestActivity.class);
+        intent.putExtra("Location", startPoint);
+
+        startActivity(intent);
+    }
 
 
     /**
@@ -411,5 +421,14 @@ public class Location extends Activity{
      */
     public Double getDistance() {
         return distance;
+    }
+
+    /**
+     * get fare
+     * @return fare
+     */
+    public double getFare() {
+        fare = distance*rate;
+        return fare;
     }
 }
