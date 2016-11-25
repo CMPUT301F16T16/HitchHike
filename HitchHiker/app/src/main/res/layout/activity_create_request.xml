@@ -101,7 +101,8 @@
         android:id="@+id/submit_button"
         android:text="Submit"
         android:layout_below="@id/get_fare_est_button"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="CreateRequest"/>
 
 
 
