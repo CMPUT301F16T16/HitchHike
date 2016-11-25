@@ -145,10 +145,13 @@ public class Location extends Activity implements Serializable{
     }
 
     public void setRoute(View view){
-        Intent intent = new Intent(Location.this, CreateRequestActivity.class);
-        intent.putExtra("Location", startPoint);
+        if (endPoint != null) {
+            Intent intent = new Intent(Location.this, CreateRequestActivity.class);
+            // intent.putExtra("Location", startPoint);
 
-        startActivity(intent);
+            startActivity(intent);
+        }
+        else{Toast.makeText(Location.this, "Please set destination", Toast.LENGTH_SHORT).show();}
     }
 
 
