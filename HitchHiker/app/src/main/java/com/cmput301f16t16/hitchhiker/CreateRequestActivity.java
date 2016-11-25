@@ -1,5 +1,6 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,13 @@ public class CreateRequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_request);
         user = (User) getIntent().getSerializableExtra("user");
     }
+
+    public void ViewMap(View view){
+        Intent intent = new Intent(CreateRequestActivity.this, Location.class);
+        //intent.putExtra("user", user);
+        startActivity(intent);
+    }
+
 
     /**
      * Create request with the user inputs.
@@ -63,4 +71,6 @@ public class CreateRequestActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
