@@ -109,7 +109,9 @@ public class Location extends Activity implements Serializable{
         overlayList.add(t);
 
 
-
+        //http://stackoverflow.com/questions/10598330/find-out-current-position-in-osmdroid
+        // accessed on Nev 15th, 2016
+        // author: Ali Behzadian Nejad
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria crit = new Criteria();
         towers = lm.getBestProvider(crit, false);
@@ -205,7 +207,9 @@ public class Location extends Activity implements Serializable{
 
 
         }
-
+        //https://github.com/myetkin/android/blob/master/MainActivity.java
+        // accessed on Nev 15th, 2016
+        // author: myetkin
         public boolean onTouchEvent(MotionEvent e, MapView m) {
             //Log.d("MAPTAG", "testing");
             if (e.getAction() == MotionEvent.ACTION_DOWN) {
@@ -278,6 +282,9 @@ public class Location extends Activity implements Serializable{
     }
 
     //  ROUTE
+    //https://www.youtube.com/watch?v=SUOWNXGRc6g&list=PL2F07DBCDCC01493A
+    //accessed on Nev 15th, 2016
+    //author:thenewboston
     public void getRoute (View view) {
 
         EditText etOrigin = (EditText) findViewById(R.id.origin);
