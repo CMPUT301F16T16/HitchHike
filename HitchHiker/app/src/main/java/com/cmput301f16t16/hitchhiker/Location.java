@@ -59,6 +59,7 @@ public class Location extends Activity implements Serializable{
     private int x,y,lat,longi;
     private double rate = 5;
     private double fare;
+
     IMapController mapController;
     /**
      * The Our activity.
@@ -141,6 +142,7 @@ public class Location extends Activity implements Serializable{
 
         overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
         overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", endPoint));
+
         //getRoadAsync(startPoint, endPoint);
     }
 
@@ -374,6 +376,7 @@ public class Location extends Activity implements Serializable{
             }
             String routeDesc = path.getLengthDurationText(ourActivity, -1);
             distance = path.mLength;
+            //Log.d("distance:", Double.toString(distance));
             Polyline roadPolyline = RoadManager.buildRoadOverlay(path);
             roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
             roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
@@ -432,6 +435,7 @@ public class Location extends Activity implements Serializable{
      */
     public double getFare() {
         fare = distance*rate;
+
         return fare;
     }
 }
