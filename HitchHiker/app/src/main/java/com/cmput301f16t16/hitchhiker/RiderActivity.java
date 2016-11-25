@@ -1,6 +1,8 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -103,8 +105,20 @@ public class RiderActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
-    public void onBackPressed(){
-        // Do nothing
+    // Code taken from http://stackoverflow.com/questions/6413700/android-proper-way-to-use-onbackpressed-with-toast
+    // on Nov 24, 2016
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit App?")
+                .setMessage("Exit Hitch Hiker?")
+                .setNegativeButton("No", null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                }).create().show();
     }
 
     //http://stackoverflow.com/questions/14292398/how-to-pass-data-from-2nd-activity-to-1st-activity-when-pressed-back-android
@@ -118,4 +132,6 @@ public class RiderActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
