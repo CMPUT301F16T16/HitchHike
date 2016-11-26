@@ -49,7 +49,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
                 intent.putExtra("request", chosenRequest);
 
                 String driverUserName = user.getUserName();
-    //dont think we need all this ?
                 ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
                 getUserTask.execute(driverUserName);
 

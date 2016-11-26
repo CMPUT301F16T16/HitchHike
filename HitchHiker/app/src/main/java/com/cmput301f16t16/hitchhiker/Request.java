@@ -26,6 +26,7 @@ public class Request implements Serializable {
      * and use what info we need
      */
     private String Rider;
+    private String Driver;
 
     /**
      * Need a list of prospective Drivers to choose Final Driver Choice
@@ -53,27 +54,32 @@ public class Request implements Serializable {
      * 4) A rider has reached the location (B) from (A) and has paid
      * 5) A canceled request
      */
-    static final int CREATED = 1;
+    private int CREATED = 1;
     /**
      * The Pending.
      */
-    static final int PENDING = 2;
+    private int PENDING = 2;
     /**
      * The Accepted.
      */
-    static final int ACCEPTED = 3;
+    private int ACCEPTED = 3;
     /**
      * The Finished.
      */
-    static final int FINISHED = 4;
-    /**
-     * The Canceled.
-     */
-    static final int CANCELED = 5;
-    //static int requestStatus = CREATED; //Always starts at one when a request is created
+    private int FINISHED = 4;
+
+
     private int requestStatus;
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
+
+    public String getDriver() {
+        return Driver;
+    }
+
+    public void setDriver(String driver) {
+        Driver = driver;
+    }
 
     /**
      * Instantiates a new Request.
@@ -83,13 +89,14 @@ public class Request implements Serializable {
      * @param dropOff        the drop off
      * @param price          the price
      */
-    public Request(String requestCreator, String pickUp, String dropOff, Double price) {
+    public Request(String requestCreator, String pickUp, String dropOff, Double price, String driver) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
         this.dropOff = dropOff;
         this.price = price;
         this.requestStatus = CREATED;
         this.prospectiveDrivers = new ArrayList<String>();
+        this.Driver = driver;
 
     }
 
@@ -171,11 +178,32 @@ public class Request implements Serializable {
         this.id = id;
     }
 
-    /**
-     * Get rider name string.
-     *
-     * @return the string
-     */
+    public void setPENDING( int PENDING){
+        this.PENDING = PENDING;
+    }
+
+    public void setACCEPTED(int ACCEPTED) {
+        this.ACCEPTED = ACCEPTED;
+    }
+
+    public void setFINISHED(int FINISHED) {
+        this.FINISHED = FINISHED;
+    }
+
+
+    public  int getPENDING() {
+        return PENDING;
+    }
+
+
+    public int getACCEPTED() {
+        return ACCEPTED;
+    }
+
+    public int getFINISHED() {
+        return FINISHED;
+    }
+
     public String getRiderName(){
         return this.Rider;
     }

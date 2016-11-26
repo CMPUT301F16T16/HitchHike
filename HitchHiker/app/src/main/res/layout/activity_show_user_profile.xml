@@ -160,7 +160,8 @@
             android:layout_marginTop="20dp"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/carTitle"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:onClick="AcceptDriverAction"/>
 
 
     </RelativeLayout>

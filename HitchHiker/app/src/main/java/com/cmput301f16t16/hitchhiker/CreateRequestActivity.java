@@ -59,7 +59,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         else{
             Double price = Double.parseDouble(suggestedFare);
             String userName = user.getUserName();
-            Request newRequest = new Request(userName, pickUp, dropOff, price);
+            Request newRequest = new Request(userName, pickUp, dropOff, price, "");
             String result = rc.addRequest(newRequest);
 
             if (result == null){

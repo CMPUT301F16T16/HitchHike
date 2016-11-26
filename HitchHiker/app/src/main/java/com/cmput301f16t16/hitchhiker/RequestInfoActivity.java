@@ -36,7 +36,8 @@ public class RequestInfoActivity extends AppCompatActivity {
 
         String userName = user.getUserName();
         request.addProspectiveDriver(userName);
-
+        // change the status
+        request.setPENDING(2);
         rc.addRequest(request);
         finish();
     }
