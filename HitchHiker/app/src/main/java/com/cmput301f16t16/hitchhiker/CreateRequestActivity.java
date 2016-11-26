@@ -12,16 +12,18 @@ import android.widget.Toast;
  */
 public class CreateRequestActivity extends AppCompatActivity {
     private User user;
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
         user = (User) getIntent().getSerializableExtra("user");
+
     }
 
     public void ViewMap(View view){
-        Intent intent = new Intent(CreateRequestActivity.this, Location.class);
+        Intent intent = new Intent(CreateRequestActivity.this, LocationViewActivity.class);
         //intent.putExtra("user", user);
         startActivity(intent);
     }
@@ -33,6 +35,9 @@ public class CreateRequestActivity extends AppCompatActivity {
      * @param view the view
      */
     public void CreateRequest(View view){
+
+
+
         RequestListController rc = new RequestListController();
         Toast.makeText(this, "Creating Request", Toast.LENGTH_SHORT).show();
 
@@ -49,8 +54,11 @@ public class CreateRequestActivity extends AppCompatActivity {
          * doubles long and lat and return them so they can be added to
          * the request object
          */
-        String pickUp = pickUpText.getText().toString();
-        String dropOff = dropOffText.getText().toString();
+
+        String pickUp = location.getStringStartPoint().toString();
+        String dropOff = location.getStringEndPoint().toString();
+//        String pickUp = pickUpText.getText().toString();
+//        String dropOff = dropOffText.getText().toString();
         String suggestedFare = suggestedFareText.getText().toString();
 
         if (pickUp.equals("") || dropOff.equals("") || suggestedFare.equals("")){
@@ -72,5 +80,9 @@ public class CreateRequestActivity extends AppCompatActivity {
         }
     }
 
+    protected void onStart() {
+        super.onStart();
+        location = (Location) getIntent().getSerializableExtra("location");
 
+    }
 }
