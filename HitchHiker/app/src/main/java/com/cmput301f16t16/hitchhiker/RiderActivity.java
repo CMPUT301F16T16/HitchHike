@@ -44,13 +44,20 @@ public class RiderActivity extends AppCompatActivity {
 
 
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
-                Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Request request = requestsList.get(position);
-                intent.putExtra("request", request);
 
-                startActivity(intent);
+                if (request.getRequestStatus() == "ACCEPTED") {
+                    Intent intent = new Intent(RiderActivity.this, AcceptedRequestActivity.class);
+                    intent.putExtra("request", request);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
+                    intent.putExtra("request", request);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

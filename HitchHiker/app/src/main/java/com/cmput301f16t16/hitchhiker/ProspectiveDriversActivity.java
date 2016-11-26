@@ -67,6 +67,7 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
                 intent.putExtra("user", user);
                 intent.putExtra("request", request);
                 startActivity(intent);
+                finish();
             }
         });
 

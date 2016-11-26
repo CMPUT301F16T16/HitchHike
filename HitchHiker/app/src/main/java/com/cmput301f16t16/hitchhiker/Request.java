@@ -54,22 +54,22 @@ public class Request implements Serializable {
      * 4) A rider has reached the location (B) from (A) and has paid
      * 5) A canceled request
      */
-    private int CREATED = 1;
+    private String CREATED;
     /**
      * The Pending.
      */
-    private int PENDING = 2;
+    private String PENDING;
     /**
      * The Accepted.
      */
-    private int ACCEPTED = 3;
+    private String ACCEPTED;
     /**
      * The Finished.
      */
-    private int FINISHED = 4;
+    private String FINISHED;
 
 
-    private int requestStatus;
+    private String requestStatus;
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
 
@@ -94,7 +94,7 @@ public class Request implements Serializable {
         this.pickUp = pickUp;
         this.dropOff = dropOff;
         this.price = price;
-        this.requestStatus = CREATED;
+        this.requestStatus = "CREATED";
         this.prospectiveDrivers = new ArrayList<String>();
         this.Driver = driver;
 
@@ -105,13 +105,18 @@ public class Request implements Serializable {
      *
      * @return the request status
      */
-    public int getRequestStatus() {
+    public String getRequestStatus() {
         return this.requestStatus;
     }
 
+    public void setRequestStatus(String requestStatus){this.requestStatus = requestStatus; }
+
+
+
+
     @Override
     public String toString () {
-        return this.pickUp + "\t ---> \t" + this.dropOff;
+        return this.pickUp + "\t ---> \t" + this.dropOff+"\t\t\t\t\t\t"+ this.requestStatus;
     }
 
     /**
@@ -150,8 +155,6 @@ public class Request implements Serializable {
         return this.price;
     }
 
-
-
     public void addProspectiveDriver(String driverName){
         this.prospectiveDrivers.add(driverName);
     }
@@ -160,49 +163,15 @@ public class Request implements Serializable {
         return this.pickUp + "\t ---> \t" + this.dropOff;
     }
 
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
+
     public String getId() {
         return id;
     }
 
-    /**
-     * Sets id.
-     *
-     * @param id the id
-     */
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setPENDING( int PENDING){
-        this.PENDING = PENDING;
-    }
-
-    public void setACCEPTED(int ACCEPTED) {
-        this.ACCEPTED = ACCEPTED;
-    }
-
-    public void setFINISHED(int FINISHED) {
-        this.FINISHED = FINISHED;
-    }
-
-
-    public  int getPENDING() {
-        return PENDING;
-    }
-
-
-    public int getACCEPTED() {
-        return ACCEPTED;
-    }
-
-    public int getFINISHED() {
-        return FINISHED;
-    }
 
     public String getRiderName(){
         return this.Rider;

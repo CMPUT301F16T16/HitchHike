@@ -77,7 +77,7 @@ public class ShowUserProfileActivity extends AppCompatActivity {
     // drivers are removed, no more.
     public void AcceptDriverAction(View view){
         RequestListController rc = new RequestListController();
-        request.setACCEPTED(3);
+        request.setRequestStatus("ACCEPTED");
         request.setDriver(userName);
         rc.addRequest(request);
 
