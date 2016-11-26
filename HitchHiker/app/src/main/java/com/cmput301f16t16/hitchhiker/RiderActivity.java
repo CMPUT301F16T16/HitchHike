@@ -105,20 +105,13 @@ public class RiderActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
-    // Code taken from http://stackoverflow.com/questions/6413700/android-proper-way-to-use-onbackpressed-with-toast
-    // on Nov 24, 2016
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Exit App?")
-                .setMessage("Exit Hitch Hiker?")
-                .setNegativeButton("No", null)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        finish();
-                    }
-                }).create().show();
+
+    public void onBackPressed() {
+        Intent intent = new Intent(RiderActivity.this, ChooseUserModeActivity.class);
+        intent.putExtra("user", user);
+        startActivityForResult(intent, 1);
+
     }
 
     //http://stackoverflow.com/questions/14292398/how-to-pass-data-from-2nd-activity-to-1st-activity-when-pressed-back-android

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hitch Hiker</string>
+    <string name="app_name">HitchHiker</string>
     <string name="Register"><u>Register</u></string>
     <string name="title_activity_testing_acitivity2">testingAcitivity2</string>
     <string name="title_activity_testing2">TestingActivity2</string>

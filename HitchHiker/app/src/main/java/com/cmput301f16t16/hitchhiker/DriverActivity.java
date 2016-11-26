@@ -48,23 +48,6 @@ public class DriverActivity extends AppCompatActivity {
     }
 
 
-    // Code taken from http://stackoverflow.com/questions/6413700/android-proper-way-to-use-onbackpressed-with-toast
-    // on Nov 24, 2016
-    @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Exit App?")
-                .setMessage("Exit Hitch Hiker?")
-                .setNegativeButton("No", null)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        finish();
-                    }
-                }).create().show();
-
-
-    }
 }
 
 
