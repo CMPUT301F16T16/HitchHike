@@ -28,26 +28,15 @@ public class ChooseUserModeActivity extends Activity {
 
         rider = (RadioButton) findViewById(R.id.riderRadioButton);
         driver = (RadioButton) findViewById(R.id.driverRadioButton);
-
-
     }
-    // https://developer.android.com/guide/topics/ui/controls/radiobutton.html
-    // date accessed 11/26/16
+
     public void enterModeAction(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch (view.getId()) {
-            case R.id.riderRadioButton:
-                if (checked)
-                    goToRider();
-            case R.id.driverRadioButton:
-                if (checked) {
-                    goToDriver();
-                }
+        if (rider.isChecked()) {
+            goToRider();
         }
-
+        else if (driver.isChecked()){
+            goToDriver();
+        }
     }
 
     public void goToRider() {
