@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -31,6 +32,9 @@ public class UserProfileActivity extends AppCompatActivity {
         TextView phoneNumberText = (TextView) findViewById(R.id.phoneNumber_textView);
         TextView riderText = (TextView) findViewById(R.id.rider_textView);
         TextView driverText = (TextView) findViewById(R.id.driver_textView);
+        TextView carText = (TextView) findViewById(R.id.carTitle) ;
+        TextView carDetails = (TextView) findViewById(R.id.carDetails);
+
 
         String userName = user.getUserName();
         Integer userType = user.getUserType();
@@ -38,6 +42,7 @@ public class UserProfileActivity extends AppCompatActivity {
         String lastName = user.getUserLastName();
         String email = user.getUserEmail();
         Integer phoneNumber = user.getUserPhoneNumber();
+        String carDescription = user.getCarDescription();
 
         userNameText.setText(userName);
         firstNameText.setText(firstName);
@@ -49,14 +54,19 @@ public class UserProfileActivity extends AppCompatActivity {
         if (userType == 1){
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.LTGRAY);
+            carText.setVisibility(View.GONE);
         }
         else if (userType == 2){
             riderText.setTextColor(Color.LTGRAY);
             driverText.setTextColor(Color.BLACK);
+            carDetails.setText(carDescription);
+
         }
         else if (userType == 3){
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.BLACK);
+            carDetails.setText(carDescription);
+
         }
     }
 

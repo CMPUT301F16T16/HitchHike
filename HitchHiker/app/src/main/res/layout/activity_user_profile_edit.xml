@@ -22,11 +22,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
         android:text="Save Profile"
-        android:onClick="saveProfile"/>
+        android:onClick="saveProfile"
+        android:id="@+id/saveProfile"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -145,6 +147,24 @@
             android:inputType="phone"
             android:textSize="17sp" />
 
+        <TextView
+            android:id="@+id/carTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car Description:"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/phoneNumberTitle_textView"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:id="@+id/carDetails"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/carTitle"
+            android:layout_alignParentStart="true" />
+
 
     </RelativeLayout>
 
@@ -155,7 +175,7 @@
         android:layout_below="@+id/profile_information_view"
         android:layout_alignParentStart="true"
         android:layout_marginStart="19dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/profile_warning_textview" />
 
 </RelativeLayout>

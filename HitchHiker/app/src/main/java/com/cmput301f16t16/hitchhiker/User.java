@@ -53,6 +53,9 @@ public class User implements Serializable {
      */
     protected Integer userPhoneNumber;
 
+
+    protected String carDescription;
+
     /**
      * Instantiates a new User.
      *
@@ -63,13 +66,14 @@ public class User implements Serializable {
      * @param userPhoneNumber the user phone number
      * @param userType        the user type
      */
-    public User(String userName, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType) {
+    public User(String userName, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType, String carDescription) {
         this.userName = userName;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
         this.userPhoneNumber = userPhoneNumber;
         this.userType = userType;
+        this.carDescription = carDescription;
     }
 
     /**
@@ -195,6 +199,14 @@ public class User implements Serializable {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCarDescription() {
+        return carDescription;
+    }
+
+    public void setCarDescription(String carDescription) {
+        this.carDescription = carDescription;
     }
 
 

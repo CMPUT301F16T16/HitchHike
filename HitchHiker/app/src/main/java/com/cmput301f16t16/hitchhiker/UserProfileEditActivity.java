@@ -14,10 +14,12 @@ import android.widget.TextView;
 public class UserProfileEditActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText phoneNumberEditText;
+    private EditText carDetails;
     private String currentEmail;
     private Integer currentPhoneNumber;
     private User user;
     private TextView errorMessage;
+    private String carDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +34,26 @@ public class UserProfileEditActivity extends AppCompatActivity {
         TextView riderText = (TextView) findViewById(R.id.rider_textView);
         TextView driverText = (TextView) findViewById(R.id.driver_textView);
         errorMessage = (TextView) findViewById(R.id.profile_warning_textview);
+        TextView carText = (TextView) findViewById(R.id.carTitle);
+        carDetails = (EditText) findViewById(R.id.carDetails);
+
 
         String userName = user.getUserName();
         Integer userType = user.getUserType();
         String firstName = user.getUserFirstName();
         String lastName = user.getUserLastName();
+        carDescription = user.getCarDescription();
 
         userNameText.setText(userName);
         firstNameText.setText(firstName);
         lastNameText.setText(lastName);
+        carDetails.setText(carDescription);
 
         if (userType == 1){
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.LTGRAY);
+            carText.setVisibility(View.GONE);
+            carDetails.setVisibility(View.GONE);
         }
         else if (userType == 2){
             riderText.setTextColor(Color.LTGRAY);
@@ -64,6 +73,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
         emailEditText.setText(currentEmail);
         phoneNumberEditText.setText(Integer.toString(currentPhoneNumber));
 
+
     }
 
     /**
@@ -75,15 +85,16 @@ public class UserProfileEditActivity extends AppCompatActivity {
 
         String newEmail = emailEditText.getText().toString();
         String newPhoneNumber = phoneNumberEditText.getText().toString();
+        String newCarDetails = carDetails.getText().toString();
 
 
-        if (newEmail.equals(currentEmail) && newPhoneNumber.equals(Integer.toString(currentPhoneNumber))){
+        if (newEmail.equals(currentEmail) && newPhoneNumber.equals(Integer.toString(currentPhoneNumber)) && newCarDetails.equals(carDetails)){
             // say nothing has been changed
             errorMessage.setText("Nothing was changed. Cannot save.");
             errorMessage.setTextColor(Color.BLUE);
         }
 
-        else if (newEmail.equals("") || newPhoneNumber.equals("")){
+        else if (newEmail.equals("") || newPhoneNumber.equals("") || newCarDetails.equals("")){
             errorMessage.setText("Please fill in all fields.");
             errorMessage.setTextColor(Color.RED);
 
@@ -91,6 +102,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
         else{
             user.setUserEmail(newEmail);
             user.setUserPhoneNumber(Integer.parseInt(newPhoneNumber));
+            user.setCarDescription(newCarDetails);
 
             ElasticsearchUserController.AddUsersTask update = new ElasticsearchUserController.AddUsersTask();
             update.execute(user);

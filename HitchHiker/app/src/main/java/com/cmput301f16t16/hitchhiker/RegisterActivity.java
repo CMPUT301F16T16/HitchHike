@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
         else if (usernameExists == false) {
             Integer userPhoneNumber = Integer.parseInt(phoneNumber);
 
-            User newUser = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType);
+            User newUser = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType, "");
 
             // adds user to the elasticsearch database
             uc.addUser(newUser);
