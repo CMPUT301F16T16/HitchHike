@@ -34,6 +34,7 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         TextView phoneNumberText = (TextView) findViewById(R.id.phoneNumber_textView);
         TextView riderText = (TextView) findViewById(R.id.rider_textView);
         TextView driverText = (TextView) findViewById(R.id.driver_textView);
+        TextView carDetails = (TextView) findViewById(R.id.carDetails);
 
         String userName = user.getUserName();
         Integer userType = user.getUserType();
@@ -41,17 +42,20 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         String lastName = user.getUserLastName();
         String email = user.getUserEmail();
         Integer phoneNumber = user.getUserPhoneNumber();
+        String carDescription = user.getCarDescription();
 
         userNameText.setText(userName);
         firstNameText.setText(firstName);
         lastNameText.setText(lastName);
         emailText.setText(email);
         phoneNumberText.setText(Integer.toString(phoneNumber));
+        carDetails.setText(carDescription);
 
 
         if (userType == 1){
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.LTGRAY);
+            carDetails.setVisibility(View.GONE);
         }
         else if (userType == 2){
             riderText.setTextColor(Color.LTGRAY);
