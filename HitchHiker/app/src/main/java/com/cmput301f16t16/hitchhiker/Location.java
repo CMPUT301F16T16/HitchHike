@@ -196,7 +196,7 @@ public class Location extends Activity implements Serializable{
 
     //long click
     /**
-     * Set Location
+     * User can set Location by long click screen
      *
      */
     private class Touchy extends Overlay {
@@ -281,6 +281,10 @@ public class Location extends Activity implements Serializable{
         }
     }
 
+    /**
+     * User input the location address, the function draw the route
+     * @param view
+     */
     //  ROUTE
     //https://www.youtube.com/watch?v=SUOWNXGRc6g&list=PL2F07DBCDCC01493A
     //accessed on Nev 15th, 2016
@@ -312,6 +316,11 @@ public class Location extends Activity implements Serializable{
         }.start();
     }
 
+    /**
+     * User input the location address, the function return a Geopoint
+     * @param location
+     * @return gp
+     */
     public GeoPoint getLocation(String location) {
 
         GeocoderNominatim gn = new GeocoderNominatim(location);
@@ -440,7 +449,7 @@ public class Location extends Activity implements Serializable{
      * get fare
      * @return fare
      */
-    public double getFare() {
+    public double getFare(double distance, double rate) {
         fare = distance*rate;
 
         return fare;
