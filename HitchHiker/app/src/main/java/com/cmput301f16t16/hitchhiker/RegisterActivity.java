@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
             usernameExists = false;
         }
         else if (usernameExists == false) {
-            Integer userPhoneNumber = Integer.parseInt(phoneNumber);
+            String userPhoneNumber = (phoneNumber);
 
             User newUser = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType, "");
 

@@ -47,14 +47,14 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         String firstName = user.getUserFirstName();
         String lastName = user.getUserLastName();
         String email = user.getUserEmail();
-        Integer phoneNumber = user.getUserPhoneNumber();
+        String phoneNumber = user.getUserPhoneNumber();
         String carDescription = user.getCarDescription();
 
         userNameText.setText(userName);
         firstNameText.setText(firstName);
         lastNameText.setText(lastName);
         emailText.setText(email);
-        phoneNumberText.setText(Integer.toString(phoneNumber));
+        phoneNumberText.setText(phoneNumber);
         carDetails.setText(carDescription);
 
 
@@ -81,11 +81,6 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         request.setDriver(userName);
         rc.addRequest(request);
         finish();
-
-//        Intent intent = new Intent(ShowUserProfileActivity.this, AcceptedRequestActivity.class);
-//        intent.putExtra("request", request);
-//        startActivity(intent);
-        //finish();
 
     }
 }
