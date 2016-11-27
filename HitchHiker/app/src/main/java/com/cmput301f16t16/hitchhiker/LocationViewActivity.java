@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The type Location view activity.
@@ -46,19 +47,24 @@ import java.util.List;
 public class LocationViewActivity extends Activity implements Serializable {
 
     private List<Overlay> overlayList;
-    private Location location;
+
     private LocationManager lm;
     private String towers;
     private GeoPoint currentPoint;
     private GeoPoint startPoint;
     private GeoPoint endPoint;
     private GeoPoint touchedPoint;
+    private String startAddress;
+    private String destinationAddress;
     private Double distance;
     private long start;
     private long stop;
     private int x, y, lat, longi;
     private double rate = 5;
     private double fare;
+    private Location location;
+
+    final String userAgent = "tingwei@ualberta.ca";
 
     IMapController mapController;
     /**
@@ -140,11 +146,19 @@ public class LocationViewActivity extends Activity implements Serializable {
         overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
         overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", endPoint));
 
+        //getRoadAsync(startPoint, endPoint);
     }
     public void setRoute(View view){
         if (endPoint != null) {
+//            Intent intent = new Intent(LocationViewActivity.this, CreateRequestActivity.class);
             Intent intent = new Intent();
-            intent.putExtra("location", location);
+
+            intent.putExtra("startAddress", startAddress);
+            intent.putExtra("destinationAddress",destinationAddress);
+            intent.putExtra("startGeoLoc", (Serializable) startPoint);
+            intent.putExtra("destGeoLoc", (Serializable) endPoint);
+
+            //intent.putExtra("location", location);
             setResult(AppCompatActivity.RESULT_OK, intent);
             finish();
         }
@@ -154,6 +168,7 @@ public class LocationViewActivity extends Activity implements Serializable {
     public void setStartMarker(GeoPoint sp) {
         // set the map
         Marker startMarker = new Marker(map);
+
         startMarker.setPosition(sp);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setTitle("START");
@@ -161,7 +176,6 @@ public class LocationViewActivity extends Activity implements Serializable {
 
 
         overlayList.add(startMarker);
-
 
     }
 
@@ -216,8 +230,15 @@ public class LocationViewActivity extends Activity implements Serializable {
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
                         startPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
-
+                        startAddress = getAddress(startPoint.getLatitude(), startPoint.getLongitude());
                         setStartMarker(startPoint);
+
+                        EditText etOrigin = (EditText) findViewById(R.id.origin);
+                        etOrigin.setText(startAddress);
+
+                        TextView text = (TextView) findViewById(R.id.textView1) ;
+                        text.setText(startAddress);
+
                         map.invalidate();
                         Toast.makeText(LocationViewActivity.this, "Set Start Point", Toast.LENGTH_LONG).show();
                     }
@@ -230,8 +251,11 @@ public class LocationViewActivity extends Activity implements Serializable {
                         // TODO Auto-generated method stub
                         endPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
 
-                        // need to implement a reverse GeoCoder...
-//                        location = new Location(startPoint, endPoint);
+                        EditText etOrigin = (EditText) findViewById(R.id.origin);
+                        EditText etDestination = (EditText) findViewById(R.id.destination);
+
+                        destinationAddress = getAddress(endPoint.getLatitude(), endPoint.getLongitude());
+                        etDestination.setText(destinationAddress);
 
                         getRoadAsync(startPoint, endPoint);
 
@@ -252,7 +276,6 @@ public class LocationViewActivity extends Activity implements Serializable {
                         Touchy t = new Touchy();
                         overlayList = map.getOverlays();
                         overlayList.add(t);
-
 
                     }
 
@@ -276,26 +299,34 @@ public class LocationViewActivity extends Activity implements Serializable {
         final String o = etOrigin.getText().toString();
         final String d = etDestination.getText().toString();
 
-        new Thread() {
+        if (o.equals("") || d.equals("")) {
+            Toast.makeText(LocationViewActivity.this, "Please enter in a Start Location and Destination!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            startAddress = o;
+            destinationAddress = d;
+            new Thread() {
 
-            public void run() {
-                startPoint = getLocation(o);
-                endPoint = getLocation(d);
+                public void run() {
+                    startPoint = getLocation(o);
+                    endPoint = getLocation(d);
 
-                if (startPoint != null && endPoint != null) {
-                    location = new Location(startPoint, endPoint, o, d);
-                    getRoadAsync(startPoint, endPoint);
+                    if (startPoint != null && endPoint != null) {
 
-                    mapController.animateTo(startPoint);
+                        getRoadAsync(startPoint, endPoint);
+
+                        mapController.animateTo(startPoint);
+
+                        location = new Location(startPoint, endPoint, o, d);
 
 
-
-                } else {
-                    Toast.makeText(LocationViewActivity.this, "Fail to find a route !", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(LocationViewActivity.this, "Fail to find a route !", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
+                    .start();
         }
-                .start();
     }
 
     public GeoPoint getLocation(String location) {
@@ -380,4 +411,34 @@ public class LocationViewActivity extends Activity implements Serializable {
             map.invalidate();
         }
     }
+
+    private String getAddress(double latitude, double longitude){
+        String theAddress;
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+//            GeocoderNominatim geocoder = new GeocoderNominatim(current, userAgent);
+//            geocoder.setService("http://open.mapquestapi.com/nominatim/v1/");
+//            geocoder.setKey("G2m83JSnHrnZ9nMb9Uc0KcDPTfCPxTSo");
+
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            StringBuilder sb = new StringBuilder();
+            if(addresses.size() > 0) {
+                Address address = addresses.get(0);
+                int n = address.getMaxAddressLineIndex();
+                for(int i = 0; i <= n; i++) {
+                    if(i != 0) {
+                        sb.append(", ");
+                    }
+                    sb.append(address.getAddressLine(i));
+                }
+                theAddress = new String(sb);
+            } else {
+                theAddress = null;
+            }
+        } catch (Exception e) {
+            theAddress = null;
+        }
+        return theAddress;
+    }
+
 }

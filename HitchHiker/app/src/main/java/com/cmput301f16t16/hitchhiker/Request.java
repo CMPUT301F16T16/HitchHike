@@ -28,7 +28,6 @@ public class Request implements Serializable {
      * and use what info we need
      */
     private String Rider;
-    private String Driver;
 
     /**
      * Need a list of prospective Drivers to choose Final Driver Choice
@@ -56,19 +55,35 @@ public class Request implements Serializable {
      * 4) A rider has reached the location (B) from (A) and has paid
      * 5) A canceled request
      */
-
-    private String requestStatus;
+    static final int CREATED = 1;
+    /**
+     * The Pending.
+     */
+    static final int PENDING = 2;
+    /**
+     * The Accepted.
+     */
+    static final int ACCEPTED = 3;
+    /**
+     * The Finished.
+     */
+    static final int FINISHED = 4;
+    /**
+     * The Canceled.
+     */
+    static final int CANCELED = 5;
+    //static int requestStatus = CREATED; //Always starts at one when a request is created
+    private int requestStatus;
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
 
-    public String getDriver() {
-        return Driver;
-    }
+    private GeoPoint startPoint;
+    private GeoPoint endPoint;
 
-    private GeoPoint start;
-    private GeoPoint end;
+    private String sp;
+    private String ep;
 
-
+    private String driver;
     /**
      * Instantiates a new Request.
      *
@@ -77,16 +92,15 @@ public class Request implements Serializable {
      * @param dropOff        the drop off
      * @param price          the price
      */
-
-    public Request(String requestCreator, String pickUp, String dropOff, Double price, GeoPoint start, GeoPoint end) {
+    public Request(String requestCreator, String pickUp, String dropOff, Double price, GeoPoint start, GeoPoint dest) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
         this.dropOff = dropOff;
         this.price = price;
-        this.requestStatus = "CREATED";
+        this.requestStatus = CREATED;
         this.prospectiveDrivers = new ArrayList<String>();
-        this.start = start;
-        this.end = end;
+        this.startPoint = start;
+        this.endPoint = dest;
 
     }
 
@@ -95,18 +109,13 @@ public class Request implements Serializable {
      *
      * @return the request status
      */
-    public String getRequestStatus() {
+    public int getRequestStatus() {
         return this.requestStatus;
     }
 
-    public void setRequestStatus(String requestStatus){this.requestStatus = requestStatus; }
-
-
-
-
     @Override
     public String toString () {
-        return this.pickUp + "\t ---> \t" + this.dropOff+"\t\t\t\t\t\t"+ this.requestStatus;
+        return this.pickUp + "\t ---> \t" + this.dropOff;
     }
 
     /**
@@ -137,12 +146,6 @@ public class Request implements Serializable {
     }
 
     /**
-     * gets start location GeoPoint
-     * @return the GeoPoint
-     */
-    public GeoPoint getStartGeo() {return this.start;}
-
-    /**
      * Get price double.
      *
      * @return the double
@@ -150,6 +153,8 @@ public class Request implements Serializable {
     public Double getPrice(){
         return this.price;
     }
+
+
 
     public void addProspectiveDriver(String driverName){
         this.prospectiveDrivers.add(driverName);
@@ -159,16 +164,29 @@ public class Request implements Serializable {
         return this.pickUp + "\t ---> \t" + this.dropOff;
     }
 
-
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
-
+    /**
+     * Get rider name string.
+     *
+     * @return the string
+     */
     public String getRiderName(){
         return this.Rider;
     }
@@ -184,7 +202,16 @@ public class Request implements Serializable {
     public ArrayList<String> getProspectiveDrivers() {
         return prospectiveDrivers;
     }
-    public void setDriver(String Driver){
-        this.Driver = Driver;
+
+    public GeoPoint getStartPoint() {
+        return startPoint;
+    }
+
+    public GeoPoint getEndPoint() {
+        return endPoint;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 }

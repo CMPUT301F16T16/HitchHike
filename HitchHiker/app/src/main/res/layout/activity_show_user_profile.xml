@@ -26,8 +26,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
         android:text="Accept Driver"
-        android:id="@+id/profile_button"
-        android:onClick="AcceptDriverAction"/>
+        android:id="@+id/profile_button"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -161,8 +160,7 @@
             android:layout_marginTop="20dp"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/carTitle"
-            android:layout_alignParentStart="true"
-            android:onClick="AcceptDriverAction"/>
+            android:layout_alignParentStart="true" />
 
 
     </RelativeLayout>

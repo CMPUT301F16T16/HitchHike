@@ -51,7 +51,7 @@ public class User implements Serializable {
     /**
      * The User phone number.
      */
-    protected String userPhoneNumber;
+    protected Integer userPhoneNumber;
 
 
     protected String carDescription;
@@ -66,7 +66,7 @@ public class User implements Serializable {
      * @param userPhoneNumber the user phone number
      * @param userType        the user type
      */
-    public User(String userName, String userFirstName, String userLastName, String userEmail, String userPhoneNumber, int userType, String carDescription) {
+    public User(String userName, String userFirstName, String userLastName, String userEmail, int userPhoneNumber, int userType, String carDescription) {
         this.userName = userName;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
@@ -160,7 +160,7 @@ public class User implements Serializable {
      *
      * @param userPhoneNumber the user phone number
      */
-    public void setUserPhoneNumber(String userPhoneNumber) {
+    public void setUserPhoneNumber(int userPhoneNumber) {
 
         this.userPhoneNumber = userPhoneNumber;
     }
@@ -170,7 +170,7 @@ public class User implements Serializable {
      *
      * @return the user phone number
      */
-    public String getUserPhoneNumber() {
+    public int getUserPhoneNumber() {
         return this.userPhoneNumber;
     }
 

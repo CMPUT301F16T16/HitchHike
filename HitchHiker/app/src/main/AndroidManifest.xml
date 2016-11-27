@@ -16,7 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,8 +36,7 @@
         <activity android:name=".LocationViewActivity" />
         <activity android:name=".ShowUserProfileActivity" />
         <activity android:name=".Location" />
-        <activity android:name=".ChooseUserModeActivity" />
-        <activity android:name=".AcceptedRequestActivity"/>
+        <activity android:name=".ChooseUserModeActivity"/>
 
     </application>
 

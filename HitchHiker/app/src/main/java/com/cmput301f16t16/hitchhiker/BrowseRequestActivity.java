@@ -20,7 +20,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private ArrayList<Request> browseList = new ArrayList<Request>();
     private ArrayAdapter<Request> browseAdapter;
     private User user;
-    private User driverUser;
+    //private User DriverUser;
 
     /**
      * browseList is an array of all pending requests
@@ -49,24 +49,24 @@ public class BrowseRequestActivity extends AppCompatActivity{
                 intent.putExtra("request", chosenRequest);
 
                 String driverUserName = user.getUserName();
-                ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
-                getUserTask.execute(driverUserName);
+//    dont think we need all this ?
+//                ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
+//                getUserTask.execute(driverUserName);
+//
+//                try {
+//                    driverUser = getUserTask.get();
+//                }
+//                catch(Exception e){
+//
+//                }
 
-                try {
-                    driverUser = getUserTask.get();
-                }
-                catch(Exception e){
-
-                }
-
-                intent.putExtra("user", driverUser);
+                intent.putExtra("user", driverUserName);
                 startActivity(intent);
             }
         });
 
 
         try {
-            // how to populate the browslist view
             browseList.clear();
             ElasticsearchRequestController.GetBrowsingRequestsTask getBrowsingRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
             getBrowsingRequestsTask.execute("");
@@ -89,7 +89,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         try {
             ElasticsearchRequestController.GetBrowsingRequestsTask getBrowseRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
             getBrowseRequestsTask.execute("");
-            browseList = getBrowseRequestsTask.get(); // brosweList is now populate with request from elasticsearch
+            browseList = getBrowseRequestsTask.get();
         } catch (Exception e) {
             Log.i("Error", "Failed to get the requests out of the async object.");
         }

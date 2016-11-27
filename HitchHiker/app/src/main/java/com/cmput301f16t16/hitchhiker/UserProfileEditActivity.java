@@ -16,7 +16,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
     private EditText phoneNumberEditText;
     private EditText carDetails;
     private String currentEmail;
-    private String currentPhoneNumber;
+    private Integer currentPhoneNumber;
     private User user;
     private TextView errorMessage;
     private String carDescription;
@@ -71,7 +71,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
         currentPhoneNumber = user.getUserPhoneNumber();
 
         emailEditText.setText(currentEmail);
-        phoneNumberEditText.setText(currentPhoneNumber);
+        phoneNumberEditText.setText(Integer.toString(currentPhoneNumber));
 
 
     }
@@ -88,51 +88,30 @@ public class UserProfileEditActivity extends AppCompatActivity {
         String newCarDetails = carDetails.getText().toString();
 
 
-        if (user.userType != 1) {
-            if (newEmail.equals(currentEmail) && newPhoneNumber.equals(currentPhoneNumber) && newCarDetails.equals(carDetails)) {
-                // say nothing has been changed
-                errorMessage.setText("Nothing was changed. Cannot save.");
-                errorMessage.setTextColor(Color.BLUE);
-            } else if (newEmail.equals("") || newPhoneNumber.equals("") || newCarDetails.equals("")) {
-                errorMessage.setText("Please fill in all fields.");
-                errorMessage.setTextColor(Color.RED);
+        if (newEmail.equals(currentEmail) && newPhoneNumber.equals(Integer.toString(currentPhoneNumber)) && newCarDetails.equals(carDetails)){
+            // say nothing has been changed
+            errorMessage.setText("Nothing was changed. Cannot save.");
+            errorMessage.setTextColor(Color.BLUE);
+        }
 
-            } else {
-                user.setUserEmail(newEmail);
-                user.setUserPhoneNumber(newPhoneNumber);
-                user.setCarDescription(newCarDetails);
+        else if (newEmail.equals("") || newPhoneNumber.equals("") || newCarDetails.equals("")){
+            errorMessage.setText("Please fill in all fields.");
+            errorMessage.setTextColor(Color.RED);
 
-                ElasticsearchUserController.AddUsersTask update = new ElasticsearchUserController.AddUsersTask();
-                update.execute(user);
-
-                Intent intent = new Intent();
-                intent.putExtra("updatedUser", user);
-                setResult(AppCompatActivity.RESULT_OK, intent);
-                finish();
-
-            }
         }
         else{
-            if (newEmail.equals(currentEmail) && newPhoneNumber.equals(currentPhoneNumber)) {
-                // say nothing has been changed
-                errorMessage.setText("Nothing was changed. Cannot save.");
-                errorMessage.setTextColor(Color.BLUE);
-            } else if (newEmail.equals("") || newPhoneNumber.equals("")) {
-                errorMessage.setText("Please fill in all fields.");
-                errorMessage.setTextColor(Color.RED);
+            user.setUserEmail(newEmail);
+            user.setUserPhoneNumber(Integer.parseInt(newPhoneNumber));
+            user.setCarDescription(newCarDetails);
 
-            } else {
-                user.setUserEmail(newEmail);
-                user.setUserPhoneNumber(newPhoneNumber);
+            ElasticsearchUserController.AddUsersTask update = new ElasticsearchUserController.AddUsersTask();
+            update.execute(user);
 
-                ElasticsearchUserController.AddUsersTask update = new ElasticsearchUserController.AddUsersTask();
-                update.execute(user);
+            Intent intent = new Intent();
+            intent.putExtra("updatedUser", user);
+            setResult(AppCompatActivity.RESULT_OK, intent);
+            finish();
 
-                Intent intent = new Intent();
-                intent.putExtra("updatedUser", user);
-                setResult(AppCompatActivity.RESULT_OK, intent);
-                finish();
-            }
 
         }
     }
