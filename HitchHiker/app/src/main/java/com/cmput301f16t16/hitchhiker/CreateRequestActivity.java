@@ -79,12 +79,18 @@ public class CreateRequestActivity extends AppCompatActivity {
             String result = rc.addRequest(newRequest);
 
             if (result == null){
-                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "result is null", Toast.LENGTH_SHORT).show();
                 this.finish();
             }
             else {
-                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
             }
+
+
+//            Request newRequest = new Request(userName, pickUp, dropOff, price);
+//            ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
+//            addRequestsTask.execute(newRequest);
+//            finish();
         }
     }
 

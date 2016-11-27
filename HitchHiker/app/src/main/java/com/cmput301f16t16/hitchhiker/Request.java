@@ -79,10 +79,6 @@ public class Request implements Serializable {
         return Driver;
     }
 
-    public void setDriver(String driver) {
-        Driver = driver;
-    }
-
     private GeoPoint start;
     private GeoPoint end;
 
@@ -96,14 +92,13 @@ public class Request implements Serializable {
      * @param price          the price
      */
 
-    public Request(String requestCreator, String pickUp, String dropOff, Double price, GeoPoint start, GeoPoint end, String driver) {
+    public Request(String requestCreator, String pickUp, String dropOff, Double price, GeoPoint start, GeoPoint end) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
         this.dropOff = dropOff;
         this.price = price;
         this.requestStatus = "CREATED";
         this.prospectiveDrivers = new ArrayList<String>();
-        this.Driver = driver;
         this.start = start;
         this.end = end;
 
@@ -202,5 +197,8 @@ public class Request implements Serializable {
 
     public ArrayList<String> getProspectiveDrivers() {
         return prospectiveDrivers;
+    }
+    public void setDriver(String Driver){
+        this.Driver = Driver;
     }
 }
