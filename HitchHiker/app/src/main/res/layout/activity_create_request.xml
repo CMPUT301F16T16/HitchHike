@@ -34,17 +34,20 @@
         android:layout_below="@+id/locationText"
         android:onClick="ViewMap"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter start"
+        android:textSize="25dp"
+        android:hint=""
         android:id="@+id/pick_up_edittext"
         android:layout_below="@id/view_map"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter Destination"
+        android:textSize="25dp"
+
+        android:hint=""
         android:id="@+id/drop_off_edittext"
         android:layout_below="@id/pick_up_edittext"/>
 

@@ -5,7 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.osmdroid.util.GeoPoint;
+import org.w3c.dom.Text;
 
 /**
  * The type Create request activity.
@@ -13,6 +17,9 @@ import android.widget.Toast;
 public class CreateRequestActivity extends AppCompatActivity {
     private User user;
     private Location location;
+    private String pickUp;
+    private String dropOff;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +47,14 @@ public class CreateRequestActivity extends AppCompatActivity {
 
         RequestListController rc = new RequestListController();
         Toast.makeText(this, "Creating Request", Toast.LENGTH_SHORT).show();
-
-        EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
-        EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
+//
+//        EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
+//        EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
         EditText suggestedFareText = (EditText) findViewById(R.id.suggested_fare);
 
         //Fare estimate shouldnt be editable it should pop-up once the
         //dropOff and PickUp location are specified
-        EditText estimate = (EditText) findViewById(R.id.suggested_fare);
+
 
         /**
          * Spei convert the dropOff Location and pickUp Location to
@@ -55,10 +62,11 @@ public class CreateRequestActivity extends AppCompatActivity {
          * the request object
          */
 
-        String pickUp = location.getStringStartPoint().toString();
-        String dropOff = location.getStringEndPoint().toString();
-//        String pickUp = pickUpText.getText().toString();
-//        String dropOff = dropOffText.getText().toString();
+        GeoPoint dd = location.getStartPoint();
+
+//        String pickUp = location.getStringStartPoint();
+//        String dropOff = location.getStringEndPoint();
+//
         String suggestedFare = suggestedFareText.getText().toString();
 
         if (pickUp.equals("") || dropOff.equals("") || suggestedFare.equals("")){
@@ -84,5 +92,14 @@ public class CreateRequestActivity extends AppCompatActivity {
         super.onStart();
         location = (Location) getIntent().getSerializableExtra("location");
 
+        if (location != null) {
+            pickUp = location.getStringStartPoint();
+            dropOff = location.getStringEndPoint();
+            TextView pickUpText = (TextView) findViewById(R.id.pick_up_edittext);
+            TextView dropOffText = (TextView) findViewById(R.id.drop_off_edittext);
+            pickUpText.setText(pickUp);
+            dropOffText.setText(dropOff);
+
+        }
     }
 }

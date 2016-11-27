@@ -46,6 +46,8 @@ public class LocationViewActivity extends Activity implements Serializable {
 
     private List<Overlay> overlayList;
 
+    private Location location;
+
     private LocationManager lm;
     private String towers;
     private GeoPoint currentPoint;
@@ -144,7 +146,7 @@ public class LocationViewActivity extends Activity implements Serializable {
     public void setRoute(View view){
         if (endPoint != null) {
             Intent intent = new Intent(LocationViewActivity.this, CreateRequestActivity.class);
-//            intent.putExtra("location", location);
+            intent.putExtra("location", location);
 
             startActivity(intent);
         }
@@ -232,6 +234,9 @@ public class LocationViewActivity extends Activity implements Serializable {
                         // TODO Auto-generated method stub
                         endPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
 
+                        // need to implement a reverse GeoCoder...
+//                        location = new Location(startPoint, endPoint);
+
                         getRoadAsync(startPoint, endPoint);
 
                         mapController.animateTo(startPoint);
@@ -282,12 +287,12 @@ public class LocationViewActivity extends Activity implements Serializable {
                 endPoint = getLocation(d);
 
                 if (startPoint != null && endPoint != null) {
-
+                    location = new Location(startPoint, endPoint, o, d);
                     getRoadAsync(startPoint, endPoint);
 
                     mapController.animateTo(startPoint);
 
-                    Location location = new Location(startPoint, endPoint, o, d);
+
 
                 } else {
                     Toast.makeText(LocationViewActivity.this, "Fail to find a route !", Toast.LENGTH_LONG).show();
