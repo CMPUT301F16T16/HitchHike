@@ -66,6 +66,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
 
 
         try {
+            // how to populate the browslist view
             browseList.clear();
             ElasticsearchRequestController.GetBrowsingRequestsTask getBrowsingRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
             getBrowsingRequestsTask.execute("");
