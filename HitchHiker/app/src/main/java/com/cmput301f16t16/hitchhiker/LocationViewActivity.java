@@ -47,24 +47,25 @@ import java.util.Locale;
 public class LocationViewActivity extends Activity implements Serializable {
 
     private List<Overlay> overlayList;
-
+    private Location newLocation;
     private LocationManager lm;
     private String towers;
     private GeoPoint currentPoint;
     private GeoPoint startPoint;
     private GeoPoint endPoint;
     private GeoPoint touchedPoint;
-    private String startAddress;
-    private String destinationAddress;
     private Double distance;
     private long start;
     private long stop;
     private int x, y, lat, longi;
     private double rate = 5;
     private double fare;
-    private Location location;
+    private final String userAgent = "tingwei@ualberta.ca";
+    private EditText getOrigin;
+    private EditText getDestination;
+    private String startAddress;
+    private String destAddress;
 
-    final String userAgent = "tingwei@ualberta.ca";
 
     IMapController mapController;
     /**
@@ -91,6 +92,8 @@ public class LocationViewActivity extends Activity implements Serializable {
 //        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
 //        displayTrip.setText(requestView);
 
+        getOrigin = (EditText) findViewById(R.id.origin);
+        getDestination = (EditText) findViewById(R.id.destination);
 
         map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -120,6 +123,7 @@ public class LocationViewActivity extends Activity implements Serializable {
         towers = lm.getBestProvider(crit, false);
         android.location.Location location = lm.getLastKnownLocation(towers);
 
+
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(LocationViewActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
@@ -146,19 +150,13 @@ public class LocationViewActivity extends Activity implements Serializable {
         overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
         overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", endPoint));
 
-        //getRoadAsync(startPoint, endPoint);
     }
     public void setRoute(View view){
-        if (endPoint != null) {
-//            Intent intent = new Intent(LocationViewActivity.this, CreateRequestActivity.class);
+        if (endPoint != null && startPoint != null) {
+            newLocation = new Location(startPoint, endPoint, startAddress, destAddress, distance);
+
             Intent intent = new Intent();
-
-            intent.putExtra("startAddress", startAddress);
-            intent.putExtra("destinationAddress",destinationAddress);
-            intent.putExtra("startGeoLoc", (Serializable) startPoint);
-            intent.putExtra("destGeoLoc", (Serializable) endPoint);
-
-            //intent.putExtra("location", location);
+            intent.putExtra("location", newLocation);
             setResult(AppCompatActivity.RESULT_OK, intent);
             finish();
         }
@@ -168,7 +166,6 @@ public class LocationViewActivity extends Activity implements Serializable {
     public void setStartMarker(GeoPoint sp) {
         // set the map
         Marker startMarker = new Marker(map);
-
         startMarker.setPosition(sp);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setTitle("START");
@@ -176,6 +173,7 @@ public class LocationViewActivity extends Activity implements Serializable {
 
 
         overlayList.add(startMarker);
+
 
     }
 
@@ -225,21 +223,39 @@ public class LocationViewActivity extends Activity implements Serializable {
                 AlertDialog alert = new AlertDialog.Builder(LocationViewActivity.this).create();
                 alert.setTitle("Pick an Option");
                 alert.setMessage("Your current location will be your default start point");
-                alert.setButton(DialogInterface.BUTTON_POSITIVE, "Set SatrtPoint", new DialogInterface.OnClickListener() {
+                alert.setButton(DialogInterface.BUTTON_POSITIVE, "Set StartPoint", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         // TODO Auto-generated method stub
                         startPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
-                        startAddress = getAddress(startPoint.getLatitude(), startPoint.getLongitude());
-                        setStartMarker(startPoint);
+                        if (endPoint == null){
+                            clearMap();
 
-                        EditText etOrigin = (EditText) findViewById(R.id.origin);
-                        etOrigin.setText(startAddress);
+                            setStartMarker(startPoint);
 
-                        TextView text = (TextView) findViewById(R.id.textView1) ;
-                        text.setText(startAddress);
+                            startAddress = getTheAddress(startPoint.getLatitude(), startPoint.getLongitude());
+                            getOrigin.setText(startAddress);
 
-                        map.invalidate();
+                            map.invalidate();
+
+                        }
+                        else{
+                            clearMap();
+
+                            setStartMarker(startPoint);
+
+                            startAddress = getTheAddress(startPoint.getLatitude(), startPoint.getLongitude());
+                            getOrigin.setText(startAddress);
+
+                            destAddress = getTheAddress(endPoint.getLatitude(), endPoint.getLongitude());
+                            getDestination.setText(destAddress);
+
+                            getRoadAsync(startPoint,endPoint);
+
+                            map.invalidate();
+                        }
+
+
                         Toast.makeText(LocationViewActivity.this, "Set Start Point", Toast.LENGTH_LONG).show();
                     }
 
@@ -251,35 +267,55 @@ public class LocationViewActivity extends Activity implements Serializable {
                         // TODO Auto-generated method stub
                         endPoint = new GeoPoint(touchedPoint.getLatitude(), touchedPoint.getLongitude());
 
-                        EditText etOrigin = (EditText) findViewById(R.id.origin);
-                        EditText etDestination = (EditText) findViewById(R.id.destination);
+                        if (startPoint == null){
+                            clearMap();
 
-                        destinationAddress = getAddress(endPoint.getLatitude(), endPoint.getLongitude());
-                        etDestination.setText(destinationAddress);
+                            destAddress = getTheAddress(endPoint.getLatitude(), endPoint.getLongitude());
+                            getDestination.setText(destAddress);
 
-                        getRoadAsync(startPoint, endPoint);
+                            getRoadAsync(startPoint, endPoint);
+                            mapController.animateTo(startPoint);
 
-                        mapController.animateTo(startPoint);
+                            map.invalidate();
+
+                        }
+                        else{
+                            clearMap();
+
+                            startAddress = getTheAddress(startPoint.getLatitude(), startPoint.getLongitude());
+                            getOrigin.setText(startAddress);
+
+                            destAddress = getTheAddress(endPoint.getLatitude(), endPoint.getLongitude());
+                            getDestination.setText(destAddress);
+
+                            getRoadAsync(startPoint,endPoint);
+                            mapController.animateTo(startPoint);
+
+                            map.invalidate();
+
+                        }
+
                         Toast.makeText(LocationViewActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                     }
                     //setEndPoint(touchedpoint);
                     //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                 });
 
-                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
-                        // TODO Auto-generated method stub
-                        overlayList.clear();
-                        map.invalidate();
-
-                        Touchy t = new Touchy();
-                        overlayList = map.getOverlays();
-                        overlayList.add(t);
-
-                    }
-
-                });
+//                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int which) {
+//                        // TODO Auto-generated method stub
+//                        overlayList.clear();
+//                        map.invalidate();
+//
+//                        Touchy t = new Touchy();
+//                        overlayList = map.getOverlays();
+//                        overlayList.add(t);
+//
+//
+//                    }
+//
+//                });
 
 
                 alert.show();
@@ -293,40 +329,32 @@ public class LocationViewActivity extends Activity implements Serializable {
     //  ROUTE
     public void getRoute(View view) {
 
-        EditText etOrigin = (EditText) findViewById(R.id.origin);
-        EditText etDestination = (EditText) findViewById(R.id.destination);
 
-        final String o = etOrigin.getText().toString();
-        final String d = etDestination.getText().toString();
+        final String o = getOrigin.getText().toString();
+        final String d = getDestination.getText().toString();
 
-        if (o.equals("") || d.equals("")) {
-            Toast.makeText(LocationViewActivity.this, "Please enter in a Start Location and Destination!", Toast.LENGTH_LONG).show();
-        }
-        else {
-            startAddress = o;
-            destinationAddress = d;
-            new Thread() {
+        new Thread() {
 
-                public void run() {
-                    startPoint = getLocation(o);
-                    endPoint = getLocation(d);
+            public void run() {
+                startPoint = getLocation(o);
+                endPoint = getLocation(d);
+                startAddress = o;
+                destAddress = d;
 
-                    if (startPoint != null && endPoint != null) {
+                if (startPoint != null && endPoint != null) {
+                    //location = new Location(startPoint, endPoint, o, d);
+                    getRoadAsync(startPoint, endPoint);
 
-                        getRoadAsync(startPoint, endPoint);
-
-                        mapController.animateTo(startPoint);
-
-                        location = new Location(startPoint, endPoint, o, d);
+                    mapController.animateTo(startPoint);
 
 
-                    } else {
-                        Toast.makeText(LocationViewActivity.this, "Fail to find a route !", Toast.LENGTH_LONG).show();
-                    }
+
+                } else {
+                    Toast.makeText(LocationViewActivity.this, "Fail to find a route !", Toast.LENGTH_LONG).show();
                 }
             }
-                    .start();
         }
+                .start();
     }
 
     public GeoPoint getLocation(String location) {
@@ -412,11 +440,21 @@ public class LocationViewActivity extends Activity implements Serializable {
         }
     }
 
-    private String getAddress(double latitude, double longitude){
+    private void clearMap(){
+        overlayList.clear();
+        map.invalidate();
+
+        Touchy t = new Touchy();
+        overlayList = map.getOverlays();
+        overlayList.add(t);
+    }
+
+    private String getTheAddress(double latitude, double longitude){
         String theAddress;
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-//            GeocoderNominatim geocoder = new GeocoderNominatim(current, userAgent);
+
+//            GeocoderNominatim geocoder = new GeocoderNominatim(Locale.getDefault(), userAgent);
 //            geocoder.setService("http://open.mapquestapi.com/nominatim/v1/");
 //            geocoder.setKey("G2m83JSnHrnZ9nMb9Uc0KcDPTfCPxTSo");
 
@@ -440,5 +478,6 @@ public class LocationViewActivity extends Activity implements Serializable {
         }
         return theAddress;
     }
+
 
 }

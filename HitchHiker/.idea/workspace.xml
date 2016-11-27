@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c391aaac-6159-4ad9-9ae6-039aa167e873" name="Default" comment="" />
+    <list default="true" id="d6c3bc82-1981-43fc-b538-18dd81eb17d0" name="Default" comment="" />
     <ignored path="HitchHiker.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -1380,7 +1380,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4440447929000" />
+        <entry key="$PROJECT_DIR$" value="4440861222000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1739,10 +1739,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1771,6 +1771,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.do.not.ask.upgrade.gradle.plugin.version" value="2.1.3" />
+    <property name="device.picker.selection" value="Nexus_4_API_18" />
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -1893,7 +1894,7 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+    <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="app" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
@@ -1959,11 +1960,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c391aaac-6159-4ad9-9ae6-039aa167e873" name="Default" comment="" />
-      <created>1480286886386</created>
+      <changelist id="d6c3bc82-1981-43fc-b538-18dd81eb17d0" name="Default" comment="" />
+      <created>1480287654317</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1480286886386</updated>
+      <updated>1480287654317</updated>
     </task>
     <servers />
   </component>

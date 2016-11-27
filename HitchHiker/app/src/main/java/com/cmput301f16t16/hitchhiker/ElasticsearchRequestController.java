@@ -68,6 +68,53 @@ public class ElasticsearchRequestController {
 
     }
 
+    public static class GetPendingTask extends AsyncTask<String, Void, ArrayList<Request>> {
+        private String userName;
+        private String requestStatus;
+
+        @Override
+        protected ArrayList<Request> doInBackground(String... search_parameters) {
+            verifySettings();
+
+            ArrayList<Request> pendings = new ArrayList<Request>();
+
+            // Assumption: Only the first search_parameter[0] is used.
+
+
+            //String search_string = "{\n" + "\"query\": {\n" + "\"match\" : {\n" + "\"" + userName + "\" : \n" + "\"" + requestStatus + "\"\n" + "}\n" + "}\n" + "}";
+            //String search_string = "{\"from\": 0, \"size\": 10000, \"query\": " + "{\"match\": {\"Rider\": \""+userName+"\"} {" + "\"Status\": \""+requestStatus+"\"}}}";
+
+            String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"Rider\": \""+userName+"\"} {\"requestStatus\": \""+requestStatus+"\"}}}";
+            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
+
+            try{
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()){
+                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
+                    pendings.addAll(foundRequests);
+                }
+                else{
+                    Log.i("Error", "The search executed but it didn't work.");
+                }
+            }
+            catch (Exception e){
+                Log.i("Error", "Executing the get requests method failed");
+            }
+            return pendings;
+        }
+
+        /**
+         * Set user name.
+         *
+         * @param userName the user name
+         */
+        public void setUserName(String userName){
+            this.userName = userName;
+        }
+        public void setRequestStatus(String requestStatus) {this.requestStatus = requestStatus;}
+
+    }
+
     /**
      * The type Get browsing requests task.
      */

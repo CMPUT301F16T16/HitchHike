@@ -1,5 +1,6 @@
 package com.cmput301f16t16.hitchhiker;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,12 +11,17 @@ import android.widget.TextView;
 public class ShowUserProfileActivity extends AppCompatActivity {
     private User user;
     private Integer userType;
+    private Request request;
+    private String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_user_profile);
 
         user = (User) getIntent().getSerializableExtra("user");
+        request = (Request) getIntent().getSerializableExtra("request");
+
 
         userType = user.getUserType();
         if (userType == 1) {
@@ -36,19 +42,19 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         TextView driverText = (TextView) findViewById(R.id.driver_textView);
         TextView carDetails = (TextView) findViewById(R.id.carDetails);
 
-        String userName = user.getUserName();
+        userName = user.getUserName();
         Integer userType = user.getUserType();
         String firstName = user.getUserFirstName();
         String lastName = user.getUserLastName();
         String email = user.getUserEmail();
-        Integer phoneNumber = user.getUserPhoneNumber();
+        String phoneNumber = user.getUserPhoneNumber();
         String carDescription = user.getCarDescription();
 
         userNameText.setText(userName);
         firstNameText.setText(firstName);
         lastNameText.setText(lastName);
         emailText.setText(email);
-        phoneNumberText.setText(Integer.toString(phoneNumber));
+        phoneNumberText.setText(phoneNumber);
         carDetails.setText(carDescription);
 
 
@@ -65,5 +71,16 @@ public class ShowUserProfileActivity extends AppCompatActivity {
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.BLACK);
         }
+    }
+    // when you accept a driver, driver gets notified, status of request changes to accepted 3
+    // sets the driver to his username, and goes to a new activity with accepted driver, The prospective
+    // drivers are removed, no more. Returns to Rider Activity
+    public void AcceptDriverAction(View view){
+        RequestListController rc = new RequestListController();
+        request.setRequestStatus("ACCEPTED");
+        request.setDriver(userName);
+        rc.addRequest(request);
+        finish();
+
     }
 }

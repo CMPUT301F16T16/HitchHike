@@ -55,11 +55,12 @@ public class Location implements Serializable {
     private double rate = 5;
 
 
-    public Location(GeoPoint startPoint, GeoPoint endPoint, String stringStartPoint, String stringEndPoint) {
+    public Location(GeoPoint startPoint, GeoPoint endPoint, String stringStartPoint, String stringEndPoint, Double distance) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.stringEndPoint = stringEndPoint;
         this.stringStartPoint = stringStartPoint;
+        this.distance = distance;
         this.fare = fare;
         this.rate = rate;
 

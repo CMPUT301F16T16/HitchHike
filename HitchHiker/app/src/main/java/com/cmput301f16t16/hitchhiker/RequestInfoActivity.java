@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class RequestInfoActivity extends AppCompatActivity {
     private Request request;
-//    private User user;
-    private String name;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +20,7 @@ public class RequestInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request_info);
 
         request = (Request) getIntent().getSerializableExtra("request");
-//        user = (User) getIntent().getSerializableExtra("user");
-        name = getIntent().getStringExtra("user");
+        user = (User) getIntent().getSerializableExtra("user");
 
         TextView pickUpLocationText = (TextView) findViewById(R.id.pickUp_Location_TextView);
         pickUpLocationText.setText(request.getPickUp());
@@ -29,19 +29,19 @@ public class RequestInfoActivity extends AppCompatActivity {
         dropOffLocationText.setText(request.getDropOff());
 
         TextView userNameText = (TextView) findViewById(R.id.requestUserName_textView);
-        userNameText.setText(name);
-        //userNameText.setText(user.getUserName());
+        userNameText.setText(user.getUserName());
 
     }
 
     public void AcceptRequest(View view){
         RequestListController rc = new RequestListController();
-
-        //String userName = user.getUserName();
-        request.addProspectiveDriver(name);
-        request.setDriver(name);
-
+        String userName = user.getUserName();
+        request.addProspectiveDriver(userName);
+        // change the status
+        request.setRequestStatus("PENDING");
+        // update the status
         rc.addRequest(request);
+        // we remove the request from the browslist, and put it in the pending list,
         finish();
     }
 
@@ -52,12 +52,12 @@ public class RequestInfoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void GoToUserProfile(View view){
-//        Intent intent = new Intent(RequestInfoActivity.this, ShowUserProfileActivity.class);
-//
-//        intent.putExtra("user", user);
-//        startActivity(intent);
-//
-//
-//    }
+    public void GoToUserProfile(View view){
+        Intent intent = new Intent(RequestInfoActivity.this, ShowUserProfileActivity.class);
+
+        intent.putExtra("user", user);
+        startActivity(intent);
+
+
+    }
 }

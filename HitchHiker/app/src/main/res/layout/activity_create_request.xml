@@ -34,17 +34,20 @@
         android:layout_below="@+id/locationText"
         android:onClick="ViewMap"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter start"
+        android:textSize="18dp"
+        android:hint=""
         android:id="@+id/pick_up_edittext"
         android:layout_below="@id/view_map"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter Destination"
+        android:textSize="18dp"
+
+        android:hint=""
         android:id="@+id/drop_off_edittext"
         android:layout_below="@id/pick_up_edittext"/>
 
@@ -73,7 +76,7 @@
         android:layout_below="@id/estimate"
         android:layout_toRightOf="@id/suggested_fare_text"
         android:id="@+id/suggested_fare"
-        android:digits="0123456789"
+        android:digits="0123456789."
         android:ems="5"/>
 
     <TextView

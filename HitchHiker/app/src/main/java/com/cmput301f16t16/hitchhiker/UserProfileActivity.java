@@ -41,14 +41,14 @@ public class UserProfileActivity extends AppCompatActivity {
         String firstName = user.getUserFirstName();
         String lastName = user.getUserLastName();
         String email = user.getUserEmail();
-        Integer phoneNumber = user.getUserPhoneNumber();
+        String phoneNumber = user.getUserPhoneNumber();
         String carDescription = user.getCarDescription();
 
         userNameText.setText(userName);
         firstNameText.setText(firstName);
         lastNameText.setText(lastName);
         emailText.setText(email);
-        phoneNumberText.setText(Integer.toString(phoneNumber));
+        phoneNumberText.setText(phoneNumber);
 
 
         if (userType == 1){

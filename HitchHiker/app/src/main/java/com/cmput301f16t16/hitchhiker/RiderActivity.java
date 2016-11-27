@@ -44,13 +44,21 @@ public class RiderActivity extends AppCompatActivity {
 
 
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
-                Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Request request = requestsList.get(position);
-                intent.putExtra("request", request);
 
-                startActivity(intent);
+                String status = request.getRequestStatus();
+                if (status.equals("ACCEPTED")) {
+                    Intent intent = new Intent(RiderActivity.this, AcceptedRequestActivity.class);
+                    intent.putExtra("request", request);
+                    startActivity(intent);
+
+                } else {
+                    Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
+                    intent.putExtra("request", request);
+                    startActivity(intent);
+
+                }
             }
         });
     }
@@ -106,14 +114,6 @@ public class RiderActivity extends AppCompatActivity {
     }
 
 
-
-//    public void onBackPressed() {
-//        Intent intent = new Intent(RiderActivity.this, ChooseUserModeActivity.class);
-//        intent.putExtra("user", user);
-//        startActivityForResult(intent, 1);
-//
-//    }
-
     //http://stackoverflow.com/questions/14292398/how-to-pass-data-from-2nd-activity-to-1st-activity-when-pressed-back-android
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -123,6 +123,28 @@ public class RiderActivity extends AppCompatActivity {
                 user = (User) data.getSerializableExtra("updatedUser");
 
             }
+        }
+    }
+
+    // Code taken from http://stackoverflow.com/questions/6413700/android-proper-way-to-use-onbackpressed-with-toast
+    // on Nov 24, 2016
+    @Override
+    public void onBackPressed() {
+
+        if( user.userType == 1) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Exit App?")
+                    .setMessage("Exit Hitch Hiker?")
+                    .setNegativeButton("No", null)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            finish();
+                        }
+                    }).create().show();
+        }
+        else{
+            finish();
         }
     }
 
