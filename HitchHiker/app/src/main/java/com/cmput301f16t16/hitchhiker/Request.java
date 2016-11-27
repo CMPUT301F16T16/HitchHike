@@ -56,7 +56,7 @@ public class Request implements Serializable {
      * 4) A rider has reached the location (B) from (A) and has paid
      * 5) A canceled request
      */
-    
+
     private String requestStatus;
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
