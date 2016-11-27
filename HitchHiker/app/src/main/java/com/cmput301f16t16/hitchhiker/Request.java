@@ -1,6 +1,8 @@
 package com.cmput301f16t16.hitchhiker;
 
 
+import org.osmdroid.util.GeoPoint;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -75,6 +77,9 @@ public class Request implements Serializable {
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
 
+    private GeoPoint start;
+    private GeoPoint end;
+
     /**
      * Instantiates a new Request.
      *
@@ -83,13 +88,15 @@ public class Request implements Serializable {
      * @param dropOff        the drop off
      * @param price          the price
      */
-    public Request(String requestCreator, String pickUp, String dropOff, Double price) {
+    public Request(String requestCreator, String pickUp, String dropOff, Double price, GeoPoint start) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
         this.dropOff = dropOff;
         this.price = price;
         this.requestStatus = CREATED;
         this.prospectiveDrivers = new ArrayList<String>();
+        this.start = start;
+//        this.end = end;
 
     }
 
@@ -133,6 +140,12 @@ public class Request implements Serializable {
     public String getEndLocation(){
         return this.dropOff;
     }
+
+    /**
+     * gets start location GeoPoint
+     * @return the GeoPoint
+     */
+    public GeoPoint getStartGeo() {return this.start;}
 
     /**
      * Get price double.
