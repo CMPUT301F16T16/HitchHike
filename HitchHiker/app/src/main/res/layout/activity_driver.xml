@@ -15,31 +15,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Accepted Requests"
+        android:text="Current Requests"
         android:textSize="28dp"
         android:layout_centerHorizontal="true"
-        android:id="@+id/acceptedByRider_text"/>
+        android:id="@+id/driverRequest_text"/>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/acceptedByRider_text"
-        android:id="@+id/acceptedByRider_listview" />
+        android:layout_height="400dp"
+        android:layout_below="@+id/driverRequest_text"
+        android:id="@+id/driverRequest_listview" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pending Requests"
-        android:textSize="28dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/acceptedByRider_listview"
-        android:id="@+id/pending"/>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/pending"
-        android:id="@+id/pending_requests_listview" />
 
     <Button
         android:layout_width="wrap_content"
@@ -61,7 +47,7 @@
         android:layout_gravity="bottom"
         android:layout_weight="0.33"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/pending_requests_listview"
+        android:layout_below="@+id/driverRequest_listview"
         android:onClick="BrowseRequestAction"/>
 
     <Button
@@ -71,7 +57,7 @@
         android:id="@+id/profile_button"
         android:layout_weight="0.33"
         android:layout_gravity="bottom"
-        android:layout_below="@+id/pending_requests_listview"
+        android:layout_below="@+id/driverRequest_listview"
         android:layout_toRightOf="@+id/browse"
         android:layout_alignParentEnd="true"
         android:onClick="UserProfilePageAction"/>
