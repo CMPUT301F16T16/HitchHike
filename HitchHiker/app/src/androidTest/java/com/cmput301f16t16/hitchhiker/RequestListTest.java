@@ -22,7 +22,7 @@ public class RequestListTest extends TestCase{
         GeoPoint B = new GeoPoint(132.00, 131.00);
         String pickUpA = "11512 Groat Rd Edmonton";
         String dropOffB = "1234 Luxury Ln Edmonton";
-        Request request = new Request(paying_Rider.getUserName(), pickUpA, dropOffB, 5.00, A, B, driver.getUserName());
+        Request request = new Request(paying_Rider.getUserName(), pickUpA, dropOffB, 5.00, A, B);
         requestList.add(request);
         assertTrue(requestList.hasRequest(request));
     }
@@ -38,7 +38,7 @@ public class RequestListTest extends TestCase{
         GeoPoint B = new GeoPoint(132.00, 131.00);
         String pickUpA = "11512 Groat Rd Edmonton";
         String dropOffB = "1234 Luxury Ln Edmonton";
-        Request request = new Request(paying_Rider.getUserName(), pickUpA, dropOffB, 5.00, A, B, driver.getUserName());
+        Request request = new Request(paying_Rider.getUserName(), pickUpA, dropOffB, 5.00, A, B);
         requestList.add(request);
         requestList.delete(request);
         assertFalse(requestList.hasRequest(request));
@@ -54,7 +54,7 @@ public class RequestListTest extends TestCase{
         GeoPoint B = new GeoPoint(132.00, 131.00);
         String pickUp = "1123 CandyLane Rd Edmonton";
         String dropOff = "1222 DeerBourne Ln Edmonton";
-        Request request = new Request(rider.getUserName(), pickUp, dropOff, 5.00, A, B, driver.getUserName());
+        Request request = new Request(rider.getUserName(), pickUp, dropOff, 5.00, A, B);
         requestList.add(request);
         assertTrue(requestList.hasRequest(request));
     }
@@ -72,7 +72,7 @@ public class RequestListTest extends TestCase{
         GeoPoint B = new GeoPoint(132.00, 131.00);
         String pickUp = "1123 SpruceGrove Rd Edmonton";
         String dropOff = "1222 DeerRed Ln Edmonton";
-        Request request = new Request(rider.getUserName(), pickUp, dropOff, 5.00, A, B, driver.getUserName());
+        Request request = new Request(rider.getUserName(), pickUp, dropOff, 5.00, A, B);
         requestList.add(request);
         Collection<Request> requests = requestList.getRequests();
         assertTrue("RequestLIST size", requests.size() == 1);

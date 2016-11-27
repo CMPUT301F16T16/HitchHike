@@ -27,7 +27,7 @@ public class RequestTest extends TestCase {
         paying_Rider.setUserType(1);
         Fare fare = new Fare();
         fare.setFare(100.25);
-        Request request = new Request(paying_Rider.getUserName(), pickUpA, dropOffB, 5.00, A, B, driver.getUserName());
+        Request request = new Request(paying_Rider.getUserName(), pickUpA, dropOffB, 5.00, A, B);
         assertTrue("Location A is not the start", pickUpA.equals(request.getStartLocation()));
         assertTrue("Location A is not the end", dropOffB.equals(request.getEndLocation()));
         RequestListController requestListController = new RequestListController();
@@ -47,7 +47,7 @@ public class RequestTest extends TestCase {
         String dropOffD = "1222 DeerBourne Ln Edmonton";
         Fare fare = new Fare();
         fare.setFare(1.25);
-        Request request = new Request(rider.getUserName(), pickUpC, dropOffD, 5.00, A, B, driver.getUserName());
+        Request request = new Request(rider.getUserName(), pickUpC, dropOffD, 5.00, A, B);
         RequestListController rc = new RequestListController();
         rc.addRequest(request);
         assertEquals("There are no requests in the List", rc.getRequestLoad(rider).size(), 1);
