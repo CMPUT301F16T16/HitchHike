@@ -20,7 +20,6 @@ public class CreateRequestActivity extends AppCompatActivity {
     private String pickUp;
     private String dropOff;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +31,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     public void ViewMap(View view){
         Intent intent = new Intent(CreateRequestActivity.this, LocationViewActivity.class);
         //intent.putExtra("user", user);
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
 
 
@@ -62,7 +61,8 @@ public class CreateRequestActivity extends AppCompatActivity {
          * the request object
          */
 
-        GeoPoint dd = location.getStartPoint();
+        GeoPoint start = location.getStartPoint();
+        GeoPoint end = location.getEndPoint();
 
 //        String pickUp = location.getStringStartPoint();
 //        String dropOff = location.getStringEndPoint();
@@ -74,8 +74,8 @@ public class CreateRequestActivity extends AppCompatActivity {
         }
         else{
             Double price = Double.parseDouble(suggestedFare);
-            String userName = user.getUserName();
-            Request newRequest = new Request(userName, pickUp, dropOff, price, "");
+            String userName = user.getUserName(); 
+            Request newRequest = new Request(userName, pickUp, dropOff, price, start, end, "");
             String result = rc.addRequest(newRequest);
 
             if (result == null){
@@ -88,18 +88,28 @@ public class CreateRequestActivity extends AppCompatActivity {
         }
     }
 
-    protected void onStart() {
-        super.onStart();
-        location = (Location) getIntent().getSerializableExtra("location");
+//    protected void onStart() {
+//        super.onStart();
+//        //location = (Location) getIntent().getSerializableExtra("location");
+//
+//
+//
+//
+//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            if (resultCode == RESULT_OK){
+//                location = (Location) getIntent().getSerializableExtra("location");
+                location = (Location) data.getSerializableExtra("location");
+                pickUp = location.getStringStartPoint();
+                dropOff = location.getStringEndPoint();
+                TextView pickUpText = (TextView) findViewById(R.id.pick_up_edittext);
+                TextView dropOffText = (TextView) findViewById(R.id.drop_off_edittext);
+                pickUpText.setText(pickUp);
+                dropOffText.setText(dropOff);
 
-        if (location != null) {
-            pickUp = location.getStringStartPoint();
-            dropOff = location.getStringEndPoint();
-            TextView pickUpText = (TextView) findViewById(R.id.pick_up_edittext);
-            TextView dropOffText = (TextView) findViewById(R.id.drop_off_edittext);
-            pickUpText.setText(pickUp);
-            dropOffText.setText(dropOff);
-
+            }
         }
     }
 }

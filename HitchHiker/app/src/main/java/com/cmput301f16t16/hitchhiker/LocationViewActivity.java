@@ -11,6 +11,7 @@ import android.location.*;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,9 +46,7 @@ import java.util.List;
 public class LocationViewActivity extends Activity implements Serializable {
 
     private List<Overlay> overlayList;
-
     private Location location;
-
     private LocationManager lm;
     private String towers;
     private GeoPoint currentPoint;
@@ -141,14 +140,13 @@ public class LocationViewActivity extends Activity implements Serializable {
         overlayItemArray.add(new OverlayItem("Starting Point", "This is the starting point", startPoint));
         overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", endPoint));
 
-        //getRoadAsync(startPoint, endPoint);
     }
     public void setRoute(View view){
         if (endPoint != null) {
-            Intent intent = new Intent(LocationViewActivity.this, CreateRequestActivity.class);
+            Intent intent = new Intent();
             intent.putExtra("location", location);
-
-            startActivity(intent);
+            setResult(AppCompatActivity.RESULT_OK, intent);
+            finish();
         }
         else{Toast.makeText(LocationViewActivity.this, "Please set destination", Toast.LENGTH_SHORT).show();}
     }
@@ -156,8 +154,6 @@ public class LocationViewActivity extends Activity implements Serializable {
     public void setStartMarker(GeoPoint sp) {
         // set the map
         Marker startMarker = new Marker(map);
-
-
         startMarker.setPosition(sp);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setTitle("START");
