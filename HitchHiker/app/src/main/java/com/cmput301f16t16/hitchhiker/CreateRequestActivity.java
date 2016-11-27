@@ -42,8 +42,6 @@ public class CreateRequestActivity extends AppCompatActivity {
      */
     public void CreateRequest(View view){
 
-
-
         RequestListController rc = new RequestListController();
         Toast.makeText(this, "Creating Request", Toast.LENGTH_SHORT).show();
 //
@@ -75,7 +73,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         else{
             Double price = Double.parseDouble(suggestedFare);
             String userName = user.getUserName(); 
-            Request newRequest = new Request(userName, pickUp, dropOff, price, start, end, "");
+            Request newRequest = new Request(userName, pickUp, dropOff, price, start, end);
             String result = rc.addRequest(newRequest);
 
             if (result == null){

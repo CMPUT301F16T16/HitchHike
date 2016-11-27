@@ -12,31 +12,46 @@
 
 
 
-     <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="Pending Requests"
-         android:textSize="28dp"
-         android:layout_centerHorizontal="true"
-         android:id="@+id/pending"/>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accepted Requests"
+        android:textSize="28dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/acceptedByRider_text"/>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/acceptedByRider_text"
+        android:id="@+id/acceptedByRider_listview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending Requests"
+        android:textSize="28dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/acceptedByRider_listview"
+        android:id="@+id/pending"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_below="@+id/pending"
         android:id="@+id/pending_requests_listview" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
+        android:text="Refresh"
         android:id="@+id/home_button"
         android:layout_gravity="bottom"
         android:layout_weight="0.33"
         android:layout_alignBottom="@+id/browse"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/browse" />
+        android:layout_toStartOf="@+id/browse"
+        android:onClick="RefreshAction"/>
 
     <Button
         android:layout_width="wrap_content"
