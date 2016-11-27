@@ -113,14 +113,6 @@ public class RiderActivity extends AppCompatActivity {
     }
 
 
-
-//    public void onBackPressed() {
-//        Intent intent = new Intent(RiderActivity.this, ChooseUserModeActivity.class);
-//        intent.putExtra("user", user);
-//        startActivityForResult(intent, 1);
-//
-//    }
-
     //http://stackoverflow.com/questions/14292398/how-to-pass-data-from-2nd-activity-to-1st-activity-when-pressed-back-android
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -137,6 +129,7 @@ public class RiderActivity extends AppCompatActivity {
     // on Nov 24, 2016
     @Override
     public void onBackPressed() {
+
         if( user.userType == 1) {
             new AlertDialog.Builder(this)
                     .setTitle("Exit App?")

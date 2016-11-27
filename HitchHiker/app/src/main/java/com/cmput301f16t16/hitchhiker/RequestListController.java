@@ -68,7 +68,7 @@ public class RequestListController {
 
     /**
      * Get list of request array list.
-     *
+     *  this returns a list of array by the username, it's only good populating Riders open request list
      * @param userName the user name
      * @return the array list
      */
@@ -85,6 +85,29 @@ public class RequestListController {
         }
 
         return requestsList;
+
+    }
+
+    /**
+     * This will get a list of pending request, we must query on two constraints, based on the username a
+     * nd the status being 2 or 3
+     * @param userName, requestStatus
+     * @return
+     */
+    public ArrayList<Request> getListOfPendingRequest(String userName, String status ){
+        ArrayList<Request> pendingList = new ArrayList<Request>();
+        ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
+        getPendingTask.setUserName(userName);
+        getPendingTask.setRequestStatus(status);
+        getPendingTask.execute("");
+        try {
+            pendingList = getPendingTask.get();
+        }
+        catch (Exception e) {
+            Log.i("Error", "Failed to get the tweets out of the async object.");
+        }
+
+        return pendingList;
 
     }
 
