@@ -47,7 +47,8 @@ public class DriverActivity extends AppCompatActivity {
         // populate the pending listview with request that the driver selected, whos status is all pending
         theRequestList = (ListView) findViewById(R.id.driverRequest_listview);
 
-        acceptedList = rc.getListOfAccepted(accepted);
+         // add the accepted requests
+        acceptedList = rc.getListOfDriverRequests(accepted);
         ArrayList<Request> TempList = new ArrayList<Request>();
 
         for(Request request : acceptedList){
@@ -55,10 +56,10 @@ public class DriverActivity extends AppCompatActivity {
                 requestList.add(request);
             }
         }
-        pendingList = rc.getListOfPending(pending);
+        // add the pending requests
+        pendingList = rc.getListOfDriverRequests(pending);
         // temp list has all the pending request, we must narrow down to driver in prospectiveDriverList
         TempList.addAll(pendingList);
-
         for(Request request: TempList){
             // makes a new tempDriver list for each request
             ArrayList<String> TempDriver = new ArrayList<String>();
@@ -70,61 +71,23 @@ public class DriverActivity extends AppCompatActivity {
             }
         }
 
-//        for (int i = 0 ; i < TempList.size(); i++){
-//            TempDriver.addAll(request.getProspectiveDrivers());
-//            for (int j = 0; j < TempDriver.size(); i++) {
-//                // get all the prospective drivers
-//                if (driverName == TempDriver[j]){
-//                    requestList.add(request);
-//                }
-//            }
-//        }
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stubz
+        super.onStart();
 
+        //requestList.clear();
+        requestList = rc.setListOfDriveRequests(requestList);
 
-//
-//        try {
-//            // how to populate the browslist view
-//            browseList.clear();
-//            ElasticsearchRequestController.GetBrowsingRequestsTask getBrowsingRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
-//            getBrowsingRequestsTask.execute("");
-//            browseList = getBrowsingRequestsTask.get();
-//        } catch (Exception e) {
-//            Log.i("Error", "Failed to get the requests out of the async object.");
-//        }
-//        browseAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, browseList);
-//        theBrowseList.setAdapter(browseAdapter);
-//        browseAdapter.notifyDataSetChanged();
-//    }
-
-    //}
-
-//        public void onStart(){
-//            super.onStart();
-//            // populate the pending listview with request that the driver selected, whos status is all pending
-//            theRequestList = (ListView) findViewById(R.id.driverRequest_listview);
-//            requestList.clear();
-//            requestList = rc.getListOfPendingRequest(userName, pending, accepted);
-//            try {
-//                ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
-//                getPendingTask.execute("");
-//                requestList = getPendingTask.get();
-//            } catch (Exception e) {
-//                Log.i("Error", "Failed to get the requests out of the async object.");
-//            }
-//
-//            requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
-//            theRequestList.setAdapter(requestAdapter);
-//            requestAdapter.addAll(requestList);
-//
-//            requestAdapter.notifyDataSetChanged();
-//
-//    }
-
+        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
+        theRequestList.setAdapter(requestAdapter);
+        requestAdapter.notifyDataSetChanged();
+    }
 
     /**
      * Browse request action.
@@ -148,17 +111,14 @@ public class DriverActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    //Only here for testing purposes.
-//    public void RefreshAction(View view){
-//        requestList.clear();
-//        requestList = rc.getListOfPendingRequest(userName, pending, accepted);
-//
-//        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
-//        theRequestList.setAdapter(requestAdapter);
-//        requestAdapter.notifyDataSetChanged();
-//    }
+    public void Refresh(View view){
+        //requestList.clear();
+        requestList = rc.setListOfDriveRequests(requestList);
 
-
+        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
+        theRequestList.setAdapter(requestAdapter);
+        requestAdapter.notifyDataSetChanged();
+    }
 }
 
 

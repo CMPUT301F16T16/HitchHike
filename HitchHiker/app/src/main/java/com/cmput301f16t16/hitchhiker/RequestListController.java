@@ -71,8 +71,14 @@ public class RequestListController {
         return requestsList;
     }
 
+    public ArrayList<Request> setListOfDriveRequests(ArrayList requestList){
+        ArrayList<Request> containsRequestList = new ArrayList<Request>();
+        containsRequestList.clear();
+        containsRequestList.addAll(requestList);
+        return containsRequestList;
+    }
 
-    public ArrayList<Request> getListOfAccepted(String status){
+    public ArrayList<Request> getListOfDriverRequests(String status){
         ArrayList<Request> requestsList = new ArrayList<Request>();
         ElasticsearchRequestController.GetDriverTask getRequestsTask = new ElasticsearchRequestController.GetDriverTask();
         getRequestsTask.setStatus(status);
@@ -86,38 +92,8 @@ public class RequestListController {
         return requestsList;
     }
 
-    public ArrayList<Request> getListOfPending(String status){
-        ArrayList<Request> requestsList = new ArrayList<Request>();
-        ElasticsearchRequestController.GetDriverTask getRequestsTask = new ElasticsearchRequestController.GetDriverTask();
-        getRequestsTask.setStatus(status);
-        getRequestsTask.execute("");
-        try {
-            requestsList = getRequestsTask.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets out of the async object.");
-        }
-        return requestsList;
-    }
 
 
-
-
-
-//    public ArrayList<Request> getListOfAccepted(String status, String driver){
-//        ArrayList<Request> requestsList = new ArrayList<Request>();
-//        ElasticsearchRequestController.GetAcceptTask getRequestsTask = new ElasticsearchRequestController.GetAcceptTask();
-//        getRequestsTask.setAccepted(status);
-//        getRequestsTask.setDriver(driver);
-//        getRequestsTask.execute("");
-//        try {
-//            requestsList = getRequestsTask.get();
-//        }
-//        catch (Exception e) {
-//            Log.i("Error", "Failed to get the tweets out of the async object.");
-//        }
-//        return requestsList;
-//    }
 
 
 

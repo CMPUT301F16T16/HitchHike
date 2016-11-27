@@ -53,40 +53,6 @@ public class ElasticsearchRequestController {
         }
     }
 
-    public static class GetPendingTask extends AsyncTask<String, Void, ArrayList<Request>> {
-        private String pending;
-
-        @Override
-        protected ArrayList<Request> doInBackground(String... search_parameters) {
-            verifySettings();
-
-            ArrayList<Request> requests = new ArrayList<Request>();
-
-            // Assumption: Only the first search_parameter[0] is used.
-
-            String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"requestStatus\": \"" + pending + "\"}}}";
-
-            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
-
-            try {
-                SearchResult result = client.execute(search);
-                if (result.isSucceeded()) {
-                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
-                    requests.addAll(foundRequests);
-                } else {
-                    Log.i("Error", "The search executed but it didn't work.");
-                }
-            } catch (Exception e) {
-                Log.i("Error", "Executing the get requests method failed");
-            }
-            return requests;
-        }
-        public void setPending(String pending){
-            this.pending = pending;
-        }
-    }
-
-
 
     public static class GetDriverTask extends AsyncTask<String, Void, ArrayList<Request>> {
         private String status;
@@ -119,58 +85,7 @@ public class ElasticsearchRequestController {
 
 
 
-//    public static class GetAcceptTask extends AsyncTask<String, Void, ArrayList<Request>> {
-//        private String accepted;
-//        private String driver;
-//
-//        @Override
-//        protected ArrayList<Request> doInBackground(String... search_parameters) {
-//            verifySettings();
-//
-//            ArrayList<Request> requests = new ArrayList<Request>();
-//
-//            // Assumption: Only the first search_parameter[0] is used.
-//
-//            //String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"requestStatus\": \"" + accepted + "\"} {}}";
-//
-//            String search_string =
-//                    "{ \"from\" : 0, \"size\" : 500,\n" +
-//                            "  \"query\": {\n" +
-//                            "    \"bool\": {\n" +
-//                            "      \"must\": { \"match\": { \"Driver\": \"" + driver + "\" }},\n" +
-//                            "      \"should\": [\n" +
-//                            "              { \"match\": { \"requestStatus\": \"" + accepted + "\" }},\n" +
-//                            "      ],\n" +
-//                            "      \"minimum_should_match\": \"1\"\n" +
-//                            "    }\n" +
-//                            "  }\n" +
-//                            "}";
-//
-//            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
-//
-//            try {
-//                SearchResult result = client.execute(search);
-//                if (result.isSucceeded()) {
-//                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
-//                    requests.addAll(foundRequests);
-//                } else {
-//                    Log.i("Error", "The search executed but it didn't work.");
-//                }
-//            } catch (Exception e) {
-//                Log.i("Error", "Executing the get requests method failed");
-//            }
-//            return requests;
-//        }
-//        public void setAccepted(String accepted){
-//            this.accepted = accepted;
-//        }
-//
-//        public void setDriver(String driver) {
-//            this.driver = driver;
-//        }
-//
-//
-//    }
+
 
 
 
