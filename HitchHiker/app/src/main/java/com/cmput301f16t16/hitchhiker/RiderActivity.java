@@ -51,12 +51,12 @@ public class RiderActivity extends AppCompatActivity {
                     Intent intent = new Intent(RiderActivity.this, AcceptedRequestActivity.class);
                     intent.putExtra("request", request);
                     startActivity(intent);
-                    finish();
+
                 } else {
                     Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
                     intent.putExtra("request", request);
                     startActivity(intent);
-                    finish();
+
                 }
             }
         });
