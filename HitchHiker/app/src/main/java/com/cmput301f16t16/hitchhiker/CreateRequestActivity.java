@@ -62,6 +62,7 @@ public class CreateRequestActivity extends AppCompatActivity {
          */
 
         GeoPoint start = location.getStartPoint();
+        GeoPoint end = location.getEndPoint();
 
 //        String pickUp = location.getStringStartPoint();
 //        String dropOff = location.getStringEndPoint();
@@ -73,8 +74,8 @@ public class CreateRequestActivity extends AppCompatActivity {
         }
         else{
             Double price = Double.parseDouble(suggestedFare);
-            String userName = user.getUserName();
-            Request newRequest = new Request(userName, pickUp, dropOff, price, start);
+            String userName = user.getUserName(); 
+            Request newRequest = new Request(userName, pickUp, dropOff, price, start, end);
             String result = rc.addRequest(newRequest);
 
             if (result == null){

@@ -283,7 +283,7 @@ public class LocationViewActivity extends Activity implements Serializable {
                 endPoint = getLocation(d);
 
                 if (startPoint != null && endPoint != null) {
-                    location = new Location(startPoint, o, d);
+                    location = new Location(startPoint, endPoint, o, d);
                     getRoadAsync(startPoint, endPoint);
 
                     mapController.animateTo(startPoint);

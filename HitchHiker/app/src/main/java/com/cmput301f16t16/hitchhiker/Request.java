@@ -88,7 +88,7 @@ public class Request implements Serializable {
      * @param dropOff        the drop off
      * @param price          the price
      */
-    public Request(String requestCreator, String pickUp, String dropOff, Double price, GeoPoint start) {
+    public Request(String requestCreator, String pickUp, String dropOff, Double price, GeoPoint start, GeoPoint end) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
         this.dropOff = dropOff;
@@ -96,7 +96,7 @@ public class Request implements Serializable {
         this.requestStatus = CREATED;
         this.prospectiveDrivers = new ArrayList<String>();
         this.start = start;
-//        this.end = end;
+        this.end = end;
 
     }
 
