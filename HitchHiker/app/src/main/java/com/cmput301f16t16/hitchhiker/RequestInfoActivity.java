@@ -38,7 +38,10 @@ public class RequestInfoActivity extends AppCompatActivity {
         request.addProspectiveDriver(userName);
         // change the status
         request.setRequestStatus("PENDING");
+        // update the status
         rc.addRequest(request);
+        // we remove the request from the browslist, and put it in the pending list,
+
         finish();
     }
 

@@ -7,8 +7,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * The type Driver activity.
@@ -23,6 +25,10 @@ public class DriverActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         user = (User) getIntent().getSerializableExtra("user");
+
+
+        ListView pendingListView = (ListView) findViewById(R.id.pending_requests_listview);
+
     }
 
     /**
