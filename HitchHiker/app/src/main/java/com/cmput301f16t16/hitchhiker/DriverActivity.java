@@ -7,9 +7,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +19,15 @@ import java.util.List;
  */
 public class DriverActivity extends AppCompatActivity {
     private User user;
+    private ListView thePendingList ;
+    private ArrayList<Request> pendingList = new ArrayList<Request>();
+    private ArrayAdapter<Request> pendingAdapter;
+    private RequestListController rc = new RequestListController();
+    private String userName;
+    private String created;
+    private String pending;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +36,21 @@ public class DriverActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         user = (User) getIntent().getSerializableExtra("user");
+        userName = user.getUserName();
+
+        created = "CREATED";
+        pending = "PENDING";
+
+        thePendingList = (ListView) findViewById(R.id.pending_requests_listview);
 
 
-        ListView pendingListView = (ListView) findViewById(R.id.pending_requests_listview);
+        //pendingList.clear();
+        pendingList = rc.getListOfPendingRequest(userName,created);
+
+
+        pendingAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, pendingList);
+        thePendingList.setAdapter(pendingAdapter);
+        pendingAdapter.notifyDataSetChanged();
 
     }
 
