@@ -47,7 +47,8 @@ public class RiderActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Request request = requestsList.get(position);
 
-                if (request.getRequestStatus() == "ACCEPTED") {
+                String status = request.getRequestStatus();
+                if (status.equals("ACCEPTED")) {
                     Intent intent = new Intent(RiderActivity.this, AcceptedRequestActivity.class);
                     intent.putExtra("request", request);
                     startActivity(intent);

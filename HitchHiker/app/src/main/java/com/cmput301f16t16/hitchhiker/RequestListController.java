@@ -91,7 +91,7 @@ public class RequestListController {
     /**
      * This will get a list of pending request, we must query on two constraints, based on the username a
      * nd the status being 2 or 3
-     * @param userName, requestStatus
+     * @param userName, status
      * @return
      */
     public ArrayList<Request> getListOfPendingRequest(String userName, String status ){

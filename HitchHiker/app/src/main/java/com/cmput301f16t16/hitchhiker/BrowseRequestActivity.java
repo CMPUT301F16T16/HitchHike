@@ -89,7 +89,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         try {
             ElasticsearchRequestController.GetBrowsingRequestsTask getBrowseRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
             getBrowseRequestsTask.execute("");
-            browseList = getBrowseRequestsTask.get();
+            browseList = getBrowseRequestsTask.get(); // brosweList is now populate with request from elasticsearch
         } catch (Exception e) {
             Log.i("Error", "Failed to get the requests out of the async object.");
         }

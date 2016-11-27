@@ -74,16 +74,17 @@ public class ShowUserProfileActivity extends AppCompatActivity {
     }
     // when you accept a driver, driver gets notified, status of request changes to accepted 3
     // sets the driver to his username, and goes to a new activity with accepted driver, The prospective
-    // drivers are removed, no more.
+    // drivers are removed, no more. Returns to Rider Activity
     public void AcceptDriverAction(View view){
         RequestListController rc = new RequestListController();
         request.setRequestStatus("ACCEPTED");
         request.setDriver(userName);
         rc.addRequest(request);
+        finish();
 
-        Intent intent = new Intent(ShowUserProfileActivity.this, AcceptedRequestActivity.class);
-        intent.putExtra("request", request);
-        startActivity(intent);
+//        Intent intent = new Intent(ShowUserProfileActivity.this, AcceptedRequestActivity.class);
+//        intent.putExtra("request", request);
+//        startActivity(intent);
         //finish();
 
     }
