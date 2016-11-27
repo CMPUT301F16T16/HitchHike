@@ -77,7 +77,7 @@ public class RequestListTest extends TestCase{
         Collection<Request> requests = requestList.getRequests();
         assertTrue("RequestLIST size", requests.size() == 1);
         assertTrue("joseph is in", requestList.contains(request));
-        assertEquals("There is a request", requestList.hasRequest(request), 1);
+        assertTrue("There is a request", requestList.hasRequest(request));
         Request returnedRequest = requestList.getRequest(0);
         assertEquals(returnedRequest.getRequestID(),request.getRequestID());
     }
