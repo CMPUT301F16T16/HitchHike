@@ -10,17 +10,11 @@ import java.util.Collection;
 public class UserList implements Serializable{
 
     private static final long serialVersionUID = 12L;
-
-    /**
-     * The User list.
-     */
     protected ArrayList<User> userList = null;
-
     /**
      * The User listeners.
      */
     protected transient ArrayList<UserListener> userListeners = null;
-
     /**
      * Instantiates a new User list.
      */
@@ -38,7 +32,6 @@ public class UserList implements Serializable{
 
     /**
      * Has user boolean.
-     *
      * @param user the user
      * @return the boolean
      */
@@ -46,10 +39,8 @@ public class UserList implements Serializable{
         return userList.contains(user);
     }
 
-
     /**
      * Delete.
-     *
      * @param user the user
      */
     public void delete(User user) {
@@ -58,8 +49,7 @@ public class UserList implements Serializable{
     }
 
     /**
-     * Gets users.
-     *
+     * Gets list of users.
      * @return the users
      */
     public Collection<User> getUsers() {
@@ -76,8 +66,7 @@ public class UserList implements Serializable{
     }
 
     /**
-     * Gets user.
-     *
+     * Gets a single user.
      * @param index the index
      * @return the user
      */

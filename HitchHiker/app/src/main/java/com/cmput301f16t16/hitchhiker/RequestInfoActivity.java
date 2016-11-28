@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * The type Request info activity. once a request has been pending from the driver POV, it will contain details about the request
+ * @author Victoria Lee
+ */
 public class RequestInfoActivity extends AppCompatActivity {
     private Request request;
     private User user;
@@ -36,19 +40,16 @@ public class RequestInfoActivity extends AppCompatActivity {
         SpannableString content = new SpannableString(request.getRiderName());
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         userNameText.setText(content);
-//        userNameText.setText(user.getUserName());
 
-        /**
-         * TextView tv = (TextView) view.findViewById(R.id.tv);
-         SpannableString content = new SpannableString("Content");
-         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-         tv.setText(content);
-         */
         TextView requestFareText = (TextView) findViewById(R.id.requestFare_textView);
         String price = request.getPrice().toString();
         requestFareText.setText(price);
     }
 
+    /**
+     * Accept request.
+     * @param view the view
+     */
     public void AcceptRequest(View view){
         RequestListController rc = new RequestListController();
         String userName = user.getUserName();
@@ -61,12 +62,20 @@ public class RequestInfoActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Go to map.
+     * @param view the view
+     */
     public void GoToMap(View view){
         Intent intent = new Intent(RequestInfoActivity.this, driverViewMap.class);
         intent.putExtra("request", request);
         startActivity(intent);
     }
 
+    /**
+     * Go to user profile.
+     * @param view the view
+     */
     public void GoToUserProfile(View view){
         Intent intent = new Intent(RequestInfoActivity.this, UserInfoOnlyActivity.class);
         String riderName = request.getRiderName();
@@ -77,10 +86,7 @@ public class RequestInfoActivity extends AppCompatActivity {
         }
         catch(Exception e){
         }
-
         intent.putExtra("user", riderUser);
         startActivity(intent);
-
-
     }
 }

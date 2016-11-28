@@ -8,13 +8,12 @@ import android.widget.TextView;
 
 /**
  * Created by V1CTORIA2LEE on 2016-11-27.
+ * This Activity will display the User information only, without any edit or accept buttons
  */
 public class UserInfoOnlyActivity extends Activity {
     private User user;
     private Request request;
     private String userName;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +22,6 @@ public class UserInfoOnlyActivity extends Activity {
 
         user =(User) getIntent().getSerializableExtra("user");
         request =(Request) getIntent().getSerializableExtra("request");
-
-
     }
 
     @Override
@@ -54,7 +51,6 @@ public class UserInfoOnlyActivity extends Activity {
         phoneNumberText.setText(phoneNumber);
         carDetails.setText(carDescription);
 
-
         if (userType == 1){
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.LTGRAY);
@@ -63,14 +59,10 @@ public class UserInfoOnlyActivity extends Activity {
         else if (userType == 2){
             riderText.setTextColor(Color.LTGRAY);
             driverText.setTextColor(Color.BLACK);
-            //aButton.setVisibility(View.GONE);
         }
         else if (userType == 3){
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.BLACK);
-            //aButton.setVisibility(View.GONE);
         }
-
-
     }
 }
