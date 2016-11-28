@@ -110,6 +110,8 @@ public class Request implements Serializable {
      * @return the GeoPoint
      */
     public GeoPoint getStartGeo() {return this.start;}
+    public void setStartGeo(GeoPoint start) {this.start = start;}
+    public void setEndGeo(GeoPoint end) {this.end = end;}
 
     public void setPrice(Double price) {
         this.price = price;
