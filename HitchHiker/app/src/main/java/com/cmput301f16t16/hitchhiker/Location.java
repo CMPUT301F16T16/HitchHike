@@ -49,7 +49,6 @@ public class Location implements Serializable {
     private GeoPoint endPoint;
     private String stringStartPoint;
     private String stringEndPoint;
-    private GeoPoint touchedPoint;
     private Double distance;
     private double fare;
     private double rate = 5;
@@ -61,9 +60,6 @@ public class Location implements Serializable {
         this.stringEndPoint = stringEndPoint;
         this.stringStartPoint = stringStartPoint;
         this.distance = distance;
-//        this.fare = fare;
-//        this.rate = rate;
-
     }
 
     /**
