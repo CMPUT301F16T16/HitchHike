@@ -20,20 +20,18 @@ import java.util.List;
  */
 public class DriverActivity extends AppCompatActivity {
     private User user; // this is the driver
-    private ListView thePendingList ;
-    private ListView theAcceptedList;
-    private ArrayList<Request> pendingList = new ArrayList<Request>();
+    private ListView theRequestList ;
+    private ArrayList<Request> requestList = new ArrayList<Request>();
     private ArrayList<Request> acceptedList = new ArrayList<Request>();
-    private ArrayAdapter<Request> pendingAdapter;
-    private ArrayAdapter<Request> acceptedAdapter;
+    private ArrayList<Request> pendingList = new ArrayList<Request>();
+
+    private ArrayAdapter<Request> requestAdapter;
     private RequestListController rc = new RequestListController();
-    private String userName;
+    private String driverName;
     private String accepted;
     private String pending;
 
-
-
-
+    //private Request request;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,71 +39,55 @@ public class DriverActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         user = (User) getIntent().getSerializableExtra("user");
-        userName = user.getUserName();
-
+        // the driver name
+        driverName = user.getUserName();
         pending = "PENDING";
+        accepted = "ACCEPTED";
 
         // populate the pending listview with request that the driver selected, whos status is all pending
-        thePendingList = (ListView) findViewById(R.id.pending_requests_listview);
-        pendingList.clear();
-        pendingList = rc.getListOfPendingRequest(userName, pending);
-        try {
-            ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
-            getPendingTask.execute("");
-            pendingList = getPendingTask.get();
-        } catch (Exception e) {
-            Log.i("Error", "Failed to get the requests out of the async object.");
+        theRequestList = (ListView) findViewById(R.id.driverRequest_listview);
+
+         // add the accepted requests
+        acceptedList = rc.getListOfDriverRequests(accepted);
+        ArrayList<Request> TempList = new ArrayList<Request>();
+
+        for(Request request : acceptedList){
+            if (driverName.equals(request.getDriver())) {
+                requestList.add(request);
+            }
+        }
+        // add the pending requests
+        pendingList = rc.getListOfDriverRequests(pending);
+        // temp list has all the pending request, we must narrow down to driver in prospectiveDriverList
+        TempList.addAll(pendingList);
+        for(Request request: TempList){
+            // makes a new tempDriver list for each request
+            ArrayList<String> TempDriver = new ArrayList<String>();
+            TempDriver.addAll(request.getProspectiveDrivers());
+            for (String driver: TempDriver){
+                if (driverName.equals(driver)){
+                    requestList.add(request);
+                }
+            }
         }
 
-        pendingAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, pendingList);
-        thePendingList.setAdapter(pendingAdapter);
-        pendingAdapter.addAll(pendingList);
-
-        pendingAdapter.notifyDataSetChanged();
-
-        // accepted listview stuff
-//        theAcceptedList = (ListView) findViewById(R.id.acceptedByRider_listview);
-//        acceptedList = rc.getListOfAcceptedRequest(userName, accepted);
-//        acceptedAdapter = new ArrayAdapter<Request>(this, R.layoutpen)
-//
+        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
+        theRequestList.setAdapter(requestAdapter);
+        requestAdapter.notifyDataSetChanged();
     }
 
-        public void onStart(){
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stubz
+        super.onStart();
 
-         super.onStart();
-            pendingList.clear();
-            pendingList = rc.getListOfPendingRequest(userName,pending);
+        //requestList.clear();
+        requestList = rc.setListOfDriveRequests(requestList);
 
-            // populate the pending listview with request that the driver selected, whos status is all pending
-            pending = "PENDING";
-            thePendingList = (ListView) findViewById(R.id.pending_requests_listview);
-//        try {
-//            ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
-//            getPendingTask.execute("");
-//            pendingList = getPendingTask.get();
-//        } catch (Exception e) {
-//            Log.i("Error", "Failed to get the requests out of the async object.");
-//        }
-
-            pendingAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, pendingList);
-            thePendingList.setAdapter(pendingAdapter);
-           // pendingAdapter.addAll(pendingList);
-
-            pendingAdapter.notifyDataSetChanged();
-
-            // accepted listview stuff
-//        theAcceptedList = (ListView) findViewById(R.id.acceptedByRider_listview);
-//        acceptedList = rc.getListOfAcceptedRequest(userName, accepted);
-//        acceptedAdapter = new ArrayAdapter<Request>(this, R.layoutpen)
-//
-
+        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
+        theRequestList.setAdapter(requestAdapter);
+        requestAdapter.notifyDataSetChanged();
     }
-
-
-
-
-
-
 
     /**
      * Browse request action.
@@ -129,17 +111,14 @@ public class DriverActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Only here for testing purposes.
-    public void RefreshAction(View view){
-        pendingList.clear();
-        pendingList = rc.getListOfPendingRequest(userName, pending);
+    public void Refresh(View view){
+        //requestList.clear();
+        requestList = rc.setListOfDriveRequests(requestList);
 
-        pendingAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, pendingList);
-        thePendingList.setAdapter(pendingAdapter);
-        pendingAdapter.notifyDataSetChanged();
+        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
+        theRequestList.setAdapter(requestAdapter);
+        requestAdapter.notifyDataSetChanged();
     }
-
-
 }
 
 

@@ -11,13 +11,13 @@ import static java.lang.Boolean.FALSE;
 public class UserTest extends TestCase {
     public void testGetUserName() {
         String userName = "TestUser";
-        User user = new User(userName, "","","",8, 0);
+        User user = new User(userName, "","","","", 0, "");
         assertEquals("TestUser", user.getUserName());
     }
 
     public void testSetUserName(){
         String userName = "TestUser";
-        User user = new User(userName, "", "", "", 9, 65);
+        User user = new User(userName, "", "", "", "", 65, "");
         String userName2 = "TestUser2";
         user.setUserName(userName2);
         assertEquals("TestUser2", user.getUserName());
@@ -25,7 +25,7 @@ public class UserTest extends TestCase {
 
     public void testupdateEmail(){
         String email = "yahoo.com";
-        User user = new User("", "", "", email, 9, 65);
+        User user = new User("", "", "", "", "", 65, "");
         assertEquals(email, user.getUserEmail());
 
         String email2 = "lala@gmail";

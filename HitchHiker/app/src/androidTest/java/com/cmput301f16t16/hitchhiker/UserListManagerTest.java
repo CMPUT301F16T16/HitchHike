@@ -23,7 +23,7 @@ public class UserListManagerTest extends AndroidTestCase {
 
     public void testUserToString() {
         UserList userList = new UserList();
-        User user = new User("BOB", "", "", "", 3, 4);
+        User user = new User("BOB", "", "", "", "", 4, "");
         userList.addUser(user);
         try {
             String userName = UserListManager.userListToString(userList);
@@ -43,7 +43,7 @@ public class UserListManagerTest extends AndroidTestCase {
         try {
             UserList userList = new UserList();
             String userName = "testUser";
-            User user = new User("BOBBBBY", "", "", "", 3, 4);
+            User user = new User("BOBBBBY", "", "", "", "", 4, "");
             userList.addUser(user);
             UserListManager userListManager = new UserListManager(getContext());
             userListManager.saveUserList(userList);

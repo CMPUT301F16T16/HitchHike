@@ -14,32 +14,18 @@ import java.util.ArrayList;
  * possibly change this to a request controller instead
  */
 public class RequestListController {
-
     /*
     *Lazy Singleton talk too the activity and elastic search
      */
     private static RequestList requestList = null;
 
-    /**
-     * Gets request list.
-     *
-     * @return the request list
-     */
     static public RequestList getRequestList() {
         if (requestList == null) {
             requestList = new RequestList();
-
             }
-
         return requestList;
     }
 
-    /**
-     * Add request string.
-     *
-     * @param request the request
-     * @return the string
-     */
     public String addRequest(Request request) {
         if (request.getStartLocation() == null || request.getEndLocation() == null)
         {
@@ -57,7 +43,6 @@ public class RequestListController {
 
     /**
      * Remove request.
-     *
      * @param requestId the request id
      */
     public void removeRequest(String requestId) {
@@ -83,10 +68,57 @@ public class RequestListController {
         catch (Exception e) {
             Log.i("Error", "Failed to get the tweets out of the async object.");
         }
-
         return requestsList;
-
     }
+
+    public ArrayList<Request> setListOfDriveRequests(ArrayList requestList){
+        ArrayList<Request> containsRequestList = new ArrayList<Request>();
+        containsRequestList.clear();
+        containsRequestList.addAll(requestList);
+        return containsRequestList;
+    }
+
+    public ArrayList<Request> getListOfDriverRequests(String status){
+        ArrayList<Request> requestsList = new ArrayList<Request>();
+        ElasticsearchRequestController.GetDriverTask getRequestsTask = new ElasticsearchRequestController.GetDriverTask();
+        getRequestsTask.setStatus(status);
+        getRequestsTask.execute("");
+        try {
+            requestsList = getRequestsTask.get();
+        }
+        catch (Exception e) {
+            Log.i("Error", "Failed to get the tweets out of the async object.");
+        }
+        return requestsList;
+    }
+
+
+
+
+
+
+
+//    public ArrayList<Request> getDriverRequest(String status, String stat){
+//        ArrayList<Request> requestsList = new ArrayList<Request>();
+//        ElasticsearchRequestController.GetDriverRequestTask getRequestsTask = new ElasticsearchRequestController.GetDriverRequestTask();
+//        getRequestsTask.setPending(status);
+//        getRequestsTask.setPending(stat);
+//
+//        getRequestsTask.execute("");
+//        try {
+//            requestsList = getRequestsTask.get();
+//        }
+//        catch (Exception e) {
+//            Log.i("Error", "Failed to get the tweets out of the async object.");
+//        }
+//        return requestsList;
+//    }
+
+
+
+
+
+
 
     /**
      * This will get a list of pending request, we must query on two constraints, based on the username a
@@ -94,22 +126,38 @@ public class RequestListController {
      * @param userName, status
      * @return
      */
-    public ArrayList<Request> getListOfPendingRequest(String userName, String status ){
-        ArrayList<Request> pendingList = new ArrayList<Request>();
-        ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
-        getPendingTask.setUserName(userName);
-        getPendingTask.setRequestStatus(status);
-        getPendingTask.execute("");
-        try {
-            pendingList = getPendingTask.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets out of the async object.");
-        }
+//    public ArrayList<Request> getListOfPendingRequest(String userName, String pending ){
+//        ArrayList<Request> pendingList = new ArrayList<Request>();
+//        ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
+//        try {
+//            getPendingTask.setUserName(userName);
+//            getPendingTask.setPending(pending);
+//            getPendingTask.execute("");
+//            pendingList = getPendingTask.get();
+//        }
+//        catch (Exception e) {
+//            Log.i("Error", "Failed to get the tweets out of the async object.");
+//        }
+//        return pendingList;
+//    }
+//
+//    public ArrayList<Request> getListOfAcceptedRequest(String userName, String accepted ){
+//        ArrayList<Request> acceptedList = new ArrayList<Request>();
+//        ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
+//        try {
+//            getPendingTask.setUserName(userName);
+//            getPendingTask.setAccepted(accepted);
+//            getPendingTask.execute("");
+//            acceptedList = getPendingTask.get();
+//        }
+//        catch (Exception e) {
+//            Log.i("Error", "Failed to get the tweets out of the async object.");
+//        }
+//        return acceptedList;
+//    }
 
-        return pendingList;
 
-    }
+
 
     /**
      * Gets request load.
