@@ -14,11 +14,10 @@ public class UserListController {
 
     /**
      * Gets user list.
-     *
      * @return the user list
+     * If a userList isn't created yet it will catch error otherwise
+     * it will grab the users from the userManager and save the userList
      */
-// If a userList isn't created yet it will catch error otherwise
-    // it will grab the users from the userManager and save the userList
     static public UserList getUserList() {
         if (userList == null) {
             try {
@@ -42,6 +41,7 @@ public class UserListController {
 
     /**
      * Save user list.
+     * @see UserListManager
      */
     public static void saveUserList() {
         try {
@@ -53,9 +53,9 @@ public class UserListController {
     }
 
     /**
-     * Add user.
-     *
+     * Add user into elasticsearch
      * @param newUser the new user
+     * @see ElasticsearchUserController
      */
     public void addUser(User newUser){
         ElasticsearchUserController.AddUsersTask addUsersTask = new ElasticsearchUserController.AddUsersTask();
@@ -63,10 +63,10 @@ public class UserListController {
     }
 
     /**
-     * Find user user.
-     *
+     * Find user if it exists
      * @param userName the user name
      * @return the user
+     * @see ElasticsearchUserController
      */
     public User findUser(String userName){
         User user = null;

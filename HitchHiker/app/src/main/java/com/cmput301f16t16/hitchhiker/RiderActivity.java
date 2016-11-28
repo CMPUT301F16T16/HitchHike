@@ -16,7 +16,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * The type Rider activity.
+ * The type Rider activity. The rider can view a list of request it is involved in, It can go to
+ * a create new request task and its profile page.
  */
 public class RiderActivity extends AppCompatActivity {
 
@@ -37,13 +38,13 @@ public class RiderActivity extends AppCompatActivity {
 
         // display requests into the listview
         theRequestList = (ListView) findViewById(R.id.open_requests_listview);
-
         requestsList = rc.getListOfRequest(userName);
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
 
-
+        // when a request is clicked grab the position and depending on the status of the request it
+        // will be sent to a different activity.
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Request request = requestsList.get(position);
@@ -55,15 +56,16 @@ public class RiderActivity extends AppCompatActivity {
                     intent.putExtra("request", request);
                     startActivity(intent);
 
-                } else if (status.equals("COMPLETED")) {
+                }// If the request is completed it will go no where
+                else if (status.equals("COMPLETED")) {
                     Toast.makeText(RiderActivity.this, "This request as been completed", Toast.LENGTH_LONG).show();
                 }
+                // it will take you to a page where you can view a list of drivers that accepted this request
                 else {
                     Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
                     intent.putExtra("user", user);
                     intent.putExtra("request", request);
                     startActivity(intent);
-
                 }
             }
         });
@@ -76,7 +78,6 @@ public class RiderActivity extends AppCompatActivity {
 
         requestsList.clear();
         requestsList = rc.getListOfRequest(userName);
-
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
@@ -84,14 +85,12 @@ public class RiderActivity extends AppCompatActivity {
 
     /**
      * Refresh.
-     *
      * @param view the view
      */
 //Only here for testing purposes.
     public void Refresh(View view){
         requestsList.clear();
         requestsList = rc.getListOfRequest(userName);
-
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestsList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
@@ -99,7 +98,6 @@ public class RiderActivity extends AppCompatActivity {
 
     /**
      * Create request.
-     *
      * @param view the view
      */
     public void CreateRequest(View view){
@@ -110,7 +108,6 @@ public class RiderActivity extends AppCompatActivity {
 
     /**
      * Go to user profile page.
-     *
      * @param view the view
      */
     public void GoToUserProfilePage(View view) {
@@ -127,7 +124,6 @@ public class RiderActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 user = (User) data.getSerializableExtra("updatedUser");
-
             }
         }
     }
@@ -136,7 +132,6 @@ public class RiderActivity extends AppCompatActivity {
     // on Nov 24, 2016
     @Override
     public void onBackPressed() {
-
         if( user.userType == 1) {
             new AlertDialog.Builder(this)
                     .setTitle("Exit App?")

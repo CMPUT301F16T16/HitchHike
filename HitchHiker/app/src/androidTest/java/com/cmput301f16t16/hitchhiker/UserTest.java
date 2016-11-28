@@ -36,13 +36,26 @@ public class UserTest extends TestCase {
 
     /**
      * US 1.09.01 As a rider, I should see a description of the driver's vehicle
+     * US
      */
     public void testGetCarDescription() {
-        User user = new User("","","","","",65,"");
         String carDescription = "Fiat Multipla Gray";
-        user.setCarDescription(carDescription);
+        User user = new User("","","","","",65,carDescription);
         assertEquals(carDescription, user.getCarDescription());
     }
+
+    /**
+     * US 03.04.01 As a driver, in my profile I can provide details about
+     * the car I drive
+     */
+    public void testSetCarDescription() {
+        User user = new User ("","","","","",65,"");
+        String carDescription = "Maclaren P1 Orange";
+        user.setCarDescription(carDescription);
+        assertEquals(carDescription, user.getCarDescription());
+
+    }
+
 
 
 

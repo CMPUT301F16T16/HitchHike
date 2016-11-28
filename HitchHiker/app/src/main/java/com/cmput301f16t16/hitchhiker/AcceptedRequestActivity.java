@@ -115,7 +115,7 @@ public class AcceptedRequestActivity extends Activity{
      *      from ACCEPTED to COMPLETED.</p>
      *
      * @param view the view
-     * @see Request
+     * @see Req
      */
     public void PayNowAction(View view){
         Toast.makeText(this, "Payment completed, Thank You for using HitchHiker!", Toast.LENGTH_SHORT).show();

@@ -19,10 +19,8 @@ import io.searchbox.annotations.JestId;
 public class Request implements Serializable {
 
     private static long serialVersionUID = 44L; // need this to access a same request from diff screens
-
     @JestId
     private String id;
-
     /**
      * instead of just grabbing the ID's driver and rider we can bring in the whole objects
      * and use what info we need
@@ -30,34 +28,11 @@ public class Request implements Serializable {
     private String Rider;
     private String Driver;
 
-    /**
-     * Need a list of prospective Drivers to choose Final Driver Choice
-     */
-
     private ArrayList<String> prospectiveDrivers;
-
-    /**
-     * Need a Location A (start of where the rider is located)
-     * and a Location B (End of the ride is located)
-     */
     private String pickUp;
     private String dropOff;
-
-    /**
-     * Fare is calculated and must be accepted before request is complete
-     */
     private Double price;
-    /**
-     * need some variables types (int maybe?) to know different states of request:
-     * 1) a user has created a request but no drivers accepted yet CREATED = 1
-     * 2) atleast one or more drivers have offered to give the rider a ride
-     * 3) A rider has chosen a specific driver for the ride
-     * 4) A rider has reached the location (B) from (A) and has paid
-     * 5) A canceled request
-     */
-
     private String requestStatus;
-
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
 
     /**
@@ -71,7 +46,6 @@ public class Request implements Serializable {
 
     private GeoPoint start;
     private GeoPoint end;
-
 
     /**
      * Instantiates a new Request.
@@ -111,9 +85,6 @@ public class Request implements Serializable {
      */
     public void setRequestStatus(String requestStatus){this.requestStatus = requestStatus; }
 
-
-
-
     @Override
     public String toString () {
         return this.pickUp + "\t ---> \t" + this.dropOff+"\t\t\t\t\t\t"+ this.requestStatus;
@@ -137,6 +108,9 @@ public class Request implements Serializable {
         return this.pickUp;
     }
 
+
+
+
     /**
      * Get end location string.
      *
@@ -152,6 +126,8 @@ public class Request implements Serializable {
      * @return the GeoPoint
      */
     public GeoPoint getStartGeo() {return this.start;}
+    public void setStartGeo(GeoPoint start) {this.start = start;}
+    public void setEndGeo(GeoPoint end) {this.end = end;}
 
     /**
      * Sets price.
@@ -262,4 +238,5 @@ public class Request implements Serializable {
     public GeoPoint getEndGeo() {
         return this.end;
     }
+
 }

@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * The type Show user profile activity. If the user being passed is a rider, they will have the
+ * option to Accept the Driver. If the user being passed is a Driver, the accept button will not
+ * be visible
+ */
 public class ShowUserProfileActivity extends AppCompatActivity {
     private User user;
-    private Integer userType;
     private Request request;
     private String userName;
-    private Button aButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,19 +64,22 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         else if (userType == 2){
             riderText.setTextColor(Color.LTGRAY);
             driverText.setTextColor(Color.BLACK);
-            //aButton.setVisibility(View.GONE);
         }
         else if (userType == 3){
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.BLACK);
-            //aButton.setVisibility(View.GONE);
         }
 
 
     }
-    // when you accept a driver, driver gets notified, status of request changes to accepted 3
-    // sets the driver to his username, and goes to a new activity with accepted driver, The prospective
-    // drivers are removed, no more. Returns to Rider Activity
+
+    /**
+     * Accept driver action.
+     * @param view the view
+     * when you accept a driver, driver gets notified, status of request changes to accepted
+     * sets the driver to his username, and goes to a new activity with accepted driver, The prospective
+     * drivers are removed, no more. Returns to Rider Activity
+     */
     public void AcceptDriverAction(View view){
         RequestListController rc = new RequestListController();
         request.setRequestStatus("ACCEPTED");

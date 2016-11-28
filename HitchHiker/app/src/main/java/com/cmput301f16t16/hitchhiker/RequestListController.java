@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * possibly change this to a request controller instead
+ * Request controller handles everything to do with the requests
  */
 public class RequestListController {
     /*
@@ -26,7 +26,7 @@ public class RequestListController {
             }
         return requestList;
     }
-
+    //
     public String addRequest(Request request) {
         if (request.getStartLocation() == null || request.getEndLocation() == null)
         {
@@ -45,6 +45,7 @@ public class RequestListController {
     /**
      * Remove request.
      * @param requestId the request id
+     * @see ElasticsearchUserController
      */
     public void removeRequest(String requestId) {
         ElasticsearchRequestController.DeleteRequestTask deleteRequestTask = new ElasticsearchRequestController.DeleteRequestTask();
@@ -79,6 +80,7 @@ public class RequestListController {
 //        return containsRequestList;
 //    }
 
+
 //    public ArrayList<Request> getListOfDriverRequests(String status){
 //        ArrayList<Request> requestsList = new ArrayList<Request>();
 //        ElasticsearchRequestController.GetDriverTask getRequestsTask = new ElasticsearchRequestController.GetDriverTask();
@@ -94,75 +96,8 @@ public class RequestListController {
 //    }
 
 
-
-
-
-
-
-//    public ArrayList<Request> getDriverRequest(String status, String stat){
-//        ArrayList<Request> requestsList = new ArrayList<Request>();
-//        ElasticsearchRequestController.GetDriverRequestTask getRequestsTask = new ElasticsearchRequestController.GetDriverRequestTask();
-//        getRequestsTask.setPending(status);
-//        getRequestsTask.setPending(stat);
-//
-//        getRequestsTask.execute("");
-//        try {
-//            requestsList = getRequestsTask.get();
-//        }
-//        catch (Exception e) {
-//            Log.i("Error", "Failed to get the tweets out of the async object.");
-//        }
-//        return requestsList;
-//    }
-
-
-
-
-
-
-
-    /**
-     * This will get a list of pending request, we must query on two constraints, based on the username a
-     * nd the status being 2 or 3
-     * @param userName, status
-     * @return
-     */
-//    public ArrayList<Request> getListOfPendingRequest(String userName, String pending ){
-//        ArrayList<Request> pendingList = new ArrayList<Request>();
-//        ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
-//        try {
-//            getPendingTask.setUserName(userName);
-//            getPendingTask.setPending(pending);
-//            getPendingTask.execute("");
-//            pendingList = getPendingTask.get();
-//        }
-//        catch (Exception e) {
-//            Log.i("Error", "Failed to get the tweets out of the async object.");
-//        }
-//        return pendingList;
-//    }
-//
-//    public ArrayList<Request> getListOfAcceptedRequest(String userName, String accepted ){
-//        ArrayList<Request> acceptedList = new ArrayList<Request>();
-//        ElasticsearchRequestController.GetPendingTask getPendingTask = new ElasticsearchRequestController.GetPendingTask();
-//        try {
-//            getPendingTask.setUserName(userName);
-//            getPendingTask.setAccepted(accepted);
-//            getPendingTask.execute("");
-//            acceptedList = getPendingTask.get();
-//        }
-//        catch (Exception e) {
-//            Log.i("Error", "Failed to get the tweets out of the async object.");
-//        }
-//        return acceptedList;
-//    }
-
-
-
-
     /**
      * Gets request load.
-     *
      * @param rider the rider
      * @return the request load
      */
@@ -173,9 +108,10 @@ public class RequestListController {
 
     /**
      * Gets the DriverBrowseList
-     *
+     * The browseList will be populated by price, keyword
      * @param driverName
      * @return requests that are pending and created
+     * @see ElasticsearchRequestController
      */
     public ArrayList<Request> getBrowseRequest(String driverName){
         ArrayList<Request> finalBrowseList = new ArrayList<Request>();
@@ -221,7 +157,8 @@ public class RequestListController {
         return finalBrowseList;
     }
 
-
+    // this will populate the current listview in driver, the current request list will contain
+    // requests whose status is pending, accepted and completed
     public ArrayList<Request> getCurrentRequest(String driverName){
         ArrayList<Request> finalCurrentList = new ArrayList<Request>();
         ArrayList<Request> currentList = new ArrayList<Request>();

@@ -22,6 +22,11 @@ public class UserListTest extends TestCase {
         assertFalse(userList.hasUser(user));
 
     }
+
+    /**
+     * US 03.03.01 As a user, I want to, when a username is presented for a thing
+     * retrieve and show contact information
+     */
     public void testGetUser(){
         UserList userList = new UserList();
         User user = new User("TestUser",  "", "", "", "", 4, "");

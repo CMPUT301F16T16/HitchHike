@@ -53,7 +53,6 @@ public class Location implements Serializable {
     private GeoPoint endPoint;
     private String stringStartPoint;
     private String stringEndPoint;
-    private GeoPoint touchedPoint;
     private Double distance;
     private double fare;
     private double rate = 5;

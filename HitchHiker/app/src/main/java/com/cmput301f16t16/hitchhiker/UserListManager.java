@@ -88,7 +88,6 @@ public class UserListManager {
 
     /**
      * User list from string user list.
-     *
      * @param userListData the user list data
      * @return the user list
      * @throws IOException            the io exception
@@ -103,7 +102,6 @@ public class UserListManager {
 
     /**
      * User list to string string.
-     *
      * @param userList the user list
      * @return the string
      * @throws IOException the io exception
@@ -120,7 +118,6 @@ public class UserListManager {
 
     /**
      * Save user list.
-     *
      * @param userList the user list
      * @throws IOException the io exception
      */

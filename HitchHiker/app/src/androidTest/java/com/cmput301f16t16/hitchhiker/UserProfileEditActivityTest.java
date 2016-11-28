@@ -40,8 +40,6 @@ public class UserProfileEditActivityTest extends ActivityInstrumentationTestCase
         solo.clickOnView(solo.getView(R.id.saveProfile));
 
 
-
-
-
     }
+
 }

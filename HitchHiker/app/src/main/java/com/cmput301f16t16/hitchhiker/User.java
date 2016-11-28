@@ -21,44 +21,21 @@ import static java.sql.Types.NULL;
 public class User implements Serializable {
 
     private static long serialVersionUID = 44454L;
-
     /**
      * The Id.
      */
     @JestId
     protected String id;
-
-    /**
-     * The User name.
-     */
     protected String userName;
-    /**
-     * The User type.
-     */
     protected Integer userType;
-    /**
-     * The User first name.
-     */
     protected String userFirstName;
-    /**
-     * The User last name.
-     */
     protected String userLastName;
-    /**
-     * The User email.
-     */
     protected String userEmail;
-    /**
-     * The User phone number.
-     */
     protected String userPhoneNumber;
-
-
     protected String carDescription;
 
     /**
      * Instantiates a new User.
-     *
      * @param userName        the user name
      * @param userFirstName   the user first name
      * @param userLastName    the user last name
@@ -76,127 +53,52 @@ public class User implements Serializable {
         this.carDescription = carDescription;
     }
 
-    /**
-     * Gets user name.
-     *
-     * @return the user name
-     */
     public String getUserName() {
         return this.userName;
     }
 
-    /**
-     * Sets user name.
-     *
-     * @param userName the user name
-     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    /**
-     * Sets user type.
-     *
-     * @param userType the user type
-     */
     public void setUserType(Integer userType) {
         this.userType = userType;
     }
 
-    /**
-     * Get user type integer.
-     *
-     * @return the integer
-     */
     public Integer getUserType(){
         return userType;
     }
 
-    /**
-     * Set user first name.
-     *
-     * @param userFirstName the user first name
-     */
-    public void setUserFirstName(String userFirstName){
-        this.userFirstName = userFirstName;}
+    public void setUserFirstName(String userFirstName){ this.userFirstName = userFirstName; }
 
-    /**
-     * Get user first name string.
-     *
-     * @return the string
-     */
     public String getUserFirstName(){
         return userFirstName;
     }
 
-    /**
-     * Set user last name.
-     *
-     * @param userLastName the user last name
-     */
-    public void setUserLastName(String userLastName){
-        this.userLastName = userLastName;}
+    public void setUserLastName(String userLastName){ this.userLastName = userLastName; }
 
-    /**
-     * Get user last name string.
-     *
-     * @return the string
-     */
     public String getUserLastName(){
         return userLastName;
     }
 
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
     public String getId() {
         return id;
     }
 
-    /**
-     * Sets user phone number.
-     *
-     * @param userPhoneNumber the user phone number
-     */
-    public void setUserPhoneNumber(String userPhoneNumber) {
+    public void setUserPhoneNumber(String userPhoneNumber) { this.userPhoneNumber = userPhoneNumber; }
 
-        this.userPhoneNumber = userPhoneNumber;
-    }
-
-    /**
-     * Gets user phone number.
-     *
-     * @return the user phone number
-     */
     public String getUserPhoneNumber() {
         return this.userPhoneNumber;
     }
 
-    /**
-     * Sets user email.
-     *
-     * @param email the email
-     */
     public void setUserEmail(String email) {
         this.userEmail = email;
     }
 
-    /**
-     * Gets user email.
-     *
-     * @return the user email
-     */
     public String getUserEmail() {
         return this.userEmail;
     }
 
-    /**
-     * Sets id.
-     *
-     * @param id the id
-     */
     public void setId(String id) {
         this.id = id;
     }
@@ -208,13 +110,6 @@ public class User implements Serializable {
     public void setCarDescription(String carDescription) {
         this.carDescription = carDescription;
     }
-
-
-
-
-
-
-
 
 }
 

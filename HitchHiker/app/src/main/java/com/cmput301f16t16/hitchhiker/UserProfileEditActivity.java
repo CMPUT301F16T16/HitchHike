@@ -9,7 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * The type User profile edit activity.
+ * This Activity displays the information of the User and allows for certain fields of
+ * information to be editable. Depending on whether the user is a rider only or both, the
+ * car information field will change visibility.
+ * @author Willy Liao
  */
 public class UserProfileEditActivity extends AppCompatActivity {
     private EditText emailEditText;
@@ -72,21 +75,20 @@ public class UserProfileEditActivity extends AppCompatActivity {
 
         emailEditText.setText(currentEmail);
         phoneNumberEditText.setText(currentPhoneNumber);
-
-
     }
 
     /**
-     * Save profile.
-     *
+     * Save profile information after it was edited. If the user is a driver (aka both) the they
+     * are required to enter car details, it cannot be left blank. To update the user information
+     * we add the user again, and it replaces the old user because they have the same jestId
      * @param view the view
+     * @see UserListController
      */
     public void saveProfile(View view){
 
         String newEmail = emailEditText.getText().toString();
         String newPhoneNumber = phoneNumberEditText.getText().toString();
         String newCarDetails = carDetails.getText().toString();
-
 
         if (user.userType != 1) {
             if (newEmail.equals(currentEmail) && newPhoneNumber.equals(currentPhoneNumber) && newCarDetails.equals(carDetails)) {

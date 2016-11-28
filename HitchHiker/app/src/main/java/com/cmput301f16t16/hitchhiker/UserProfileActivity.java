@@ -9,9 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * The type User profile activity.
+ * The User profile activity displays the users profile information. The user can edit certain
+ * fields of information when they click the edit button
  */
 public class UserProfileActivity extends AppCompatActivity {
+    // this user depends on where it is being sent from
     private User user;
 
     @Override
@@ -34,7 +36,6 @@ public class UserProfileActivity extends AppCompatActivity {
         TextView driverText = (TextView) findViewById(R.id.driver_textView);
         TextView carText = (TextView) findViewById(R.id.carTitle) ;
         TextView carDetails = (TextView) findViewById(R.id.carDetails);
-
 
         String userName = user.getUserName();
         Integer userType = user.getUserType();
@@ -71,8 +72,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     /**
-     * Edit profile.
-     *
+     * Edit profile. A button that goes to an activity where the user cna edit information
      * @param view the view
      */
     public void editProfile(View view){

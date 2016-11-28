@@ -58,9 +58,6 @@ public class LocationViewActivity extends Activity implements Serializable {
     private long start;
     private long stop;
     private int x, y, lat, longi;
-    private double rate = 5;
-    private double fare;
-    private final String userAgent = "tingwei@ualberta.ca";
     private EditText getOrigin;
     private EditText getDestination;
     private String startAddress;
@@ -187,11 +184,7 @@ public class LocationViewActivity extends Activity implements Serializable {
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setTitle("START");
         startMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
-
-
         overlayList.add(startMarker);
-
-
     }
 
     /**
@@ -201,16 +194,13 @@ public class LocationViewActivity extends Activity implements Serializable {
      */
     public void setEndMarker() {
         Marker endMarker = new Marker(map);
-
         endMarker.setPosition(endPoint);
         endMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         endMarker.setTitle("END");
         endMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
-
         overlayList.add(endMarker);
-
-
     }
+
 
 
 
@@ -220,16 +210,11 @@ public class LocationViewActivity extends Activity implements Serializable {
      * <p> This is for the touch interface of the map.</p>
      * <p> This allows a startPoint or an endPoint to be selected and set.</p>
      * <p> The route will also be drawn.</p>
-     */
+     **/
     private class Touchy extends Overlay {
-
-
         @Override
         protected void draw(Canvas canvas, MapView mapView, boolean b) {
-
-
         }
-
         public boolean onTouchEvent(MotionEvent e, MapView m) {
             //Log.d("MAPTAG", "testing");
             if (e.getAction() == MotionEvent.ACTION_DOWN) {
@@ -325,7 +310,6 @@ public class LocationViewActivity extends Activity implements Serializable {
                     //setEndPoint(touchedpoint);
                     //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                 });
-
 
                 alert.show();
                 return true;
