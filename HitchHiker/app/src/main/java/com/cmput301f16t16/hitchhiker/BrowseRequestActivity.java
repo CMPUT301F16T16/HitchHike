@@ -20,7 +20,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private ArrayList<Request> browseList = new ArrayList<Request>();
     private ArrayAdapter<Request> browseAdapter;
     private User user;
-    private User driverUser;
 
     /**
      * browseList is an array of all pending requests
@@ -35,10 +34,12 @@ public class BrowseRequestActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_request);
 
+        // this is passing the driver
         user = (User) getIntent().getSerializableExtra("user");
 
         // display requests into the listview
         theBrowseList = (ListView) findViewById(R.id.browsing_requests_listview);
+        // when you click on a request
         theBrowseList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
 
@@ -46,20 +47,9 @@ public class BrowseRequestActivity extends AppCompatActivity{
 //                intent.putExtra("requestsList", browseList);
 //                intent.putExtra("index", position);
                 Request chosenRequest = browseList.get(position);
-                intent.putExtra("request", chosenRequest);
+                intent.putExtra("chosenRequest", chosenRequest);
 
-                String driverUserName = user.getUserName();
-                ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
-                getUserTask.execute(driverUserName);
 
-                try {
-                    driverUser = getUserTask.get();
-                }
-                catch(Exception e){
-
-                }
-
-                intent.putExtra("user", driverUser);
                 startActivity(intent);
             }
         });
