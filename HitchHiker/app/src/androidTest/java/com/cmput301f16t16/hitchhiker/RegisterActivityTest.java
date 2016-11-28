@@ -5,7 +5,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
 import com.robotium.solo.Solo;
-import junit.framework.TestCase;
 
 /**
  * Created by V1CTORIA2LEE on 2016-11-27.
@@ -27,7 +26,7 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
     }
 
     public void testRegister(){
-        solo.assertCurrentActivity("Wrong Activity", RegisterActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequestInfoActivity.class);
         //solo.clickOnButton("Clear");
 
 //        solo.enterText((EditText) solo.getView(R.id.body), "Test Tweet!");

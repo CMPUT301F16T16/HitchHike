@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
-
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -30,12 +32,17 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private ArrayAdapter<Request> browseAdapter;
     private User user;
     private User driverUser;
+
     /**
      * Radio Buttons for searching ie. GeoLocation Address Price
      */
     private RadioButton GeoPoint;
     private RadioButton Address;
     private RadioButton Price;
+
+    private String driverName;
+    private RequestListController rc = new RequestListController();
+
 
 
     /**
@@ -52,6 +59,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         setContentView(R.layout.activity_browse_request);
 
         user = (User) getIntent().getSerializableExtra("user");
+        driverName = user.getUserName();
 
         GeoPoint = (RadioButton) findViewById(R.id.GPSradioButton);
         Address = (RadioButton) findViewById(R.id.AddressRadioButton);
@@ -79,26 +87,23 @@ public class BrowseRequestActivity extends AppCompatActivity{
                 catch(Exception e){
 
                 }
-
                 intent.putExtra("user", driverUser);
                 startActivity(intent);
             }
         });
 
-
-        try {
-            // how to populate the browslist view
+        try{
             browseList.clear();
-            ElasticsearchRequestController.GetBrowsingRequestsTask getBrowsingRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
-            getBrowsingRequestsTask.execute("");
-            browseList = getBrowsingRequestsTask.get();
-        } catch (Exception e) {
-            Log.i("Error", "Failed to get the requests out of the async object.");
+            browseList = rc.getBrowseRequest(driverName);
+        }
+        catch (Exception e){
+
         }
         browseAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, browseList);
         theBrowseList.setAdapter(browseAdapter);
-        browseAdapter.notifyDataSetChanged();
+
     }
+
 
     /**
      * Update browse list.
@@ -143,6 +148,8 @@ public class BrowseRequestActivity extends AppCompatActivity{
         }
         browseAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, browseList);
         theBrowseList.setAdapter(browseAdapter);
+        browseAdapter.clear();
+        browseAdapter.addAll(rc.getBrowseRequest(driverName));
         browseAdapter.notifyDataSetChanged();
     }
 
@@ -156,6 +163,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         intent.putExtra("user", user);
         startActivity(intent);
     }
+
 
 }
 

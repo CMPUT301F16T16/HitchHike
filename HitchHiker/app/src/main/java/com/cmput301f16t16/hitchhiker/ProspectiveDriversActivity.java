@@ -31,6 +31,8 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prospective_drivers);
 
         request = (Request) getIntent().getSerializableExtra("request");
+        user =(User) getIntent().getSerializableExtra("user");
+
 
         theProspectiveDriversList = (ListView) findViewById(R.id.prospective_driver_listview);
 
@@ -51,10 +53,7 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
                 String userName;
 
-                Intent intent = new Intent(ProspectiveDriversActivity.this, ShowUserProfileActivity.class);
-
                 userName = prospectiveDriverList.get(position);
-
                 ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
                 getUserTask.execute(userName);
 
@@ -64,6 +63,8 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
                 catch(Exception e){
 
                 }
+                Intent intent = new Intent(ProspectiveDriversActivity.this, ShowUserProfileActivity.class);
+                // this passes the driver user, not the rider user
                 intent.putExtra("user", user);
                 intent.putExtra("request", request);
                 startActivity(intent);

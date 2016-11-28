@@ -61,8 +61,8 @@ public class Location implements Serializable {
         this.stringEndPoint = stringEndPoint;
         this.stringStartPoint = stringStartPoint;
         this.distance = distance;
-        this.fare = fare;
-        this.rate = rate;
+//        this.fare = fare;
+//        this.rate = rate;
 
     }
 

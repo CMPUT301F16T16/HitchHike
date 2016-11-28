@@ -13,6 +13,7 @@ public class ShowUserProfileActivity extends AppCompatActivity {
     private Integer userType;
     private Request request;
     private String userName;
+    private Button aButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +23,6 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         request = (Request) getIntent().getSerializableExtra("request");
 
-
-        userType = user.getUserType();
-        if (userType == 1) {
-            Button aButton = (Button) findViewById(R.id.profile_button);
-            aButton.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -66,11 +61,15 @@ public class ShowUserProfileActivity extends AppCompatActivity {
         else if (userType == 2){
             riderText.setTextColor(Color.LTGRAY);
             driverText.setTextColor(Color.BLACK);
+            //aButton.setVisibility(View.GONE);
         }
         else if (userType == 3){
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.BLACK);
+            //aButton.setVisibility(View.GONE);
         }
+
+
     }
     // when you accept a driver, driver gets notified, status of request changes to accepted 3
     // sets the driver to his username, and goes to a new activity with accepted driver, The prospective

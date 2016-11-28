@@ -34,6 +34,16 @@ public class UserTest extends TestCase {
 
     }
 
+    /**
+     * US 1.09.01 As a rider, I should see a description of the driver's vehicle
+     */
+    public void testGetCarDescription() {
+        User user = new User("","","","","",65,"");
+        String carDescription = "Fiat Multipla Gray";
+        user.setCarDescription(carDescription);
+        assertEquals(carDescription, user.getCarDescription());
+    }
+
 
 
 }

@@ -9,12 +9,13 @@ import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by V1CTORIA2LEE on 2016-11-26.
  */
 public class AcceptedRequestActivity extends Activity{
-    // hi
+
     private User user;
     private Request request;
 
@@ -43,29 +44,41 @@ public class AcceptedRequestActivity extends Activity{
         String str = Double.toString(d);
         fare.setText(str);
 
-        //Integer user_type = user.getUserType();
+        Integer user_type = user.getUserType();
 
-//        if (user_type == 1){
-//            View payButton = findViewById(R.id.paymentButton);
-//            payButton.setVisibility(View.GONE);
-//        }
-//        else {
-//            View payButton = findViewById(R.id.paymentButton);
-//            payButton.setVisibility(View.VISIBLE);
-//        }
+        if (user_type == 1){
+            View payButton = findViewById(R.id.paymentButton);
+            //payButton.setVisibility(View.VISIBLE);
+        }
+        else {
+            View payButton = findViewById(R.id.paymentButton);
+            payButton.setVisibility(View.GONE);
+        }
     }
 
-    public void userPageAction(View view){
-        Intent intent = new Intent(AcceptedRequestActivity.this, UserProfileActivity.class);
+    public void RiderPageAction(View view){
+        Intent rIntent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
+        rIntent.putExtra("user", user);
+        startActivity(rIntent);
+
+    }
+
+    public void DriverPageAction(View view){
+        Intent intent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
+        String driver = request.getDriver();
+        UserListController ulc = new UserListController();
+        ulc.findUser(driver);
         intent.putExtra("user", user);
         startActivity(intent);
     }
+
+
     public void PayNowAction(View view){
-        //Intent intent = new Intent(AcceptedRequestActivity.this, RiderActivity.class);
+        Toast.makeText(this, "Payment completed, Thank You for using HitchHiker!", Toast.LENGTH_SHORT).show();
         RequestListController rc = new RequestListController();
         request.setRequestStatus("COMPLETED");
         rc.addRequest(request);
-        //intent.putExtra("request", request);
+
         finish();
     }
 }

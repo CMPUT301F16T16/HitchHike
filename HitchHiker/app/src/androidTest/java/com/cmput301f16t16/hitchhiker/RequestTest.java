@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 
 import org.osmdroid.util.GeoPoint;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by Jae-yeon on 10/14/2016.
@@ -25,17 +27,9 @@ public class RequestTest extends TestCase {
         String pickUpA = "11512 Groat Rd Edmonton";
         String dropOffB = "1234 Luxury Ln Edmonton";
         paying_Rider.setUserType(1);
-        Fare fare = new Fare();
-        fare.setFare(100.25);
         Request request = new Request(paying_Rider.getUserName(), pickUpA, dropOffB, 5.00, A, B);
         assertTrue("Location A is not the start", pickUpA.equals(request.getStartLocation()));
         assertTrue("Location A is not the end", dropOffB.equals(request.getEndLocation()));
-        RequestListController requestListController = new RequestListController();
-        requestListController.addRequest(request);
-        assertEquals("There is a request", 1, requestListController.getRequestLoad(paying_Rider).size());
-        requestListController.removeRequest(request.getId());
-        assertEquals("There is no request", requestListController.getRequestLoad(paying_Rider).size(), 0);
-
     }
 
     public void testSizeRequestList() {
@@ -45,12 +39,13 @@ public class RequestTest extends TestCase {
         GeoPoint B = new GeoPoint(132.00, 131.00);
         String pickUpC = "1123 CandyLane Rd Edmonton";
         String dropOffD = "1222 DeerBourne Ln Edmonton";
-        Fare fare = new Fare();
-        fare.setFare(1.25);
         Request request = new Request(rider.getUserName(), pickUpC, dropOffD, 5.00, A, B);
         RequestListController rc = new RequestListController();
         rc.addRequest(request);
-        assertEquals("There are no requests in the List", rc.getRequestLoad(rider).size(), 1);
+        ArrayList<Request> requestList = new ArrayList<Request>();
+        requestList.add(request);
+        //assertEquals("There are no requests in the List", rc.getRequestLoad(rider).size(), 1);
+        assertEquals(requestList.size(), 1);
     }
 
     public void testUserType() {
@@ -59,6 +54,33 @@ public class RequestTest extends TestCase {
         rider.setUserType(2);
         driver.setUserType(2);
         assertTrue("The User's type is the same", rider.getUserType().equals(driver.getUserType()));
+    }
+
+    /**
+     * US 01.06.01
+     * As a rider I want an estumation of a fair fare to offer to drivers
+     */
+    public void testFare() {
+        User rider = new User("HitchHiker4", "Kevin", "Abels", "kabels@ualberta.ca", "2065714788", 1, "");
+        User driver = new User("Hitcher1", "Vic", "Lee", "vlee@ualberta.ca", "7803334444", 2, "Civic");
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickUpC = "1123 CandyLane Rd Edmonton";
+        String dropOffD = "1222 DeerBourne Ln Edmonton";
+        Request request = new Request(rider.getUserName(), pickUpC, dropOffD, 5.00, A, B);
+        request.setPrice(100.00);
+        //assertEquals(5.00, request.getPrice());
+        assertNotSame(5.00, request.getPrice());
+    }
+
+    public void testAcceptedDriver(){
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickup = "st albert";
+        String dropoff = "edmonton";
+        Request request = new Request("Sarah", pickup, dropoff, 5.00, A, B);
+        request.setRequestStatus("PENDING");
+        assertEquals(request.getRequestStatus(), "PENDING");
 
     }
 }

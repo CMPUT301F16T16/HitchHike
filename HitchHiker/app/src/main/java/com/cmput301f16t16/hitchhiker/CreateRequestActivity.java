@@ -80,7 +80,7 @@ public class CreateRequestActivity extends AppCompatActivity {
             String result = rc.addRequest(newRequest);
 
             if (result == null){
-                Toast.makeText(this, "result is null", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "result is null", Toast.LENGTH_SHORT).show();
                 this.finish();
             }
             else {
