@@ -10,7 +10,7 @@ import android.widget.TextView;
  * Created by V1CTORIA2LEE on 2016-11-26.
  */
 public class AcceptedRequestActivity extends Activity{
-
+    // hi
     private User user;
     private Request request;
 
