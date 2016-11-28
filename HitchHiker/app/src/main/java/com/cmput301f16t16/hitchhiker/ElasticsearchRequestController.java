@@ -7,6 +7,8 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import org.osmdroid.util.GeoPoint;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -266,4 +268,141 @@ public class ElasticsearchRequestController {
         }
     }
 
+    public static class GetKeySearchAddressRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
+        private String searchKeyAddress;
+        private double searchKeyPrice;
+
+        @Override
+        protected ArrayList<Request> doInBackground(String... search_parameters) {
+            verifySettings();
+
+            ArrayList<Request> requests = new ArrayList<Request>();
+
+            // Assumption: Only the first search_parameter[0] is used.
+
+            String query =
+                    "{ \"from\" : 0, \"size\" : 500,\n" +
+                    "  \"query\": {\n" +
+                    "    \"bool\": {\n" +
+                    "      \"should\": [\n" +
+                    "              { \"match\": { \"pickUp\": \"" + searchKeyAddress + "\" }},\n" +
+                    "              { \"match\": { \"dropOff\": \"" + searchKeyAddress + "\" }}\n" +
+                    "      ],\n" +
+                    "      \"minimum_should_match\": \"1\"\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}";
+
+            Search search = new Search.Builder(query).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
+
+
+            try{
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()){
+                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
+                    requests.addAll(foundRequests);
+                }
+                else{
+                    Log.i("Error", "The search executed but it didn't work.");
+                }
+            }
+            catch (Exception e){
+                Log.i("Error", "Executing the get requests method failed");
+            }
+            return requests;
+        }
+        public void setSearchKeyAddress(String searchKeyAddress){
+            this.searchKeyAddress = searchKeyAddress;
+        }
+        public void setSearchKeyPrice(double searchKeyPrice){
+            this.searchKeyPrice = searchKeyPrice;
+        }
+
+    }
+//    public static class GetKeySearchGeoPointRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
+//        private GeoPoint searchKeyGeoPoint;
+//
+//        @Override
+//        protected ArrayList<Request> doInBackground(String... search_parameters) {
+//            verifySettings();
+//
+//            ArrayList<Request> requests = new ArrayList<Request>();
+//
+//
+//            String query =
+//                    "{ \"from\" : 0, \"size\" : 500,\n" +
+//                            "  \"query\": {\n" +
+//                            "    \"bool\": {\n" +
+//                            "      \"should\": [\n" +
+//                            "              { \"match\": { \"start\": \"" + searchKeyGeoPoint + "\" }},\n" +
+//                            "              { \"match\": { \"end\": \"" + searchKeyGeoPoint + "\" }}\n" +
+//                            "      ],\n" +
+//                            "      \"minimum_should_match\": \"1\"\n" +
+//                            "    }\n" +
+//                            "  }\n" +
+//                            "}";
+//
+//            Search search = new Search.Builder(query).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
+//
+//
+//            try{
+//                SearchResult result = client.execute(search);
+//                if (result.isSucceeded()){
+//                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
+//                    requests.addAll(foundRequests);
+//                }
+//                else{
+//                    Log.i("Error", "The search executed but it didn't work.");
+//                }
+//            }
+//            catch (Exception e){
+//                Log.i("Error", "Executing the get requests method failed");
+//            }
+//            return requests;
+//        }
+    public static class GetKeySearchPriceRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
+        private double searchKeyPrice;
+
+        @Override
+        protected ArrayList<Request> doInBackground(String... search_parameters) {
+            verifySettings();
+
+            ArrayList<Request> requests = new ArrayList<Request>();
+
+            // Assumption: Only the first search_parameter[0] is used.
+
+            String query =
+                    "{ \"from\" : 0, \"size\" : 500,\n" +
+                            "  \"query\": {\n" +
+                            "    \"bool\": {\n" +
+                            "      \"should\": [\n" +
+                            "              { \"match\": { \"price\": \"range\":{" +(searchKeyPrice-2)+"\"to\":\""+(searchKeyPrice+2)+"\"} }},\n" +
+                            "      ],\n" +
+                            "      \"minimum_should_match\": \"1\"\n" +
+                            "    }\n" +
+                            "  }\n" +
+                            "}";
+
+            Search search = new Search.Builder(query).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
+//                    "{ \"from\" : 0, \"size\" : 500,\n" +
+//                            "              { \"match\": { \"start\": \"" + searchKeyGeoPoint + "\" }},\n" +
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
+                    requests.addAll(foundRequests);
+                } else {
+                    Log.i("Error", "The search executed but it didn't work.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Executing the get requests method failed");
+            }
+            return requests;
+        }
+
+
+        public void setSearchKeyPrice(double searchKeyPrice) {
+            this.searchKeyPrice = searchKeyPrice;
+        }
+    }
 }

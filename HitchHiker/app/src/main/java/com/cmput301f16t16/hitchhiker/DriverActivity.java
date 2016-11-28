@@ -87,9 +87,6 @@ public class DriverActivity extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     @Override
@@ -99,7 +96,6 @@ public class DriverActivity extends AppCompatActivity {
 
         //requestList.clear();
         requestList = rc.setListOfDriveRequests(requestList);
-
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();

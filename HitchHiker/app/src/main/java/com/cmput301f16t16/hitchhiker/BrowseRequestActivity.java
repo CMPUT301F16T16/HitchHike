@@ -7,20 +7,36 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
  * Created by V1CTORIA2LEE on 2016-11-12.
  */
 public class BrowseRequestActivity extends AppCompatActivity{
-
+    private EditText searchKeyAddressText;
+    private EditText searchKeyPriceText;
+    private EditText searchKeyText;
+    private String searchKeyPriceString;
+    private double searchKeyPrice;
+    private String searchKey;
+    private String searchKeyAddress;
     private ListView theBrowseList;
     private ArrayList<Request> browseList = new ArrayList<Request>();
     private ArrayAdapter<Request> browseAdapter;
     private User user;
     private User driverUser;
+    /**
+     * Radio Buttons for searching ie. GeoLocation Address Price
+     */
+    private RadioButton GeoPoint;
+    private RadioButton Address;
+    private RadioButton Price;
+
 
     /**
      * browseList is an array of all pending requests
@@ -37,6 +53,11 @@ public class BrowseRequestActivity extends AppCompatActivity{
 
         user = (User) getIntent().getSerializableExtra("user");
 
+        GeoPoint = (RadioButton) findViewById(R.id.GPSradioButton);
+        Address = (RadioButton) findViewById(R.id.AddressRadioButton);
+        Price = (RadioButton) findViewById(R.id.PriceRadioButton);
+
+        searchKeyText = (EditText) findViewById(R.id.searchKeyEditText);
         // display requests into the listview
         theBrowseList = (ListView) findViewById(R.id.browsing_requests_listview);
         theBrowseList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -82,14 +103,41 @@ public class BrowseRequestActivity extends AppCompatActivity{
     /**
      * Update browse list.
      *
+     *If the Search Edit Text is filled in it will search according to key address word in pickUp and dropOff
+     *
      * @param view the view
      */
     public void updateBrowseList(View view) {
         browseList.clear();
+
         try {
-            ElasticsearchRequestController.GetBrowsingRequestsTask getBrowseRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
-            getBrowseRequestsTask.execute("");
-            browseList = getBrowseRequestsTask.get(); // brosweList is now populate with request from elasticsearch
+            searchKey = searchKeyText.getText().toString();
+            if (Address.isChecked() & (!searchKey.equals(""))) {
+                searchKeyAddress = searchKeyText.getText().toString();
+                ElasticsearchRequestController.GetKeySearchAddressRequestsTask getKeySearchAddressRequestsTask =
+                        new ElasticsearchRequestController.GetKeySearchAddressRequestsTask();
+                getKeySearchAddressRequestsTask.setSearchKeyAddress(searchKeyAddress);
+                getKeySearchAddressRequestsTask.execute();
+                browseList = getKeySearchAddressRequestsTask.get();
+            }
+//            if (GeoPoint.isChecked()){
+//
+//            }
+            if (Price.isChecked() & (!searchKey.equals(""))){
+                searchKeyPriceString =  searchKeyText.getText().toString();
+                searchKeyPrice = Double.parseDouble(searchKeyPriceString);
+                ElasticsearchRequestController.GetKeySearchPriceRequestsTask getKeySearchPriceRequestsTask =
+                        new ElasticsearchRequestController.GetKeySearchPriceRequestsTask();
+                getKeySearchPriceRequestsTask.setSearchKeyPrice(searchKeyPrice);
+                getKeySearchPriceRequestsTask.execute();
+                browseList = getKeySearchPriceRequestsTask.get();
+            }
+            if (searchKey.equals("")) {
+                ElasticsearchRequestController.GetBrowsingRequestsTask getBrowseRequestsTask =
+                        new ElasticsearchRequestController.GetBrowsingRequestsTask();
+                getBrowseRequestsTask.execute("");
+                browseList = getBrowseRequestsTask.get();
+            }
         } catch (Exception e) {
             Log.i("Error", "Failed to get the requests out of the async object.");
         }
