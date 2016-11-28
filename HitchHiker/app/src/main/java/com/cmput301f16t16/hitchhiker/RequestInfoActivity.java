@@ -21,7 +21,7 @@ public class RequestInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_info);
 
-        request = (Request) getIntent().getSerializableExtra("request");
+        request = (Request) getIntent().getSerializableExtra("chosenRequest");
         user = (User) getIntent().getSerializableExtra("user");
 
         TextView pickUpLocationText = (TextView) findViewById(R.id.pickUp_Location_TextView);
@@ -31,7 +31,7 @@ public class RequestInfoActivity extends AppCompatActivity {
         dropOffLocationText.setText(request.getDropOff());
 
         TextView userNameText = (TextView) findViewById(R.id.requestUserName_textView);
-        SpannableString content = new SpannableString(user.getUserName());
+        SpannableString content = new SpannableString(request.getRiderName());
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         userNameText.setText(content);
 //        userNameText.setText(user.getUserName());
@@ -70,6 +70,14 @@ public class RequestInfoActivity extends AppCompatActivity {
 
     public void GoToUserProfile(View view){
         Intent intent = new Intent(RequestInfoActivity.this, ShowUserProfileActivity.class);
+        String riderName = request.getRiderName();
+        ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
+        getUserTask.execute(riderName);
+        try {
+            user = getUserTask.get();
+        }
+        catch(Exception e){
+        }
 
         intent.putExtra("user", user);
         startActivity(intent);

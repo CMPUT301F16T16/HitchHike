@@ -31,7 +31,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private ArrayList<Request> browseList = new ArrayList<Request>();
     private ArrayAdapter<Request> browseAdapter;
     private User user;
-    private User driverUser;
 
     /**
      * Radio Buttons for searching ie. GeoLocation Address Price
@@ -58,6 +57,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_request);
 
+        // this is passing the driver
         user = (User) getIntent().getSerializableExtra("user");
         driverName = user.getUserName();
 
@@ -68,6 +68,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         searchKeyText = (EditText) findViewById(R.id.searchKeyEditText);
         // display requests into the listview
         theBrowseList = (ListView) findViewById(R.id.browsing_requests_listview);
+        // when you click on a request
         theBrowseList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
 
@@ -75,19 +76,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
 //                intent.putExtra("requestsList", browseList);
 //                intent.putExtra("index", position);
                 Request chosenRequest = browseList.get(position);
-                intent.putExtra("request", chosenRequest);
-
-                String driverUserName = user.getUserName();
-                ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
-                getUserTask.execute(driverUserName);
-
-                try {
-                    driverUser = getUserTask.get();
-                }
-                catch(Exception e){
-
-                }
-                intent.putExtra("user", driverUser);
+                intent.putExtra("chosenRequest", chosenRequest);
                 startActivity(intent);
             }
         });
