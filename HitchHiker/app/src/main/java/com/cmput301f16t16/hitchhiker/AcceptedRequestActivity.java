@@ -24,6 +24,7 @@ public class AcceptedRequestActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accepted_request);
 
+        //passing the driver and the request
         user = (User) getIntent().getSerializableExtra("user");
         request = (Request) getIntent().getSerializableExtra("request");
 
@@ -57,17 +58,21 @@ public class AcceptedRequestActivity extends Activity{
     }
 
     public void RiderPageAction(View view){
-        Intent rIntent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
-        rIntent.putExtra("user", user);
-        startActivity(rIntent);
+        Intent Intent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
+        String rider = request.getRiderName();
+        UserListController ulc = new UserListController();
+        ulc.findUser(rider);
+        User user = ulc.findUser(rider);
+        Intent.putExtra("user", user);
+        startActivity(Intent);
 
     }
 
     public void DriverPageAction(View view){
         Intent intent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
-        String driver = request.getDriver();
-        UserListController ulc = new UserListController();
-        ulc.findUser(driver);
+//        String driver = request.getDriver();
+//        UserListController ulc = new UserListController();
+//        ulc.findUser(driver);
         intent.putExtra("user", user);
         startActivity(intent);
     }
