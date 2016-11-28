@@ -88,8 +88,12 @@ public class RequestTest extends TestCase {
 
     }
 
+
     /**
      *  US 01.07.01 As a rider, I want to confirm the completion of a request and enable payment
+     *  US 02.01.01 As a rider or driver, I wnt to see the status of a request that im involved in
+     *  US 05.03.01 As a driver, I want tot see if my acceptance was accepted
+     *
      */
     public void testGetRequestStatus() {
         GeoPoint A = new GeoPoint(12.00, 11.00);
@@ -114,7 +118,72 @@ public class RequestTest extends TestCase {
         Request request = new Request("Amy", pickup, dropoff, 5.00, A, B);
 
         assertEquals(pickup, request.getStartLocation());
+
+    }
+
+    /**
+     *  US 10.01.01 As a rider, I want to specify a start and end geo locations
+     *  on a map for a request
+     */
+    public void testSetStartGeo() {
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickup = "st albert";
+        String dropoff = "edmonton";
+        Request request = new Request("Amy", pickup, dropoff, 5.00, A, B);
+
+        GeoPoint A2 = new GeoPoint(11.00, 11.00);
+
+        request.setStartGeo(A2);
+
+        assertEquals(A2, request.getStartGeo());
+    }
+
+    /**
+     *  US 10.01.01 As a rider, I want to specify a start and end geo locations
+     *  on a map for a request
+     */
+    public void testSetEndGeo() {
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickup = "st albert";
+        String dropoff = "edmonton";
+        Request request = new Request("Amy", pickup, dropoff, 5.00, A, B);
+
+        GeoPoint B2 = new GeoPoint(133.00, 132.00);
+
+        request.setEndGeo(B2);
+
+        assertEquals(B2, request.getEndGeo());
+    }
+
+    /**
+     * US 10.02.01 As a driver, I want to view start and end geo locations
+     * on a map for a request
+     */
+    public void testGetStartGeo() {
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickup = "st albert";
+        String dropoff = "edmonton";
+        Request request = new Request("Amy", pickup, dropoff, 5.00, A, B);
         assertEquals(A, request.getStartGeo());
     }
+
+    /**
+     * US 10.02.01 As a driver, I want to view start and end geo locations
+     * on a map for a request
+     */
+    public void testGetEndGeo() {
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickup = "st albert";
+        String dropoff = "edmonton";
+        Request request = new Request("Amy", pickup, dropoff, 5.00, A, B);
+        assertEquals(B, request.getEndGeo());
+    }
+
+
+
 }
 
