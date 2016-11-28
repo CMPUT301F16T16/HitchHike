@@ -136,6 +136,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
                 getKeySearchPriceRequestsTask.setSearchKeyPrice(searchKeyPrice);
                 getKeySearchPriceRequestsTask.execute();
                 browseList = getKeySearchPriceRequestsTask.get();
+                browseAdapter.clear();
                 browseAdapter.addAll(browseList);
                 browseAdapter.notifyDataSetChanged();
 

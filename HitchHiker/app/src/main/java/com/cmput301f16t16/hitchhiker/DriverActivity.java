@@ -49,34 +49,28 @@ public class DriverActivity extends AppCompatActivity {
         theRequestList = (ListView) findViewById(R.id.driverRequest_listview);
 
          // add the accepted requests
-        acceptedList = rc.getListOfDriverRequests(accepted);
-        ArrayList<Request> TempList = new ArrayList<Request>();
+        //acceptedList = rc.getListOfDriverRequests(accepted);
+        //ArrayList<Request> TempList = new ArrayList<Request>();
 
-        for(Request request : acceptedList){
-            if (driverName.equals(request.getDriver())) {
-                requestList.add(request);
-            }
-        }
-        // add the pending requests
-        pendingList = rc.getListOfDriverRequests(pending);
-        // temp list has all the pending request, we must narrow down to driver in prospectiveDriverList
-        TempList.addAll(pendingList);
-        for(Request request: TempList){
-            // makes a new tempDriver list for each request
-            ArrayList<String> TempDriver = new ArrayList<String>();
-            TempDriver.addAll(request.getProspectiveDrivers());
-            for (String driver: TempDriver){
-                if (driverName.equals(driver)){
-                    requestList.add(request);
-                }
-            }
-        }
-
-        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
-        theRequestList.setAdapter(requestAdapter);
-        requestAdapter.notifyDataSetChanged();
-
-
+//        for(Request request : acceptedList){
+//            if (driverName.equals(request.getDriver())) {
+//                requestList.add(request);
+//            }
+//        }
+//        // add the pending requests
+//        pendingList = rc.getListOfDriverRequests(pending);
+//        // temp list has all the pending request, we must narrow down to driver in prospectiveDriverList
+//        TempList.addAll(pendingList);
+//        for(Request request: TempList){
+//            // makes a new tempDriver list for each request
+//            ArrayList<String> TempDriver = new ArrayList<String>();
+//            TempDriver.addAll(request.getProspectiveDrivers());
+//            for (String driver: TempDriver){
+//                if (driverName.equals(driver)){
+//                    requestList.add(request);
+//                }
+//            }
+//        }
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Request request = requestList.get(position);
@@ -88,19 +82,19 @@ public class DriverActivity extends AppCompatActivity {
             }
         });
 
-    }
 
-    @Override
-    protected void onStart() {
-        // TODO Auto-generated method stubz
-        super.onStart();
 
-        //requestList.clear();
-        requestList = rc.setListOfDriveRequests(requestList);
+        requestList.clear();
+        requestList = rc.getCurrentRequest(driverName);
+
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
         theRequestList.setAdapter(requestAdapter);
-        requestAdapter.notifyDataSetChanged();
+
+
+
     }
+
+
 
     /**
      * Browse request action.
@@ -125,13 +119,14 @@ public class DriverActivity extends AppCompatActivity {
     }
 
     public void RefreshAction(View view){
-        //requestList.clear();
-        requestList = rc.setListOfDriveRequests(requestList);
 
-        requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
-        theRequestList.setAdapter(requestAdapter);
+
+
+        requestAdapter.clear();
+        requestAdapter.addAll(rc.getCurrentRequest(driverName));
         requestAdapter.notifyDataSetChanged();
     }
+
 }
 
 
