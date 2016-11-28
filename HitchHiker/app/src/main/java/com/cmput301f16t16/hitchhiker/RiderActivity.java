@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -53,7 +54,12 @@ public class RiderActivity extends AppCompatActivity {
                     intent.putExtra("request", request);
                     startActivity(intent);
 
-                } else {
+                } else if (status.equals("COMPLETED")) {
+                    Toast.makeText(RiderActivity.this, "This request as been completed", Toast.LENGTH_LONG).show();
+
+                }
+
+                else {
                     Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
                     intent.putExtra("request", request);
                     startActivity(intent);

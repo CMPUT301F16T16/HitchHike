@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -74,6 +75,21 @@ public class DriverActivity extends AppCompatActivity {
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
         theRequestList.setAdapter(requestAdapter);
         requestAdapter.notifyDataSetChanged();
+
+
+        theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Request request = requestList.get(position);
+                Intent intent = new Intent(DriverActivity.this, AcceptedRequestActivity.class);
+                intent.putExtra("user", user);
+                intent.putExtra("request", request);
+                startActivity(intent);
+            }
+        });
+
+
+
+
     }
 
     @Override
@@ -111,7 +127,7 @@ public class DriverActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Refresh(View view){
+    public void RefreshAction(View view){
         //requestList.clear();
         requestList = rc.setListOfDriveRequests(requestList);
 

@@ -11,6 +11,9 @@ import android.widget.Toast;
 import org.osmdroid.util.GeoPoint;
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 /**
  * The type Create request activity.
  */
@@ -108,12 +111,20 @@ public class CreateRequestActivity extends AppCompatActivity {
                 location = (Location) data.getSerializableExtra("location");
                 pickUp = location.getStringStartPoint();
                 dropOff = location.getStringEndPoint();
+                NumberFormat formatter = new DecimalFormat("#0.00");
+
+                // http://stackoverflow.com/questions/16583604/formatting-numbers-using-decimalformat
+                DecimalFormat df = new DecimalFormat("0.##");
+                //df.format(location.getFare());
+
                 TextView pickUpText = (TextView) findViewById(R.id.pick_up_edittext);
                 TextView dropOffText = (TextView) findViewById(R.id.drop_off_edittext);
-                EditText suggestedFareText = (EditText) findViewById(R.id.suggested_fare);
-                suggestedFareText.setText(String.valueOf(location.getFare()));
+                TextView FareEstimate = (TextView) findViewById(R.id.fare_estimate);
+                FareEstimate.setText(String.valueOf(df.format(location.getFare())));
                 pickUpText.setText("Pick up: " + pickUp);
                 dropOffText.setText("Drop off: " + dropOff);
+                //new DecimalFormat("#.##").format(dblVar);
+
 
             }
         }
