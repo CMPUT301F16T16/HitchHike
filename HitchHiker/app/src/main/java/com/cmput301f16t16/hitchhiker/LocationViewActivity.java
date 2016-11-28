@@ -202,8 +202,6 @@ public class LocationViewActivity extends Activity implements Serializable {
     }
 
 
-
-
     /**
      * Set Location
      *
@@ -317,7 +315,6 @@ public class LocationViewActivity extends Activity implements Serializable {
             return false;
         }
     }
-
 
     /**
      * Gets route.
@@ -471,10 +468,6 @@ public class LocationViewActivity extends Activity implements Serializable {
         String theAddress;
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-//            GeocoderNominatim geocoder = new GeocoderNominatim(Locale.getDefault(), userAgent);
-//            geocoder.setService("http://open.mapquestapi.com/nominatim/v1/");
-//            geocoder.setKey("G2m83JSnHrnZ9nMb9Uc0KcDPTfCPxTSo");
 
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             StringBuilder sb = new StringBuilder();

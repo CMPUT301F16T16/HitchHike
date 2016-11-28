@@ -23,7 +23,6 @@ public class AcceptedRequestActivity extends Activity{
     private User user;
     private Request request;
 
-
     /**
      * Called when the activity is first created.
      * <p>This initiates TextViews to display: the trip, rider name, driver name
@@ -88,22 +87,17 @@ public class AcceptedRequestActivity extends Activity{
         User user = ulc.findUser(rider);
         Intent.putExtra("user", user);
         startActivity(Intent);
-
     }
 
     /**
      * Driver page action.
      * <p>This is linked to the driver name TextView.</p>
      * <p>When clicked, it will send the user to the userProfileActivity displaying the drivers info.</p>
-     *
      * @param view the view
      * @see UserProfileActivity
      */
     public void DriverPageAction(View view){
         Intent intent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
-//        String driver = request.getDriver();
-//        UserListController ulc = new UserListController();
-//        ulc.findUser(driver);
         intent.putExtra("user", user);
         startActivity(intent);
     }
@@ -114,14 +108,12 @@ public class AcceptedRequestActivity extends Activity{
         startActivity(intent);
     }
 
-
     /**
      * Pay now action.
      * <p> This button will change the current request status that it is on
      *      from ACCEPTED to COMPLETED.</p>
      *
      * @param view the view
-     * @see Req
      */
     public void PayNowAction(View view){
         Toast.makeText(this, "Payment completed, Thank You for using HitchHiker!", Toast.LENGTH_SHORT).show();

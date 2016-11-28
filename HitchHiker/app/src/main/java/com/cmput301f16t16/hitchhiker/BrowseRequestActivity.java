@@ -47,7 +47,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private String driverName;
     private RequestListController rc = new RequestListController();
 
-
     /**
      * Called when the activity is first created.
      * <p>When called, it will populate the listView with requests that are available
@@ -94,9 +93,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         }
         browseAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, browseList);
         theBrowseList.setAdapter(browseAdapter);
-
     }
-
 
     /**
      * Update browse list.
@@ -155,7 +152,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
         } catch (Exception e) {
             Log.i("Error", "Failed to get the requests out of the async object.");
         }
-
     }
 
     /**
@@ -170,8 +166,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
         intent.putExtra("user", user);
         startActivity(intent);
     }
-
-
 }
 
 

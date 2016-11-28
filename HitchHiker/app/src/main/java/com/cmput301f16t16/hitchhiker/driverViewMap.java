@@ -106,9 +106,6 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
         startPoint = request.getStartGeo();
         endPoint = request.getEndGeo();
 
-
-
-
         // http://stackoverflow.com/questions/38539637/osmbonuspack-roadmanager-networkonmainthreadexception
         // accessed on October 27th, 2016
         // author: yubaraj poudel
@@ -141,11 +138,7 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setTitle("START");
         startMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
-
-
         overlayList.add(startMarker);
-
-
     }
 
     /**
@@ -155,17 +148,12 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
      */
     public void setEndMarker() {
         Marker endMarker = new Marker(map);
-
         endMarker.setPosition(endPoint);
         endMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         endMarker.setTitle("END");
         endMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
-
         overlayList.add(endMarker);
-
-
     }
-
 
     /**
      * Gets route.
@@ -174,16 +162,12 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
      */
 //  ROUTE
     public void getRoute(View view) {
-
         new Thread() {
 
             public void run() {
-
                 if (startPoint != null && endPoint != null) {
                     getRoadAsync(startPoint, endPoint);
-
                     mapController.animateTo(startPoint);
-
                 } else {
                     Toast.makeText(driverViewMap.this, "Fail to find a route !", Toast.LENGTH_LONG).show();
                 }
@@ -194,15 +178,12 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
 
     /**
      * Gets location.
-     *
      * @param location the location
      * @return the location
      */
     public GeoPoint getLocation(String location) {
-
         GeocoderNominatim gn = new GeocoderNominatim(location);
         GeoPoint gp = null;
-
         ArrayList<Address> al;
         try {
             al = (ArrayList<Address>) gn.getFromLocationName(location, 1);

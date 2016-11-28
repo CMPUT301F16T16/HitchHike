@@ -28,12 +28,9 @@ public class DriverActivity extends AppCompatActivity {
     private ListView theRequestList ;
     private ArrayList<Request> requestList = new ArrayList<Request>();
 
-
     private ArrayAdapter<Request> requestAdapter;
     private RequestListController rc = new RequestListController();
     private String driverName;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,6 @@ public class DriverActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         // the driver name
         driverName = user.getUserName();
-
 
         // populate the pending listview with request that the driver selected, whos status is all pending
         theRequestList = (ListView) findViewById(R.id.driverRequest_listview);
@@ -62,12 +58,9 @@ public class DriverActivity extends AppCompatActivity {
 
         requestList.clear();
         requestList = rc.getCurrentRequest(driverName);
-
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
         theRequestList.setAdapter(requestAdapter);
-
     }
-
 
     /**
      * Browse request action.
@@ -104,9 +97,6 @@ public class DriverActivity extends AppCompatActivity {
      * @param view the view
      */
     public void RefreshAction(View view){
-
-
-
         requestAdapter.clear();
         requestAdapter.addAll(rc.getCurrentRequest(driverName));
         requestAdapter.notifyDataSetChanged();

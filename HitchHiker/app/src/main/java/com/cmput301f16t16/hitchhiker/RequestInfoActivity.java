@@ -13,13 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
-<<<<<<< HEAD
- * The type Request info activity.
- * <p> Shows the information for the request clicked.</p>
-=======
  * The type Request info activity. once a request has been pending from the driver POV, it will contain details about the request
  * @author Victoria Lee
->>>>>>> e4b0dc55c3ba15242475455c6e8feeed818578b1
  */
 public class RequestInfoActivity extends AppCompatActivity {
     private Request request;
@@ -53,15 +48,10 @@ public class RequestInfoActivity extends AppCompatActivity {
 
     /**
      * Accept request.
-<<<<<<< HEAD
      * <p> When called, will change the status of the request to PENDING</p>
      * <p> Will add the request again through RequestListController</p>
-     *
      * @param view the view
      * @see RequestListController
-=======
-     * @param view the view
->>>>>>> e4b0dc55c3ba15242475455c6e8feeed818578b1
      */
     public void AcceptRequest(View view){
         RequestListController rc = new RequestListController();
@@ -77,13 +67,9 @@ public class RequestInfoActivity extends AppCompatActivity {
 
     /**
      * Go to map.
-<<<<<<< HEAD
      * <p> This will go to another map view.</p>
      * @param view the view
      * @see driverViewMap
-=======
-     * @param view the view
->>>>>>> e4b0dc55c3ba15242475455c6e8feeed818578b1
      */
     public void GoToMap(View view){
         Intent intent = new Intent(RequestInfoActivity.this, driverViewMap.class);
@@ -93,13 +79,9 @@ public class RequestInfoActivity extends AppCompatActivity {
 
     /**
      * Go to user profile.
-<<<<<<< HEAD
      * <p> This will go to the userProfilePage</p>
      * @param view the view
      * @see UserInfoOnlyActivity
-=======
-     * @param view the view
->>>>>>> e4b0dc55c3ba15242475455c6e8feeed818578b1
      */
     public void GoToUserProfile(View view){
         Intent intent = new Intent(RequestInfoActivity.this, UserInfoOnlyActivity.class);

@@ -108,9 +108,6 @@ public class Request implements Serializable {
         return this.pickUp;
     }
 
-
-
-
     /**
      * Get end location string.
      *
