@@ -301,23 +301,6 @@ public class LocationViewActivity extends Activity implements Serializable {
                     //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                 });
 
-//                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int which) {
-//                        // TODO Auto-generated method stub
-//                        overlayList.clear();
-//                        map.invalidate();
-//
-//                        Touchy t = new Touchy();
-//                        overlayList = map.getOverlays();
-//                        overlayList.add(t);
-//
-//
-//                    }
-//
-//                });
-
-
                 alert.show();
                 return true;
             }
@@ -361,7 +344,7 @@ public class LocationViewActivity extends Activity implements Serializable {
 
         GeocoderNominatim gn = new GeocoderNominatim(location);
         GeoPoint gp = null;
-
+//        List<address> add = gn.getFromLocationName(name, 1)
         ArrayList<Address> al;
         try {
             al = (ArrayList<Address>) gn.getFromLocationName(location, 1);
@@ -460,20 +443,15 @@ public class LocationViewActivity extends Activity implements Serializable {
 
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             StringBuilder sb = new StringBuilder();
+
             if(addresses.size() > 0) {
                 Address address = addresses.get(0);
-                int n = address.getMaxAddressLineIndex();
-                for(int i = 0; i <= n; i++) {
-                    if(i != 0) {
-                        sb.append(", ");
-                    }
-                    sb.append(address.getAddressLine(i));
-                }
-                theAddress = new String(sb);
-            } else {
-                theAddress = null;
+
+                sb.append(address.getAddressLine(0));
             }
-        } catch (Exception e) {
+            theAddress = new String(sb);
+        }
+         catch (Exception e) {
             theAddress = null;
         }
         return theAddress;
