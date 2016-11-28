@@ -81,6 +81,7 @@ public class DriverActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Request request = requestList.get(position);
                 Intent intent = new Intent(DriverActivity.this, AcceptedRequestActivity.class);
+                // passing the driver, and the request
                 intent.putExtra("user", user);
                 intent.putExtra("request", request);
                 startActivity(intent);
