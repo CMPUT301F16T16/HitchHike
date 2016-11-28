@@ -462,17 +462,12 @@ public class LocationViewActivity extends Activity implements Serializable {
             StringBuilder sb = new StringBuilder();
             if(addresses.size() > 0) {
                 Address address = addresses.get(0);
-                int n = address.getMaxAddressLineIndex();
-                for(int i = 0; i <= n; i++) {
-                    if(i != 0) {
-                        sb.append(", ");
-                    }
-                    sb.append(address.getAddressLine(i));
+
+                    sb.append(address.getAddressLine(0));
                 }
                 theAddress = new String(sb);
-            } else {
-                theAddress = null;
-            }
+
+
         } catch (Exception e) {
             theAddress = null;
         }

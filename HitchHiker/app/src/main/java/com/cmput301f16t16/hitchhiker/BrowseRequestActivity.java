@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,9 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private ArrayAdapter<Request> browseAdapter;
     private User user;
     private User driverUser;
+    private String driverName;
+    private RequestListController rc = new RequestListController();
+
 
     /**
      * browseList is an array of all pending requests
@@ -36,6 +41,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         setContentView(R.layout.activity_browse_request);
 
         user = (User) getIntent().getSerializableExtra("user");
+        driverName = user.getUserName();
 
         // display requests into the listview
         theBrowseList = (ListView) findViewById(R.id.browsing_requests_listview);
@@ -58,26 +64,23 @@ public class BrowseRequestActivity extends AppCompatActivity{
                 catch(Exception e){
 
                 }
-
                 intent.putExtra("user", driverUser);
                 startActivity(intent);
             }
         });
 
-
-        try {
-            // how to populate the browslist view
+        try{
             browseList.clear();
-            ElasticsearchRequestController.GetBrowsingRequestsTask getBrowsingRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
-            getBrowsingRequestsTask.execute("");
-            browseList = getBrowsingRequestsTask.get();
-        } catch (Exception e) {
-            Log.i("Error", "Failed to get the requests out of the async object.");
+            browseList = rc.getBrowseRequest(driverName);
+        }
+        catch (Exception e){
+
         }
         browseAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, browseList);
         theBrowseList.setAdapter(browseAdapter);
-        browseAdapter.notifyDataSetChanged();
+
     }
+
 
     /**
      * Update browse list.
@@ -85,16 +88,8 @@ public class BrowseRequestActivity extends AppCompatActivity{
      * @param view the view
      */
     public void updateBrowseList(View view) {
-        browseList.clear();
-        try {
-            ElasticsearchRequestController.GetBrowsingRequestsTask getBrowseRequestsTask = new ElasticsearchRequestController.GetBrowsingRequestsTask();
-            getBrowseRequestsTask.execute("");
-            browseList = getBrowseRequestsTask.get(); // brosweList is now populate with request from elasticsearch
-        } catch (Exception e) {
-            Log.i("Error", "Failed to get the requests out of the async object.");
-        }
-        browseAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, browseList);
-        theBrowseList.setAdapter(browseAdapter);
+        browseAdapter.clear();
+        browseAdapter.addAll(rc.getBrowseRequest(driverName));
         browseAdapter.notifyDataSetChanged();
     }
 
@@ -108,6 +103,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
         intent.putExtra("user", user);
         startActivity(intent);
     }
+
 
 }
 
