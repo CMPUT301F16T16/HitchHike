@@ -108,6 +108,12 @@ public class AcceptedRequestActivity extends Activity{
         startActivity(intent);
     }
 
+    public void ViewMap(View view){
+        Intent intent = new Intent(AcceptedRequestActivity.this, driverViewMap.class);
+        intent.putExtra("request", request);
+        startActivity(intent);
+    }
+
 
     /**
      * Pay now action.
