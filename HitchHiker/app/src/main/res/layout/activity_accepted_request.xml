@@ -72,6 +72,14 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/fare_textview"
         android:layout_marginTop="20dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fare_price"
+        android:layout_centerHorizontal="true"
+        android:text="VIEW MAP"
+        android:layout_marginTop="40dp"
+        android:onClick="ViewMap"/>
 
     <TextView
         android:layout_width="wrap_content"

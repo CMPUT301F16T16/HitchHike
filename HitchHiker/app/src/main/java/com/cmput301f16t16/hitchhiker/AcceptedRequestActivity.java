@@ -77,6 +77,12 @@ public class AcceptedRequestActivity extends Activity{
         startActivity(intent);
     }
 
+    public void ViewMap(View view){
+        Intent intent = new Intent(AcceptedRequestActivity.this, driverViewMap.class);
+        intent.putExtra("request", request);
+        startActivity(intent);
+    }
+
 
     public void PayNowAction(View view){
         Toast.makeText(this, "Payment completed, Thank You for using HitchHiker!", Toast.LENGTH_SHORT).show();
