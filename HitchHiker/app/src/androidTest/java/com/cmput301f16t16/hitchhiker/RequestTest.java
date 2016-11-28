@@ -59,7 +59,23 @@ public class RequestTest extends TestCase {
         rider.setUserType(2);
         driver.setUserType(2);
         assertTrue("The User's type is the same", rider.getUserType().equals(driver.getUserType()));
+    }
 
+    /**
+     * US 01.06.01
+     * As a rider I want an estumation of a fair fare to offer to drivers
+     */
+    public void testSetFare() {
+        User rider = new User("HitchHiker4", "Kevin", "Abels", "kabels@ualberta.ca", "2065714788", 1, "");
+        User driver = new User("Hitcher1", "Vic", "Lee", "vlee@ualberta.ca", "7803334444", 2, "Civic");
+        Fare fare = new Fare();
+        fare.setFare(100.0);
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickUpC = "1123 CandyLane Rd Edmonton";
+        String dropOffD = "1222 DeerBourne Ln Edmonton";
+        Request request = new Request(rider.getUserName(), pickUpC, dropOffD, 5.00, A, B);
+        assertEquals(fare, request.getPrice());
     }
 }
 
