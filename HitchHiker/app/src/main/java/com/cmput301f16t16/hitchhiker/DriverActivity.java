@@ -111,7 +111,7 @@ public class DriverActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Refresh(View view){
+    public void RefreshAction(View view){
         //requestList.clear();
         requestList = rc.setListOfDriveRequests(requestList);
 

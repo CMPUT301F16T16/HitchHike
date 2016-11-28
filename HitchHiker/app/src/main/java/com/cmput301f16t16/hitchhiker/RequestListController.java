@@ -9,6 +9,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * possibly change this to a request controller instead
@@ -168,6 +169,50 @@ public class RequestListController {
     public ArrayList<Request> getRequestLoad(User rider) {
         ArrayList<Request> requestLoad = new ArrayList<>();
         return requestLoad;
+    }
+
+    public ArrayList<Request> getBrowseRequest(String driverName){
+        ArrayList<Request> finalBrowseList = new ArrayList<Request>();
+        ArrayList<Request> browseList = new ArrayList<Request>();
+        ElasticsearchRequestController.GetBrowse getBrowsingRequests = new ElasticsearchRequestController.GetBrowse();
+        try {
+            getBrowsingRequests.execute();
+            browseList = getBrowsingRequests.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Request> TempList = new ArrayList<Request>();
+
+        TempList.addAll(browseList);
+        for (Request request : TempList) {
+            // makes a new tempDriver list for each request
+            ArrayList<String> TempDriver = new ArrayList<String>();
+            TempDriver.addAll(request.getProspectiveDrivers());
+            Boolean yes = false;
+            if ((request.getRiderName()).equals(driverName)){
+
+            }
+            else {
+                if (TempDriver.size() == 0) {
+                    finalBrowseList.add(request);
+                } else {
+                    Boolean exists = false;
+                    for (String driver : TempDriver) {
+                        if (driverName.equals(driver)) {
+                            exists = true;
+                        }
+                    }
+                    if (exists == false) {
+                        finalBrowseList.add(request);
+                    }
+                }
+            }
+        }
+
+        return finalBrowseList;
     }
 
 }
