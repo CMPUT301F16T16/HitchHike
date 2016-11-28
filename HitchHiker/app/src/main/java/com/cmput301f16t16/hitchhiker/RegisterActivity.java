@@ -56,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText lastNameText = (EditText) findViewById(R.id.lastNameEditText);
         EditText phoneNumberText = (EditText) findViewById(R.id.phoneNumberEditText);
         EditText emailAddressText = (EditText) findViewById(R.id.emailAddressEditText);
+        EditText carDeatilsText = (EditText) findViewById(R.id.car_editText);
 
         TextView chooseUserTypeText = (TextView) findViewById(R.id.choose_usertype_text);
         TextView uniqueUsernameText = (TextView) findViewById(R.id.unique_username_text);
@@ -69,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
         String userLastName = lastNameText.getText().toString();
         String userEmail = emailAddressText.getText().toString();
         String phoneNumber = phoneNumberText.getText().toString();
+        String carDeatils = carDeatilsText.getText().toString();
+
 
         /**
          * Determines the userType
@@ -120,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
         else if (usernameExists == false) {
             String userPhoneNumber = (phoneNumber);
 
-            User newUser = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType, "");
+            User newUser = new User(userName, userFirstName, userLastName, userEmail, userPhoneNumber, userType, carDeatils);
 
             // adds user to the elasticsearch database
             uc.addUser(newUser);
