@@ -113,22 +113,32 @@ public class BrowseRequestActivity extends AppCompatActivity{
      * @param view the view
      */
     public void updateBrowseList(View view) {
-        browseList.clear();
 
         try {
             searchKey = searchKeyText.getText().toString();
             if (Address.isChecked() & (!searchKey.equals(""))) {
+
+                browseList.clear();
+
                 searchKeyAddress = searchKeyText.getText().toString();
                 ElasticsearchRequestController.GetKeySearchAddressRequestsTask getKeySearchAddressRequestsTask =
                         new ElasticsearchRequestController.GetKeySearchAddressRequestsTask();
                 getKeySearchAddressRequestsTask.setSearchKeyAddress(searchKeyAddress);
                 getKeySearchAddressRequestsTask.execute();
                 browseList = getKeySearchAddressRequestsTask.get();
+                browseAdapter.clear();
+                browseAdapter.addAll(browseList);
+                browseAdapter.notifyDataSetChanged();
+
+
             }
 //            if (GeoPoint.isChecked()){
 //
 //            }
             if (Price.isChecked() & (!searchKey.equals(""))){
+
+                browseList.clear();
+
                 searchKeyPriceString =  searchKeyText.getText().toString();
                 searchKeyPrice = Double.parseDouble(searchKeyPriceString);
                 ElasticsearchRequestController.GetKeySearchPriceRequestsTask getKeySearchPriceRequestsTask =
@@ -136,21 +146,24 @@ public class BrowseRequestActivity extends AppCompatActivity{
                 getKeySearchPriceRequestsTask.setSearchKeyPrice(searchKeyPrice);
                 getKeySearchPriceRequestsTask.execute();
                 browseList = getKeySearchPriceRequestsTask.get();
+                browseAdapter.addAll(browseList);
+                browseAdapter.notifyDataSetChanged();
+
             }
             if (searchKey.equals("")) {
-                ElasticsearchRequestController.GetBrowsingRequestsTask getBrowseRequestsTask =
-                        new ElasticsearchRequestController.GetBrowsingRequestsTask();
-                getBrowseRequestsTask.execute("");
-                browseList = getBrowseRequestsTask.get();
+
+                browseAdapter.clear();
+                browseAdapter.addAll(rc.getBrowseRequest(driverName));
+                browseAdapter.notifyDataSetChanged();
+
             }
         } catch (Exception e) {
             Log.i("Error", "Failed to get the requests out of the async object.");
         }
-        browseAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, browseList);
-        theBrowseList.setAdapter(browseAdapter);
-        browseAdapter.clear();
-        browseAdapter.addAll(rc.getBrowseRequest(driverName));
-        browseAdapter.notifyDataSetChanged();
+
+//        browseAdapter.clear();
+//        browseAdapter.addAll(rc.getBrowseRequest(driverName));
+//        browseAdapter.notifyDataSetChanged();
     }
 
     /**

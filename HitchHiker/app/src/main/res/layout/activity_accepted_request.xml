@@ -48,7 +48,8 @@
         android:text="NAME"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="20dp"
-        android:onClick="RiderPageAction"/>
+        android:onClick="RiderPageAction"
+        android:clickable="true"/>
 
     <TextView
         android:id="@+id/driver_textView"

@@ -257,9 +257,7 @@ public class ElasticsearchRequestController {
     }
 
     public static class GetBrowse extends AsyncTask<String, Void, ArrayList<Request>> {
-        private String status;
 
-        private ArrayList<Request> finalBrowseList = new ArrayList<Request>();
         private String pending = "PENDING";
         private String created = "CREATED";
         @Override
@@ -299,23 +297,7 @@ public class ElasticsearchRequestController {
 
             return requests;
         }
-        public void setStatus(String status){
-            this.status = status;
-        }
 
-        public ArrayList<Request> filterBrowse(ArrayList<Request> browseList, String driverName){
-            ArrayList<Request> tempBrowse = new ArrayList<Request>();
-            for (Request request: browseList){
-                ArrayList<String> TempDriver = new ArrayList<String>();
-                TempDriver.addAll(request.getProspectiveDrivers());
-                for (String driver: TempDriver){
-                    if (driverName.equals(driver)){
-                        tempBrowse.add(request);
-                    }
-                }
-            }
-            return tempBrowse;
-        }
 
 
     }
