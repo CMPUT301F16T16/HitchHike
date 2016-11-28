@@ -39,6 +39,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Driver view map.
+ * <p> This View will allow the driver to see the exact start and end point
+ * of the request they are looking at.</p>
+ * @author willyliao
+ */
 public class driverViewMap extends AppCompatActivity implements Serializable {
     private List<Overlay> overlayList;
     private Location location;
@@ -56,6 +62,9 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
     private double fare;
     private Request request;
 
+    /**
+     * The Map controller.
+     */
     IMapController mapController;
     /**
      * The Our activity.
@@ -76,11 +85,6 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_driver_view_map);
 
         request = (Request) getIntent().getSerializableExtra("request");
-
-
-//        String requestView = request.getTrip();
-//        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
-//        displayTrip.setText(requestView);
 
 
         map = (MapView) findViewById(R.id.mapDriverView);
@@ -124,6 +128,12 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
         }
     }
 
+    /**
+     * Sets start marker.
+     * <p> Using omsDroids code, and from CMPUT301 Lab.</p>
+     * <p> This will set the startPoint on the map.</p>
+     * @param sp the sp
+     */
     public void setStartMarker(GeoPoint sp) {
         // set the map
         Marker startMarker = new Marker(map);
@@ -138,6 +148,11 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
 
     }
 
+    /**
+     * Sets end marker.
+     * <p> Using omsDroids code, and from CMPUT301 Lab.</p>
+     * <p> This will set the endPoint on the map.</p>
+     */
     public void setEndMarker() {
         Marker endMarker = new Marker(map);
 
@@ -152,11 +167,12 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
     }
 
 
-
-
-
-
-    //  ROUTE
+    /**
+     * Gets route.
+     *
+     * @param view the view
+     */
+//  ROUTE
     public void getRoute(View view) {
 
         new Thread() {
@@ -176,6 +192,12 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
                 .start();
     }
 
+    /**
+     * Gets location.
+     *
+     * @param location the location
+     * @return the location
+     */
     public GeoPoint getLocation(String location) {
 
         GeocoderNominatim gn = new GeocoderNominatim(location);
@@ -204,6 +226,7 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
 
     /**
      * Gets road async.
+     * <p> This will get the route of the trip.</p>
      *
      * @param startPoint       the start point
      * @param destinationPoint the destination point

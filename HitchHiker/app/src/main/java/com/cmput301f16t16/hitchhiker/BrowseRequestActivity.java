@@ -18,6 +18,11 @@ import java.util.ArrayList;
 
 /**
  * Created by V1CTORIA2LEE on 2016-11-12.
+ *
+ * <p>browseList is an array of all pending requests
+ * request available. The list view is clickable to a new activity to view a
+ * map of the requests.</p>
+ * @author victorialee
  */
 public class BrowseRequestActivity extends AppCompatActivity{
     private EditText searchKeyAddressText;
@@ -43,14 +48,13 @@ public class BrowseRequestActivity extends AppCompatActivity{
     private RequestListController rc = new RequestListController();
 
 
-
     /**
-     * browseList is an array of all pending requests
-     * request available. The list view is clickable to a new activity to view a
-     * map of the requests.
-     *
-     * request object is passed to the
+     * Called when the activity is first created.
+     * <p>When called, it will populate the listView with requests that are available
+     * for selection to the Driver.</p>
+     * <p> The list is populated using the RequestListController</p>
      * @param savedInstanceState
+     * @see RequestListController
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +77,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
 
                 Intent intent = new Intent(BrowseRequestActivity.this, RequestInfoActivity.class);
-//                intent.putExtra("requestsList", browseList);
-//                intent.putExtra("index", position);
+
                 Request chosenRequest = browseList.get(position);
                 intent.putExtra("chosenRequest", chosenRequest);
                 intent.putExtra("user", user);
@@ -97,10 +100,13 @@ public class BrowseRequestActivity extends AppCompatActivity{
 
     /**
      * Update browse list.
-     *
-     *If the Search Edit Text is filled in it will search according to key address word in pickUp and dropOff
+     * <p>This button will update work according to whether the search EditText is filled,
+     * and also which selection is currently chosen.</p>
      *
      * @param view the view
+     * @see ElasticsearchRequestController
+     * @see RequestListController
+     *
      */
     public void updateBrowseList(View view) {
 
@@ -122,9 +128,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
 
 
             }
-//            if (GeoPoint.isChecked()){
-//
-//            }
+
             if (Price.isChecked() & (!searchKey.equals(""))){
 
                 browseList.clear();
@@ -152,15 +156,14 @@ public class BrowseRequestActivity extends AppCompatActivity{
             Log.i("Error", "Failed to get the requests out of the async object.");
         }
 
-//        browseAdapter.clear();
-//        browseAdapter.addAll(rc.getBrowseRequest(driverName));
-//        browseAdapter.notifyDataSetChanged();
     }
 
     /**
      * Go to driver profile page.
-     *
+     * <p> This is linked to the profile button. </p>
+     * <p> This will send the user to their profile page.</p>
      * @param view the view
+     * @see UserProfileActivity
      */
     public void GoToDriverProfilePage(View view) {
         Intent intent = new Intent(BrowseRequestActivity.this, UserProfileActivity.class);

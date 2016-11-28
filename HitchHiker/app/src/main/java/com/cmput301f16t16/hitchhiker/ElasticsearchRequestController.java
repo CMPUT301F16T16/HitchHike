@@ -20,12 +20,20 @@ import io.searchbox.core.SearchResult;
 
 /**
  * Created by willyliao on 2016-11-04.
+ * <p> This uses ElasticSearch, JEST, to store and grab data from a server.</p>
  */
 public class ElasticsearchRequestController {
     private static JestDroidClient client;
 
     /**
      * The type Get requests task.
+     *
+     * <p> This class when called from the RequestListController, will return a list of
+     * requests that matches the current users userName. These requests are ones
+     * created by the specified user.</p>
+     *
+     * @see android.os.AsyncTask
+     * @see RequestListController
      */
 // TODO we need a function that gets requests!
     public static class GetRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
@@ -50,12 +58,27 @@ public class ElasticsearchRequestController {
             }
             return requests;
         }
+
+        /**
+         * Set user name.
+         * <p> allows the userName to be set to a specified userName, so it returns back
+         * requests that this specific user has created.</p>
+         * @param userName the user name
+         */
         public void setUserName(String userName){
             this.userName = userName;
         }
     }
 
 
+    /**
+     * The type Get driver task.
+     *
+     * <p> This class when called from the RequestListController.</p>
+     *
+     * @see android.os.AsyncTask
+     * @see RequestListController
+     */
     public static class GetDriverTask extends AsyncTask<String, Void, ArrayList<Request>> {
         private String status;
         @Override
@@ -77,84 +100,22 @@ public class ElasticsearchRequestController {
             }
             return requests;
         }
+
+        /**
+         * Set status.
+         *
+         * @param status the status
+         */
         public void setStatus(String status){
             this.status = status;
         }
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-//    public static class GetDriverRequestTask extends AsyncTask<String, Void, ArrayList<Request>> {
-//        private String userName;
-//        private String pending;
-//        private String accepted;
-//
-//        @Override
-//        protected ArrayList<Request> doInBackground(String... search_parameters) {
-//            verifySettings();
-//
-//            ArrayList<Request> pendings = new ArrayList<Request>();
-//
-//            //String search_string = "{\n" + "\"query\": {\n" + "\"match\" : {\n" + "\"" + userName + "\" : \n" + "\"" + requestStatus + "\"\n" + "}\n" + "}\n" + "}";
-//            //String search_string = "{\"from\": 0, \"size\": 10000, \"query\": " + "{\"match\": {\"Rider\": \""+userName+"\"} {" + "\"Status\": \""+requestStatus+"\"}}}";
-//            //String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"Rider\": \""+userName+"\"} {\"requestStatus\": \""+requestStatus+"\"}}}";
-//
-//
-//            String search_string =
-//                    "{ \"from\" : 0, \"size\" : 500,\n" +
-//                            "  \"query\": {\n" +
-//                            "    \"bool\": {\n" +
-//                            //"      \"must\": { \"match\": { \"Rider\": \"" + userName + "\" }},\n" +
-//                            "      \"should\": [\n" +
-//                            "              { \"match\": { \"requestStatus\": \"" + pending + "\" }},\n" +
-//                            "              { \"match\": { \"requestStatus\": \"" + accepted + "\" }}\n" +
-//                            "      ],\n" +
-//                            "      \"minimum_should_match\": \"1\"\n" +
-//                            //"    }\n" +
-//                            "  }\n" +
-//                            "}";
-//            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
-//
-//            try{
-//                SearchResult result = client.execute(search);
-//                if (result.isSucceeded()){
-//                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
-//                    pendings.addAll(foundRequests);
-//                }
-//                else{
-//                    Log.i("Error", "The search executed but it didn't work.");
-//                }
-//            }
-//            catch (Exception e){
-//                Log.i("Error", "Executing the get requests method failed");
-//            }
-//            return pendings;
-//        }
-//
-//        /**
-//         * Set user name.
-//         *
-//         * @param userName the user name
-//         */
-//        public void setUserName(String userName){ this.userName = userName;}
-//        public void setPending(String pending) { this.pending = pending;}
-//        public void setAccepted(String accepted) { this.accepted = accepted; }
-//
-//
-//    }
-
     /**
      * The type Get browsing requests task.
+     * <p> This is called from the RequestListController.</p>
+     * @see RequestListController
      */
 // TODO we need a function which populates browsing_request!
     public static class GetBrowsingRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
@@ -190,6 +151,9 @@ public class ElasticsearchRequestController {
 
     /**
      * The type Add requests task.
+     * <p> This will add a new request (as well as update by readding) to the server.</p>
+     * <p> called in the RequestListController</p>
+     * @see RequestListController
      */
 // TODO we need a function which adds a request!
     public static class AddRequestsTask extends AsyncTask<Request, Void, Void> {
@@ -223,11 +187,15 @@ public class ElasticsearchRequestController {
 
     /**
      * The type Delete request task.
+     * <p> This will delete a request through elasticsearch.</p>
+     * <p> This is called in the RequestListController.</p>
+     * @see RequestListController
      */
 // TODO we need a function which adds a request!
     public static class DeleteRequestTask extends AsyncTask<Request, Void, Void> {
         /**
          * The Item id.
+         * <p> the requests JEST ID</p>
          */
         String itemId;
 
@@ -248,7 +216,7 @@ public class ElasticsearchRequestController {
 
         /**
          * Set item id.
-         *
+         * <p> This will set the itemId to the JESTID of that request, so elasticsearch and delete the right object.</p>
          * @param itemId the item id
          */
         public void setItemId(String itemId){
@@ -256,6 +224,13 @@ public class ElasticsearchRequestController {
         }
     }
 
+    /**
+     * The type Get browse.
+     * <p> This will grab all requests with the requestStatus PENDING and CREATED.</p>
+     * <p> Called in RequestListController.</p>
+     *
+     * @see RequestListController
+     */
     public static class GetBrowse extends AsyncTask<String, Void, ArrayList<Request>> {
 
         private String pending = "PENDING";
@@ -301,6 +276,13 @@ public class ElasticsearchRequestController {
 
     }
 
+    /**
+     * The type Get current.
+     * The type Get browse.
+     * <p> This will grab all requests with the requestStatus PENDING and CREATED.</p>
+     * <p> Called in RequestListController.</p>
+     * @see RequestListController
+     */
     public static class GetCurrent extends AsyncTask<String, Void, ArrayList<Request>> {
 
         private String pending = "PENDING";
@@ -363,6 +345,14 @@ public class ElasticsearchRequestController {
         }
     }
 
+    /**
+     * The type Get key search address requests task.
+     * <p> This will grab requests with certain words in the pickUp and dropOff address.</p>
+     * <p> The keyword will be set by the user themselves.</p>
+     * <p> used in BrowseRequestActivity</p>
+     *
+     * @see BrowseRequestActivity
+     */
     public static class GetKeySearchAddressRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
         private String searchKeyAddress;
         private double searchKeyPrice;
@@ -406,14 +396,30 @@ public class ElasticsearchRequestController {
             }
             return requests;
         }
+
+        /**
+         * Set search key address.
+         *
+         * @param searchKeyAddress the search key address
+         */
         public void setSearchKeyAddress(String searchKeyAddress){
             this.searchKeyAddress = searchKeyAddress;
         }
+
+        /**
+         * Set search key price.
+         *
+         * @param searchKeyPrice the search key price
+         */
         public void setSearchKeyPrice(double searchKeyPrice){
             this.searchKeyPrice = searchKeyPrice;
         }
 
     }
+
+    /**
+     * The type Get key search price requests task.
+     */
 //    public static class GetKeySearchGeoPointRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
 //        private GeoPoint searchKeyGeoPoint;
 //
@@ -455,6 +461,15 @@ public class ElasticsearchRequestController {
 //            }
 //            return requests;
 //        }
+
+
+    /**
+     * The type Get browse.
+     * <p> This will grab all requests a price that is in between around the user specified base fare.</p>
+     * <p> Called in BrowseRequestActivity.</p>
+     *
+     * @see BrowseRequestActivity
+     */
     public static class GetKeySearchPriceRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
         private double searchKeyPrice;
 
@@ -496,6 +511,11 @@ public class ElasticsearchRequestController {
         }
 
 
+        /**
+         * Sets search key price.
+         *
+         * @param searchKeyPrice the search key price
+         */
         public void setSearchKeyPrice(double searchKeyPrice) {
             this.searchKeyPrice = searchKeyPrice;
         }

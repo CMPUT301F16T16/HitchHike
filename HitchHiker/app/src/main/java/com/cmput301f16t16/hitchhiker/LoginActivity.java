@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 /**
  * The type Login activity.
+ * <p> This is the View where the user can input his name and login.</p>
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,8 +27,14 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Go to main page.
+     * <p> when called, the function will check if the user is a driver
+     * or a rider and go to their respective activities.</p>
+     * <p> Uses ElasticSearch to see if user exists.</p>
      *
      * @param view the view
+     * @see DriverActivity
+     * @see RiderActivity
+     * @see ElasticsearchUserController
      */
     public void GoToMainPage(View view){
 
@@ -75,8 +82,10 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Go to register page.
+     * <p> when called, will bring the user to the RegisterActivity</p>
      *
      * @param view the view
+     * @see RegisterActivity
      */
     public void GoToRegisterPage(View view){
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);

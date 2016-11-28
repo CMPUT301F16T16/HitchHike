@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 
 /**
  * Created by V1CTORIA2LEE on 2016-11-26.
+ * <p> This class is basically a View that allows the User to choose
+ * which userType they want to be as.</p>
  */
 public class ChooseUserModeActivity extends Activity {
 
@@ -30,6 +32,12 @@ public class ChooseUserModeActivity extends Activity {
         driver = (RadioButton) findViewById(R.id.driverRadioButton);
     }
 
+    /**
+     * Enter mode action.
+     * <p> This is a check to see which radiobutton is checked. This will
+     *      go to their respective functions within this class.</p>
+     * @param view the view
+     */
     public void enterModeAction(View view) {
         if (rider.isChecked()) {
             goToRider();
@@ -39,6 +47,11 @@ public class ChooseUserModeActivity extends Activity {
         }
     }
 
+    /**
+     * Go to rider.
+     * <p> This will send the user to the RiderActivity.</p>
+     * @see RiderActivity
+     */
     public void goToRider() {
         rider.setChecked(false);
         Intent intent = new Intent(ChooseUserModeActivity.this, RiderActivity.class);
@@ -46,6 +59,11 @@ public class ChooseUserModeActivity extends Activity {
         startActivity(intent);
     }
 
+    /**
+     * Go to driver.
+     * <p> This will send the user to the DriverActivity</p>
+     * @see DriverActivity
+     */
     public void goToDriver() {
         driver.setChecked(false);
         Intent intent = new Intent(ChooseUserModeActivity.this, DriverActivity.class);

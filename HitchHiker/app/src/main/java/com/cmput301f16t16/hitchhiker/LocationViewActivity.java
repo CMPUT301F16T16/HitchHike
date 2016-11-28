@@ -67,15 +67,21 @@ public class LocationViewActivity extends Activity implements Serializable {
     private String destAddress;
 
 
+    /**
+     * The Map controller.
+     */
     IMapController mapController;
+
     /**
      * The Our activity.
      */
     Activity ourActivity = this;
+
     /**
      * The Map.
      */
     MapView map;
+
     /**
      * The M roads.
      */
@@ -86,11 +92,6 @@ public class LocationViewActivity extends Activity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-//        request = (Request) getIntent().getSerializableExtra("request");
-
-//        String requestView = request.getTrip();
-//        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
-//        displayTrip.setText(requestView);
 
         getOrigin = (EditText) findViewById(R.id.origin);
         getDestination = (EditText) findViewById(R.id.destination);
@@ -100,9 +101,7 @@ public class LocationViewActivity extends Activity implements Serializable {
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
 
-        /**
-         * Using fake coordinates until we can create REAL requests
-         */
+        //Using fake coordinates until we can create REAL requests
         startPoint = new GeoPoint(53.527452, -113.529679);
 
 
@@ -110,9 +109,7 @@ public class LocationViewActivity extends Activity implements Serializable {
         mapController.setZoom(9);
         mapController.setCenter(startPoint);
 
-        /**
-         * User long click screen
-         */
+        // User long click
         Touchy t = new Touchy();
         overlayList = map.getOverlays();
         overlayList.add(t);
@@ -151,6 +148,20 @@ public class LocationViewActivity extends Activity implements Serializable {
         overlayItemArray.add(new OverlayItem("Destination", "This is the detination point", endPoint));
 
     }
+
+
+    /**
+     * Set route.
+     *
+     * <p> This is linked to a button.</p>
+     * <p> When called, it will create a new Location object that will contain
+     * the start and end geopoints, the start and end addresses, and the distance of the route.</p>
+     * <p> This will be returned back to the CreateRequestActivity.</p>
+     *
+     * @param view the view
+     * @see CreateRequestActivity
+     * @see Location
+     */
     public void setRoute(View view){
         if (endPoint != null && startPoint != null) {
             newLocation = new Location(startPoint, endPoint, startAddress, destAddress, distance);
@@ -163,6 +174,12 @@ public class LocationViewActivity extends Activity implements Serializable {
         else{Toast.makeText(LocationViewActivity.this, "Please set destination", Toast.LENGTH_SHORT).show();}
     }
 
+    /**
+     * Sets start marker.
+     *
+     *  <p> This sets the Location marker on the start point on the Map.</p>
+     * @param sp the sp
+     */
     public void setStartMarker(GeoPoint sp) {
         // set the map
         Marker startMarker = new Marker(map);
@@ -177,6 +194,11 @@ public class LocationViewActivity extends Activity implements Serializable {
 
     }
 
+    /**
+     * Sets end marker.
+     *
+     *  <p> This sets the Location marker on the end point on the Map.</p>
+     */
     public void setEndMarker() {
         Marker endMarker = new Marker(map);
 
@@ -191,10 +213,13 @@ public class LocationViewActivity extends Activity implements Serializable {
     }
 
 
-//long click
 
     /**
      * Set Location
+     *
+     * <p> This is for the touch interface of the map.</p>
+     * <p> This allows a startPoint or an endPoint to be selected and set.</p>
+     * <p> The route will also be drawn.</p>
      */
     private class Touchy extends Overlay {
 
@@ -301,22 +326,6 @@ public class LocationViewActivity extends Activity implements Serializable {
                     //Toast.makeText(MainActivity.this, "Set destination", Toast.LENGTH_LONG).show();
                 });
 
-//                alert.setButton(DialogInterface.BUTTON_NEUTRAL, "Clear", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int which) {
-//                        // TODO Auto-generated method stub
-//                        overlayList.clear();
-//                        map.invalidate();
-//
-//                        Touchy t = new Touchy();
-//                        overlayList = map.getOverlays();
-//                        overlayList.add(t);
-//
-//
-//                    }
-//
-//                });
-
 
                 alert.show();
                 return true;
@@ -326,7 +335,13 @@ public class LocationViewActivity extends Activity implements Serializable {
     }
 
 
-    //  ROUTE
+    /**
+     * Gets route.
+     * <p> This sets the route according to what is typed in the editText.</p>
+     * <p> It will draw a rout efrom the Start and End points</p>
+     * @param view the view
+     */
+//  ROUTE
     public void getRoute(View view) {
 
 
@@ -357,6 +372,12 @@ public class LocationViewActivity extends Activity implements Serializable {
                 .start();
     }
 
+    /**
+     * Gets location.
+     *
+     * @param location the location
+     * @return the location
+     */
     public GeoPoint getLocation(String location) {
 
         GeocoderNominatim gn = new GeocoderNominatim(location);
@@ -398,6 +419,9 @@ public class LocationViewActivity extends Activity implements Serializable {
         new UpdateRoadTask().execute(waypoints);
     }
 
+    /**
+     * The type Update road task.
+     */
     class UpdateRoadTask extends AsyncTask<Object, Void, Road[]> {
 
         protected Road[] doInBackground(Object... params) {
@@ -440,6 +464,10 @@ public class LocationViewActivity extends Activity implements Serializable {
         }
     }
 
+
+    /**
+     * This function clears the map
+     */
     private void clearMap(){
         overlayList.clear();
         map.invalidate();
@@ -449,6 +477,12 @@ public class LocationViewActivity extends Activity implements Serializable {
         overlayList.add(t);
     }
 
+    /**
+     * This function reverse geocodes. Address -> Geopoints
+     * @param latitude
+     * @param longitude
+     * @return
+     */
     private String getTheAddress(double latitude, double longitude){
         String theAddress;
         try {

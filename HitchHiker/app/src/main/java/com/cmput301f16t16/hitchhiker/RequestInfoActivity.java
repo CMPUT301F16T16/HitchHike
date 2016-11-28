@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * The type Request info activity.
+ * <p> Shows the information for the request clicked.</p>
+ */
 public class RequestInfoActivity extends AppCompatActivity {
     private Request request;
     private User user;
@@ -49,6 +53,14 @@ public class RequestInfoActivity extends AppCompatActivity {
         requestFareText.setText(price);
     }
 
+    /**
+     * Accept request.
+     * <p> When called, will change the status of the request to PENDING</p>
+     * <p> Will add the request again through RequestListController</p>
+     *
+     * @param view the view
+     * @see RequestListController
+     */
     public void AcceptRequest(View view){
         RequestListController rc = new RequestListController();
         String userName = user.getUserName();
@@ -61,12 +73,24 @@ public class RequestInfoActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Go to map.
+     * <p> This will go to another map view.</p>
+     * @param view the view
+     * @see driverViewMap
+     */
     public void GoToMap(View view){
         Intent intent = new Intent(RequestInfoActivity.this, driverViewMap.class);
         intent.putExtra("request", request);
         startActivity(intent);
     }
 
+    /**
+     * Go to user profile.
+     * <p> This will go to the userProfilePage</p>
+     * @param view the view
+     * @see UserInfoOnlyActivity
+     */
     public void GoToUserProfile(View view){
         Intent intent = new Intent(RequestInfoActivity.this, UserInfoOnlyActivity.class);
         String riderName = request.getRiderName();

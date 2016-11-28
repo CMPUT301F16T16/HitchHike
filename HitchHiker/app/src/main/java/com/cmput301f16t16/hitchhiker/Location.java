@@ -42,6 +42,10 @@ import java.util.List;
 
 /**
  * Created by Angus on 11/3/2016.
+ * <p> This class is solely used to "package" and send data from the
+ * MapView to the Create a Request View.</p>
+ * @see LocationViewActivity
+ * @see CreateRequestActivity
  */
 public class Location implements Serializable {
     private GeoPoint currentPoint;
@@ -55,15 +59,21 @@ public class Location implements Serializable {
     private double rate = 5;
 
 
+    /**
+     * Instantiates a new Location.
+     *
+     * @param startPoint       the start point
+     * @param endPoint         the end point
+     * @param stringStartPoint the string start point
+     * @param stringEndPoint   the string end point
+     * @param distance         the distance
+     */
     public Location(GeoPoint startPoint, GeoPoint endPoint, String stringStartPoint, String stringEndPoint, Double distance) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.stringEndPoint = stringEndPoint;
         this.stringStartPoint = stringStartPoint;
         this.distance = distance;
-//        this.fare = fare;
-//        this.rate = rate;
-
     }
 
     /**
@@ -91,11 +101,18 @@ public class Location implements Serializable {
 
     /**
      * Gets the string Address of EndPoint
+     *
      * @return the end point string address
      */
     public String getStringEndPoint() { return stringEndPoint;}
 
+    /**
+     * Gets string start point.
+     *
+     * @return the string start point
+     */
     public String getStringStartPoint() {return stringStartPoint;}
+
     /**
      * Gets current point.
      *
@@ -107,7 +124,8 @@ public class Location implements Serializable {
 
     /**
      * gets distance
-     * @return distance
+     *
+     * @return distance distance
      */
     public Double getDistance() {
         return distance;
@@ -115,7 +133,8 @@ public class Location implements Serializable {
 
     /**
      * get fare
-     * @return fare
+     *
+     * @return fare fare
      */
     public double getFare() {
         fare = distance*rate;

@@ -18,21 +18,23 @@ import java.util.List;
 
 /**
  * The type Driver activity.
+ * <p> This View allows the driver to see the requests he is currently a part of.
+ * This could be a request he has accepted, waiting for response, or completed.</p>
+ *
+ * @author willyliao
  */
 public class DriverActivity extends AppCompatActivity {
     private User user; // this is the driver
     private ListView theRequestList ;
     private ArrayList<Request> requestList = new ArrayList<Request>();
-    private ArrayList<Request> acceptedList = new ArrayList<Request>();
-    private ArrayList<Request> pendingList = new ArrayList<Request>();
+
 
     private ArrayAdapter<Request> requestAdapter;
     private RequestListController rc = new RequestListController();
     private String driverName;
-    private String accepted;
-    private String pending;
 
-    //private Request request;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,35 +44,11 @@ public class DriverActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         // the driver name
         driverName = user.getUserName();
-        pending = "PENDING";
-        accepted = "ACCEPTED";
+
 
         // populate the pending listview with request that the driver selected, whos status is all pending
         theRequestList = (ListView) findViewById(R.id.driverRequest_listview);
 
-         // add the accepted requests
-        //acceptedList = rc.getListOfDriverRequests(accepted);
-        //ArrayList<Request> TempList = new ArrayList<Request>();
-
-//        for(Request request : acceptedList){
-//            if (driverName.equals(request.getDriver())) {
-//                requestList.add(request);
-//            }
-//        }
-//        // add the pending requests
-//        pendingList = rc.getListOfDriverRequests(pending);
-//        // temp list has all the pending request, we must narrow down to driver in prospectiveDriverList
-//        TempList.addAll(pendingList);
-//        for(Request request: TempList){
-//            // makes a new tempDriver list for each request
-//            ArrayList<String> TempDriver = new ArrayList<String>();
-//            TempDriver.addAll(request.getProspectiveDrivers());
-//            for (String driver: TempDriver){
-//                if (driverName.equals(driver)){
-//                    requestList.add(request);
-//                }
-//            }
-//        }
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Request request = requestList.get(position);
@@ -82,24 +60,22 @@ public class DriverActivity extends AppCompatActivity {
             }
         });
 
-
-
         requestList.clear();
         requestList = rc.getCurrentRequest(driverName);
 
         requestAdapter = new ArrayAdapter<Request>(this, R.layout.request_list_item, requestList);
         theRequestList.setAdapter(requestAdapter);
 
-
-
     }
-
 
 
     /**
      * Browse request action.
+     * <p> This is linked to a button, and will take the user to the BrowseRequestActivity,
+     * where the user will be able to browse and select requests that he may want to do.</p>
      *
      * @param view the view
+     * @see BrowseRequestActivity
      */
     public void BrowseRequestAction(View view) {
         Intent intent = new Intent(DriverActivity.this, BrowseRequestActivity.class);
@@ -109,7 +85,8 @@ public class DriverActivity extends AppCompatActivity {
 
     /**
      * User profile page action.
-     *
+     * <p> This is linked to a button, and will take the user to their profile page.</p>
+     * @see UserProfileActivity
      * @param view the view
      */
     public void UserProfilePageAction(View view) {
@@ -118,6 +95,14 @@ public class DriverActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Refresh action.
+     * <p> This is a refresh action in which it will recall elasticsearch to grab and
+     * update the current list.</p>
+     *
+     * @see RequestListController
+     * @param view the view
+     */
     public void RefreshAction(View view){
 
 

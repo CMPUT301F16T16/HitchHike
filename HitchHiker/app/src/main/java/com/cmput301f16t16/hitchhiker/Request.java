@@ -34,7 +34,6 @@ public class Request implements Serializable {
      * Need a list of prospective Drivers to choose Final Driver Choice
      */
 
-    //    private ArrayList<User> prospectiveDrivers;
     private ArrayList<String> prospectiveDrivers;
 
     /**
@@ -61,6 +60,11 @@ public class Request implements Serializable {
 
     private Integer RequestId; //A separate ID from elasticSearch ID. This will be shown to both drivers and riders.
 
+    /**
+     * Gets driver.
+     *
+     * @return the driver
+     */
     public String getDriver() {
         return Driver;
     }
@@ -76,8 +80,9 @@ public class Request implements Serializable {
      * @param pickUp         the pick up
      * @param dropOff        the drop off
      * @param price          the price
+     * @param start          the start
+     * @param end            the end
      */
-
     public Request(String requestCreator, String pickUp, String dropOff, Double price, GeoPoint start, GeoPoint end) {
         this.Rider = requestCreator;
         this.pickUp = pickUp;
@@ -99,6 +104,11 @@ public class Request implements Serializable {
         return this.requestStatus;
     }
 
+    /**
+     * Set request status.
+     *
+     * @param requestStatus the request status
+     */
     public void setRequestStatus(String requestStatus){this.requestStatus = requestStatus; }
 
 
@@ -138,10 +148,16 @@ public class Request implements Serializable {
 
     /**
      * gets start location GeoPoint
+     *
      * @return the GeoPoint
      */
     public GeoPoint getStartGeo() {return this.start;}
 
+    /**
+     * Sets price.
+     *
+     * @param price the price
+     */
     public void setPrice(Double price) {
         this.price = price;
     }
@@ -155,43 +171,94 @@ public class Request implements Serializable {
         return this.price;
     }
 
+    /**
+     * Add prospective driver.
+     *
+     * @param driverName the driver name
+     */
     public void addProspectiveDriver(String driverName){
         this.prospectiveDrivers.add(driverName);
     }
 
+    /**
+     * Gets trip.
+     *
+     * @return the trip
+     */
     public String getTrip() {
         return this.pickUp + "\t ---> \t" + this.dropOff;
     }
 
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
 
+    /**
+     * Get rider name string.
+     *
+     * @return the string
+     */
     public String getRiderName(){
         return this.Rider;
     }
 
+    /**
+     * Gets pick up.
+     *
+     * @return the pick up
+     */
     public String getPickUp() {
         return pickUp;
     }
 
+    /**
+     * Gets drop off.
+     *
+     * @return the drop off
+     */
     public String getDropOff() {
         return dropOff;
     }
 
+    /**
+     * Gets prospective drivers.
+     *
+     * @return the prospective drivers
+     */
     public ArrayList<String> getProspectiveDrivers() {
         return prospectiveDrivers;
     }
+
+    /**
+     * Set driver.
+     *
+     * @param Driver the driver
+     */
     public void setDriver(String Driver){
         this.Driver = Driver;
     }
 
+    /**
+     * Gets end geo.
+     *
+     * @return the end geo
+     */
     public GeoPoint getEndGeo() {
         return this.end;
     }

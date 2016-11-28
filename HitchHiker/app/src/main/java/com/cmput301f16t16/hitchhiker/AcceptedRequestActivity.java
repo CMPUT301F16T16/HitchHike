@@ -13,12 +13,27 @@ import android.widget.Toast;
 
 /**
  * Created by V1CTORIA2LEE on 2016-11-26.
+ *
+ * This class is the view class where a rider can go to for an Accepted Request.
+ * <p> The rider is able to pay for the ride here.</p>
+ * @author willyliao
  */
 public class AcceptedRequestActivity extends Activity{
 
     private User user;
     private Request request;
 
+
+    /**
+     * Called when the activity is first created.
+     * <p>This initiates TextViews to display: the trip, rider name, driver name
+     *      , and fare.</p>
+     * <p>The rider name TextView and the driverName textView are both clickable.
+     *      They both lead to their respective userProfiles.</p>
+     * <p>There is also a Pay button which is used to pay for the ride.</p>
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +72,14 @@ public class AcceptedRequestActivity extends Activity{
         }
     }
 
+    /**
+     * Rider page action.
+     * <p>This is linked to the rider name TextView.</p>
+     * <p>When clicked, it will send the user to the userProfileActivity displaying the riders info.</p>
+     *
+     * @param view the view
+     * @see UserProfileActivity
+     */
     public void RiderPageAction(View view){
         Intent Intent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
         String rider = request.getRiderName();
@@ -68,6 +91,14 @@ public class AcceptedRequestActivity extends Activity{
 
     }
 
+    /**
+     * Driver page action.
+     * <p>This is linked to the driver name TextView.</p>
+     * <p>When clicked, it will send the user to the userProfileActivity displaying the drivers info.</p>
+     *
+     * @param view the view
+     * @see UserProfileActivity
+     */
     public void DriverPageAction(View view){
         Intent intent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
 //        String driver = request.getDriver();
@@ -78,6 +109,14 @@ public class AcceptedRequestActivity extends Activity{
     }
 
 
+    /**
+     * Pay now action.
+     * <p> This button will change the current request status that it is on
+     *      from ACCEPTED to COMPLETED.</p>
+     *
+     * @param view the view
+     * @see Request
+     */
     public void PayNowAction(View view){
         Toast.makeText(this, "Payment completed, Thank You for using HitchHiker!", Toast.LENGTH_SHORT).show();
         RequestListController rc = new RequestListController();
