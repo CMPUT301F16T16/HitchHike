@@ -39,6 +39,8 @@
         <activity android:name=".ChooseUserModeActivity" />
         <activity android:name=".AcceptedRequestActivity" />
         <activity android:name=".driverViewMap"></activity>
+        <activity android:name=".UserInfoOnlyActivity"/>
+
     </application>
 
 </manifest>

@@ -1,27 +1,29 @@
 package com.cmput301f16t16.hitchhiker;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-public class ShowUserProfileActivity extends AppCompatActivity {
+/**
+ * Created by V1CTORIA2LEE on 2016-11-27.
+ */
+public class UserInfoOnlyActivity extends Activity {
     private User user;
-    private Integer userType;
     private Request request;
     private String userName;
-    private Button aButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_user_profile);
+        setContentView(R.layout.activity_user_info_only);
 
-        user = (User) getIntent().getSerializableExtra("user");
-        request = (Request) getIntent().getSerializableExtra("request");
+        user =(User) getIntent().getSerializableExtra("user");
+        request =(Request) getIntent().getSerializableExtra("request");
+
 
     }
 
@@ -69,17 +71,6 @@ public class ShowUserProfileActivity extends AppCompatActivity {
             //aButton.setVisibility(View.GONE);
         }
 
-
-    }
-    // when you accept a driver, driver gets notified, status of request changes to accepted 3
-    // sets the driver to his username, and goes to a new activity with accepted driver, The prospective
-    // drivers are removed, no more. Returns to Rider Activity
-    public void AcceptDriverAction(View view){
-        RequestListController rc = new RequestListController();
-        request.setRequestStatus("ACCEPTED");
-        request.setDriver(userName);
-        rc.addRequest(request);
-        finish();
 
     }
 }
