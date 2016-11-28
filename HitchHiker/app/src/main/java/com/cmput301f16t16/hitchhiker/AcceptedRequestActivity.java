@@ -56,11 +56,23 @@ public class AcceptedRequestActivity extends Activity{
         }
     }
 
-    public void userPageAction(View view){
-        Intent intent = new Intent(AcceptedRequestActivity.this, ShowUserProfileActivity.class);
+    public void RiderPageAction(View view){
+        Intent rIntent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
+        rIntent.putExtra("user", user);
+        startActivity(rIntent);
+
+    }
+
+    public void DriverPageAction(View view){
+        Intent intent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
+        String driver = request.getDriver();
+        UserListController ulc = new UserListController();
+        ulc.findUser(driver);
         intent.putExtra("user", user);
         startActivity(intent);
     }
+
+
     public void PayNowAction(View view){
         Toast.makeText(this, "Payment completed, Thank You for using HitchHiker!", Toast.LENGTH_SHORT).show();
         RequestListController rc = new RequestListController();
