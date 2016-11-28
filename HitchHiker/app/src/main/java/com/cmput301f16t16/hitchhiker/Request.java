@@ -187,4 +187,8 @@ public class Request implements Serializable {
     public void setDriver(String Driver){
         this.Driver = Driver;
     }
+
+    public GeoPoint getEndGeo() {
+        return this.end;
+    }
 }

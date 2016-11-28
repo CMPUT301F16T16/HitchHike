@@ -3,6 +3,8 @@ package com.cmput301f16t16.hitchhiker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -29,7 +31,21 @@ public class RequestInfoActivity extends AppCompatActivity {
         dropOffLocationText.setText(request.getDropOff());
 
         TextView userNameText = (TextView) findViewById(R.id.requestUserName_textView);
-        userNameText.setText(user.getUserName());
+        SpannableString content = new SpannableString(user.getUserName());
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        userNameText.setText(content);
+//        userNameText.setText(user.getUserName());
+
+        /**
+         * TextView tv = (TextView) view.findViewById(R.id.tv);
+         SpannableString content = new SpannableString("Content");
+         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+         tv.setText(content);
+         */
+        TextView requestFareText = (TextView) findViewById(R.id.requestFare_textView);
+        String price = request.getPrice().toString();
+        requestFareText.setText(price);
+
 
     }
 
@@ -46,7 +62,7 @@ public class RequestInfoActivity extends AppCompatActivity {
     }
 
     public void GoToMap(View view){
-        Intent intent = new Intent(RequestInfoActivity.this, LocationViewActivity.class);
+        Intent intent = new Intent(RequestInfoActivity.this, driverViewMap.class);
 
         intent.putExtra("request", request);
         startActivity(intent);

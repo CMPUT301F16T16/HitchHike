@@ -37,17 +37,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:hint=""
+        android:textSize="12dp"
+        android:hint="Enter start"
         android:id="@+id/pick_up_edittext"
         android:layout_below="@id/view_map"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-
-        android:hint=""
+        android:hint="Enter Destination"
         android:id="@+id/drop_off_edittext"
         android:layout_below="@id/pick_up_edittext"/>
 
@@ -76,7 +74,7 @@
         android:layout_below="@id/estimate"
         android:layout_toRightOf="@id/suggested_fare_text"
         android:id="@+id/suggested_fare"
-        android:digits="0123456789."
+        android:digits="0123456789"
         android:ems="5"/>
 
     <TextView
