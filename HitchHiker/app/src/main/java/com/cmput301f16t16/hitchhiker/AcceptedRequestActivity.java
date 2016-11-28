@@ -1,6 +1,7 @@
 package com.cmput301f16t16.hitchhiker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -42,14 +43,29 @@ public class AcceptedRequestActivity extends Activity{
         String str = Double.toString(d);
         fare.setText(str);
 
+        //Integer user_type = user.getUserType();
 
-        if (user.userType == 1){
-            View payButton = findViewById(R.id.paymentButton);
-            payButton.setVisibility(View.GONE);
-        }
-        else{
-            View payButton = findViewById(R.id.paymentButton);
-            payButton.setVisibility(View.VISIBLE);
-        }
+//        if (user_type == 1){
+//            View payButton = findViewById(R.id.paymentButton);
+//            payButton.setVisibility(View.GONE);
+//        }
+//        else {
+//            View payButton = findViewById(R.id.paymentButton);
+//            payButton.setVisibility(View.VISIBLE);
+//        }
+    }
+
+    public void userPageAction(View view){
+        Intent intent = new Intent(AcceptedRequestActivity.this, UserProfileActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+    }
+    public void PayNowAction(View view){
+        //Intent intent = new Intent(AcceptedRequestActivity.this, RiderActivity.class);
+        RequestListController rc = new RequestListController();
+        request.setRequestStatus("COMPLETED");
+        rc.addRequest(request);
+        //intent.putExtra("request", request);
+        finish();
     }
 }

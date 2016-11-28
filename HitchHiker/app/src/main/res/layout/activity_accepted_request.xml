@@ -21,7 +21,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
         android:text="Pay Now"
-        android:id="@+id/paymentButton"/>
+        android:id="@+id/paymentButton"
+        android:onClick="PayNowAction"/>
 
 
 
@@ -45,7 +46,8 @@
         android:textSize="20dp"
         android:text="NAME"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:onClick="userPageAction"/>
 
     <TextView
         android:id="@+id/driver_textView"
@@ -89,7 +91,8 @@
         android:layout_marginLeft="70dp"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/driver_textView"
-        android:layout_alignEnd= "@+id/driver_textView" />
+        android:layout_alignEnd= "@+id/driver_textView"
+        android:onClick="userPageAction"/>
 
 
 
