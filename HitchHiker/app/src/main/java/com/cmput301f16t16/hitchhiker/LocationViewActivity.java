@@ -339,7 +339,7 @@ public class LocationViewActivity extends Activity implements Serializable {
         new UpdateRoadTask().execute(waypoints);
     }
 
-    private class UpdateRoadTask extends AsyncTask<Object, Void, Road[]> {
+    class UpdateRoadTask extends AsyncTask<Object, Void, Road[]> {
 
         protected Road[] doInBackground(Object... params) {
             @SuppressWarnings("unchecked")
