@@ -51,16 +51,16 @@ public class RiderActivity extends AppCompatActivity {
                 String status = request.getRequestStatus();
                 if (status.equals("ACCEPTED")) {
                     Intent intent = new Intent(RiderActivity.this, AcceptedRequestActivity.class);
+                    intent.putExtra("user", user);
                     intent.putExtra("request", request);
                     startActivity(intent);
 
                 } else if (status.equals("COMPLETED")) {
                     Toast.makeText(RiderActivity.this, "This request as been completed", Toast.LENGTH_LONG).show();
-
                 }
-
                 else {
                     Intent intent = new Intent(RiderActivity.this, ProspectiveDriversActivity.class);
+                    intent.putExtra("user", user);
                     intent.putExtra("request", request);
                     startActivity(intent);
 

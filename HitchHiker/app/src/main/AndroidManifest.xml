@@ -37,7 +37,7 @@
         <activity android:name=".ShowUserProfileActivity" />
         <activity android:name=".Location" />
         <activity android:name=".ChooseUserModeActivity" />
-        <activity android:name=".AcceptedRequestActivity"/>
+        <activity android:name=".AcceptedRequestActivity" />
 
     </application>
 
