@@ -77,6 +77,7 @@ public class BrowseRequestActivity extends AppCompatActivity{
 //                intent.putExtra("index", position);
                 Request chosenRequest = browseList.get(position);
                 intent.putExtra("chosenRequest", chosenRequest);
+                intent.putExtra("user", user);
                 startActivity(intent);
             }
         });

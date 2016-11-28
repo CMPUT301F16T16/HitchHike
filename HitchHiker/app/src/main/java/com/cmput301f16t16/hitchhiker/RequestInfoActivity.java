@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class RequestInfoActivity extends AppCompatActivity {
     private Request request;
     private User user;
+    private User riderUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class RequestInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request_info);
 
         request = (Request) getIntent().getSerializableExtra("chosenRequest");
+        // this is the driver being passed around
         user = (User) getIntent().getSerializableExtra("user");
 
         TextView pickUpLocationText = (TextView) findViewById(R.id.pickUp_Location_TextView);
@@ -45,8 +47,6 @@ public class RequestInfoActivity extends AppCompatActivity {
         TextView requestFareText = (TextView) findViewById(R.id.requestFare_textView);
         String price = request.getPrice().toString();
         requestFareText.setText(price);
-
-
     }
 
     public void AcceptRequest(View view){
@@ -63,23 +63,22 @@ public class RequestInfoActivity extends AppCompatActivity {
 
     public void GoToMap(View view){
         Intent intent = new Intent(RequestInfoActivity.this, driverViewMap.class);
-
         intent.putExtra("request", request);
         startActivity(intent);
     }
 
     public void GoToUserProfile(View view){
-        Intent intent = new Intent(RequestInfoActivity.this, ShowUserProfileActivity.class);
+        Intent intent = new Intent(RequestInfoActivity.this, UserInfoOnlyActivity.class);
         String riderName = request.getRiderName();
         ElasticsearchUserController.GetUserTask getUserTask = new ElasticsearchUserController.GetUserTask();
         getUserTask.execute(riderName);
         try {
-            user = getUserTask.get();
+            riderUser = getUserTask.get();
         }
         catch(Exception e){
         }
 
-        intent.putExtra("user", user);
+        intent.putExtra("user", riderUser);
         startActivity(intent);
 
 
