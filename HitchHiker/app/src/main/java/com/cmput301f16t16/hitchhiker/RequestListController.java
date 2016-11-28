@@ -171,6 +171,12 @@ public class RequestListController {
         return requestLoad;
     }
 
+    /**
+     * Gets the DriverBrowseList
+     *
+     * @param driverName
+     * @return requests that are pending and created
+     */
     public ArrayList<Request> getBrowseRequest(String driverName){
         ArrayList<Request> finalBrowseList = new ArrayList<Request>();
         ArrayList<Request> browseList = new ArrayList<Request>();
@@ -213,6 +219,51 @@ public class RequestListController {
         }
 
         return finalBrowseList;
+    }
+
+
+    public ArrayList<Request> getCurrentRequest(String driverName){
+        ArrayList<Request> finalCurrentList = new ArrayList<Request>();
+        ArrayList<Request> currentList = new ArrayList<Request>();
+        ElasticsearchRequestController.GetCurrent getCurrentRequests = new ElasticsearchRequestController.GetCurrent();
+        try {
+            getCurrentRequests.execute();
+            currentList = getCurrentRequests.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Request> TempList = new ArrayList<Request>();
+
+        TempList.addAll(currentList);
+        for (Request request : TempList) {
+            // makes a new tempDriver list for each request
+            ArrayList<String> TempDriver = new ArrayList<String>();
+            TempDriver.addAll(request.getProspectiveDrivers());
+            Boolean yes = false;
+            if ((request.getRiderName()).equals(driverName)){
+
+            }
+            else {
+                if (TempDriver.size() == 0) {
+                    finalCurrentList.add(request);
+                } else {
+                    Boolean exists = false;
+                    for (String driver : TempDriver) {
+                        if (driverName.equals(driver)) {
+                            exists = true;
+                        }
+                    }
+                    if (exists) {
+                        finalCurrentList.add(request);
+                    }
+                }
+            }
+        }
+
+        return finalCurrentList;
     }
 
 }

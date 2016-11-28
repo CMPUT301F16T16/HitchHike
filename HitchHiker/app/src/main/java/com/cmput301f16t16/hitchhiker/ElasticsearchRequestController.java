@@ -260,6 +260,7 @@ public class ElasticsearchRequestController {
 
         private String pending = "PENDING";
         private String created = "CREATED";
+
         @Override
         protected ArrayList<Request> doInBackground(String... search_parameters) {
             verifySettings();
@@ -298,23 +299,54 @@ public class ElasticsearchRequestController {
             return requests;
         }
 
-
-
     }
 
-    public ArrayList<Request> filterBrowse(ArrayList<Request> browseList, String driverName){
-        ArrayList<Request> finalBrowseList = new ArrayList<Request>();
-        for (Request request: browseList){
-            ArrayList<String> TempDriver = new ArrayList<String>();
-            TempDriver.addAll(request.getProspectiveDrivers());
-            for (String driver: TempDriver){
-                if (driverName.equals(driver)){
-                    finalBrowseList.add(request);
+    public static class GetCurrent extends AsyncTask<String, Void, ArrayList<Request>> {
+
+        private String pending = "PENDING";
+        private String accepted = "ACCEPTED";
+        private String completed = "COMPLETED";
+        @Override
+        protected ArrayList<Request> doInBackground(String... search_parameters) {
+            verifySettings();
+            ArrayList<Request> requests = new ArrayList<Request>();
+
+//            String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"requestStatus\": \"" + status + "\"}}}";
+
+            String search_string =
+                    "{ \"from\" : 0, \"size\" : 500,\n" +
+                            "  \"query\": {\n" +
+                            "    \"bool\": {\n" +
+                            "      \"should\": [\n" +
+                            "              { \"match\": { \"requestStatus\": \"" + pending + "\" }},\n" +
+                            "              { \"match\": { \"requestStatus\": \"" + completed + "\" }},\n" +
+                            "              { \"match\": { \"requestStatus\": \"" + accepted + "\" }}\n" +
+
+                            "      ],\n" +
+                            "      \"minimum_should_match\": \"1\"\n" +
+                            "    }\n" +
+                            "  }\n" +
+                            "}";
+
+
+            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
+                    requests.addAll(foundRequests);
+                } else {
+                    Log.i("Error", "The search executed but it didn't work.");
                 }
+            } catch (Exception e) {
+                Log.i("Error", "Executing the get requests method failed");
             }
+
+            return requests;
         }
-        return finalBrowseList;
+
     }
+
 
 
 
