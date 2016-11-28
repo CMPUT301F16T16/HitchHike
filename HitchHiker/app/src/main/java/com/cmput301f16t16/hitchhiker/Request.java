@@ -164,4 +164,5 @@ public class Request implements Serializable {
     public GeoPoint getEndGeo() {
         return this.end;
     }
+
 }

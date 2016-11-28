@@ -73,6 +73,10 @@ public class RequestTest extends TestCase {
         assertNotSame(5.00, request.getPrice());
     }
 
+    /**
+     * US 05.01.01 As a driver, I want to accept a request I agree with and
+     * accept that offered payment upon completion
+     */
     public void testAcceptedDriver(){
         GeoPoint A = new GeoPoint(12.00, 11.00);
         GeoPoint B = new GeoPoint(132.00, 131.00);
@@ -82,6 +86,35 @@ public class RequestTest extends TestCase {
         request.setRequestStatus("PENDING");
         assertEquals(request.getRequestStatus(), "PENDING");
 
+    }
+
+    /**
+     *  US 01.07.01 As a rider, I want to confirm the completion of a request and enable payment
+     */
+    public void testGetRequestStatus() {
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickup = "st albert";
+        String dropoff = "edmonton";
+        Request request = new Request("Amy", pickup, dropoff, 5.00, A, B);
+        request.setRequestStatus("COMPLETED");
+
+        assertEquals("COMPLETED", request.getRequestStatus());
+    }
+
+
+    /**
+     * US 04.04.01 As a driver, I should be able to see the addresses of the requests.
+     */
+    public void testGetStartLocation() {
+        GeoPoint A = new GeoPoint(12.00, 11.00);
+        GeoPoint B = new GeoPoint(132.00, 131.00);
+        String pickup = "st albert";
+        String dropoff = "edmonton";
+        Request request = new Request("Amy", pickup, dropoff, 5.00, A, B);
+
+        assertEquals(pickup, request.getStartLocation());
+        assertEquals(A, request.getStartGeo());
     }
 }
 

@@ -22,6 +22,7 @@ public class UserListTest extends TestCase {
         assertFalse(userList.hasUser(user));
 
     }
+
     public void testGetUser(){
         UserList userList = new UserList();
         User user = new User("TestUser",  "", "", "", "", 4, "");
