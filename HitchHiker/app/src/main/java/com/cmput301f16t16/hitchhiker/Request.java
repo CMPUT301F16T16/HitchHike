@@ -142,6 +142,10 @@ public class Request implements Serializable {
      */
     public GeoPoint getStartGeo() {return this.start;}
 
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     /**
      * Get price double.
      *
