@@ -48,7 +48,10 @@ public class RequestInfoActivity extends AppCompatActivity {
 
     /**
      * Accept request.
+     * <p> When called, will change the status of the request to PENDING</p>
+     * <p> Will add the request again through RequestListController</p>
      * @param view the view
+     * @see RequestListController
      */
     public void AcceptRequest(View view){
         RequestListController rc = new RequestListController();
@@ -64,7 +67,9 @@ public class RequestInfoActivity extends AppCompatActivity {
 
     /**
      * Go to map.
+     * <p> This will go to another map view.</p>
      * @param view the view
+     * @see driverViewMap
      */
     public void GoToMap(View view){
         Intent intent = new Intent(RequestInfoActivity.this, driverViewMap.class);
@@ -74,7 +79,9 @@ public class RequestInfoActivity extends AppCompatActivity {
 
     /**
      * Go to user profile.
+     * <p> This will go to the userProfilePage</p>
      * @param view the view
+     * @see UserInfoOnlyActivity
      */
     public void GoToUserProfile(View view){
         Intent intent = new Intent(RequestInfoActivity.this, UserInfoOnlyActivity.class);

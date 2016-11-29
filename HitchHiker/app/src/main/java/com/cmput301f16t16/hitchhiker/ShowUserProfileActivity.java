@@ -69,8 +69,6 @@ public class ShowUserProfileActivity extends AppCompatActivity {
             riderText.setTextColor(Color.BLACK);
             driverText.setTextColor(Color.BLACK);
         }
-
-
     }
 
     /**

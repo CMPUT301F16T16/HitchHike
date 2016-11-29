@@ -16,6 +16,9 @@ import java.text.NumberFormat;
 
 /**
  * The type Create request activity.
+ * <p> This View will allow the user to create a request by inputting correct info</p>
+ * <p> The user is also to choose their pickUp and dropOff location through a map.</p>
+ * @author willyliao
  */
 public class CreateRequestActivity extends AppCompatActivity {
     private User user;
@@ -31,6 +34,12 @@ public class CreateRequestActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * View map.
+     *  <p> This sends the user to the MapView where they are able to set their start and end locations</p>
+     * @param view the view
+     * @see LocationViewActivity
+     */
     public void ViewMap(View view){
         Intent intent = new Intent(CreateRequestActivity.this, LocationViewActivity.class);
         //intent.putExtra("user", user);
@@ -40,33 +49,23 @@ public class CreateRequestActivity extends AppCompatActivity {
 
     /**
      * Create request with the user inputs.
+     * <p> after User sets location through the map and enters in a "fare price" they can hit submit
+     * and a request will be created.</p>
+     * <p> The request is added by using elasticsearch through the RequestListController.</p>
      *
      * @param view the view
+     * @see RequestListController
      */
     public void CreateRequest(View view){
 
         RequestListController rc = new RequestListController();
         Toast.makeText(this, "Creating Request", Toast.LENGTH_SHORT).show();
-//
-//        EditText pickUpText = (EditText) findViewById(R.id.pick_up_edittext);
-//        EditText dropOffText = (EditText) findViewById(R.id.drop_off_edittext);
         EditText suggestedFareText = (EditText) findViewById(R.id.suggested_fare);
 
-        //Fare estimate shouldnt be editable it should pop-up once the
-        //dropOff and PickUp location are specified
-
-
-        /**
-         * Spei convert the dropOff Location and pickUp Location to
-         * doubles long and lat and return them so they can be added to
-         * the request object
-         */
 
         GeoPoint start = location.getStartPoint();
         GeoPoint end = location.getEndPoint();
 
-//        String pickUp = location.getStringStartPoint();
-//        String dropOff = location.getStringEndPoint();
 //
         String suggestedFare = suggestedFareText.getText().toString();
 
@@ -87,27 +86,13 @@ public class CreateRequestActivity extends AppCompatActivity {
                 Toast.makeText(this, "else", Toast.LENGTH_SHORT).show();
             }
 
-
-//            Request newRequest = new Request(userName, pickUp, dropOff, price);
-//            ElasticsearchRequestController.AddRequestsTask addRequestsTask = new ElasticsearchRequestController.AddRequestsTask();
-//            addRequestsTask.execute(newRequest);
-//            finish();
         }
     }
 
-//    protected void onStart() {
-//        super.onStart();
-//        //location = (Location) getIntent().getSerializableExtra("location");
-//
-//
-//
-//
-//    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
             if (resultCode == RESULT_OK){
-//                location = (Location) getIntent().getSerializableExtra("location");
                 location = (Location) data.getSerializableExtra("location");
                 pickUp = location.getStringStartPoint();
                 dropOff = location.getStringEndPoint();
@@ -115,7 +100,6 @@ public class CreateRequestActivity extends AppCompatActivity {
 
                 // http://stackoverflow.com/questions/16583604/formatting-numbers-using-decimalformat
                 DecimalFormat df = new DecimalFormat("0.##");
-                //df.format(location.getFare());
 
                 TextView pickUpText = (TextView) findViewById(R.id.pick_up_edittext);
                 TextView dropOffText = (TextView) findViewById(R.id.drop_off_edittext);
@@ -123,8 +107,6 @@ public class CreateRequestActivity extends AppCompatActivity {
                 FareEstimate.setText(String.valueOf(df.format(location.getFare())));
                 pickUpText.setText("Pick up: " + pickUp);
                 dropOffText.setText("Drop off: " + dropOff);
-                //new DecimalFormat("#.##").format(dblVar);
-
 
             }
         }

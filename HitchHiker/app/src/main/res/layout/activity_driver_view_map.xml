@@ -5,26 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/originDriverView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:hint=""/>
-
-        <EditText
-            android:id="@+id/destination"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:hint="DestinationDriverView"/>
-
-    </LinearLayout>
 
     <org.osmdroid.views.MapView android:id="@+id/mapDriverView"
         android:layout_width="fill_parent"

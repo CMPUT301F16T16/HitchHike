@@ -20,6 +20,8 @@ import io.searchbox.core.SearchResult;
 
 /**
  * Created by willyliao on 2016-11-09.
+ * <p> This uses ElasticSearch, JEST, to store and grab data from a server.</p>
+ * @author willyliao
  */
 public class ElasticsearchUserController{
 
@@ -27,6 +29,7 @@ public class ElasticsearchUserController{
 
     /**
      * The type Get users task.
+     * <p> This will grab a list of users from elastic search.</p>
      */
 // TODO we need a function that gets requests!
     public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
@@ -40,7 +43,7 @@ public class ElasticsearchUserController{
             Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("user").build();
 
             try{
-                SearchResult result = client.execute(search);
+                  SearchResult result = client.execute(search);
                 if (result.isSucceeded()){
                     List<User> foundUsers = result.getSourceAsObjectList(User.class);
                     users.addAll(foundUsers);
@@ -58,6 +61,10 @@ public class ElasticsearchUserController{
 
     /**
      * The type Get user task.
+     * <p> This will grab a User Object that is specified by the User from the server.</p>
+     * <p> Used in the LoginActivity as well as the ProspectiveDrivers Activity</p>
+     * @see LoginActivity
+     * @see ProspectiveDriversActivity
      */
 // TODO we need a function which gets a single user (for login)
     public static class GetUserTask extends AsyncTask<String, Void, User> {
@@ -88,6 +95,10 @@ public class ElasticsearchUserController{
 
     /**
      * The type Add users task.
+     * <p> This will add a new user to the server.</p>
+     * <p> This is used when creating a new user.</p>
+     * <p> Used in the RegisterActivity</p>
+     * @see RegisterActivity
      */
 // TODO we need a function which adds a request!
     public static class AddUsersTask extends AsyncTask<User, Void, Void> {

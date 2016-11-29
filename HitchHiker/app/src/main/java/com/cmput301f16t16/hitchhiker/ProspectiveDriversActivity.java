@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 /**
  * The type Prospective drivers activity.
+ * <p> This view displays a list of drivers that have "accepted" the
+ * request of this user and the user can choose to accept one of the drivers.</p>
  */
 public class ProspectiveDriversActivity extends AppCompatActivity {
     private String requestId;
@@ -75,6 +77,13 @@ public class ProspectiveDriversActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Delete request.
+     * <p> when called, will delete the request.</p>
+     *
+     * @param view the view
+     * @see RequestListController
+     */
     public void DeleteRequest(View view){
         rc.removeRequest(requestId);
         finish();

@@ -73,20 +73,6 @@ public class RequestListController {
         return requestsList;
     }
 
-    public ArrayList<Request> getListOfDriverRequests(String status){
-        ArrayList<Request> requestsList = new ArrayList<Request>();
-        ElasticsearchRequestController.GetDriverTask getRequestsTask = new ElasticsearchRequestController.GetDriverTask();
-        getRequestsTask.setStatus(status);
-        getRequestsTask.execute("");
-        try {
-            requestsList = getRequestsTask.get();
-        }
-        catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets out of the async object.");
-        }
-        return requestsList;
-    }
-
     /**
      * Gets request load.
      * @param rider the rider

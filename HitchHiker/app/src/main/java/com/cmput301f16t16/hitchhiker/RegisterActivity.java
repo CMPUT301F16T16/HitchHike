@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 /**
  * The type Register activity.
+ * <p> This View will allow the user to Register an account.</p>
  */
 public class RegisterActivity extends AppCompatActivity {
     private int userType = 0;
@@ -47,8 +48,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Create user.
+     * <p> This will create the user and add using UserListController</p>
      *
      * @param view the view
+     * @see UserListController
      */
     public void CreateUser(View view){
         EditText usernameText = (EditText) findViewById(R.id.userNameEditText);
