@@ -6,3 +6,6 @@ We used Facebook to keep each other up to date with what we were doing. We did n
 
 This link is to a google doc. These are the requirements we felt we had completed. 
 https://docs.google.com/document/d/15HWgln7-qzhTpN_3cMtEv1wSCUdCHA38KBx3iuk6tSY/edit#
+
+Group Commerical Video!
+https://archive.org/details/HitchHiker_201611
