@@ -77,12 +77,6 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
 
         request = (Request) getIntent().getSerializableExtra("request");
 
-
-//        String requestView = request.getTrip();
-//        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
-//        displayTrip.setText(requestView);
-
-
         map = (MapView) findViewById(R.id.mapDriverView);
         overlayList = map.getOverlays();
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -101,9 +95,6 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
 
         startPoint = request.getStartGeo();
         endPoint = request.getEndGeo();
-
-
-
 
         // http://stackoverflow.com/questions/38539637/osmbonuspack-roadmanager-networkonmainthreadexception
         // accessed on October 27th, 2016
@@ -131,7 +122,6 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setTitle("START");
         startMarker.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
-
 
         overlayList.add(startMarker);
 
@@ -248,7 +238,6 @@ public class driverViewMap extends AppCompatActivity implements Serializable {
             }
             String routeDesc = path.getLengthDurationText(ourActivity, -1);
             distance = path.mLength;
-            //Log.d("distance:", Double.toString(distance));
             Polyline roadPolyline = RoadManager.buildRoadOverlay(path);
             roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
             roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));

@@ -82,77 +82,6 @@ public class ElasticsearchRequestController {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//    public static class GetDriverRequestTask extends AsyncTask<String, Void, ArrayList<Request>> {
-//        private String userName;
-//        private String pending;
-//        private String accepted;
-//
-//        @Override
-//        protected ArrayList<Request> doInBackground(String... search_parameters) {
-//            verifySettings();
-//
-//            ArrayList<Request> pendings = new ArrayList<Request>();
-//
-//            //String search_string = "{\n" + "\"query\": {\n" + "\"match\" : {\n" + "\"" + userName + "\" : \n" + "\"" + requestStatus + "\"\n" + "}\n" + "}\n" + "}";
-//            //String search_string = "{\"from\": 0, \"size\": 10000, \"query\": " + "{\"match\": {\"Rider\": \""+userName+"\"} {" + "\"Status\": \""+requestStatus+"\"}}}";
-//            //String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"Rider\": \""+userName+"\"} {\"requestStatus\": \""+requestStatus+"\"}}}";
-//
-//
-//            String search_string =
-//                    "{ \"from\" : 0, \"size\" : 500,\n" +
-//                            "  \"query\": {\n" +
-//                            "    \"bool\": {\n" +
-//                            //"      \"must\": { \"match\": { \"Rider\": \"" + userName + "\" }},\n" +
-//                            "      \"should\": [\n" +
-//                            "              { \"match\": { \"requestStatus\": \"" + pending + "\" }},\n" +
-//                            "              { \"match\": { \"requestStatus\": \"" + accepted + "\" }}\n" +
-//                            "      ],\n" +
-//                            "      \"minimum_should_match\": \"1\"\n" +
-//                            //"    }\n" +
-//                            "  }\n" +
-//                            "}";
-//            Search search = new Search.Builder(search_string).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
-//
-//            try{
-//                SearchResult result = client.execute(search);
-//                if (result.isSucceeded()){
-//                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
-//                    pendings.addAll(foundRequests);
-//                }
-//                else{
-//                    Log.i("Error", "The search executed but it didn't work.");
-//                }
-//            }
-//            catch (Exception e){
-//                Log.i("Error", "Executing the get requests method failed");
-//            }
-//            return pendings;
-//        }
-//
-//        /**
-//         * Set user name.
-//         *
-//         * @param userName the user name
-//         */
-//        public void setUserName(String userName){ this.userName = userName;}
-//        public void setPending(String pending) { this.pending = pending;}
-//        public void setAccepted(String accepted) { this.accepted = accepted; }
-//
-//
-//    }
-
     /**
      * The type Get browsing requests task.
      */
@@ -266,8 +195,6 @@ public class ElasticsearchRequestController {
             verifySettings();
             ArrayList<Request> requests = new ArrayList<Request>();
 
-//            String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"requestStatus\": \"" + status + "\"}}}";
-
             String search_string =
                     "{ \"from\" : 0, \"size\" : 500,\n" +
                             "  \"query\": {\n" +
@@ -311,8 +238,6 @@ public class ElasticsearchRequestController {
             verifySettings();
             ArrayList<Request> requests = new ArrayList<Request>();
 
-//            String search_string = "{\"from\": 0, \"size\": 10000, \"query\": {\"match\": {\"requestStatus\": \"" + status + "\"}}}";
-
             String search_string =
                     "{ \"from\" : 0, \"size\" : 500,\n" +
                             "  \"query\": {\n" +
@@ -346,10 +271,6 @@ public class ElasticsearchRequestController {
         }
 
     }
-
-
-
-
 
     private static void verifySettings() {
         // if the client hasn't been initialized then we should make it!
@@ -390,7 +311,6 @@ public class ElasticsearchRequestController {
 
             Search search = new Search.Builder(query).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
 
-
             try{
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()){
@@ -414,47 +334,7 @@ public class ElasticsearchRequestController {
         }
 
     }
-//    public static class GetKeySearchGeoPointRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
-//        private GeoPoint searchKeyGeoPoint;
-//
-//        @Override
-//        protected ArrayList<Request> doInBackground(String... search_parameters) {
-//            verifySettings();
-//
-//            ArrayList<Request> requests = new ArrayList<Request>();
-//
-//
-//            String query =
-//                    "{ \"from\" : 0, \"size\" : 500,\n" +
-//                            "  \"query\": {\n" +
-//                            "    \"bool\": {\n" +
-//                            "      \"should\": [\n" +
-//                            "              { \"match\": { \"start\": \"" + searchKeyGeoPoint + "\" }},\n" +
-//                            "              { \"match\": { \"end\": \"" + searchKeyGeoPoint + "\" }}\n" +
-//                            "      ],\n" +
-//                            "      \"minimum_should_match\": \"1\"\n" +
-//                            "    }\n" +
-//                            "  }\n" +
-//                            "}";
-//
-//            Search search = new Search.Builder(query).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
-//
-//
-//            try{
-//                SearchResult result = client.execute(search);
-//                if (result.isSucceeded()){
-//                    List<Request> foundRequests = result.getSourceAsObjectList(Request.class);
-//                    requests.addAll(foundRequests);
-//                }
-//                else{
-//                    Log.i("Error", "The search executed but it didn't work.");
-//                }
-//            }
-//            catch (Exception e){
-//                Log.i("Error", "Executing the get requests method failed");
-//            }
-//            return requests;
-//        }
+
     public static class GetKeySearchPriceRequestsTask extends AsyncTask<String, Void, ArrayList<Request>> {
         private double searchKeyPrice;
 
@@ -479,8 +359,7 @@ public class ElasticsearchRequestController {
                             "}";
 
             Search search = new Search.Builder(query).addIndex("3h$1k40puf8@ta!$0wpd4n3x2y!@1s").addType("request").build();
-//                    "{ \"from\" : 0, \"size\" : 500,\n" +
-//                            "              { \"match\": { \"start\": \"" + searchKeyGeoPoint + "\" }},\n" +
+
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {

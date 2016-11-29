@@ -73,8 +73,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
 
                 Intent intent = new Intent(BrowseRequestActivity.this, RequestInfoActivity.class);
-//                intent.putExtra("requestsList", browseList);
-//                intent.putExtra("index", position);
                 Request chosenRequest = browseList.get(position);
                 intent.putExtra("chosenRequest", chosenRequest);
                 intent.putExtra("user", user);
@@ -122,9 +120,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
 
 
             }
-//            if (GeoPoint.isChecked()){
-//
-//            }
             if (Price.isChecked() & (!searchKey.equals(""))){
 
                 browseList.clear();
@@ -152,9 +147,6 @@ public class BrowseRequestActivity extends AppCompatActivity{
             Log.i("Error", "Failed to get the requests out of the async object.");
         }
 
-//        browseAdapter.clear();
-//        browseAdapter.addAll(rc.getBrowseRequest(driverName));
-//        browseAdapter.notifyDataSetChanged();
     }
 
     /**

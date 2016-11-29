@@ -49,28 +49,6 @@ public class DriverActivity extends AppCompatActivity {
         theRequestList = (ListView) findViewById(R.id.driverRequest_listview);
 
          // add the accepted requests
-        //acceptedList = rc.getListOfDriverRequests(accepted);
-        //ArrayList<Request> TempList = new ArrayList<Request>();
-
-//        for(Request request : acceptedList){
-//            if (driverName.equals(request.getDriver())) {
-//                requestList.add(request);
-//            }
-//        }
-//        // add the pending requests
-//        pendingList = rc.getListOfDriverRequests(pending);
-//        // temp list has all the pending request, we must narrow down to driver in prospectiveDriverList
-//        TempList.addAll(pendingList);
-//        for(Request request: TempList){
-//            // makes a new tempDriver list for each request
-//            ArrayList<String> TempDriver = new ArrayList<String>();
-//            TempDriver.addAll(request.getProspectiveDrivers());
-//            for (String driver: TempDriver){
-//                if (driverName.equals(driver)){
-//                    requestList.add(request);
-//                }
-//            }
-//        }
         theRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Request request = requestList.get(position);

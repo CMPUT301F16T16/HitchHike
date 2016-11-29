@@ -83,12 +83,6 @@ public class LocationViewActivity extends Activity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-//        request = (Request) getIntent().getSerializableExtra("request");
-
-//        String requestView = request.getTrip();
-//        TextView displayTrip = (TextView) findViewById(R.id.loc_display_req_textview);
-//        displayTrip.setText(requestView);
-
         getOrigin = (EditText) findViewById(R.id.origin);
         getDestination = (EditText) findViewById(R.id.destination);
 
@@ -187,7 +181,6 @@ public class LocationViewActivity extends Activity implements Serializable {
         protected void draw(Canvas canvas, MapView mapView, boolean b) {
         }
         public boolean onTouchEvent(MotionEvent e, MapView m) {
-            //Log.d("MAPTAG", "testing");
             if (e.getAction() == MotionEvent.ACTION_DOWN) {
                 start = e.getEventTime();
                 x = (int) e.getX();
@@ -305,12 +298,9 @@ public class LocationViewActivity extends Activity implements Serializable {
                 destAddress = d;
 
                 if (startPoint != null && endPoint != null) {
-                    //location = new Location(startPoint, endPoint, o, d);
                     getRoadAsync(startPoint, endPoint);
 
                     mapController.animateTo(startPoint);
-
-
 
                 } else {
                     Toast.makeText(LocationViewActivity.this, "Fail to find a route !", Toast.LENGTH_LONG).show();
@@ -392,7 +382,6 @@ public class LocationViewActivity extends Activity implements Serializable {
             }
             String routeDesc = path.getLengthDurationText(ourActivity, -1);
             distance = path.mLength;
-            //Log.d("distance:", Double.toString(distance));
             Polyline roadPolyline = RoadManager.buildRoadOverlay(path);
             roadPolyline.setTitle(getString(R.string.app_name) + " - " + routeDesc);
             roadPolyline.setInfoWindow(new BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, map));
@@ -416,10 +405,6 @@ public class LocationViewActivity extends Activity implements Serializable {
         String theAddress;
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-//            GeocoderNominatim geocoder = new GeocoderNominatim(Locale.getDefault(), userAgent);
-//            geocoder.setService("http://open.mapquestapi.com/nominatim/v1/");
-//            geocoder.setKey("G2m83JSnHrnZ9nMb9Uc0KcDPTfCPxTSo");
 
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             StringBuilder sb = new StringBuilder();

@@ -49,7 +49,6 @@ public class AcceptedRequestActivity extends Activity{
 
         if (user_type == 1){
             View payButton = findViewById(R.id.paymentButton);
-            //payButton.setVisibility(View.VISIBLE);
         }
         else {
             View payButton = findViewById(R.id.paymentButton);
@@ -70,9 +69,6 @@ public class AcceptedRequestActivity extends Activity{
 
     public void DriverPageAction(View view){
         Intent intent = new Intent(AcceptedRequestActivity.this, UserInfoOnlyActivity.class);
-//        String driver = request.getDriver();
-//        UserListController ulc = new UserListController();
-//        ulc.findUser(driver);
         intent.putExtra("user", user);
         startActivity(intent);
     }
